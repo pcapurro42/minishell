@@ -17,6 +17,4 @@
 
 // - PARSING - //
 
-// - LIBFT - //
-
 #endif
