@@ -60,6 +60,7 @@ SRCS	=	ft_isalpha.c \
 			get_next_line.c \
 			ft_strrchr_i.c \
 			ft_isnum.c \
+			ft_free_tab.c \
 
 
 OBJS	=	$(SRCS:.c=.o)
