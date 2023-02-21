@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/20 11:00:53 by pcapurro         ###   ########.fr       */
+/*   Created: 2023/02/21 15:27:16 by pcapurro          #+#    #+#             */
+/*   Updated: 2023/02/21 15:27:17 by pcapurro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-int	g_last_return_code = 0;
-
-typedef struct s_mini
+void	pls_free(char **str)
 {
-	int		infile;
-	int		outfile;
-	int		append_mod;
+	int	i;
 
-	char	**envp;
-	char	**cmd_path_lst;
-
-	char	***cmd_lst;
-}	t_mini;
-
-// - EXECUTION - //
-
-// - PARSING - //
-
-#endif
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
