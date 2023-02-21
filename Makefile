@@ -23,7 +23,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(LIBFT) -o $(NAME) $(CFLAGS) $(OBJS)
+	$(CC) $(LIBFT) -lreadline $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(LIBFT):
 	make -C libft

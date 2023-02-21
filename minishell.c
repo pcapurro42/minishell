@@ -10,7 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+// char	*ft_analyze_input(char *input);
+
 int	main(void)
 {
+	char	*input;
+
+	input = NULL;
+	while (6)
+	{
+		if (input)
+			free(input);
+		input = NULL;
+		while (input == NULL)
+			input = readline("minifeur:~$ ");
+		// ft_analyze_input(input);
+	}
 	return (1);
 }
