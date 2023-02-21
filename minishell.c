@@ -14,10 +14,27 @@
 
 // char	*ft_analyze_input(char *input);
 
+char	*ft_get_name(void)
+{
+	int		address;
+	char	*name;
+
+	address = (int)&name * (-1);
+	while (address > 10)
+		address = address / 10;
+	if (address % 2 == 0)
+		name = ft_strdup("minifeur:~$ ");
+	else
+		name = ft_strdup("miniquoi:~$ ");
+	return (name);
+}
+
 int	main(void)
 {
+	char	*name;
 	char	*input;
 
+	name = ft_get_name();
 	input = NULL;
 	while (6)
 	{
@@ -25,7 +42,7 @@ int	main(void)
 			free(input);
 		input = NULL;
 		while (input == NULL)
-			input = readline("minifeur:~$ ");
+			input = readline(name);
 		// ft_analyze_input(input);
 	}
 	return (1);

@@ -13,10 +13,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "libft/libft.h"
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
@@ -40,5 +43,6 @@ typedef struct s_mini
 // - PARSING - //
 
 char	*ft_analyze_input(char *input);
+char	*ft_get_name(void);
 
 #endif
