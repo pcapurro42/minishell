@@ -12,16 +12,6 @@
 
 #include "../minishell.h"
 
-int	ft_check_commands(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (0);
-}
-
 char	*ft_analyze_input(char *input)
 {
 	int		i;
@@ -34,7 +24,6 @@ char	*ft_analyze_input(char *input)
 		return (free(temp), NULL);
 	else
 		str = ft_split(temp, ' ');
-	ft_check_commands(str);
 	return (NULL);
 }
 

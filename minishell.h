@@ -54,8 +54,6 @@ int		ft_empty_checker(char *str);
 int		ft_quote_checker(char *str);
 int		ft_pipe_chevron_checker(char *str);
 
-int		ft_check_commands(char **str);
-
 char	*ft_analyze_input(char *input);
 
 #endif

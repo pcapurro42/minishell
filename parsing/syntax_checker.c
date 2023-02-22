@@ -72,6 +72,14 @@ int	ft_pipe_chevron_checker(char *str)
 		i++;
 	}
 	i = 0;
+	while (strf[i] != NULL)
+	{
+		if ((strf[i][0] == '<' || strf[i][0] == '>') && ft_strlen(strf[i]) > 2)
+			return (printf("Error!\n"));
+		if ((strf[i][0] == '<' || strf[i][0] == '>') && ft_strlen(strf[i]) > 2 && strf[i][1] != strf[i][0])
+			return (printf("Error!\n"));
+		i++;
+	}
 	return (0);
 }
 
