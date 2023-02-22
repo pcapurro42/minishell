@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-// char	*ft_analyze_input(char *input);
-
 char	*ft_get_name(void)
 {
 	int		address;
@@ -36,6 +34,7 @@ int	main(void)
 
 	name = ft_get_name();
 	input = NULL;
+	g_last_return_code = 0;
 	while (6)
 	{
 		if (input)
@@ -43,7 +42,8 @@ int	main(void)
 		input = NULL;
 		while (input == NULL)
 			input = readline(name);
-		// ft_analyze_input(input);
+		if (input[0] != '\0')
+			ft_analyze_input(input);
 	}
-	return (1);
+	return (0);
 }

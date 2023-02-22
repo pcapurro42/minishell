@@ -23,7 +23,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-int	g_last_return_code = 0;
+int	g_last_return_code;
 
 typedef struct s_mini
 {
@@ -38,11 +38,24 @@ typedef struct s_mini
 	char	***cmd_lst;
 }	t_mini;
 
+// - MAIN - //
+
+char	*ft_get_name(void);
+
 // - EXECUTION - //
 
 // - PARSING - //
 
+char	*ft_clean_input(char *input);
+char	*ft_add_spaces(char *str);
+
+int		ft_syntax_checker(char *str);
+int		ft_empty_checker(char *str);
+int		ft_quote_checker(char *str);
+int		ft_pipe_chevron_checker(char *str);
+
+int		ft_check_commands(char **str);
+
 char	*ft_analyze_input(char *input);
-char	*ft_get_name(void);
 
 #endif

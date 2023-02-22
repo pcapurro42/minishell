@@ -7,6 +7,10 @@
 NAME = minishell
 
 SRCS = minishell.c \
+	parsing/main_checker.c \
+	parsing/syntax_checker.c \
+	parsing/checker_utils.c \
+	execution/execution.c \
 
 LIBFT = libft/libft.a
 
@@ -32,7 +36,7 @@ re: fclean all
 
 clean:
 	@rm -rf $(OBJS)
-	make clean -C libft
+	@make clean -C libft
 
 fclean: clean
 	@rm -rf $(NAME)
