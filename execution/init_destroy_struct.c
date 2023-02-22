@@ -6,13 +6,13 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/22 13:34:51 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:44:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_mini	ft_init_mini(char **envp)
+t_mini	*ft_init_mini(char *envp[])
 {
 	t_mini	*minishell;
 
@@ -24,4 +24,5 @@ t_mini	ft_init_mini(char **envp)
 	minishell->cmd_lst = NULL;
 	minishell->history = NULL;
 	minishell->cmd_path_lst = ft_find_path(envp);
+	return (minishell);
 }

@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:08:47 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/22 13:34:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:41:10 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_execution(t_mini *minishell)
 {
+	(void) minishell;
 	return ;
 }

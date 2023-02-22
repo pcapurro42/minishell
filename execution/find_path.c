@@ -6,13 +6,13 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:52:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/22 13:35:48 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:42:06 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	complete_path(char **cmd_path_lst)
+void	ft_complete_path(char **cmd_path_lst)
 {
 	int		i;
 	char	*temp;
@@ -29,7 +29,7 @@ void	complete_path(char **cmd_path_lst)
 	}
 }
 
-char	**no_env(void)
+char	**ft_no_env(void)
 {
 	char	**cmd_path_lst;
 
@@ -41,7 +41,7 @@ char	**no_env(void)
 	return (cmd_path_lst);
 }
 
-char	**find_path(char *envp[])
+char	**ft_find_path(char *envp[])
 {
 	char	**cmd_path_lst;
 	char	*temp;
