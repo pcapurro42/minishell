@@ -47,13 +47,11 @@ char	*ft_get_name(void);
 // - PARSING - //
 
 char	*ft_clean_input(char *input);
-char	*ft_add_spaces(char *str);
 
 int		ft_syntax_checker(char *str);
-int		ft_empty_checker(char *str);
-int		ft_quote_checker(char *str);
-int		ft_pipe_chevron_checker(char *str);
+int		ft_consistency_checker(char **str);
 
 char	*ft_analyze_input(char *input);
+char	*ft_deliver_input(char **str);
 
 #endif

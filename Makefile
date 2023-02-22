@@ -9,6 +9,7 @@ NAME = minishell
 SRCS = minishell.c \
 	parsing/main_checker.c \
 	parsing/syntax_checker.c \
+	parsing/consistency_checker.c \
 	parsing/checker_utils.c \
 	execution/execution.c \
 

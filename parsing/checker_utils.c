@@ -24,7 +24,7 @@ static char	*ft_char_to_str(char c)
 	return (str);
 }
 
-char	*ft_add_spaces(char *str)
+static char	*ft_add_spaces(char *str)
 {
 	int		i;
 	char	*strf;
