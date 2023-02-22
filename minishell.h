@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/22 13:19:57 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:37:05 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	ft_error(void);
 void	cmd_error(char **cmd);
 void	check_malloc(void *str);
 
-t_mini	ft_init_mini(void);
+t_mini	*ft_init_mini(char **envp);
 void	ft_destroy_mini(t_mini *minishell);
+
+char	**find_path(char *envp[]);
 
 void	ft_execution(t_mini *minishell);
 

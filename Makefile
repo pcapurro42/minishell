@@ -12,6 +12,9 @@ SRCS = minishell.c \
 	parsing/consistency_checker.c \
 	parsing/checker_utils.c \
 	execution/execution.c \
+	execution/find_path.c \
+	execution/ini_destroy_struct.c \
+	execution/error_msg.c 
 
 LIBFT = libft/libft.a
 
