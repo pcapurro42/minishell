@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/22 13:44:49 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:38:42 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ typedef struct s_mini
 	int		outfile;
 	int		append_mod;
 
-	char	**envp;
 	char	**cmd_path_lst;
-	char	**history;
-
 	char	***cmd_lst;
 }	t_mini;
 
@@ -49,10 +46,10 @@ void	ft_error(void);
 void	ft_cmd_error(char **cmd);
 void	ft_check_malloc(void *str);
 
-t_mini	*ft_init_mini(char *envp[]);
+t_mini	*ft_init_mini(void);
 void	ft_destroy_mini(t_mini *minishell);
 
-char	**ft_find_path(char *envp[]);
+char	**ft_find_path(void);
 
 void	ft_execution(t_mini *minishell);
 
