@@ -16,19 +16,20 @@ int	ft_empty_checker(char *str)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
-	printf("%s\n", str);
+	k = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '|' || str[i] == '>' || str[i] == '<')
 			j++;
+		if (str[i] == ' ')
+			k++;
 		i++;
 	}
-	printf("%d\n", j);
-	printf("%zu\n", ft_strlen(str));
-	if ((size_t)j == ft_strlen(str))
+	if ((size_t)j == ft_strlen(str) - k)
 		return (printf("Error! Not enough inputs.\n"));
 	return (0);
 }
@@ -59,13 +60,14 @@ int	ft_pipe_chevron_checker(char *str)
 {
 	int		i;
 	int		j;
+	char	**strf;
 
 	i = 0;
 	j = 0;
-	while (str[i] != '\0')
+	strf = ft_split(str, ' ');
+	while (strf[i] != NULL)
 	{
-		if ((str[i] == '|' && str[i - 1] == '|')
-			|| (str[i] == '|' && str[i + 1] == '\0'))
+		if ((strf[i][0] == '|' && strf[i - 1][0] == '|') || (strf[i][0] == '|' && strf[i + 1] == NULL))
 			return (printf("Syntax error! Unexpected pipe.\n"));
 		i++;
 	}
