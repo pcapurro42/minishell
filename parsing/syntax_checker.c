@@ -85,5 +85,6 @@
 
 int	ft_syntax_checker(char *str)
 {
+	str = NULL;
 	return (0);
 }

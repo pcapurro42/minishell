@@ -18,7 +18,7 @@ char	*ft_analyze_input(char *input)
 {
 	int		i;
 	char	*str;
-	char	*strf;
+	char	**strf;
 
 	i = 0;
 	str = ft_clean_input(input);
@@ -29,12 +29,12 @@ char	*ft_analyze_input(char *input)
 	}
 	strf = ft_split(str, ' ');
 	free(str);
-	if (ft_consistency_checker(strf) != 0)
-	{
-		pls_free(strf);
-		return (NULL);
-	}
-	ft_deliver_input(strf);
+	// if (ft_consistency_checker(strf) != 0)
+	// {
+	// 	pls_free(strf);
+	// 	return (NULL);
+	// }
+	// ft_deliver_input(strf);
 	return (NULL);
 }
 
