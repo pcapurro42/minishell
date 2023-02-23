@@ -14,7 +14,10 @@ SRCS = minishell.c \
 	execution/execution.c \
 	execution/find_path.c \
 	execution/init_destroy_struct.c \
-	execution/error_msg.c 
+	execution/error_msg.c \
+	execution/check_access.c \
+	execution/child.c \
+	execution/pipex.c
 
 LIBFT = libft/libft.a
 

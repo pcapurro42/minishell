@@ -6,13 +6,13 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:08:47 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 10:57:14 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:38:12 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_here_doc(t_mini *minishell)
+static void	ft_here_doc(t_mini *minishell)
 {
 	char	*gnl;
 
@@ -37,7 +37,7 @@ void	ft_here_doc(t_mini *minishell)
 	return ;
 }
 
-void	file_not_open(t_mini *minishell)
+static void	file_not_open(t_mini *minishell)
 {
 	ft_putstr_fd("minishell: ", 2);
 	perror(minishell->infile);

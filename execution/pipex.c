@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 11:11:59 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:42:55 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_pipex_close_files(int (*fd)[2], int i)
 	close(fd[i - 1][1]);
 }
 
-pid_t	*ft_pipex_multiple_cmd2(int (*fd)[2], t_mini *minishell)
+static pid_t	*ft_pipex2(int (*fd)[2], t_mini *minishell)
 {
 	pid_t	*pid;
 	int		i;
@@ -29,17 +29,13 @@ pid_t	*ft_pipex_multiple_cmd2(int (*fd)[2], t_mini *minishell)
 	i = 0;
 	while (i < minishell->nb_cmd)
 	{
-		if ((i != minishell->nb_cmd - 1)&& pipe(fd[i]))
+		if ((i != minishell->nb_cmd - 1) && pipe(fd[i]))
 			ft_error();
 		pid[i] = fork();
 		if (pid[i] < 0)
 			ft_error();
 		if (pid[i] == 0 && i == 0)
-			child1(fd, i, minishell);
-		else if (pid[i] == 0 && (i == minishell->nb_cmd - 1))
-			child2(fd, i, minishell);
-		else if (pid[i] == 0)
-			mid_child(fd, i, minishell);
+			child(fd, i, minishell);
 		if (i > 0)
 			ft_pipex_close_files(fd, i);
 		i++;
@@ -47,7 +43,7 @@ pid_t	*ft_pipex_multiple_cmd2(int (*fd)[2], t_mini *minishell)
 	return (pid);
 }
 
-void	ft_pipex_multiple_cmd(t_mini *minishell)
+void	ft_pipex(t_mini *minishell)
 {
 	pid_t	*pid;
 	int		(*fd)[2];
@@ -58,7 +54,7 @@ void	ft_pipex_multiple_cmd(t_mini *minishell)
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));
 	if (status_code == NULL || fd == NULL)
 		ft_error();
-	pid = ft_pipex_multiple_cmd2(fd, minishell);
+	pid = ft_pipex2(fd, minishell);
 	close(minishell->infile_fd);
 	if (minishell->outfile_mod != -1)
 		close(minishell->outfile_fd);
