@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/22 13:59:45 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/23 10:45:59 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ char	*ft_get_name(void)
 	return (name);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char *envp[])
 {
-	char	*name;
-	char	*input;
+	char			*name;
+	char			*input;
 
+	(void) argc;
+	(void) argv;
+	(void) envp;
 	name = ft_get_name();
 	input = NULL;
 	g_last_return_code = 0;

@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:19 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/22 13:36:26 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/23 07:24:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_error_msg(char *msg)
 {
 	char	*error_msg;
 
-	error_msg = ft_strjoin("pipex: ", msg);
+	error_msg = ft_strjoin("minishell: ", msg);
 	ft_check_malloc(error_msg);
 	perror(error_msg);
 	unlink("here_doc");
@@ -25,7 +25,7 @@ void	ft_error_msg(char *msg)
 
 void	ft_error(void)
 {
-	write(2, "pipex: Error\n", 13);
+	write(2, "minishell: Error\n", 13);
 	unlink("here_doc");
 	exit(EXIT_FAILURE);
 }
@@ -37,7 +37,7 @@ void	ft_cmd_error(char **cmd)
 
 	temp = ft_strjoin(cmd[0], ": command not found\n");
 	ft_check_malloc(temp);
-	error_msg = ft_strjoin("pipex: ", temp);
+	error_msg = ft_strjoin("minishell: ", temp);
 	ft_check_malloc(error_msg);
 	write(2, error_msg, ft_strlen(error_msg));
 	unlink("here_doc");
