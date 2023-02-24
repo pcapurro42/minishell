@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:08:47 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 14:38:12 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:05:48 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	ft_execution(t_mini *minishell)
 		ft_here_doc(minishell);
 	if (minishell->infile_mod == 0)
 		minishell->infile_fd = open(minishell->infile, O_RDONLY);
-	if (minishell->infile_fd < 0)
+	if (minishell->infile_fd < 0 && minishell->infile_mod != -1)
 		file_not_open(minishell);
-	if (minishell->infile_fd < 0)
+	if (minishell->infile_fd < 0 && minishell->infile_mod != -1)
 		ft_error_msg(minishell->infile);
 	if (minishell->outfile_mod == 1)
 		minishell->outfile_fd = open(minishell->outfile, \
@@ -68,11 +68,8 @@ void	ft_execution(t_mini *minishell)
 	else if (minishell->outfile_mod == 0)
 		minishell->outfile_fd = open(minishell->outfile, \
 		O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (minishell->outfile_fd < 0)
+	if (minishell->outfile_fd < 0 && minishell->outfile_mod != -1)
 		ft_error_msg(minishell->outfile);
-	/*else if (minishell->nb_cmd == 1)
-		ft_pipex_one_cmd(minishell);
-	else
-		ft_pipex_multiple_cmd(minishell);*/
+	ft_pipex(minishell);
 }	
 

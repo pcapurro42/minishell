@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:19 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 07:24:35 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:48:34 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_error_msg(char *msg)
 	error_msg = ft_strjoin("minishell: ", msg);
 	ft_check_malloc(error_msg);
 	perror(error_msg);
-	unlink("here_doc");
+	unlink("minishell_here_doc.tmp");
 	exit(EXIT_FAILURE);
 }
 
 void	ft_error(void)
 {
-	write(2, "minishell: Error\n", 13);
-	unlink("here_doc");
+	write(2, "minishell: Error\n", 16);
+	unlink("minishell_here_doc.tmp");
 	exit(EXIT_FAILURE);
 }
 
@@ -40,7 +40,7 @@ void	ft_cmd_error(char **cmd)
 	error_msg = ft_strjoin("minishell: ", temp);
 	ft_check_malloc(error_msg);
 	write(2, error_msg, ft_strlen(error_msg));
-	unlink("here_doc");
+	unlink("minishell_here_doc.tmp");
 	exit(127);
 }
 

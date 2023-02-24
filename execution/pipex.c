@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 14:42:55 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:48:47 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static pid_t	*ft_pipex2(int (*fd)[2], t_mini *minishell)
 		pid[i] = fork();
 		if (pid[i] < 0)
 			ft_error();
-		if (pid[i] == 0 && i == 0)
+		if (pid[i] == 0)
 			child(fd, i, minishell);
 		if (i > 0)
 			ft_pipex_close_files(fd, i);
@@ -64,6 +64,6 @@ void	ft_pipex(t_mini *minishell)
 		waitpid(pid[i], &(status_code[i]), 0);
 		i++;
 	}
-	unlink("here_doc");
+	unlink("minishell_here_doc.tmp");
 	exit(WEXITSTATUS(status_code[i - 1]));
 }

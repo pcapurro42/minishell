@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:51:59 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 14:41:05 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:48:40 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char	*ft_check_access(int i, t_mini *minishell)
 	error_msg = ft_strjoin("pipex: ", cmd_path);
 	ft_check_malloc(error_msg);
 	write(2, error_msg, ft_strlen(error_msg));
-	unlink("here_doc");
+	unlink("minishell_here_doc.tmp");
 	exit(127);
 }
