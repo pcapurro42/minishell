@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/23 14:40:19 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:16:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ char	*ft_check_access(int i, t_mini *minishell);
 
 // - PARSING - //
 
+char	**ft_repair_string(char **strf);
+
 char	*ft_clean_input(char *input);
-char	*ft_remove_simple_and_double_quotes(char *str);
+char	*ft_prepare_for_split(char *str);
 
 int		ft_syntax_checker(char *str);
 int		ft_consistency_checker(char **str);

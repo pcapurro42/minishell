@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 06:55:57 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/24 16:47:35 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:17:39 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*ft_char_to_str(char c)
 	return (str);
 }
 
-char	*ft_remove_simple_and_double_quotes(char *str)
+static char	*ft_remove_simple_and_double_quotes(char *str)
 {
 	int	i;
 	int	dquote;
@@ -53,7 +53,48 @@ char	*ft_remove_simple_and_double_quotes(char *str)
 		}
 		i++;
 	}
-	return (0);
+	return (str);
+}
+
+static char	*ft_remove_spaces_inside_simple_and_double_quotes(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ' && dquote == 1)
+			str[i] = -1;
+		if (str[i] == ' ' && quote == 1)
+			str[i] = -1;
+		if (str[i] == 34 && quote == 0)
+		{
+			if (dquote == 0)
+				dquote = 1;
+			else
+				dquote = 0;
+		}
+		if (str[i] == 39 && dquote == 0)
+		{
+			if (quote == 0)
+				quote = 1;
+			else
+				quote = 0;
+		}
+		i++;
+	}
+	return (str);
+}
+
+char	*ft_prepare_for_split(char *str)
+{
+	str = ft_remove_spaces_inside_simple_and_double_quotes(str);
+	str = ft_remove_simple_and_double_quotes(str);
+	return (str);
 }
 
 static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
@@ -100,4 +141,25 @@ char	*ft_clean_input(char *input)
 	}
 	str = ft_add_spaces_for_pipes_and_chevrons(str);
 	return (str);
+}
+
+char	**ft_repair_string(char **strf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (strf[i] != NULL)
+	{
+		while (strf[i][j] != '\0')
+		{
+			if (strf[i][j] == -1)
+				strf[i][j] = ' ';
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (strf);
 }
