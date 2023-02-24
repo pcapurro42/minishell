@@ -69,6 +69,7 @@ char	*ft_check_access(int i, t_mini *minishell);
 // - PARSING - //
 
 char	*ft_clean_input(char *input);
+char	*ft_remove_simple_and_double_quotes(char *str);
 
 int		ft_syntax_checker(char *str);
 int		ft_consistency_checker(char **str);

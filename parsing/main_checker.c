@@ -27,6 +27,7 @@ char	*ft_analyze_input(char *input)
 		free(str);
 		return (NULL);
 	}
+	str = ft_remove_simple_and_double_quotes(str);
 	strf = ft_split(str, ' ');
 	free(str);
 	// if (ft_consistency_checker(strf) != 0)

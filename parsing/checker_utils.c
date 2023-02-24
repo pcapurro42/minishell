@@ -24,7 +24,40 @@ static char	*ft_char_to_str(char c)
 	return (str);
 }
 
-static char	*ft_add_spaces(char *str)
+char	*ft_remove_simple_and_double_quotes(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+	int	count;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	while (str[i] != NULL)
+	{
+		if (str[i] == 34 && quote == 0)
+		{
+			if (dquote == 0)
+				dquote = 1;
+			else
+				dquote = 0;
+			str[i] = -1;
+		}
+		if (str[i] == 39 && dquote == 0)
+		{
+			if (quote == 0)
+				quote = 1;
+			else
+				quote = 0;
+			str[i] = -1;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
 {
 	int		i;
 	char	*strf;
@@ -66,6 +99,6 @@ char	*ft_clean_input(char *input)
 			str = ft_strjoin(str, ft_char_to_str(input[i]));
 		i++;
 	}
-	str = ft_add_spaces(str);
+	str = ft_add_spaces_for_pipes_and_chevrons(str);
 	return (str);
 }

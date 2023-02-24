@@ -67,11 +67,15 @@ static int ft_pipe_checker(char *strf)
     return (0);
 }
 
+// static int	ft_chevron_checker(char *str);
+
 int	ft_syntax_checker(char *str)
 {
 	if (ft_quote_checker(str) != 0)
 		return (1);
 	if (ft_pipe_checker(str) != 0)
 		return (1);
+	// if (ft_chevron_checker(str) != 0)
+	// 	return (1);
 	return (0);
 }
