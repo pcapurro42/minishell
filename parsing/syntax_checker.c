@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_quote_checker(char *str)
+static int	ft_quote_checker(char *str)
 {
 	int	i;
 	int	dquote;
@@ -48,35 +48,30 @@ int	ft_quote_checker(char *str)
 	return (0);
 }
 
-// int	ft_pipe_chevron_checker(char *str)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**strf;
+static int ft_pipe_checker(char *strf)
+{
+	char	**str;
+    int 	i;
 
-// 	i = 0;
-// 	j = 0;
-// 	strf = ft_split(str, ' ');
-// 	while (strf[i] != NULL)
-// 	{
-// 		if ((strf[i][0] == '|' && strf[i - 1][0] == '|') || (strf[i][0] == '|' && strf[i + 1] == NULL))
-// 			return (printf("Syntax error! Unexpected pipe.\n"));
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (strf[i] != NULL)
-// 	{
-// 		if ((strf[i][0] == '<' || strf[i][0] == '>') && ft_strlen(strf[i]) > 2)
-// 			return (printf("Error!\n"));
-// 		if ((strf[i][0] == '<' || strf[i][0] == '>') && ft_strlen(strf[i]) > 2 && strf[i][1] != strf[i][0])
-// 			return (printf("Error!\n"));
-// 		i++;
-// 	}
-// 	return (0);
-// }
+    i = 0;
+	str = ft_split(strf, ' ');
+    while (str[i] != NULL)
+    {
+        if (str[i][0] == '|')
+		{
+			if (i == 0 || str[i + 1] == NULL || str[i - 1][0] == '|' || str[i + 1][0] == '|')
+				return (printf("Error! Unexpected pipe.\n"));
+		}
+		i++;
+    }
+    return (0);
+}
 
 int	ft_syntax_checker(char *str)
 {
-	ft_quote_checker(str);
+	if (ft_quote_checker(str) != 0)
+		return (1);
+	if (ft_pipe_checker(str) != 0)
+		return (1);
 	return (0);
 }
