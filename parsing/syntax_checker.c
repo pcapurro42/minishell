@@ -54,7 +54,7 @@ static int ft_pipe_checker(char *strf)
     int 	i;
 
     i = 0;
-	str = ft_split(strf, -1);
+	str = ft_split(strf, ' ');
     while (str[i] != NULL)
     {
         if (str[i][0] == '|')
