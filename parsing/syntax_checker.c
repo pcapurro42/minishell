@@ -67,7 +67,32 @@ static int ft_pipe_checker(char *strf)
     return (0);
 }
 
-// static int	ft_chevron_checker(char *str);
+static int	ft_chevron_checker(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			if ((str[i + 1] == '>' || str[i + 1] == '<') && (str[i + 2] == '>' || str[i + 2] == '<'))
+				return (printf("Error! Unexpected chevron.\n"));
+		}
+		i++;
+	}
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if ((str[i] == '>' || str[i] == '<') && (str[i + 1] == '>' || str[i + 1] == '<'))
+		{
+			if (str[i + 1] != str[i])
+				return (printf("Error! Unexpected chevron.\n"));
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	ft_syntax_checker(char *str)
 {
@@ -75,7 +100,7 @@ int	ft_syntax_checker(char *str)
 		return (1);
 	if (ft_pipe_checker(str) != 0)
 		return (1);
-	// if (ft_chevron_checker(str) != 0)
-	// 	return (1);
+	if (ft_chevron_checker(str) != 0)
+		return (1);
 	return (0);
 }
