@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:08:47 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/24 11:05:48 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:56:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static void	ft_here_doc(t_mini *minishell)
 	O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (minishell->infile_fd < 0)
 		return ;
-	write(0, "> ", 1);
+	write(0, "> ", 2);
 	gnl = get_next_line(0);
 	ft_check_malloc(gnl);
 	while (ft_strncmp(gnl, minishell->limiter, ft_strlen(gnl)) != '\n')
 	{
 		write(minishell->infile_fd, gnl, ft_strlen(gnl));
 		free(gnl);
-		write(0, "> ", 14);
+		write(0, "> ", 2);
 		gnl = get_next_line(0);
 		ft_check_malloc(gnl);
 	}

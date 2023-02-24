@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/24 14:01:26 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:44:23 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child(int (*fd)[2], int i, t_mini *minishell)
 
 	if (i == 0)
 		dup2(minishell->infile_fd, STDIN_FILENO);
-	if (i == minishell->nb_cmd && minishell->outfile_mod != -1)
+	if (i == minishell->nb_cmd - 1 && minishell->outfile_mod != -1)
 		dup2(minishell->outfile_fd, STDOUT_FILENO);
 	if (i == 0 && i != minishell->nb_cmd - 1)
 	{
