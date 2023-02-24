@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 06:55:57 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/22 06:55:59 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:47:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ char	*ft_remove_simple_and_double_quotes(char *str)
 	int	i;
 	int	dquote;
 	int	quote;
-	int	count;
 
 	i = 0;
 	dquote = 0;
 	quote = 0;
-	while (str[i] != NULL)
+	while (str[i] != '\0')
 	{
 		if (str[i] == 34 && quote == 0)
 		{
@@ -42,7 +41,7 @@ char	*ft_remove_simple_and_double_quotes(char *str)
 				dquote = 1;
 			else
 				dquote = 0;
-			str[i] = -1;
+			str[i] = ' ';
 		}
 		if (str[i] == 39 && dquote == 0)
 		{
@@ -50,7 +49,7 @@ char	*ft_remove_simple_and_double_quotes(char *str)
 				quote = 1;
 			else
 				quote = 0;
-			str[i] = -1;
+			str[i] = ' ';
 		}
 		i++;
 	}
@@ -73,10 +72,10 @@ static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
 		}
 		if (str[i] == '<' || str[i] == '>')
 		{
-			strf = ft_strjoin(strf, ' ');
+			strf = ft_strjoin(strf, ft_char_to_str(' '));
 			while (str[i] == '<' || str[i] == '>')
 				strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
-			strf = ft_strjoin(strf, ' ');
+			strf = ft_strjoin(strf, ft_char_to_str(' '));
 		}
 		else
 			strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
@@ -94,7 +93,7 @@ char	*ft_clean_input(char *input)
 	while (input[i] != '\0')
 	{
 		if (input[i] < 33 || input[i] > 126)
-			str = ft_strjoin(str, ' ');
+			str = ft_strjoin(str, ft_char_to_str(' '));
 		else
 			str = ft_strjoin(str, ft_char_to_str(input[i]));
 		i++;
