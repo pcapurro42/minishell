@@ -1,60 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments_checker.c                                :+:      :+:    :+:   */
+/*   syntax_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 06:10:54 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/22 06:11:56 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:22:11 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	ft_empty_checker(char *str)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	k;
+int	ft_quote_checker(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+	int	count;
 
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		if (str[i] == '|' || str[i] == '>' || str[i] == '<')
-// 			j++;
-// 		if (str[i] == ' ')
-// 			k++;
-// 		i++;
-// 	}
-// 	if ((size_t)j == ft_strlen(str) - k)
-// 		return (printf("Error! Not enough inputs.\n"));
-// 	return (0);
-// }
-
-// int	ft_quote_checker(char *str)
-// {
-// 	int	i;
-// 	int	dquote;
-// 	int	quote;
-
-// 	i = 0;
-// 	dquote = 0;
-// 	quote = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		if (str[i] == 34)
-// 			dquote++;
-// 		if (str[i] == 39)
-// 			quote++;
-// 		i++;
-// 	}
-// 	if (dquote % 2 != 0 || quote % 2 != 0)
-// 		return (printf("Syntax error! Quotes are not closed.\n"));
-// 	return (0);
-// }
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34 && quote == 0)
+		{
+			if (dquote == 0)
+				dquote = 1;
+			else
+				dquote = 0;
+			count++;
+		}
+		if (str[i] == 39 && dquote == 0)
+		{
+			if (quote == 0)
+				quote = 1;
+			else
+				quote = 0;
+			count++;
+		}
+		i++;
+	}
+	if (count % 2 != 0)
+		return (printf("Syntax error! Quotes are not closed.\n"));
+	return (0);
+}
 
 // int	ft_pipe_chevron_checker(char *str)
 // {
@@ -85,6 +77,6 @@
 
 int	ft_syntax_checker(char *str)
 {
-	str = NULL;
+	ft_quote_checker(str);
 	return (0);
 }
