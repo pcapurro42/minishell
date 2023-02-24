@@ -28,7 +28,7 @@ char	*ft_analyze_input(char *input)
 		return (NULL);
 	}
 	str = ft_remove_simple_and_double_quotes(str);
-	strf = ft_split(str, ' ');
+	strf = ft_split(str, -1);
 	free(str);
 	// if (ft_consistency_checker(strf) != 0)
 	// {

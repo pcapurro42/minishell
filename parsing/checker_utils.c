@@ -68,15 +68,17 @@ static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
 	{
 		if (str[i] == '|')
 		{
-			strf = ft_strjoin(strf, " | ");
+			strf = ft_strjoin(strf, '-1');
+			strf = ft_strjoin(strf, "|");
+			strf = ft_strjoin(strf, '-1');
 			i++;
 		}
 		if (str[i] == '<' || str[i] == '>')
 		{
-			strf = ft_strjoin(strf, " ");
+			strf = ft_strjoin(strf, -1);
 			while (str[i] == '<' || str[i] == '>')
 				strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
-			strf = ft_strjoin(strf, " ");
+			strf = ft_strjoin(strf, -1);
 		}
 		else
 			strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
@@ -94,7 +96,7 @@ char	*ft_clean_input(char *input)
 	while (input[i] != '\0')
 	{
 		if (input[i] < 33 || input[i] > 126)
-			str = ft_strjoin(str, " ");
+			str = ft_strjoin(str, -1);
 		else
 			str = ft_strjoin(str, ft_char_to_str(input[i]));
 		i++;
