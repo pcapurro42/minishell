@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*ft_deliver_input(char **str);
+char	*ft_deliver_input(char **strf);
 
 char	*ft_analyze_input(char *input)
 {
@@ -21,23 +21,23 @@ char	*ft_analyze_input(char *input)
 	char	**strf;
 
 	i = 0;
-	str = ft_clean_input(input);
-	if (ft_syntax_checker(str) != 0)
-	{
-		free(str);
+	str = ft_input_cleaner(input);
+	if (str == NULL)
 		return (NULL);
-	}
-	str = ft_prepare_for_split(str);
+
 	strf = ft_split(str, ' ');
-	strf = ft_repair_string(strf);
+	strf = ft_repair_spaces_in_quotes(strf);
+
+	if (ft_syntax_checker(strf) != 0)
+		return (NULL);
 	// if (ft_consistency_checker(strf) != 0)
-	// {
-	// 	pls_free(strf);
 	// 	return (NULL);
-	// }
 	// ft_deliver_input(strf);
 	return (NULL);
 }
+
+	// while (strf[i] != NULL)
+	// 	printf("%s\n", strf[i++]);
 
 // "|"
 // ">"

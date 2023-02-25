@@ -56,7 +56,7 @@ static char	*ft_remove_simple_and_double_quotes(char *str)
 	return (str);
 }
 
-static char	*ft_remove_spaces_inside_simple_and_double_quotes(char *str)
+static char	*ft_hide_spaces_inside_simple_and_double_quotes(char *str)
 {
 	int	i;
 	int	dquote;
@@ -67,10 +67,6 @@ static char	*ft_remove_spaces_inside_simple_and_double_quotes(char *str)
 	quote = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ' && dquote == 1)
-			str[i] = -1;
-		if (str[i] == ' ' && quote == 1)
-			str[i] = -1;
 		if (str[i] == 34 && quote == 0)
 		{
 			if (dquote == 0)
@@ -85,19 +81,16 @@ static char	*ft_remove_spaces_inside_simple_and_double_quotes(char *str)
 			else
 				quote = 0;
 		}
+		if (str[i] == ' ' && dquote == 1)
+			str[i] = -1;
+		if (str[i] == ' ' && quote == 1)
+			str[i] = -1;
 		i++;
 	}
 	return (str);
 }
 
-char	*ft_prepare_for_split(char *str)
-{
-	str = ft_remove_spaces_inside_simple_and_double_quotes(str);
-	str = ft_remove_simple_and_double_quotes(str);
-	return (str);
-}
-
-static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
+static char	*ft_add_spaces_for_pipes(char *str)
 {
 	int		i;
 	char	*strf;
@@ -107,16 +100,66 @@ static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '|')
-		{
 			strf = ft_strjoin(strf, " | ");
-			i++;
+		else
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		i++;
+	}
+	return (strf);
+}
+
+static char	*ft_add_spaces_for_chevrons(char *str)
+{
+	int		i;
+	char	*strf;
+	char	*fstr;
+
+	i = 0;
+	strf = ft_strdup("");
+	fstr = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<' && str[i - 1] != '>') && (str[i - 1] != ' ') && (str[i - 1] != 34) && (str[i - 1] != 39))
+		{
+			strf = ft_strjoin(strf, " ");
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
 		}
+		else
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		i++;
+	}
+	i = 0;
+	while (strf[i] != '\0')
+	{
+		if ((strf[i] == '>' || strf[i] == '<') && (strf[i + 1] != '<' && strf[i + 1] != '>') && (strf[i + 1] != ' ') && (str[i + 1] != 34) && (str[i + 1] != 39))
+		{
+			fstr = ft_strjoin(fstr, ft_char_to_str(strf[i]));
+			fstr = ft_strjoin(fstr, " ");
+		}
+		else
+			fstr = ft_strjoin(fstr, ft_char_to_str(strf[i]));
+		i++;
+	}
+	return (fstr);
+}
+
+static char	*ft_remove_spaces_between_chevrons(char *str)
+{
+	int	i;
+	char	*strf;
+
+	i = 0;
+	strf = ft_strdup("");
+	while (str[i] != '\0')
+	{
 		if (str[i] == '<' || str[i] == '>')
 		{
-			strf = ft_strjoin(strf, ft_char_to_str(' '));
-			while (str[i] == '<' || str[i] == '>')
-				strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
-			strf = ft_strjoin(strf, ft_char_to_str(' '));
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+			i++;
+			while (str[i] == ' ')
+				i++;
+			if (str[i] != '<' && str[i] != '>')
+				strf = ft_strjoin(strf, " ");
 		}
 		else
 			strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
@@ -124,7 +167,43 @@ static char	*ft_add_spaces_for_pipes_and_chevrons(char *str)
 	return (strf);
 }
 
-char	*ft_clean_input(char *input)
+static int	ft_quote_checker(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+	int	count;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34 && quote == 0)
+		{
+			if (dquote == 0)
+				dquote = 1;
+			else
+				dquote = 0;
+			count++;
+		}
+		if (str[i] == 39 && dquote == 0)
+		{
+			if (quote == 0)
+				quote = 1;
+			else
+				quote = 0;
+			count++;
+		}
+		i++;
+	}
+	if (count % 2 != 0)
+		return (printf("Syntax error! Quotes are not closed.\n"));
+	return (0);
+}
+
+char	*ft_input_cleaner(char *input)
 {
 	int		i;
 	char	*str;
@@ -139,11 +218,20 @@ char	*ft_clean_input(char *input)
 			str = ft_strjoin(str, ft_char_to_str(input[i]));
 		i++;
 	}
-	str = ft_add_spaces_for_pipes_and_chevrons(str);
+	if (ft_quote_checker(str) != 0)
+		return (NULL);
+	else
+	{
+		str = ft_add_spaces_for_pipes(str);
+		str = ft_hide_spaces_inside_simple_and_double_quotes(str);
+		str = ft_remove_simple_and_double_quotes(str);
+		str = ft_add_spaces_for_chevrons(str);
+		str = ft_remove_spaces_between_chevrons(str);
+	}
 	return (str);
 }
 
-char	**ft_repair_string(char **strf)
+char	**ft_repair_spaces_in_quotes(char **strf)
 {
 	int	i;
 	int	j;

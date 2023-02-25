@@ -12,4 +12,4 @@
 
 #include "../minishell.h"
 
-int	ft_consistency_checker(char **str);
+int	ft_consistency_checker(char **strf);

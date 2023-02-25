@@ -28,7 +28,7 @@ int	g_last_return_code;
 
 typedef struct s_mini
 {
-	int		nb_cmd; // le nombre de commandes à exécuter 
+	int		nb_cmd; // le nombre de commandes à exécuter
 
 	int		infile_mod; // here_doc (cmd << LIMITER) = 1 ou normal (< file) = 0 ou aucun (\) = -1
 	int		outfile_mod; // append (>>) = 1 ou normal (> file) = 0 ou aucun (\) = -1
@@ -68,15 +68,13 @@ char	*ft_check_access(int i, t_mini *minishell);
 
 // - PARSING - //
 
-char	**ft_repair_string(char **strf);
+char	*ft_input_cleaner(char *input);
+char	**ft_repair_spaces_in_quotes(char **strf);
 
-char	*ft_clean_input(char *input);
-char	*ft_prepare_for_split(char *str);
-
-int		ft_syntax_checker(char *str);
-int		ft_consistency_checker(char **str);
+int		ft_syntax_checker(char **strf);
+int		ft_consistency_checker(char **strf);
 
 char	*ft_analyze_input(char *input);
-char	*ft_deliver_input(char **str);
+char	*ft_deliver_input(char **strf);
 
 #endif
