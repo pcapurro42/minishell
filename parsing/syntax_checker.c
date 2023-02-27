@@ -12,7 +12,43 @@
 
 #include "../minishell.h"
 
-static int	ft_pipe_checker(char **str)
+int	ft_quote_checker(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+	int	count;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34 && quote == 0)
+		{
+			if (dquote == 0)
+				dquote = 1;
+			else
+				dquote = 0;
+			count++;
+		}
+		if (str[i] == 39 && dquote == 0)
+		{
+			if (quote == 0)
+				quote = 1;
+			else
+				quote = 0;
+			count++;
+		}
+		i++;
+	}
+	if (count % 2 != 0)
+		return (printf("Syntax error! Quotes are not closed.\n"));
+	return (0);
+}
+
+int	ft_pipe_checker(char **str)
 {
 	int	i;
 
@@ -32,7 +68,7 @@ static int	ft_pipe_checker(char **str)
 	return (0);
 }
 
-static int	ft_chevron_checker(char **str)
+int	ft_chevron_checker(char **str)
 {
 	int	i;
 

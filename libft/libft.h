@@ -90,6 +90,7 @@ int		ft_strrchr_i(const char *s, int c);
 
 int		ft_isnum(char *str);
 
+char	*ft_char_to_str(char c);
 int		ft_dstrlen(char **str);
 void	pls_free(char **str);
 

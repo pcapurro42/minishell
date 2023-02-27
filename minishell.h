@@ -41,11 +41,11 @@ typedef struct s_mini
 	char	***cmd_lst; // la liste des commandes à exécuter
 }	t_mini;
 
-// - MAIN - //
+// #-# MAIN #-# //
 
 char	*ft_get_name(void);
 
-// - EXECUTION - //
+// #-# EXECUTION #-# //
 
 void	ft_error_msg(char *msg);
 void	ft_error(void);
@@ -62,15 +62,33 @@ void	ft_pipex(t_mini *minishell);
 void	ft_child(int (*fd)[2], int i, t_mini *minishell);
 char	*ft_check_access(int i, t_mini *minishell);
 
-// - PARSING - //
-
-char	*ft_input_cleaner(char *input);
-char	**ft_repair_spaces_in_quotes(char **strf);
-
-int		ft_syntax_checker(char **str);
-int		ft_consistency_checker(char **str);
+// #-# PARSING #-# //
 
 char	*ft_analyze_input(char *input);
+
+// CLEANERS //
+
+char	*ft_input_cleaner(char *input);
+char 	*ft_add_spaces_for_pipes(char *str);
+char 	*ft_hide_spaces_in_quotes(char *str);
+char 	*ft_remove_quotes(char *str);
+char 	*ft_separate_chevrons(char *str);
+char 	*ft_stick_chevrons(char *str);
+char	**ft_repair_spaces_in_quotes(char **strf);
+
+// SYNTAX CHECKERS //
+
+int		ft_syntax_checker(char **str);
+int		ft_pipe_checker(char **str);
+int		ft_chevron_checker(char **str);
+int		ft_quote_checker(char *str);
+
+// CONSISTENCY CHECKERS //
+
+int		ft_consistency_checker(char **str);
+
+// DISTRIBUTION //
+
 char	*ft_deliver_input(char **str);
 
 #endif

@@ -10,7 +10,8 @@ SRCS = minishell.c \
 	parsing/main_checker.c \
 	parsing/syntax_checker.c \
 	parsing/consistency_checker.c \
-	parsing/checker_utils.c \
+	parsing/input_cleaner.c \
+	parsing/cleaner_utils.c \
 	execution/execution.c \
 	execution/find_path.c \
 	execution/init_destroy_struct.c \
