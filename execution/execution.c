@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:08:47 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/24 15:56:44 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:07:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,5 @@ void	ft_execution(t_mini *minishell)
 	ft_pipex(minishell);
 }	
 
+// Check l'existence des commandes avant celle des fichiers
+// afin de respecter l'ordre de shell

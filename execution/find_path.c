@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:52:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/23 08:07:40 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:11:33 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ static void	ft_complete_path(char **cmd_path_lst)
 	int		i;
 	char	*temp;
 
-	i = 0;
+	if (cmd_path_lst && cmd_path_lst[0])
+	{
+		temp = ft_strdup(&(cmd_path_lst[0][5]));
+		free(cmd_path_lst[0]);
+		cmd_path_lst[0] = temp;
+	}
+	else
+		ft_error();
 	ft_check_malloc(cmd_path_lst[0]);
+	i = 0;
 	while (cmd_path_lst[i])
 	{
 		temp = ft_strjoin(cmd_path_lst[i], "/");
@@ -44,11 +52,10 @@ static char	**ft_no_env(void)
 char	**ft_find_path(char *envp[])
 {
 	char	**cmd_path_lst;
-	char	*temp;
 	int		i;
 
 	i = 0;
-	if (!envp || !(envp[0]))
+	if (!envp)
 		return (ft_no_env());
 	while (envp[i])
 	{
@@ -59,13 +66,6 @@ char	**ft_find_path(char *envp[])
 	if (!(envp[i]))
 		return (ft_no_env());
 	cmd_path_lst = ft_split(envp[i], ':');
-	if (cmd_path_lst && cmd_path_lst[0])
-	{
-		temp = ft_strdup(&(cmd_path_lst[0][5]));
-		free(cmd_path_lst[0]);
-		cmd_path_lst[0] = temp;
-	}
-	else
-		ft_error();
-	return (ft_complete_path(cmd_path_lst), cmd_path_lst);
+	ft_complete_path(cmd_path_lst);
+	return (cmd_path_lst);
 }

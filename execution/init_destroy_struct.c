@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/24 11:02:45 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:05:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_mini	*ft_init_mini(char *envp[])
 
 void	ft_destroy_mini(t_mini *minishell)
 {
-	int i;
+	int	i;
 
 	if (minishell)
 	{
