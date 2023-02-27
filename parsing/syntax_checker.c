@@ -20,8 +20,6 @@ int	ft_quote_checker(char *str)
 	int	count;
 
 	i = 0;
-	dquote = 0;
-	quote = 0;
 	count = 0;
 	while (str[i] != '\0')
 	{
@@ -61,7 +59,7 @@ int	ft_pipe_checker(char **str)
 				|| str[i - 1][0] == '|' || str[i + 1][0] == '|'
 				|| str[i - 1][0] == '>' || str[i - 1][0] == '<'
 				|| str[i + 1][0] == '>' || str[i + 1][0] == '<')
-				return (printf("Error! Unexpected pipe.\n"));
+				return (printf("Syntax error! Unexpected pipe.\n"));
 		}
 		i++;
 	}
@@ -78,16 +76,16 @@ int	ft_chevron_checker(char **str)
 		if (str[i][0] == '<' || str[i][0] == '>')
 		{
 			if (i == ft_dstrlen(str) - 1)
-				return (printf("Error! Unexpected chevron.\n"));
+				return (printf("Syntax error! Unexpected chevron.\n"));
 			if (i != 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>'
 					|| str[i - 1][0] == '<' || str[i - 1][0] == '>')
-					return (printf("Error! Unexpected chevron.\n"));
+					return (printf("Syntax error! Unexpected chevron.\n"));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
-					return (printf("Error! Unexpected chevron.\n"));
+					return (printf("Syntax error! Unexpected chevron.\n"));
 			if (ft_strlen(str[i]) >= 3)
-				return (printf("Error! Unexpected chevron.\n"));
+				return (printf("Syntax error! Unexpected chevron.\n"));
 		}
 		i++;
 	}
