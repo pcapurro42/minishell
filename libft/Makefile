@@ -62,6 +62,7 @@ SRCS	=	ft_isalpha.c \
 			ft_isnum.c \
 			ft_free_tab.c \
 			ft_dstrlen.c \
+			ft_tstrlen.c \
 			ft_char_to_str.c \
 
 

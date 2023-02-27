@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*ft_deliver_input(char **strf);
+char	***ft_share_out(char **str);
 
 char	*ft_analyze_input(char *input)
 {
@@ -27,9 +27,11 @@ char	*ft_analyze_input(char *input)
 	str = ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
 		return (NULL);
+	while (str[i] != NULL)
+		printf("%s\n", str[i++]);
 	// if (ft_consistency_checker(str) != 0)
 	// 	return (NULL);
-	// ft_deliver_input(str);
+	// ft_share_out(str);
 	return (NULL);
 }
 

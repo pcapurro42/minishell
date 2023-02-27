@@ -89,6 +89,6 @@ int		ft_consistency_checker(char **str);
 
 // DISTRIBUTION //
 
-char	*ft_deliver_input(char **str);
+char	***ft_share_out(char **str);
 
 #endif

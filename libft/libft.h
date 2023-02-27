@@ -92,6 +92,7 @@ int		ft_isnum(char *str);
 
 char	*ft_char_to_str(char c);
 int		ft_dstrlen(char **str);
+int		ft_tstrlen(char ***str);
 void	pls_free(char **str);
 
 #endif
