@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-char	***ft_share_out(char **str);
-
 char	*ft_analyze_input(char *input)
 {
 	int		i;
@@ -31,7 +29,7 @@ char	*ft_analyze_input(char *input)
 		printf("%s\n", str[i++]);
 	// if (ft_consistency_checker(str) != 0)
 	// 	return (NULL);
-	// ft_share_out(str);
+	// ft_share_off(str);
 	return (NULL);
 }
 
