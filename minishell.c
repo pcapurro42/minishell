@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/23 10:45:59 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:33:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_print_minifeur(void)
 	printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
 }
 
-static void ft_print_miniquoi(void)
+static void	ft_print_miniquoi(void)
 {
 	printf("______  _______       ____________             _____    \n");
 	printf("___   |/  /__(_)_________(_)_  __ \\___  __________(_)  \n");

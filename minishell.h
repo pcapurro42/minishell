@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/27 11:11:29 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:34:25 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,13 @@ int	g_last_return_code;
 typedef struct s_mini
 {
 	int		nb_cmd; // le nombre de commandes à exécuter
-
 	int		infile_mod; // here_doc (cmd << LIMITER) = 1 ou normal (< file) = 0 ou aucun (\) = -1
 	int		outfile_mod; // append (>>) = 1 ou normal (> file) = 0 ou aucun (\) = -1
-
 	int		infile_fd; // fd du fichier d'entrée (pour l'execve)
 	int		outfile_fd; // fd du fichier de sortie (pour l'execve)
-
 	char	*limiter; // si infile_mod = 1
 	char	*infile; // nom du fichier d'entrée
 	char	*outfile; // nom du fichier de sortie
-
 	char	**envp; // environnement
 	char	**cmd_path_lst; // le path de toutes les commandes
 	char	***cmd_lst; // la liste des commandes à exécuter
