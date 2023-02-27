@@ -39,10 +39,26 @@
 // 	return (0);
 // }
 
-int	ft_syntax_checker(char **strf)
+static int	ft_quote_checker(char **str)
 {
-	// if (ft_quote_checker(str) != 0)
-	// 	return (1);
-	strf = NULL;
+	int	i;
+
+	i = 0;
+	while (str[i] != NULL)
+	{
+		if (str[i][0] == '|')
+		{
+			if (i == 0 || i == ft_dstrlen(str) - 1 || str[i - 1][0] == '|' || str[i + 1][0] == '|' || str[i - 1][0] == '>' || str[i - 1][0] == '<' || str[i + 1][0] == '>' || str[i + 1][0] == '<')
+				return (printf("Error! Unexpected pipe.\n"));
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_syntax_checker(char **str)
+{
+	if (ft_quote_checker(str) != 0)
+		return (1);
 	return (0);
 }

@@ -167,7 +167,7 @@ static char	*ft_remove_spaces_between_chevrons(char *str)
 	return (strf);
 }
 
-static int	ft_quote_checker(char *str)
+static int	ft_quote_checker_str(char *str)
 {
 	int	i;
 	int	dquote;
@@ -218,7 +218,7 @@ char	*ft_input_cleaner(char *input)
 			str = ft_strjoin(str, ft_char_to_str(input[i]));
 		i++;
 	}
-	if (ft_quote_checker(str) != 0)
+	if (ft_quote_checker_str(str) != 0)
 		return (NULL);
 	else
 	{

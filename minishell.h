@@ -67,10 +67,10 @@ char	*ft_check_access(int i, t_mini *minishell);
 char	*ft_input_cleaner(char *input);
 char	**ft_repair_spaces_in_quotes(char **strf);
 
-int		ft_syntax_checker(char **strf);
-int		ft_consistency_checker(char **strf);
+int		ft_syntax_checker(char **str);
+int		ft_consistency_checker(char **str);
 
 char	*ft_analyze_input(char *input);
-char	*ft_deliver_input(char **strf);
+char	*ft_deliver_input(char **str);
 
 #endif
