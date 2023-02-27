@@ -119,7 +119,9 @@ static char	*ft_add_spaces_for_chevrons(char *str)
 	fstr = ft_strdup("");
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<' && str[i - 1] != '>') && (str[i - 1] != ' ') && (str[i - 1] != 34) && (str[i - 1] != 39))
+		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<'
+				&& str[i - 1] != '>') && (str[i - 1] != ' ')
+			&& (str[i - 1] != 34) && (str[i - 1] != 39))
 		{
 			strf = ft_strjoin(strf, " ");
 			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
@@ -131,7 +133,9 @@ static char	*ft_add_spaces_for_chevrons(char *str)
 	i = 0;
 	while (strf[i] != '\0')
 	{
-		if ((strf[i] == '>' || strf[i] == '<') && (strf[i + 1] != '<' && strf[i + 1] != '>') && (strf[i + 1] != ' ') && (str[i + 1] != 34) && (str[i + 1] != 39))
+		if ((strf[i] == '>' || strf[i] == '<') && (strf[i + 1] != '<'
+				&& strf[i + 1] != '>') && (strf[i + 1] != ' ')
+			&& (str[i + 1] != 34) && (str[i + 1] != 39))
 		{
 			fstr = ft_strjoin(fstr, ft_char_to_str(strf[i]));
 			fstr = ft_strjoin(fstr, " ");
@@ -145,7 +149,7 @@ static char	*ft_add_spaces_for_chevrons(char *str)
 
 static char	*ft_remove_spaces_between_chevrons(char *str)
 {
-	int	i;
+	int		i;
 	char	*strf;
 
 	i = 0;

@@ -23,10 +23,8 @@ char	*ft_analyze_input(char *input)
 	input = ft_input_cleaner(input);
 	if (input == NULL)
 		return (NULL);
-
 	str = ft_split(input, ' ');
 	str = ft_repair_spaces_in_quotes(str);
-
 	if (ft_syntax_checker(str) != 0)
 		return (NULL);
 	// if (ft_consistency_checker(str) != 0)
@@ -35,9 +33,8 @@ char	*ft_analyze_input(char *input)
 	return (NULL);
 }
 
-	// while (strf[i] != NULL)
-	// 	printf("%s\n", strf[i++]);
-
+// while (strf[i] != NULL)
+// 	printf("%s\n", strf[i++]);
 // "|"
 // ">"
 // ">>"
