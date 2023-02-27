@@ -39,7 +39,7 @@
 // 	return (0);
 // }
 
-static int	ft_quote_checker(char **str)
+static int	ft_pipe_checker(char **str)
 {
 	int	i;
 
@@ -58,7 +58,7 @@ static int	ft_quote_checker(char **str)
 
 int	ft_syntax_checker(char **str)
 {
-	if (ft_quote_checker(str) != 0)
+	if (ft_pipe_checker(str) != 0)
 		return (1);
 	return (0);
 }
