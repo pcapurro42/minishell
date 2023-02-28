@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/27 11:11:53 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:39:22 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,24 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell)
 	}
 }
 
+static t_cmd	*cmd_struct(t_mini *minishell, int i)
+{
+	t_cmd	*cmd_struct;
+	int		j;
+
+	j = 0;
+	while (minishell->cmd_lst[i][j])
+	{
+		if (cmd_lst[i][j] == 
+	}
+}
+
 void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 {
 	char	*cmd_path;
-
+	t_cmd	*cmd_struct;
+	
+	cmd_struct = ft_build_struct_cmd(minishell, i);
 	ft_child_dup(fd, i, minishell);
 	close(minishell->infile_fd);
 	close(minishell->outfile_fd);

@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/28 15:02:06 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:40:15 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_mini
 	int		nb_cmd;
 	char	**envp;
 	char	***cmd_lst;
-}	t_mini
+}	t_mini;
 
 // #-# MAIN #-# //
 
@@ -64,7 +64,6 @@ void	ft_destroy_mini(t_mini *minishell);
 char	**ft_find_path(char *envp[]);
 
 void	ft_execution(t_mini *minishell);
-void	ft_pipex(t_mini *minishell);
 void	ft_child(int (*fd)[2], int i, t_mini *minishell);
 char	*ft_check_access(int i, t_mini *minishell);
 
