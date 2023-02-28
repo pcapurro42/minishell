@@ -41,6 +41,5 @@ char	***ft_analyze_input(char *input)
 	// 	g = 0;
 	// 	f++;
 	// }
-
-	return (NULL);
+	return (fstr);
 }
