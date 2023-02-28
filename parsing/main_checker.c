@@ -12,11 +12,10 @@
 
 #include "../minishell.h"
 
-char	***ft_analyze_input(char *input)
+void	*ft_analyze_input(char *input, t_mini *minishell)
 {
 	int		i;
 	char	**str;
-	char	***fstr;
 
 	i = 0;
 	input = ft_input_cleaner(input);
@@ -26,11 +25,17 @@ char	***ft_analyze_input(char *input)
 	str = ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
 		return (NULL);
+	while (str[i] != NULL)
+		printf("%s\n", str[i++]);
+	str = ft_check_variables(str, minishell);
+	minishell->cmd_lst = ft_share_off(str);
+	return (NULL);
+}
+
 	// printf("== DOUBLE TABLEAU ==\n");
 	// while (str[i] != NULL)
 	// 	printf("%s\n", str[i++]);
 	// printf("\n== TRIPLE TABLEAU ==\n");
-	fstr = ft_share_off(str);
 	// int f = 0;
 	// int g = 0;
 	// while (fstr[f] != NULL)
@@ -41,5 +46,3 @@ char	***ft_analyze_input(char *input)
 	// 	g = 0;
 	// 	f++;
 	// }
-	return (fstr);
-}

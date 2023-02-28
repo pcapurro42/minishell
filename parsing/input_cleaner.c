@@ -94,7 +94,7 @@ char	*ft_input_cleaner(char *input)
 		return (NULL);
 	str = ft_add_spaces_for_pipes(str);
 	str = ft_hide_spaces_in_quotes(str);
-	str = ft_remove_quotes(str);
+	// str = ft_remove_quotes(str);
 	str = ft_separate_chevrons(str);
 	str = ft_stick_chevrons(str);
 	return (str);

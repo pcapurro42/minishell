@@ -12,6 +12,7 @@ SRCS = minishell.c \
 	parsing/input_cleaner.c \
 	parsing/cleaner_utils.c \
 	parsing/share_off.c \
+	parsing/variable_replacer.c \
 	execution/init_destroy_struct.c \
 	execution/error_msg.c \
 

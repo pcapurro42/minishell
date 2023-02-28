@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char *envp[])
 		while (input == NULL)
 			input = readline(name);
 		if (input[0] != '\0')
-			minishell->cmd_lst = ft_analyze_input(input);
+			ft_analyze_input(input, minishell);
 	}
 	return (0);
 }
