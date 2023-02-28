@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 15:28:22 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:06:23 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ void	ft_execution(t_mini *minishell)
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));
 	if (status_code == NULL || fd == NULL)
 		ft_error();
-	pid = ft_pipex2(fd, minishell);
-	close(minishell->infile_fd);
-	if (minishell->outfile_mod != -1)
-		close(minishell->outfile_fd);
+	pid = ft_execution2(fd, minishell);
 	i = 0;
 	while (i < minishell->nb_cmd)
 	{

@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/28 15:40:15 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:05:30 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,8 @@ int	g_last_return_code;
 
 typedef struct s_cmd
 {
-	int		infile_mod; // here_doc (cmd << LIMITER) = 1 ou normal (< file) = 0 ou aucun (\) = -1
-	int		outfile_mod; // append (>>) = 1 ou normal (> file) = 0 ou aucun (\) = -1
 	int		infile_fd; // fd du fichier d'entrée (pour l'execve)
 	int		outfile_fd; // fd du fichier de sortie (pour l'execve)
-	char	*limiter; // si infile_mod = 1
-	char	*infile; // nom du fichier d'entrée
-	char	*outfile; // nom du fichier de sortie
-	char	**envp; // environnement
 	char	**cmd_path_lst; // le path de toutes les commandes
 	char	**cmd_arg; // la commande et ses arguments
 }	t_cmd;
@@ -53,19 +47,28 @@ char	*ft_get_name(void);
 
 // #-# EXECUTION #-# //
 
+char	*ft_check_access(t_cmd *cmd_struct);
+
+void	ft_here_doc(t_cmd *cmd_struct, char *limiter);
+void	file_not_open(t_cmd *cmd_struct, char *file_name);
+
+void	ft_child(int (*fd)[2], int i, t_mini *minishell);
+
+void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i);
+
 void	ft_error_msg(char *msg);
 void	ft_error(void);
 void	ft_cmd_error(char **cmd);
 void	ft_check_malloc(void *str);
 
-t_mini	*ft_init_mini(char *envp[]);
-void	ft_destroy_mini(t_mini *minishell);
+void	ft_execution(t_mini *minishell);
 
 char	**ft_find_path(char *envp[]);
 
-void	ft_execution(t_mini *minishell);
-void	ft_child(int (*fd)[2], int i, t_mini *minishell);
-char	*ft_check_access(int i, t_mini *minishell);
+t_cmd	*ft_init_cmd(t_mini *minishell);
+void	ft_destroy_cmd(t_cmd *cmd_struct);
+t_mini	*ft_init_mini(char *envp[]);
+void	ft_destroy_mini(t_mini *minishell);
 
 // #-# PARSING #-# //
 

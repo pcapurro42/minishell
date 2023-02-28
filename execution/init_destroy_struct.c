@@ -6,26 +6,21 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 15:09:47 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:07:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmd	*ft_init_cmd(void)
+t_cmd	*ft_init_cmd(t_mini *minishell)
 {
 	t_cmd	*cmd_struct;
 
 	cmd_struct = malloc(sizeof(*cmd_struct));
 	ft_check_malloc(cmd_struct);
-	cmd_struct->infile_mod = -1;
-	cmd_struct->outfile_mod = -1;
 	cmd_struct->infile_fd = -1;
 	cmd_struct->outfile_fd = -1;
-	cmd_struct->infile = NULL;
-	cmd_struct->outfile = NULL;
-	cmd_struct->limiter = NULL;
-//	cmd_struct->cmd_path_lst = ft_find_path(envp);
+	cmd_struct->cmd_path_lst = ft_find_path(minishell->envp);
 	cmd_struct->cmd_arg = NULL;
 	return (cmd_struct);
 }
@@ -38,8 +33,6 @@ void	ft_destroy_cmd(t_cmd *cmd_struct)
 			pls_free(cmd_struct->cmd_path_lst);
 		if (cmd_struct->cmd_arg)
 			pls_free(cmd_struct->cmd_arg);
-		free(cmd_struct->infile);
-		free(cmd_struct->outfile);
 		free(cmd_struct);
 	}
 }
