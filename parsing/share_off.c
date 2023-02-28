@@ -28,18 +28,64 @@ static int	ft_get_pipe_number(char **str)
 	return (count);
 }
 
+char	***ft_allocate_strs(char ***fstr, char **str, int size)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (i != size)
+	{
+		while (str[j] != NULL && str[j][0] != '|')
+		{
+			j++;
+			k++;
+		}
+		fstr[i] = malloc(sizeof(char *) * (k) + 1);
+		fstr[i][k] = NULL;
+		if (str[j] == NULL)
+			return (fstr);
+		j++;
+		i++;
+		k = 0;
+	}
+	return (fstr);
+}
+
 char	***ft_share_off(char **str)
 {
 	int		i;
 	int		j;
 	int		k;
+	int		size;
 	char	***fstr;
 
 	i = 0;
 	j = 0;
 	k = 0;
-	fstr = malloc(sizeof(char **) * (ft_get_pipe_number(str) + 1) + 1);
-	return (NULL);
+	size = ft_get_pipe_number(str) + 1;
+	fstr = malloc(sizeof(char **) * (size) + 1);
+	fstr[size] = NULL;
+	fstr = ft_allocate_strs(fstr, str, size);
+	while (fstr[i] != NULL)
+	{
+		while (str[j] != NULL && str[j][0] != '|')
+		{
+			if (str[j] == NULL)
+			{
+				fstr[i][k] = NULL;
+				return (fstr);
+			}
+			fstr[i][k] = ft_strdup(str[j]);
+			k++;
+			j++;
+		}
+		j++;
+		i++;
+		k = 0;
+	}
+	return (fstr);
 }
-
-// cat Makefile >> test.txt

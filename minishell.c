@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;
 	char			*input;
+	t_mini			*minishell;
 
 	(void) argc;
 	(void) argv;
@@ -66,13 +67,14 @@ int	main(int argc, char **argv, char *envp[])
 	g_last_return_code = 0;
 	while (6)
 	{
+		minishell = ft_init_mini(envp);
 		if (input)
 			free(input);
 		input = NULL;
 		while (input == NULL)
 			input = readline(name);
 		if (input[0] != '\0')
-			ft_analyze_input(input);
+			minishell->cmd_lst = ft_analyze_input(input);
 	}
 	return (0);
 }

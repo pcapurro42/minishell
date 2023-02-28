@@ -9,17 +9,11 @@ NAME = minishell
 SRCS = minishell.c \
 	parsing/main_checker.c \
 	parsing/syntax_checker.c \
-	parsing/consistency_checker.c \
 	parsing/input_cleaner.c \
 	parsing/cleaner_utils.c \
 	parsing/share_off.c \
-	execution/execution.c \
-	execution/find_path.c \
 	execution/init_destroy_struct.c \
 	execution/error_msg.c \
-	execution/check_access.c \
-	execution/child.c \
-	execution/pipex.c
 
 LIBFT = libft/libft.a
 

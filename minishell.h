@@ -69,7 +69,8 @@ char	*ft_check_access(int i, t_mini *minishell);
 
 // #-# PARSING #-# //
 
-char	*ft_analyze_input(char *input);
+char	***ft_analyze_input(char *input);
+char	***ft_share_off(char **str);
 
 // CLEANERS //
 
@@ -87,13 +88,5 @@ int		ft_syntax_checker(char **str);
 int		ft_pipe_checker(char **str);
 int		ft_chevron_checker(char **str);
 int		ft_quote_checker(char *str);
-
-// CONSISTENCY CHECKERS //
-
-int		ft_consistency_checker(char **str);
-
-// DISTRIBUTION //
-
-char	***ft_share_off(char **str);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-t_cmd	*ft_init_cmd(char **envp)
+t_cmd	*ft_init_cmd(void)
 {
 	t_cmd	*cmd_struct;
 
@@ -25,15 +25,13 @@ t_cmd	*ft_init_cmd(char **envp)
 	cmd_struct->infile = NULL;
 	cmd_struct->outfile = NULL;
 	cmd_struct->limiter = NULL;
-	cmd_struct->cmd_path_lst = ft_find_path(envp);
+//	cmd_struct->cmd_path_lst = ft_find_path(envp);
 	cmd_struct->cmd_arg = NULL;
 	return (cmd_struct);
 }
 
 void	ft_destroy_cmd(t_cmd *cmd_struct)
 {
-	int	i;
-
 	if (cmd_struct)
 	{
 		if (cmd_struct->cmd_path_lst)
