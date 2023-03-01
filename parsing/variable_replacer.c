@@ -12,13 +12,13 @@
 
 #include "../minishell.h"
 
-static int	ft_what_should_be_done(char *input, char *variable, int i)
-{
-	int	j;
+// static int	ft_what_should_be_done(char *input, char *variable, int i)
+// {
+// 	int	j;
 
-	j = 0;
-	return (j);
-}
+// 	j = 0;
+// 	return (j);
+// }
 
 // 0 = on laisse le contenu de variable tel quel
 // 1 = on remplace le contenu de variable par sa variable
@@ -32,6 +32,8 @@ static char	*ft_get_variable(char *variable, t_mini *minishell)
 
 	i = 0;
 	j = 0;
+	if (variable[0] == '?' && variable[1] == '\0')
+		return (ft_itoa(g_last_return_code));
 	temp = ft_strdup("");
 	while (minishell->envp[i] != NULL)
 	{
@@ -75,9 +77,9 @@ static char	*ft_replace(char *input, t_mini *minishell)
 			variable = ft_strdup("");
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 && input[i] != 39 && input[i] != 58)
 				variable = ft_strjoin(variable, ft_char_to_str(input[i++]));
-			if (ft_what_should_be_done(input, variable, i) == 0)
-				str = ft_strjoin(str, "$");
-			else
+			// if (ft_what_should_be_done(input, variable, i) == 0)
+			// 	str = ft_strjoin(str, "$");
+			// else
 				variable = ft_get_variable(variable, minishell);
 			str = ft_strjoin(str, variable);
 			free(variable);

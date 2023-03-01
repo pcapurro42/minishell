@@ -16,7 +16,6 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 {
 	int		i;
 	char	**str;
-	// char	***fstr;
 
 	i = 0;
 	input = ft_input_cleaner(input);
