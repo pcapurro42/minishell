@@ -12,36 +12,6 @@
 
 #include "../minishell.h"
 
-char	*ft_remove_quotes(char *str)
-{
-	int	i;
-	int	dquote;
-	int	quote;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34 && quote == 0)
-		{
-			if (dquote == 0)
-				dquote = 1;
-			else
-				dquote = 0;
-			str[i] = ' ';
-		}
-		if (str[i] == 39 && dquote == 0)
-		{
-			if (quote == 0)
-				quote = 1;
-			else
-				quote = 0;
-			str[i] = ' ';
-		}
-		i++;
-	}
-	return (str);
-}
-
 char	*ft_hide_spaces_in_quotes(char *str)
 {
 	int	i;

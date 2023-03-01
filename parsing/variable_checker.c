@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+// static char	*ft_remove_quotes_if_necessary(char *str);
+
 static int	ft_what_should_be_done(char *input, int position)
 {
 	int		i;
@@ -89,6 +91,7 @@ static char	*ft_replace(char *input, t_mini *minishell)
 			str = ft_strjoin(str, variable);
 			free(variable);
 		}
+		// str = ft_remove_quotes_if_necessary(str);
 	}
 	return (str);
 }
