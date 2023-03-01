@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:51:59 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 20:59:05 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:25:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_check_access(t_cmd *cmd_struct)
 		return (cmd_struct->cmd_arg[0]);
 	cmd_path = ft_strjoin(cmd_struct->cmd_arg[0], ": command not found\n");
 	ft_check_malloc(cmd_path);
-	error_msg = ft_strjoin("pipex: ", cmd_path);
+	error_msg = ft_strjoin("minishell: ", cmd_path);
 	ft_check_malloc(error_msg);
 	write(2, error_msg, ft_strlen(error_msg));
 	unlink("minishell_here_doc.tmp");
