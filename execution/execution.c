@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 21:06:23 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:23:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	ft_execution(t_mini *minishell)
 		i++;
 	}
 	unlink("minishell_here_doc.tmp");
-	exit(WEXITSTATUS(status_code[i - 1]));
+	//exit(WEXITSTATUS(status_code[i - 1]));
 }
