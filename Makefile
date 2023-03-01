@@ -30,7 +30,9 @@ CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-## === RULES === ##
+## === READLINE === ##
+
+## == .C TO .O == ##
 
 all: $(NAME)
 

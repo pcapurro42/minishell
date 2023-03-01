@@ -59,7 +59,7 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, t_cmd *cmd_stru
 	}
 	else if (i != 0)
 		dup2(fd[i - 1][0], STDIN_FILENO);
-	else 
+	else
 		dup2(1, STDIN_FILENO);
 	if (cmd_struct->outfile_fd != -1)
 	{
@@ -105,7 +105,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 			cmd_struct->infile_fd = open(minishell->cmd_lst[i][j + 1], O_RDONLY);
 			if (cmd_struct->infile_fd < 0)
 				file_not_open(cmd_struct, minishell->cmd_lst[i][j + 1]);
-			j += 2;		
+			j += 2;
 		}
 		else if (ft_strncmp(minishell->cmd_lst[i][j], ">", 2) == 0)
 		{
@@ -115,7 +115,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 			O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (cmd_struct->outfile_fd < 0)
 				perror(minishell->cmd_lst[i][j + 1]);
-			j += 2;			
+			j += 2;
 		}
 		else if (ft_strncmp(minishell->cmd_lst[i][j], "<<", 3) == 0)
 		{
@@ -126,7 +126,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 			j += 2;
 		}
 		else if (ft_strncmp(minishell->cmd_lst[i][j], ">>", 3) == 0)
-		{	
+		{
 			if (cmd_struct->outfile_fd >= 0)
 				close(cmd_struct->outfile_fd);
 			cmd_struct->outfile_fd = open(minishell->cmd_lst[i][j + 1], \
@@ -170,7 +170,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 				id_str_to_add++;
 			}
 			cmd_struct->cmd_arg[len_cmd_arg] = NULL;
-		}	
+		}
 	}
 	if (cmd_struct->infile_fd < 0)
 		cmd_struct->infile_fd = -1;
@@ -182,7 +182,7 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 {
 	char	*cmd_path;
 	t_cmd	*cmd_struct;
-	
+
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, i);
 	ft_child_dup(fd, i, minishell, cmd_struct);
@@ -195,11 +195,11 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 
 // CHECK .sh files
 
-/*	if ((ft_strlen(minishell->cmd_lst[i][0]) > 1 && \ 
+/*	if ((ft_strlen(minishell->cmd_lst[i][0]) > 1 && \
 		minishell->cmd_lst[i][0][0] == '.' && \
 		minishell->cmd_lst[i][0][1] == '/') || \
 		(ft_strchr(&(minishell->cmd_lst[i][0][2]), '/') && \
-		ft_strnstr(minishell->cmd_lst[i][0], ".sh", \ 
+		ft_strnstr(minishell->cmd_lst[i][0], ".sh", \
 		(minishell->cmd_lst[i][0])) != NULL))
 		exec_case(i, minishell);
 	else if (minishell->cmd_lst[i][0], ".sh", \
