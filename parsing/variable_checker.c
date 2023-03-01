@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variable_replacer.c                                :+:      :+:    :+:   */
+/*   variable_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:51:24 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/28 16:51:25 by pcapurro         ###   ########.fr       */
+/*   Created: 2023/03/01 22:02:48 by pcapurro          #+#    #+#             */
+/*   Updated: 2023/03/01 22:02:49 by pcapurro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// static int	ft_what_should_be_done(char *input, char *variable, int i)
-// {
-// 	int	j;
+static int	ft_what_should_be_done(char *input, int position)
+{
+	int		i;
+	char	*str;
 
-// 	j = 0;
-// 	return (j);
-// }
+	i = 0;
+	while (input[i] != '$')
+		i--;
+	position = 0;
+	str = NULL;
+	return (1);
+}
 
 // 0 = on laisse le contenu de variable tel quel
 // 1 = on remplace le contenu de variable par sa variable
@@ -77,9 +82,9 @@ static char	*ft_replace(char *input, t_mini *minishell)
 			variable = ft_strdup("");
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 && input[i] != 39 && input[i] != 58)
 				variable = ft_strjoin(variable, ft_char_to_str(input[i++]));
-			// if (ft_what_should_be_done(input, variable, i) == 0)
-			// 	str = ft_strjoin(str, "$");
-			// else
+			if (ft_what_should_be_done(input, i) == 0)
+				str = ft_strjoin(str, "$");
+			else
 				variable = ft_get_variable(variable, minishell);
 			str = ft_strjoin(str, variable);
 			free(variable);

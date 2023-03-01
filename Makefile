@@ -9,10 +9,10 @@ NAME = minishell
 SRCS = minishell.c \
 	parsing/main_checker.c \
 	parsing/syntax_checker.c \
+	parsing/variable_checker.c \
 	parsing/input_cleaner.c \
 	parsing/cleaner_utils.c \
 	parsing/share_off.c \
-	parsing/variable_replacer.c \
 	execution/check_access.c \
 	execution/init_destroy_struct.c \
 	execution/error_msg.c \
