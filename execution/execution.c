@@ -50,6 +50,10 @@ void	ft_execution(t_mini *minishell)
 	int		*status_code;
 	int		i;
 
+	i = 0;
+	while (minishell->cmd_lst && minishell->cmd_lst[i] != NULL)
+		i++;
+	minishell->nb_cmd = i;
 	if (minishell->nb_cmd == 0)
 		return ;
 	status_code = malloc(sizeof(*status_code) * minishell->nb_cmd);

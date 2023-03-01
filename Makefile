@@ -13,8 +13,12 @@ SRCS = minishell.c \
 	parsing/cleaner_utils.c \
 	parsing/share_off.c \
 	parsing/variable_replacer.c \
+	execution/check_access.c \
 	execution/init_destroy_struct.c \
 	execution/error_msg.c \
+	execution/child.c \
+	execution/execution.c \
+	execution/find_path.c \
 
 LIBFT = libft/libft.a
 

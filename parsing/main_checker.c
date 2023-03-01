@@ -16,6 +16,7 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 {
 	int		i;
 	char	**str;
+	// char	***fstr;
 
 	i = 0;
 	input = ft_input_cleaner(input);
@@ -25,13 +26,16 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 	str = ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
 		return (NULL);
-	while (str[i] != NULL)
-		printf("%s\n", str[i++]);
 	str = ft_check_variables(str, minishell);
 	minishell->cmd_lst = ft_share_off(str);
+	ft_execution(minishell);
 	return (NULL);
 }
 
+	// while (str[i] != NULL)
+	// 	printf("%s\n", str[i++]);
+
+		// fstr = ft_share_off(str);
 	// printf("== DOUBLE TABLEAU ==\n");
 	// while (str[i] != NULL)
 	// 	printf("%s\n", str[i++]);
@@ -46,3 +50,4 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 	// 	g = 0;
 	// 	f++;
 	// }
+	// minishell->cmd_lst = fstr;
