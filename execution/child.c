@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/01 10:48:37 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:22:39 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,13 +171,6 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 			}
 			cmd_struct->cmd_arg[len_cmd_arg] = NULL;
 		}	
-	}
-	int e;
-	e = 0;
-	while (cmd_struct->cmd_arg[e])
-	{
-		printf("%s\n", cmd_struct->cmd_arg[e]);
-		e++;
 	}
 	if (cmd_struct->infile_fd < 0)
 		cmd_struct->infile_fd = -1;
