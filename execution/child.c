@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 21:14:12 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/01 10:48:37 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,9 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 					sizeof(*cmd_struct->cmd_arg) * (nb_str_to_add + 1));
 			else
 			{
-				temp = malloc(sizeof(*cmd_struct->cmd_arg) * \
+				temp = malloc(sizeof(*temp) * \
 					(nb_str_to_add + len_cmd_arg + 1));
+				len_cmd_arg = 0;
 				while (cmd_struct->cmd_arg[len_cmd_arg])
 				{
 					temp[len_cmd_arg] = cmd_struct->cmd_arg[len_cmd_arg];
@@ -158,18 +159,25 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 				}
 				free(cmd_struct->cmd_arg);
 				cmd_struct->cmd_arg = temp;
+				cmd_struct->cmd_arg[len_cmd_arg] = NULL;
 			}
 			id_str_to_add = 0;
 			while (id_str_to_add < nb_str_to_add)
 			{
-				ft_printf("%s\n", minishell->cmd_lst[i][j]);
 				cmd_struct->cmd_arg[len_cmd_arg] = minishell->cmd_lst[i][j];
 				j++;
 				len_cmd_arg++;
 				id_str_to_add++;
 			}
-			ft_printf("\n");
+			cmd_struct->cmd_arg[len_cmd_arg] = NULL;
 		}	
+	}
+	int e;
+	e = 0;
+	while (cmd_struct->cmd_arg[e])
+	{
+		printf("%s\n", cmd_struct->cmd_arg[e]);
+		e++;
 	}
 	if (cmd_struct->infile_fd < 0)
 		cmd_struct->infile_fd = -1;
@@ -185,6 +193,8 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, i);
 	ft_child_dup(fd, i, minishell, cmd_struct);
+	if (!cmd_struct->cmd_arg)
+		exit(0);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->envp);
 	ft_error_msg(minishell->cmd_lst[0][i]);
