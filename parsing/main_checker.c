@@ -27,24 +27,6 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 	if (ft_syntax_checker(str) != 0)
 		return (NULL);
 	str = ft_check_variables(str, minishell);
-
-	// fstr = ft_share_off(str);
-	// printf("== DOUBLE TABLEAU ==\n");
-	// while (str[i] != NULL)
-	// 	printf("%s\n", str[i++]);
-	// printf("\n== TRIPLE TABLEAU ==\n");
-	// int f = 0;
-	// int g = 0;
-	// while (fstr[f] != NULL)
-	// {
-	// 	printf("\nTABLEAU %d\n", f + 1);
-	// 	while (fstr[f][g] != NULL)
-	// 		printf("%s\n", fstr[f][g++]);
-	// 	g = 0;
-	// 	f++;
-	// }
-	// minishell->cmd_lst = fstr;
-
 	minishell->cmd_lst = ft_share_off(str);
 	ft_execution(minishell);
 	return (NULL);
