@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/01 15:22:39 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:06:28 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, t_cmd *cmd_stru
 	else if (i != 0)
 		dup2(fd[i - 1][0], STDIN_FILENO);
 	else
-		dup2(1, STDIN_FILENO);
+		dup2(0, STDIN_FILENO);
 	if (cmd_struct->outfile_fd != -1)
 	{
 		dup2(cmd_struct->outfile_fd, STDOUT_FILENO);
 		close(cmd_struct->outfile_fd);
 	}
-	else if (i != minishell->nb_cmd)
+	else if (i != minishell->nb_cmd - 1)
 		dup2(fd[i][1], STDOUT_FILENO);
 	else
-		dup2(2, STDOUT_FILENO);
+		dup2(1, STDOUT_FILENO);
 	if (cmd_struct->infile_fd != -1)
 		close(cmd_struct->infile_fd);
 	if (cmd_struct->outfile_fd != -1)
@@ -79,7 +79,7 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, t_cmd *cmd_stru
 		close(fd[i - 1][0]);
 		close(fd[i - 1][1]);
 	}
-	if (i != minishell->nb_cmd)
+	if (i != minishell->nb_cmd - 1)
 	{
 		close(fd[i][0]);
 		close(fd[i][1]);
