@@ -19,6 +19,9 @@ SRCS = minishell.c \
 	execution/child.c \
 	execution/execution.c \
 	execution/find_path.c \
+	execution/file.c \
+	execution/add_cmd_arg.c \
+	execution/build_cmd_struct.c
 
 LIBFT = libft/libft.a
 

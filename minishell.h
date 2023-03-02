@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/28 21:05:30 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:42:10 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	g_last_return_code;
 
 typedef struct s_cmd
 {
-	int		infile_fd; // fd du fichier d'entrée (pour l'execve)
-	int		outfile_fd; // fd du fichier de sortie (pour l'execve)
-	char	**cmd_path_lst; // le path de toutes les commandes
-	char	**cmd_arg; // la commande et ses arguments
+	int		infile_fd;
+	int		outfile_fd;
+	char	**cmd_path_lst;
+	char	**cmd_arg;
 }	t_cmd;
 
 typedef struct s_mini
@@ -40,6 +40,14 @@ typedef struct s_mini
 	char	**envp;
 	char	***cmd_lst;
 }	t_mini;
+
+typedef struct s_nb
+{
+	int	j;
+	int	nb_to_add;
+	int	len_cmd_arg;
+	int	id_str_to_add;
+}	t_nb;
 
 // #-# MAIN #-# //
 
@@ -51,6 +59,9 @@ char	*ft_check_access(t_cmd *cmd_struct);
 
 void	ft_here_doc(t_cmd *cmd_struct, char *limiter);
 void	file_not_open(t_cmd *cmd_struct, char *file_name);
+
+void	ft_add_to_cmd_arg(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
 
 void	ft_child(int (*fd)[2], int i, t_mini *minishell);
 
@@ -78,10 +89,10 @@ char	***ft_share_off(char **str);
 // CLEANERS //
 
 char	*ft_input_cleaner(char *input);
-char 	*ft_add_spaces_for_pipes(char *str);
-char 	*ft_hide_spaces_in_quotes(char *str);
-char 	*ft_separate_chevrons(char *str);
-char 	*ft_stick_chevrons(char *str);
+char	*ft_add_spaces_for_pipes(char *str);
+char	*ft_hide_spaces_in_quotes(char *str);
+char	*ft_separate_chevrons(char *str);
+char	*ft_stick_chevrons(char *str);
 char	**ft_repair_spaces_in_quotes(char **strf);
 
 // SYNTAX CHECKERS //
