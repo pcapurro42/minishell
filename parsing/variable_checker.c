@@ -12,18 +12,13 @@
 
 #include "../minishell.h"
 
-// static char	*ft_remove_quotes_if_necessary(char *str);
-
-static int	ft_what_should_be_done(char *input, int position)
+static int	ft_what_should_be_done(char *input)
 {
 	int		i;
-	char	*str;
 
 	i = 0;
-	while (input[i] != '$')
-		i--;
-	position = 0;
-	str = NULL;
+	while (input[i] != '\0')
+		i++;
 	return (1);
 }
 
@@ -84,14 +79,13 @@ static char	*ft_replace(char *input, t_mini *minishell)
 			variable = ft_strdup("");
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 && input[i] != 39 && input[i] != 58)
 				variable = ft_strjoin(variable, ft_char_to_str(input[i++]));
-			if (ft_what_should_be_done(input, i) == 0)
+			if (ft_what_should_be_done(input) == 0)
 				str = ft_strjoin(str, "$");
 			else
 				variable = ft_get_variable(variable, minishell);
 			str = ft_strjoin(str, variable);
 			free(variable);
 		}
-		// str = ft_remove_quotes_if_necessary(str);
 	}
 	return (str);
 }

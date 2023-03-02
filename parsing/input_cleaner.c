@@ -75,6 +75,26 @@ char	*ft_stick_chevrons(char *str)
 	return (strf);
 }
 
+char	*ft_remove_empty_quotes(char *str)
+{
+	int		i;
+	char	*strf;
+
+	i = 0;
+	strf = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if ((str[i] == 34 && str[i + 1] == 34) || (str[i] == 39 && str[i + 1] == 39))
+			i = i + 2;
+		else
+		{
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+			i++;
+		}
+	}
+	return (strf);
+}
+
 char	*ft_input_cleaner(char *input)
 {
 	int		i;
@@ -94,7 +114,7 @@ char	*ft_input_cleaner(char *input)
 		return (NULL);
 	str = ft_add_spaces_for_pipes(str);
 	str = ft_hide_spaces_in_quotes(str);
-	// str = ft_remove_quotes(str);
+	str = ft_remove_empty_quotes(str);
 	str = ft_separate_chevrons(str);
 	str = ft_stick_chevrons(str);
 	return (str);
