@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/27 11:33:44 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:37:42 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ int	main(int argc, char **argv, char *envp[])
 	char			*name;
 	char			*input;
 	t_mini			*minishell;
+	char			**envp_cpy;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	name = ft_get_name();
+	envp_cpy = ft_cpy_envp(envp);
 	input = NULL;
 	g_last_return_code = 0;
 	while (6)

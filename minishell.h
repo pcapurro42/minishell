@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/02 12:42:10 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:37:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ void	ft_execution(t_mini *minishell);
 
 char	**ft_find_path(char *envp[]);
 
+// #-# INITIALIZATION #-# //
+
 t_cmd	*ft_init_cmd(t_mini *minishell);
 void	ft_destroy_cmd(t_cmd *cmd_struct);
 t_mini	*ft_init_mini(char *envp[]);
 void	ft_destroy_mini(t_mini *minishell);
+
+char	**ft_cpy_envp(char *envp[]);
 
 // #-# PARSING #-# //
 
