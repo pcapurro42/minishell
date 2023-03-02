@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:55:20 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/27 11:41:54 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:56:37 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 void	ft_echo_builtins(char **cmd_lst)
 {
 	int	i;
+	int	j;
 	int	final_line_break;
 
 	i = 1;
 	final_line_break = 0;
-	while (ft_strncmp(cmd_lst[i], "-n", 3) == 0)
+	while (cmd_lst[i] && ft_strncmp(cmd_lst[i], "-n", 2) == 0)
 	{
+		j = 2;
+		while (cmd_lst[i][j] == 'n')
+			j++;
+		if (cmd_lst[i][j] != '\0')
+			break ;
 		final_line_break = 1;
 		i++;
 	}

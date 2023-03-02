@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/02 17:37:44 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:45:24 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_nb
 // #-# MAIN #-# //
 
 char	*ft_get_name(void);
+
+// #-# BUILT-INS #-# //
+
+void	ft_echo_builtins(char **cmd_lst);
 
 // #-# EXECUTION #-# //
 
