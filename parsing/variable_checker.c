@@ -15,9 +15,10 @@
 static int	ft_what_should_be_done(char *input)
 {
 	int		i;
+	char	quote;
 
 	i = 0;
-	while (input[i] != '\0')
+	while (input[i] != '$')
 		i++;
 	return (1);
 }

@@ -87,10 +87,7 @@ char	*ft_remove_empty_quotes(char *str)
 		if ((str[i] == 34 && str[i + 1] == 34) || (str[i] == 39 && str[i + 1] == 39))
 			i = i + 2;
 		else
-		{
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
-			i++;
-		}
+			strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
 	}
 	return (strf);
 }
