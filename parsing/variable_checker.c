@@ -15,12 +15,13 @@
 static int	ft_what_should_be_done(char *input)
 {
 	int		i;
-	char	quote;
 
 	i = 0;
-	while (input[i] != '$')
+	while (input[i] != 34 && input[i] != 39 && input[i] != '$')
 		i++;
-	return (1);
+	if (input[i] == '$')
+		return (1);
+	return (0);
 }
 
 // 0 = on laisse le contenu de variable tel quel
