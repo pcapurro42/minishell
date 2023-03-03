@@ -6,18 +6,15 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:43:59 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/03 17:05:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 17:10:30 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd_builtins(t_mini_tools *mini_tools, char **cmd_arg)
+void	ft_pwd_builtins(t_mini_tools *mini_tools)
 {
-	if (cmd_arg[1])
-		ft_putstr_fd("minishell: pwd: too many arguments", 1);
-	else
-		ft_putstr_fd(mini_tools->pwd, 1);
+	ft_putstr_fd(mini_tools->pwd, 1);
 	ft_putchar_fd('\n', 1);
 }
 
