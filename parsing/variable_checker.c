@@ -27,9 +27,9 @@ static int	ft_what_should_be_done(char *input)
 	{
 		if (c == 0 && (input[i] == 34 || input[i] == 39))
 			c = input[i];
-		if (input[i] == 34)
+		if (input[i] == 34 && quote % 2 == 0)
 			dquote++;
-		if (input[i] == 39)
+		if (input[i] == 39 && dquote % 2 == 0)
 			quote++;
 		i++;
 	}

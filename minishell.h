@@ -81,7 +81,7 @@ void	ft_execution(t_mini *minishell);
 
 char	**ft_find_path(char *envp[]);
 
-// #-# INITIALIZATION #-# //
+// INITIALIZATION //
 
 t_cmd	*ft_init_cmd(t_mini *minishell);
 void	ft_destroy_cmd(t_cmd *cmd_struct);
@@ -104,6 +104,8 @@ char	*ft_separate_chevrons(char *str);
 char	*ft_remove_empty_quotes(char *str);
 char	*ft_stick_chevrons(char *str);
 char	**ft_repair_spaces_in_quotes(char **strf);
+
+char	**ft_remove_quotes(char **cmd_arg);
 
 // SYNTAX CHECKERS //
 
