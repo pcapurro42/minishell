@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/02 18:48:08 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:28:11 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
 	ft_child_dup2(fd, i, minishell, cmd_struct);
 }
 
-void	ft_check_builtins(t_cmd *cmd_struct)
+void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 {
 	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
 	{
 		ft_echo_builtins(cmd_struct->cmd_arg);
+		unlink("minishell_here_doc.tmp");
+		exit(0);
+	}
+	else if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
+	{
+		ft_env_builtins(minishell->envp);
 		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
@@ -75,7 +81,7 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 	ft_child_dup(fd, i, minishell, cmd_struct);
 	if (!cmd_struct->cmd_arg)
 		exit(0);
-	ft_check_builtins(cmd_struct);
+	ft_check_builtins(minishell, cmd_struct);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->envp);
 	ft_error_msg(minishell->cmd_lst[0][i]);

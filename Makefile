@@ -23,7 +23,8 @@ SRCS = minishell.c \
 	execution/add_cmd_arg.c \
 	execution/build_cmd_struct.c \
 	execution/environnement.c \
-	builtins/echo.c
+	builtins/echo.c \
+	builtins/env.c
 
 LIBFT = libft/libft.a
 
