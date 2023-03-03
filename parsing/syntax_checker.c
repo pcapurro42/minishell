@@ -21,6 +21,8 @@ int	ft_quote_checker(char *str)
 
 	i = 0;
 	count = 0;
+	dquote = 0;
+	quote = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34 && quote == 0)

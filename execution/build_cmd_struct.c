@@ -80,7 +80,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 		else
 			ft_add_to_cmd_arg(minishell, cmd_struct, i, nb);
 	}
-	// ft_remove_quotes(cmd_struct->cmd_arg);
+	ft_remove_quotes(cmd_struct->cmd_arg);
 	if (cmd_struct->infile_fd < 0)
 		cmd_struct->infile_fd = -1;
 	if (cmd_struct->outfile_fd < 0)

@@ -77,10 +77,37 @@ char	*ft_stick_chevrons(char *str)
 
 static char	*ft_substitute_str(char *str)
 {
-	int	i;
+	int		i;
+	int		dquote;
+	int		quote;
+	char	*strf;
 
 	i = 0;
-	return (str);
+	dquote = 0;
+	quote = 0;
+	strf = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34 && quote % 2 == 0)
+		{
+			str[i] = -1;
+			dquote++;
+		}
+		if (str[i] == 39 && dquote % 2 == 0)
+		{
+			str[i] = -1;
+			quote++;
+		}
+		i++;
+	}
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != -1)
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		i++;
+	}
+	return (strf);
 }
 
 char	**ft_remove_quotes(char **cmd_arg)
