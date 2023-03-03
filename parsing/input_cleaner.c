@@ -107,6 +107,7 @@ static char	*ft_substitute_str(char *str)
 			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
 		i++;
 	}
+	printf("%s\n", str);
 	return (strf);
 }
 

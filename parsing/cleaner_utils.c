@@ -19,6 +19,8 @@ char	*ft_hide_spaces_in_quotes(char *str)
 	int	quote;
 
 	i = 0;
+	dquote = 0;
+	quote = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34 && quote == 0)
