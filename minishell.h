@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/03 15:15:43 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:26:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,19 @@ typedef struct s_cmd
 	char	**cmd_arg;
 }	t_cmd;
 
+typedef	struct s_mini_tools
+{
+	char	*pwd;
+	char	*old_pwd;
+	char	**envp;
+}	t_mini_tools;
+
 typedef struct s_mini
 {
-	int		nb_cmd;
-	char	**envp;
-	char	***cmd_lst;
+	int				nb_cmd;
+	char			**envp;
+	char			***cmd_lst;
+	t_mini_tools	*mini_tools;
 }	t_mini;
 
 typedef struct s_nb
@@ -55,8 +63,11 @@ char	*ft_get_name(void);
 
 // #-# BUILT-INS #-# //
 
+char	*ft_get_pwd(char **envp);
+
 void	ft_echo_builtins(char **cmd_lst);
 void	ft_env_builtins(char **envp);
+void	ft_pwd_builtins(t_mini_tools *mini_tools);
 
 // #-# EXECUTION #-# //
 
@@ -83,10 +94,12 @@ char	**ft_find_path(char *envp[]);
 
 // INITIALIZATION //
 
-t_cmd	*ft_init_cmd(t_mini *minishell);
-void	ft_destroy_cmd(t_cmd *cmd_struct);
-t_mini	*ft_init_mini(char *envp[]);
-void	ft_destroy_mini(t_mini *minishell);
+t_cmd			*ft_init_cmd(t_mini *minishell);
+void			ft_destroy_cmd(t_cmd *cmd_struct);
+t_mini			*ft_init_mini(t_mini_tools *mini_tools);
+void			ft_destroy_mini(t_mini *minishell);
+t_mini_tools	*ft_init_mini_tools(char *envp[]);
+void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
 char	**ft_cpy_envp(char *envp[]);
 

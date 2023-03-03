@@ -15,6 +15,7 @@ SRCS = minishell.c \
 	parsing/share_off.c \
 	execution/check_access.c \
 	execution/init_destroy_struct.c \
+	execution/init_destroy_struct2.c \
 	execution/error_msg.c \
 	execution/child.c \
 	execution/execution.c \
@@ -24,7 +25,8 @@ SRCS = minishell.c \
 	execution/build_cmd_struct.c \
 	execution/environnement.c \
 	builtins/echo.c \
-	builtins/env.c
+	builtins/env.c \
+	builtins/pwd.c
 
 LIBFT = libft/libft.a
 
