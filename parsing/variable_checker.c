@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 22:02:48 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/01 22:02:49 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:46:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ static char	*ft_get_variable(char *variable, t_mini *minishell)
 	i = 0;
 	j = 0;
 	if (variable[0] == '?' && variable[1] == '\0')
-		return (ft_itoa(g_last_return_code));
+		return (ft_itoa(minishell->mini_tools->g_last_return_code));
 	temp = ft_strdup("");
-	while (minishell->envp[i] != NULL)
+	while (minishell->mini_tools->envp[i] != NULL)
 	{
-		while (minishell->envp[i][j] != '=')
-			temp = ft_strjoin(temp, ft_char_to_str(minishell->envp[i][j++]));
+		while (minishell->mini_tools->envp[i][j] != '=')
+			temp = ft_strjoin(temp, ft_char_to_str(\
+			minishell->mini_tools->envp[i][j++]));
 		j = 0;
 		if (ft_strncmp(variable, temp, ft_strlen(variable)) != 0)
 			temp = ft_strdup("");
@@ -75,13 +76,14 @@ static char	*ft_get_variable(char *variable, t_mini *minishell)
 	}
 	free(temp);
 	str = ft_strdup("");
-	if (minishell->envp[i] != NULL)
+	if (minishell->mini_tools->envp[i] != NULL)
 	{
-		while (minishell->envp[i][j] != '=')
+		while (minishell->mini_tools->envp[i][j] != '=')
 			j++;
 		j = j + 1;
-		while (minishell->envp[i][j] != '\0')
-			str = ft_strjoin(str, ft_char_to_str(minishell->envp[i][j++]));
+		while (minishell->mini_tools->envp[i][j] != '\0')
+			str = ft_strjoin(str, \
+			ft_char_to_str(minishell->mini_tools->envp[i][j++]));
 	}
 	return (str);
 }

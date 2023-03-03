@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/03 16:27:47 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:59:10 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cmd	*ft_init_cmd(t_mini *minishell)
 	ft_check_malloc(cmd_struct);
 	cmd_struct->infile_fd = -1;
 	cmd_struct->outfile_fd = -1;
-	cmd_struct->cmd_path_lst = ft_find_path(minishell->envp);
+	cmd_struct->cmd_path_lst = ft_find_path(minishell->mini_tools->envp);
 	cmd_struct->cmd_arg = NULL;
 	return (cmd_struct);
 }
@@ -44,7 +44,6 @@ t_mini	*ft_init_mini(t_mini_tools *mini_tools)
 	minishell = malloc(sizeof(*minishell));
 	ft_check_malloc(minishell);
 	minishell->nb_cmd = -1;
-	minishell->envp = mini_tools->envp;
 	minishell->mini_tools = mini_tools;
 	minishell->cmd_lst = NULL;
 	return (minishell);
@@ -71,11 +70,10 @@ void	ft_destroy_mini(t_mini *minishell)
 
 t_mini_tools	*ft_init_mini_tools(char *envp[])
 {
-	t_mini_tools	*mini_tools;
-	
 	mini_tools = malloc(sizeof(*mini_tools));
 	mini_tools->envp = ft_cpy_envp(envp);
 	mini_tools->pwd = ft_get_pwd(mini_tools->envp);
 	mini_tools->old_pwd = ft_strdup(mini_tools->pwd);
+	mini_tools->g_last_return_code = 0;
 	return (mini_tools);
 }

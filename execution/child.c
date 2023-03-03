@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/03 18:28:23 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:47:52 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 	}
 	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
 	{
-		ft_env_builtins(minishell->envp);
+		ft_env_builtins(minishell->mini_tools->envp);
 		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
@@ -95,7 +95,7 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 		exit(0);
 	ft_check_builtins(minishell, cmd_struct);
 	cmd_path = ft_check_access(cmd_struct);
-	execve(cmd_path, cmd_struct->cmd_arg, minishell->envp);
+	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }
 

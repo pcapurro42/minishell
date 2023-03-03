@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/03 16:27:27 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:59:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ int	main(int argc, char **argv, char *envp[])
 	char			*name;
 	char			*input;
 	t_mini			*minishell;
-	t_mini_tools	*mini_tools;
-
+	
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
 	input = NULL;
-	g_last_return_code = 0;
 	while (6)
 	{
 		minishell = ft_init_mini(mini_tools);
