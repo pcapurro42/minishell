@@ -75,6 +75,41 @@ char	*ft_stick_chevrons(char *str)
 	return (strf);
 }
 
+
+static char	*ft_substitute_str(char *str)
+{
+	int		i;
+	int		dquote;
+	int		quote;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == 34 && quote % 2 == 0)
+			dquote++;
+		if (str[i] == 39 && dquote % 2 == 0)
+			quote++;
+		i++;
+	}
+	return (NULL);
+}
+
+char	**ft_remove_quotes(char **cmd_arg)
+{
+	int		i;
+
+	i = 0;
+	while (cmd_arg[i] != NULL)
+	{
+		if (ft_strchr(cmd_arg[i], ' ') != NULL)
+			cmd_arg[i] = ft_substitute_str(cmd_arg[i]);
+		i++;
+	}
+	return (cmd_arg);
+}
+
 char	*ft_input_cleaner(char *input)
 {
 	int		i;

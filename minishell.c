@@ -74,6 +74,7 @@ int	main(int argc, char **argv, char *envp[])
 		input = NULL;
 		while (input == NULL)
 			input = readline(name);
+		add_history(input);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);
 	}

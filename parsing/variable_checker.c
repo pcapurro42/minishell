@@ -40,7 +40,7 @@ static int	ft_what_should_be_done(char *input)
 
 // MÉTHODE :
 // - On analyse seulement tout ce qui se situe à gauche du '$'
-// - On compte le nombre de sinple quotes et de double quotes
+// - On compte le nombre de sinple quotes et de double quotes qui ne sont pas des double quotes et des simple quotes
 // Quatre cas possible (écrit dans le même ordre que le if final pour plus de compréhension) :
 // 1. Si dquote = impaire, squote = paire, le quote à prendre en compte est le double quote (return 1)
 // 2. Si squote = paire, dquote = paire, c'est comme si il n'y avait aucune quote (return 1)
@@ -49,8 +49,6 @@ static int	ft_what_should_be_done(char *input)
 
 // return 0 = on laisse le contenu de variable tel quel
 // return 1 = on remplace le contenu de variable par sa variable
-
-// Là c'était juste pour détecter, remplacer si nécessaire ça va être un enfer sur Terre paix à mon âme...
 
 static char	*ft_get_variable(char *variable, t_mini *minishell)
 {
