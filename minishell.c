@@ -53,6 +53,15 @@ char	*ft_get_name(void)
 	return (name);
 }
 
+// void	*ft_handle_signal(int signal)
+// {
+// 	if (signal == SIGQUIT)
+// 		printf("SIGQUIT\n");
+// 	if (signal == SIGINT)
+// 		printf("SIGQUIT\n");
+// 	return (NULL);
+// }
+
 int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;

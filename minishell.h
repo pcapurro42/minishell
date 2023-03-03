@@ -60,6 +60,7 @@ typedef struct s_nb
 // #-# MAIN #-# //
 
 char	*ft_get_name(void);
+void	*ft_handle_signal(int signal);
 
 // #-# BUILT-INS #-# //
 
