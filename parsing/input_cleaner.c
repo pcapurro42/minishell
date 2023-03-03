@@ -75,25 +75,12 @@ char	*ft_stick_chevrons(char *str)
 	return (strf);
 }
 
-
 static char	*ft_substitute_str(char *str)
 {
-	int		i;
-	int		dquote;
-	int		quote;
+	int	i;
 
 	i = 0;
-	dquote = 0;
-	quote = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == 34 && quote % 2 == 0)
-			dquote++;
-		if (str[i] == 39 && dquote % 2 == 0)
-			quote++;
-		i++;
-	}
-	return (NULL);
+	return (str);
 }
 
 char	**ft_remove_quotes(char **cmd_arg)
@@ -103,7 +90,7 @@ char	**ft_remove_quotes(char **cmd_arg)
 	i = 0;
 	while (cmd_arg[i] != NULL)
 	{
-		if (ft_strchr(cmd_arg[i], ' ') != NULL)
+		if (ft_strchr(cmd_arg[i], 34) != NULL || ft_strchr(cmd_arg[i], 39) != NULL)
 			cmd_arg[i] = ft_substitute_str(cmd_arg[i]);
 		i++;
 	}

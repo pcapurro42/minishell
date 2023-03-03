@@ -27,6 +27,7 @@ void	*ft_analyze_input(char *input, t_mini *minishell)
 		return (NULL);
 	str = ft_check_variables(str, minishell);
 	minishell->cmd_lst = ft_share_off(str);
+	str = ft_remove_quotes(str);
 	ft_execution(minishell);
 	return (NULL);
 }
