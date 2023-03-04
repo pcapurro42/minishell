@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 17:18:21 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:12:09 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_child_dup2(int (*fd)[2], int i, t_mini *minishell)
 	}
 }
 
-static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
+void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
 	t_cmd *cmd_struct)
 {
 	if (cmd_struct->infile_fd != -1)
@@ -85,9 +85,9 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, i);
-	ft_child_dup(fd, i, minishell, cmd_struct);
 	if (!cmd_struct->cmd_arg)
-		exit(0);
+		exit(0); //Mauvais code de renvoie
+	ft_child_dup(fd, i, minishell, cmd_struct);
 	ft_check_builtins(minishell, cmd_struct);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
