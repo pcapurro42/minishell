@@ -56,6 +56,8 @@ char	*ft_get_name(void)
 void	ft_handle_signal(int signal)
 {
 	signal = 0;
+	printf("\n");
+	readline("miniquoi:~$ ");
 }
 
 int	main(int argc, char **argv, char *envp[])
