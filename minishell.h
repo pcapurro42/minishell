@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <fcntl.h>
+# include <signal.h>
 
 typedef struct s_cmd
 {
@@ -36,6 +37,7 @@ typedef	struct s_mini_tools
 {
 	char	*pwd;
 	char	*old_pwd;
+	char	*input;
 	char	**envp;
 	int		g_last_return_code;
 }	t_mini_tools;
@@ -55,10 +57,12 @@ typedef struct s_nb
 	int	id_str_to_add;
 }	t_nb;
 
+t_mini_tools *mini_tools;
+
 // #-# MAIN #-# //
 
 char	*ft_get_name(void);
-void	*ft_handle_signal(int signal);
+void	ft_handle_signal(int signal);
 
 // #-# BUILT-INS #-# //
 

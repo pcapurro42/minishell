@@ -53,38 +53,34 @@ char	*ft_get_name(void)
 	return (name);
 }
 
-// void	*ft_handle_signal(int signal)
-// {
-// 	if (signal == SIGQUIT)
-// 		printf("SIGQUIT\n");
-// 	if (signal == SIGINT)
-// 		printf("SIGQUIT\n");
-// 	return (NULL);
-// }
+void	ft_handle_signal(int signal)
+{
+	mini_tools->input = NULL;
+	signal = 0;
+}
 
 int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;
-	char			*input;
 	t_mini			*minishell;
-	t_mini_tools	*mini_tools;
-	
+
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
-	input = NULL;
+	signal(SIGINT, ft_handle_signal);
+	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
 		minishell = ft_init_mini(mini_tools);
-		if (input)
-			free(input);
-		input = NULL;
-		while (input == NULL)
-			input = readline(name);
-		add_history(input);
-		if (input[0] != '\0')
-			ft_analyze_input(input, minishell);
+		if (mini_tools->input)
+			free(mini_tools->input);
+		mini_tools->input = NULL;
+		while (mini_tools->input == NULL)
+			mini_tools->input = readline(name);
+		add_history(mini_tools->input);
+		if (mini_tools->input[0] != '\0')
+			ft_analyze_input(mini_tools->input, minishell);
 	}
 	return (0);
 }
