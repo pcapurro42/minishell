@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/03 18:58:48 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:47:41 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ typedef struct s_nb
 	int	len_cmd_arg;
 	int	id_str_to_add;
 }	t_nb;
-
-t_mini_tools *mini_tools;
 
 // #-# MAIN #-# //
 

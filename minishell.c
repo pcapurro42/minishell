@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/03 18:59:04 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 16:48:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv, char *envp[])
 	char			*name;
 	char			*input;
 	t_mini			*minishell;
+	t_mini_tools	*mini_tools;
 	
 	(void) argc;
 	(void) argv;
