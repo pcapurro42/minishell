@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:09:40 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:20:41 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_execution(t_mini *minishell)
 		i++;
 	minishell->nb_cmd = i;
 	if (minishell->nb_cmd == 0)
+		return ;
+	if (minishell->nb_cmd == 1 && ft_exec_one_cmd(minishell) == 0)
 		return ;
 	status_code = malloc(sizeof(*status_code) * minishell->nb_cmd);
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));

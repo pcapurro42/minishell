@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/04 20:08:08 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:35:40 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	ft_add_to_cmd_arg(t_mini *minishell, t_cmd *cmd_struct, \
 void	ft_child(int (*fd)[2], int i, t_mini *minishell);
 
 void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i);
+void	ft_build_little_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i);
 
 void	ft_error_msg(char *msg);
 void	ft_error(void);
@@ -94,7 +95,7 @@ void	ft_check_malloc(void *str);
 
 void	ft_execution(t_mini *minishell);
 
-void	ft_exec_one_cmd(t_mini *minishell, int (*fd)[2]);
+int		ft_exec_one_cmd(t_mini *minishell);
 
 char	**ft_find_path(char *envp[]);
 

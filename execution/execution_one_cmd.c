@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:09:29 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:40:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,23 @@ static int	ft_is_builtins(t_cmd *cmd_struct)
 	return (1);
 }
 
-void	ft_exec_one_cmd(t_mini *minishell, int (*fd)[2])
+int	ft_exec_one_cmd(t_mini *minishell)
 {
-	int		status_code;
 	t_cmd	*cmd_struct;
-	pid_t	*pid;
 	
+	cmd_struct = ft_init_cmd(minishell);
+	ft_build_little_struct_cmd(minishell, cmd_struct, 0);
+	if (!cmd_struct->cmd_arg)
+		ft_error();
+	if (ft_is_builtins(cmd_struct) == 1)
+		return (1);
+	ft_destroy_cmd(cmd_struct);
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, 0);
 	if (!cmd_struct->cmd_arg)
 		ft_error();
 	ft_child_dup_one_cmd(cmd_struct);
-	if (ft_is_builtins(cmd_struct) == 0)
-		return (ft_check_builtins_one_cmd(minishell, cmd_struct));
-	pid = ft_execution2(fd, minishell);
-	wait(0);
-	unlink("minishell_here_doc.tmp");
-	minishell->mini_tools->g_last_return_code = WEXITSTATUS(status_code);
-/*	pid = fork();
-	if (pid < 0)
-		ft_error();
-	if (pid == 0)
-	{
-		cmd_path = ft_check_access(cmd_struct);
-		execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
-		ft_error_msg(minishell->cmd_lst[0][0]);
-	}
-	waitpid(pid, &status_code, 0);
-	unlink("minishell_here_doc.tmp");
-	minishell->mini_tools->g_last_return_code = WEXITSTATUS(status_code);*/
+	ft_check_builtins_one_cmd(minishell, cmd_struct);
+	ft_destroy_cmd(cmd_struct);
+	return (0);
 }
-
-//Ne pas oublier de FREE !
