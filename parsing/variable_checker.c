@@ -38,18 +38,6 @@ static int	ft_what_should_be_done(char *input)
 	return (0);
 }
 
-// MÉTHODE :
-// - On analyse seulement tout ce qui se situe à gauche du '$'
-// - On compte le nombre de sinple quotes et de double quotes qui ne sont pas des double quotes et des simple quotes
-// Quatre cas possible (écrit dans le même ordre que le if final pour plus de compréhension) :
-// 1. Si dquote = impaire, squote = paire, le quote à prendre en compte est le double quote (return 1)
-// 2. Si squote = paire, dquote = paire, c'est comme si il n'y avait aucune quote (return 1)
-// 3. Si squote = impaire, dquote = impaire, le 1er quote en partant de la gauche est prioritaire (on regarde 'c' qui nous a servi à stocker le premier quote rencontré)
-// 4. Si dquote = paire, squote = impaire, le quote à prendre en compte est le simple quote (return 0)
-
-// return 0 = on laisse le contenu de variable tel quel
-// return 1 = on remplace le contenu de variable par sa variable
-
 static char	*ft_get_variable(char *variable, t_mini *minishell)
 {
 	int		i;
@@ -62,13 +50,15 @@ static char	*ft_get_variable(char *variable, t_mini *minishell)
 	if (variable[0] == '?' && variable[1] == '\0')
 		return (ft_itoa(minishell->mini_tools->g_last_return_code));
 	temp = ft_strdup("");
+	variable = ft_strjoin(variable, "=");
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j] != '=')
 			temp = ft_strjoin(temp, ft_char_to_str(\
 			minishell->mini_tools->envp[i][j++]));
 		j = 0;
-		if (ft_strncmp(variable, temp, ft_strlen(variable)) != 0)
+		temp = ft_strjoin(temp, "=");
+		if (ft_strncmp(variable, temp, ft_strlen(temp)) != 0)
 			temp = ft_strdup("");
 		else
 			break ;
