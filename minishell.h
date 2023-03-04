@@ -37,7 +37,6 @@ typedef	struct s_mini_tools
 {
 	char	*pwd;
 	char	*old_pwd;
-	char	*input;
 	char	**envp;
 	int		g_last_return_code;
 }	t_mini_tools;
@@ -56,8 +55,6 @@ typedef struct s_nb
 	int	len_cmd_arg;
 	int	id_str_to_add;
 }	t_nb;
-
-t_mini_tools *mini_tools;
 
 // #-# MAIN #-# //
 
