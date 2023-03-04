@@ -55,15 +55,13 @@ char	*ft_get_name(void)
 
 void	ft_handle_signal(int signal)
 {
-	signal = 0;
-	printf("\n");
-	readline("miniquoi:~$ ");
+	if (signal == SIGINT)
+		input = ft_strdup("");
 }
 
 int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;
-	char			*input;
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
@@ -79,9 +77,7 @@ int	main(int argc, char **argv, char *envp[])
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
-		input = NULL;
-		while (input == NULL)
-			input = readline(name);
+		input = readline(name);
 		add_history(input);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);

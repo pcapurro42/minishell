@@ -25,7 +25,8 @@
 # include <fcntl.h>
 # include <signal.h>
 
-int	g_signal;
+char	*input;
+int		g_signal;
 
 typedef struct s_cmd
 {
