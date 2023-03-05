@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/03 19:00:27 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 16:30:40 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	char	**new_envp;
 	int		envp_len;
 	int		nb_export;
+	int		i;
 
+	i = 1;
 	nb_export = 0;
-	while (cmd_arg[1 + nb_export])
-		nb_export++;
+	while (cmd_arg[i])
+	{
+		if (ft_strchr_i(cmd_arg[i], '=') != -1)
+			nb_export++;
+		i++;
+	}
 	if (nb_export == 0)
 		return(ft_env_builtins(minishell->mini_tools->envp));
 	if (minishell->mini_tools->envp == NULL)
@@ -39,11 +45,16 @@ void	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 		new_envp[envp_len] = minishell->mini_tools->envp[envp_len]; 
 		envp_len++;
 	}
+	i = 1;
 	nb_export = 0;
-	while (cmd_arg[1 + nb_export])
+	while (cmd_arg[i])
 	{
-		new_envp[envp_len + nb_export] = cmd_arg[nb_export + 1];
-		nb_export++;
+		if (ft_strchr_i(cmd_arg[i], '=') != -1)
+		{
+			new_envp[envp_len + nb_export] = cmd_arg[i];
+			nb_export++;
+		}
+		i++;
 	}
 	new_envp[envp_len + nb_export] = NULL;
 	free(minishell->mini_tools->envp);
