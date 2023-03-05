@@ -57,24 +57,23 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		printf("\n");
+		rl_on_new_line();
+		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		if (input == NULL)
-			rl_redisplay();
-	}
-	if (signal == SIGQUIT)
+		rl_redisplay();
+	}	if (signal == SIGQUIT)
 	{
 		;
 	}
 }
 
-// rl_on_new_line
-// rl_replace_line
-// rl_redisplay
-
 // SIGINT = ctrl-c
 // SIGQUIT = ctrl-'\'
+
+// tcsetattr
+// tcgetattr
+// tgetent
 
 int	main(int argc, char **argv, char *envp[])
 {
