@@ -63,6 +63,7 @@ typedef struct s_nb
 
 char	*ft_get_name(void);
 void	ft_handle_signal(int signal);
+void	rl_replace_line(const char *text, int clear_undo);
 
 // #-# BUILT-INS #-# //
 

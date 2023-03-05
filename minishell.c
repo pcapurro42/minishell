@@ -56,7 +56,7 @@ char	*ft_get_name(void)
 void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
-		input = ft_strdup("");
+		;
 }
 
 int	main(int argc, char **argv, char *envp[])

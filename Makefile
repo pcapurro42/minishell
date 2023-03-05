@@ -28,7 +28,7 @@ SRCS = minishell.c \
 	builtins/echo.c \
 	builtins/env.c \
 	builtins/pwd.c \
-	builtins/export.c 
+	builtins/export.c
 
 LIBFT = libft/libft.a
 
@@ -45,7 +45,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(LIBFT) -lreadline $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 $(LIBFT):
 	make -C libft
