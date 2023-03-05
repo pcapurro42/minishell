@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:54:56 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:01:28 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ t_mini_tools	*ft_init_mini_tools(char *envp[])
 	mini_tools->pwd = ft_get_pwd(mini_tools->envp);
 	mini_tools->old_pwd = ft_strdup(mini_tools->pwd);
 	mini_tools->g_last_return_code = 0;
+	mini_tools->main_pid = -1;
 	return (mini_tools);
 }

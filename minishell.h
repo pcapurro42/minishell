@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/05 15:15:13 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:00:18 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef	struct s_mini_tools
 	char	*old_pwd;
 	char	**envp;
 	int		g_last_return_code;
+	int		main_pid;
 }	t_mini_tools;
 
 typedef struct s_mini

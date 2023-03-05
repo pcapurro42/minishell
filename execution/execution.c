@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:20:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:16:18 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell)
 	{
 		if ((i != minishell->nb_cmd - 1) && pipe(fd[i]))
 			ft_error();
-		pid[i] = fork();
+		pid[i] = fork();	
 		if (pid[i] < 0)
 			ft_error();
 		if (pid[i] == 0)
@@ -69,6 +69,7 @@ void	ft_execution(t_mini *minishell)
 		waitpid(pid[i], &(status_code[i]), 0);
 		i++;
 	}
+	minishell->mini_tools->main_pid = -1;
 	unlink("minishell_here_doc.tmp");
 	minishell->mini_tools->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
 }
