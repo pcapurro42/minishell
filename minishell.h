@@ -26,8 +26,6 @@
 # include <signal.h>
 # include <termios.h>
 
-char	*input;
-
 typedef struct s_cmd
 {
 	int		infile_fd;
