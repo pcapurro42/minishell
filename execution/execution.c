@@ -31,7 +31,7 @@ static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell)
 	{
 		if ((i != minishell->nb_cmd - 1) && pipe(fd[i]))
 			ft_error();
-		pid[i] = fork();	
+		pid[i] = fork();
 		if (pid[i] < 0)
 			ft_error();
 		if (pid[i] == 0)

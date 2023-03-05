@@ -24,8 +24,9 @@
 # include <readline/readline.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <termios.h>
 
-char	*name;
+char			*input;
 
 typedef struct s_cmd
 {
