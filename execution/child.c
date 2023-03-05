@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:12:09 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 15:15:45 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,29 @@ void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
 
 static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 {
+	unlink("minishell_here_doc.tmp");
 	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
 	{
 		ft_echo_builtins(cmd_struct->cmd_arg);
-		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
 	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
 	{
 		ft_env_builtins(minishell->mini_tools->envp);
-		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
 	if (ft_strncmp("pwd", cmd_struct->cmd_arg[0], 4) == 0)
 	{
 		ft_pwd_builtins(minishell->mini_tools);
-		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
 	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
 	{
 		ft_export_builtins(cmd_struct->cmd_arg, minishell);
-		unlink("minishell_here_doc.tmp");
 		exit(0);
 	}
+	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
+		ft_exit_builtins(cmd_struct);
 }
 
 void	ft_child(int (*fd)[2], int i, t_mini *minishell)
