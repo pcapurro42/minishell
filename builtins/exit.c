@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:57 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 15:12:57 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 15:41:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_exit_builtins(t_cmd *cmd_struct)
 	{
 		temp = ft_strjoin("minishell: exit: ", cmd_struct->cmd_arg[1]);
 		temp2 = ft_strjoin(temp, ": numeric argument required\n");
+		ft_putstr_fd(temp2, 2);
 		exit(255);
 	}
 }
