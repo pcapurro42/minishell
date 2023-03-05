@@ -57,12 +57,12 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		rl_on_new_line();
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-	}	if (signal == SIGQUIT)
+	}
+	if (signal == SIGQUIT)
 	{
 		;
 	}
