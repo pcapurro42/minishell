@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 15:15:54 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:02:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ int	ft_exec_one_cmd(t_mini *minishell)
 	
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_little_struct_cmd(minishell, cmd_struct, 0);
-	if (!cmd_struct->cmd_arg)
-		ft_error();
-	if (ft_is_builtins(cmd_struct) == 1)
+	if (!cmd_struct->cmd_arg || ft_is_builtins(cmd_struct) == 1)
 	{
 		ft_destroy_cmd(cmd_struct);
 		return (1);
@@ -78,7 +76,7 @@ int	ft_exec_one_cmd(t_mini *minishell)
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, 0);
 	if (!cmd_struct->cmd_arg)
-		ft_error();
+		exit(0); //Mauvais code de renvoie
 	ft_child_dup_one_cmd(cmd_struct);
 	ft_check_builtins_one_cmd(minishell, cmd_struct);
 	ft_destroy_cmd(cmd_struct);

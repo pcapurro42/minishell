@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_cleaner.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:38:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/27 16:38:05 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:02:50 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	**ft_remove_quotes(char **cmd_arg)
 	int		i;
 
 	i = 0;
-	while (cmd_arg[i] != NULL)
+	while (cmd_arg && cmd_arg[i] != NULL)
 	{
 		if (ft_strchr(cmd_arg[i], 34) != NULL || ft_strchr(cmd_arg[i], 39) != NULL)
 			cmd_arg[i] = ft_substitute_str(cmd_arg[i]);

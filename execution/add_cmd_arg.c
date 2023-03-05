@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:40:11 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/04 20:35:25 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:03:53 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ void	ft_build_little_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 		else
 			ft_add_to_cmd_arg(minishell, cmd_struct, i, nb);
 	}
-	ft_remove_quotes(cmd_struct->cmd_arg);
-	if (cmd_struct->infile_fd < 0)
-		cmd_struct->infile_fd = -1;
-	if (cmd_struct->outfile_fd < 0)
-		cmd_struct->outfile_fd = -1;
+	if (cmd_struct->cmd_arg)
+		ft_remove_quotes(cmd_struct->cmd_arg);
+	free(nb);
 }
