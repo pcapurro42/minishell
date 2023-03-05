@@ -33,7 +33,6 @@ static void	ft_print_miniquoi(void)
 char	*ft_get_name(void)
 {
 	int		address;
-	char	*name;
 
 	address = (int)&name * (-1);
 	while (address > 10)
@@ -56,12 +55,19 @@ char	*ft_get_name(void)
 void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
+	{
+		// printf("\n");
+		// rl_replace_line(name, 1);
+		// rl_redisplay();
+		;
+	}
+	if (signal == SIGQUIT)
 		;
 }
 
 int	main(int argc, char **argv, char *envp[])
 {
-	char			*name;
+	char			*input;
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
@@ -70,8 +76,8 @@ int	main(int argc, char **argv, char *envp[])
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
 	input = NULL;
-	signal(SIGINT, ft_handle_signal);
-	signal(SIGQUIT, ft_handle_signal);
+	// signal(SIGINT, ft_handle_signal);
+	// signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
 		minishell = ft_init_mini(mini_tools);
@@ -79,6 +85,8 @@ int	main(int argc, char **argv, char *envp[])
 			free(input);
 		input = readline(name);
 		add_history(input);
+		if (input == NULL)
+			exit(0);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);
 	}
