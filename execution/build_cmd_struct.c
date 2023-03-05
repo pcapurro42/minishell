@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:38:28 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 18:16:09 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:18:36 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	if (cmd_struct->infile_fd >= 0)
 		close(cmd_struct->infile_fd);
 	pid = fork();
+	if (pid < 0)
+		ft_error();
 	if (pid == 0)
 	{
 		ft_here_doc(cmd_struct, \
