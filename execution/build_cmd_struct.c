@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:38:28 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 18:18:36 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:26:37 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,11 @@ static void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 static void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb)
 {
-	int pid;
-
 	if (cmd_struct->infile_fd >= 0)
 		close(cmd_struct->infile_fd);
-	pid = fork();
-	if (pid < 0)
-		ft_error();
-	if (pid == 0)
-	{
-		ft_here_doc(cmd_struct, \
-			minishell->cmd_lst[i][nb->j + 1]);
-		exit(0);
-	}
-	else
-		nb->j += 2;
+	ft_here_doc(cmd_struct, \
+		minishell->cmd_lst[i][nb->j + 1]);
+	nb->j += 2;
 }
 
 static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
