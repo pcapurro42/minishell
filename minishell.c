@@ -83,6 +83,7 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
+	ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();
