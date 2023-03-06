@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/06 14:12:02 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:14:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv, char *envp[])
 	//ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
+	here_doc_pid = -1;
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
 	input = NULL;

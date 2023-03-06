@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/06 11:56:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:13:49 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+
+int	here_doc_pid;
 
 typedef struct s_cmd
 {
