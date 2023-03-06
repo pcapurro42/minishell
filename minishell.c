@@ -22,7 +22,7 @@ char	*ft_get_name(void)
 		address = address / 10;
 	if (address % 2 == 0)
 	{
-		name = ft_strdup("miniquoi:~$");
+		name = ft_strdup("miniquoi:~$ ");
 		printf("______  _______       ____________             _____    \n");
 		printf("___   |/  /__(_)_________(_)_  __ \\___  __________(_)  \n");
 		printf("__  /|_/ /__  /__  __ \\_  /_  / / /  / / /  __ \\_  /  \n");
@@ -45,13 +45,27 @@ char	*ft_get_name(void)
 
 static void	ft_clean_stdin(void)
 {
-	int	i;
+	struct termios idk;
+	struct termios backup;
 
-	i = 0;
+	tcgetattr(STDIN_FILENO, &backup);						// = sauvegarde la config initiale du terminal (avant de la modifier)
+
+	tcgetattr(STDIN_FILENO, &idk);							// = récupère la config du terminal
+	idk.c_lflag &= ~ECHO;									// = efface le flag 'ECHO' dans idk.c_lflag
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);				// = applique la config modifiée
+
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &backup);			// = restaure la config originale
 }
+
+// tcgetattr = fonction permettant de récupérer la config du terminal
+// tcsetattr = fonction permettant d'appliquer la config mise en argument
+
+// '&=' : opérateur binaire combinant && et =
+// '~' : opérateur binaire de négation (= inverse chaque bit de ECHO)
 
 void	ft_handle_signal(int signal)
 {
+	ft_clean_stdin();
 	if (signal == SIGINT)
 	{
 		if (global_pid != -1)
@@ -69,7 +83,6 @@ void	ft_handle_signal(int signal)
 			rl_redisplay();
 		}
 	}
-	ft_clean_stdin();
 }
 
 // tcsetattr
@@ -83,7 +96,6 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
-	ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();
