@@ -54,6 +54,8 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
+		if (here_doc_pid != -1)
+			kill(here_doc_pid, SIGKILL);
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -76,10 +78,10 @@ int	main(int argc, char **argv, char *envp[])
 	//ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
-	here_doc_pid = -1;
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
 	input = NULL;
+	here_doc_pid = -1;
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
