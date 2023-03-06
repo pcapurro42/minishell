@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/06 13:47:27 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:04:03 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_cmd	*ft_exec_one_cmd(t_mini *minishell)
 	ft_check_builtins_one_cmd(minishell, cmd_struct);
 	dup2(old_stdin, STDIN_FILENO);
 	dup2(old_stdout, STDOUT_FILENO);
+	close(old_stdin);
+	close(old_stdout);
 	ft_destroy_cmd(cmd_struct);
 	return (NULL);
 }

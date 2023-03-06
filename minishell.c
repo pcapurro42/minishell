@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/04 18:10:12 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:12:02 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
+	//ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();

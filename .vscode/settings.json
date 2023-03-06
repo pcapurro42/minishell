@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"signal.h": "c",
-		"readline.h": "c",
-		"stat.h": "c",
-		"termios.h": "c"
-	}
-}
