@@ -26,7 +26,7 @@
 # include <signal.h>
 # include <termios.h>
 
-int	here_doc_pid;
+int	global_pid;
 
 typedef struct s_cmd
 {

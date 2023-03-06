@@ -22,7 +22,7 @@ char	*ft_get_name(void)
 		address = address / 10;
 	if (address % 2 == 0)
 	{
-		name = ft_strdup("minifeur:~$ ");
+		name = ft_strdup("miniquoi:~$");
 		printf("______  _______       ____________             _____    \n");
 		printf("___   |/  /__(_)_________(_)_  __ \\___  __________(_)  \n");
 		printf("__  /|_/ /__  /__  __ \\_  /_  / / /  / / /  __ \\_  /  \n");
@@ -32,7 +32,7 @@ char	*ft_get_name(void)
 	}
 	else
 	{
-		name = ft_strdup("miniquoi:~$ ");
+		name = ft_strdup("minifeur:~$ ");
 		printf("______  _______       _____________                   \n");
 		printf("___   |/  /__(_)_________(_)__  __/________  _________\n");
 		printf("__  /|_/ /__  /__  __ \\_  /__  /_ _  _ \\  / / /_  ___/\n");
@@ -54,9 +54,9 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		if (here_doc_pid != -1)
+		if (global_pid != -1)
 		{
-			kill(here_doc_pid, SIGKILL);
+			kill(global_pid, SIGKILL);
 			ft_putstr_fd("", 1);
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -88,19 +88,19 @@ int	main(int argc, char **argv, char *envp[])
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp);
 	input = NULL;
-	here_doc_pid = -1;
+	global_pid = -1;
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
-		here_doc_pid = -1;
+		global_pid = -1;
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
 		input = readline(name);
 		if (input == NULL)
 		{
-			here_doc_pid = -2;
+			global_pid = -2;
 			exit(0);
 		}
 		add_history(input);
