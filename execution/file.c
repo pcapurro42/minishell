@@ -28,14 +28,14 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 			return ;
 		write(0, "> ", 2);
 		gnl = get_next_line(0);
-		ft_check_malloc(gnl);
+		// ft_check_malloc(gnl);
 		while (ft_strncmp(gnl, limiter, ft_strlen(gnl)) != '\n')
 		{
 			write(cmd_struct->infile_fd, gnl, ft_strlen(gnl));
 			free(gnl);
 			write(0, "> ", 2);
 			gnl = get_next_line(0);
-			ft_check_malloc(gnl);
+			// ft_check_malloc(gnl);
 		}
 		free(gnl);
 		close(cmd_struct->infile_fd);

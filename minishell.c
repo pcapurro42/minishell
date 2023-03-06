@@ -93,6 +93,7 @@ int	main(int argc, char **argv, char *envp[])
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
+		here_doc_pid = -1;
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
