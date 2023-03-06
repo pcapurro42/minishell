@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 20:02:13 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:47:27 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,22 @@ static int	ft_is_builtins(t_cmd *cmd_struct)
 	return (1);
 }
 
-int	ft_exec_one_cmd(t_mini *minishell)
+t_cmd	*ft_exec_one_cmd(t_mini *minishell)
 {
 	t_cmd	*cmd_struct;
+	int		old_stdin;
+	int		old_stdout;
 	
 	cmd_struct = ft_init_cmd(minishell);
-	ft_build_little_struct_cmd(minishell, cmd_struct, 0);
-	if (!cmd_struct->cmd_arg || ft_is_builtins(cmd_struct) == 1)
-	{
-		ft_destroy_cmd(cmd_struct);
-		return (1);
-	}
-	ft_destroy_cmd(cmd_struct);
-	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, 0);
-	if (!cmd_struct->cmd_arg)
-		exit(0); //Mauvais code de renvoie
+	if (!cmd_struct->cmd_arg || ft_is_builtins(cmd_struct) == 1)
+		return (cmd_struct);
+	old_stdin = dup(0);
+	old_stdout = dup(1);
 	ft_child_dup_one_cmd(cmd_struct);
 	ft_check_builtins_one_cmd(minishell, cmd_struct);
+	dup2(old_stdin, STDIN_FILENO);
+	dup2(old_stdout, STDOUT_FILENO);
 	ft_destroy_cmd(cmd_struct);
-	return (0);
+	return (NULL);
 }

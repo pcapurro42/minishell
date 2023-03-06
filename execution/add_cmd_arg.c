@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:40:11 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 20:03:53 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:08:37 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,4 @@ void	ft_add_to_cmd_arg(t_mini *minishell, t_cmd *cmd_struct, \
 		nb->id_str_to_add++;
 	}
 	cmd_struct->cmd_arg[nb->len_cmd_arg] = NULL;
-}
-
-void	ft_build_little_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
-{
-	t_nb	*nb;
-
-	nb = malloc(sizeof(*nb));
-	if (!nb)
-		ft_error();
-	nb->j = 0;
-	nb->len_cmd_arg = 0;
-	while (minishell->cmd_lst[i][nb->j])
-	{
-		if (ft_strncmp(minishell->cmd_lst[i][nb->j], "<", 2) == 0)
-			nb->j+=2;
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], ">", 2) == 0)
-			nb->j+=2;
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], "<<", 3) == 0)
-			nb->j+=2;
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], ">>", 3) == 0)
-			nb->j+=2;
-		else
-			ft_add_to_cmd_arg(minishell, cmd_struct, i, nb);
-	}
-	if (cmd_struct->cmd_arg)
-		ft_remove_quotes(cmd_struct->cmd_arg);
-	free(nb);
 }

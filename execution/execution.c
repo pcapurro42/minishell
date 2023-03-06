@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 18:16:18 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:01:28 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_pipex_close_files(int (*fd)[2], int i)
 	close(fd[i - 1][1]);
 }
 
-static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell)
+static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell, t_cmd *cmd_struct)
 {
 	pid_t	*pid;
 	int		i;
@@ -35,7 +35,12 @@ static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell)
 		if (pid[i] < 0)
 			ft_error();
 		if (pid[i] == 0)
-			ft_child(fd, i, minishell);
+		{
+			if (minishell->nb_cmd == 1)
+				ft_child_one_cmd(fd, i, minishell, cmd_struct);
+			else
+				ft_child(fd, i, minishell);
+		}
 		if (i > 0)
 			ft_pipex_close_files(fd, i);
 		i++;
@@ -49,6 +54,7 @@ void	ft_execution(t_mini *minishell)
 	int		(*fd)[2];
 	int		*status_code;
 	int		i;
+	t_cmd 	*cmd_struct;
 
 	i = 0;
 	while (minishell->cmd_lst && minishell->cmd_lst[i] != NULL)
@@ -56,13 +62,19 @@ void	ft_execution(t_mini *minishell)
 	minishell->nb_cmd = i;
 	if (minishell->nb_cmd == 0)
 		return ;
-	//if (minishell->nb_cmd == 1 && ft_exec_one_cmd(minishell) == 0)
-	//	return ;
+	if (minishell->nb_cmd == 1)
+	{
+		cmd_struct = ft_exec_one_cmd(minishell);
+		if (cmd_struct == NULL)
+			return ;
+	}
+	else
+		cmd_struct = NULL;
 	status_code = malloc(sizeof(*status_code) * minishell->nb_cmd);
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));
 	if (status_code == NULL || fd == NULL)
 		ft_error();
-	pid = ft_execution2(fd, minishell);
+	pid = ft_execution2(fd, minishell, cmd_struct);
 	i = 0;
 	while (i < minishell->nb_cmd)
 	{
