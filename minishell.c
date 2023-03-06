@@ -55,11 +55,19 @@ void	ft_handle_signal(int signal)
 	if (signal == SIGINT)
 	{
 		if (here_doc_pid != -1)
+		{
 			kill(here_doc_pid, SIGKILL);
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+			ft_putstr_fd("", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+		}
+		else
+		{
+			ft_putstr_fd("\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	ft_clean_stdin();
 }
@@ -75,7 +83,6 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 
-	//ft_putnbr_fd(getpid(), 2);
 	(void) argc;
 	(void) argv;
 	name = ft_get_name();
@@ -91,7 +98,10 @@ int	main(int argc, char **argv, char *envp[])
 			free(input);
 		input = readline(name);
 		if (input == NULL)
+		{
+			here_doc_pid = -2;
 			exit(0);
+		}
 		add_history(input);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);
