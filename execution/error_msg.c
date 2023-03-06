@@ -25,7 +25,7 @@ void	ft_error_msg(char *msg)
 
 void	ft_error(void)
 {
-	write(2, "minishell: Error\n", 16);
+	write(2, "minishell: Error\n", 17);
 	unlink("minishell_here_doc.tmp");
 	exit(EXIT_FAILURE);
 }

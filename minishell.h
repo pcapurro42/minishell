@@ -26,8 +26,6 @@
 # include <signal.h>
 # include <termios.h>
 
-char			*input;
-
 typedef struct s_cmd
 {
 	int		infile_fd;
@@ -64,6 +62,7 @@ typedef struct s_nb
 
 char	*ft_get_name(void);
 void	ft_handle_signal(int signal);
+
 void	rl_replace_line(const char *text, int clear_undo);
 
 // #-# BUILT-INS #-# //
@@ -111,7 +110,7 @@ void			ft_destroy_mini(t_mini *minishell);
 t_mini_tools	*ft_init_mini_tools(char *envp[]);
 void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
-char	**ft_cpy_envp(char *envp[]);
+char			**ft_cpy_envp(char *envp[]);
 
 // #-# PARSING #-# //
 
@@ -131,13 +130,11 @@ char	**ft_remove_quotes(char **cmd_arg);
 
 // SYNTAX CHECKERS //
 
+char	**ft_check_variables(char **str, t_mini *minishell);
+
 int		ft_syntax_checker(char **str);
 int		ft_pipe_checker(char **str);
 int		ft_chevron_checker(char **str);
 int		ft_quote_checker(char *str);
-
-// REPLACERS //
-
-char	**ft_check_variables(char **str, t_mini *minishell);
 
 #endif

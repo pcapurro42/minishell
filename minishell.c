@@ -12,24 +12,6 @@
 
 #include "minishell.h"
 
-static void	ft_print_minifeur(void)
-{
-	printf("______  _______       _____________                   \n");
-	printf("___   |/  /__(_)_________(_)__  __/________  _________\n");
-	printf("__  /|_/ /__  /__  __ \\_  /__  /_ _  _ \\  / / /_  ___/\n");
-	printf("_  /  / / _  / _  / / /  / _  __/ /  __/ /_/ /_  /    \n");
-	printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
-}
-
-static void	ft_print_miniquoi(void)
-{
-	printf("______  _______       ____________             _____    \n");
-	printf("___   |/  /__(_)_________(_)_  __ \\___  __________(_)  \n");
-	printf("__  /|_/ /__  /__  __ \\_  /_  / / /  / / /  __ \\_  /  \n");
-	printf("_  /  / / _  / _  / / /  / / /_/ // /_/ // /_/ // /    \n");
-	printf("/_/  /_/  /_/  /_/ /_//_/  \\___\\_\\_____/ \\____//_/   \n\n");
-}
-
 char	*ft_get_name(void)
 {
 	char	*name;
@@ -40,45 +22,54 @@ char	*ft_get_name(void)
 		address = address / 10;
 	if (address % 2 == 0)
 	{
-		ft_print_minifeur();
 		name = ft_strdup("minifeur:~$ ");
+		printf("______  _______       ____________             _____    \n");
+		printf("___   |/  /__(_)_________(_)_  __ \\___  __________(_)  \n");
+		printf("__  /|_/ /__  /__  __ \\_  /_  / / /  / / /  __ \\_  /  \n");
+		printf("_  /  / / _  / _  / / /  / / /_/ // /_/ // /_/ // /    \n");
+		printf("/_/  /_/  /_/  /_/ /_//_/  \\___\\_\\_____/ \\____//_/   \n\n");
 		ft_check_malloc(name);
 	}
 	else
 	{
-		ft_print_miniquoi();
 		name = ft_strdup("miniquoi:~$ ");
+		printf("______  _______       _____________                   \n");
+		printf("___   |/  /__(_)_________(_)__  __/________  _________\n");
+		printf("__  /|_/ /__  /__  __ \\_  /__  /_ _  _ \\  / / /_  ___/\n");
+		printf("_  /  / / _  / _  / / /  / _  __/ /  __/ /_/ /_  /    \n");
+		printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
 		ft_check_malloc(name);
 	}
 	return (name);
+}
+
+static void	ft_clean_stdin(void)
+{
+	int	i;
+
+	i = 0;
 }
 
 void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		if (input == NULL)
-			rl_redisplay();
+		rl_redisplay();
 	}
-	if (signal == SIGQUIT)
-	{
-		;
-	}
+	ft_clean_stdin();
 }
 
-// rl_on_new_line
-// rl_replace_line
-// rl_redisplay
-
-// SIGINT = ctrl-c
-// SIGQUIT = ctrl-'\'
+// tcsetattr
+// tcgetattr
+// tgetent
 
 int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;
+	char			*input;
 	t_mini			*minishell;
 	t_mini_tools	*mini_tools;
 

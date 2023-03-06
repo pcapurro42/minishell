@@ -56,8 +56,8 @@ void	ft_execution(t_mini *minishell)
 	minishell->nb_cmd = i;
 	if (minishell->nb_cmd == 0)
 		return ;
-	if (minishell->nb_cmd == 1 && ft_exec_one_cmd(minishell) == 0)
-		return ;
+	//if (minishell->nb_cmd == 1 && ft_exec_one_cmd(minishell) == 0)
+	//	return ;
 	status_code = malloc(sizeof(*status_code) * minishell->nb_cmd);
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));
 	if (status_code == NULL || fd == NULL)
