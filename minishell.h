@@ -63,7 +63,9 @@ typedef struct s_nb
 // #-# MAIN #-# //
 
 char	*ft_get_name(void);
+
 void	ft_handle_signal(int signal);
+void	ft_clean_stdin(void);
 
 void	rl_replace_line(const char *text, int clear_undo);
 
@@ -76,6 +78,9 @@ void	ft_env_builtins(char **envp);
 void	ft_pwd_builtins(t_mini_tools *mini_tools);
 void	ft_export_builtins(char **cmd_arg, t_mini *minishell);
 void	ft_exit_builtins(t_cmd *cmd_struct);
+
+void	ft_unset_builtins(char **cmd_arg, t_mini *minishell);
+void	ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 
 // #-# EXECUTION #-# //
 
@@ -136,6 +141,9 @@ char	*ft_substitute_str(char *str);
 // SYNTAX CHECKERS //
 
 char	**ft_check_variables(char **str, t_mini *minishell);
+char	*ft_get_variable(char *variable, t_mini *minishell);
+char	*ft_replace(char *input, t_mini *minishell);
+int		ft_what_should_be_done(char *input);
 
 int		ft_syntax_checker(char **str);
 int		ft_pipe_checker(char **str);

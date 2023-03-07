@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static int	ft_what_should_be_done(char *input)
+int	ft_what_should_be_done(char *input)
 {
 	int		i;
 	int		dquote;
@@ -38,7 +38,7 @@ static int	ft_what_should_be_done(char *input)
 	return (0);
 }
 
-static char	*ft_get_variable(char *variable, t_mini *minishell)
+char	*ft_get_variable(char *variable, t_mini *minishell)
 {
 	int		i;
 	int		j;
@@ -78,7 +78,7 @@ static char	*ft_get_variable(char *variable, t_mini *minishell)
 	return (str);
 }
 
-static char	*ft_replace(char *input, t_mini *minishell)
+char	*ft_replace(char *input, t_mini *minishell)
 {
 	int		i;
 	char	*str;

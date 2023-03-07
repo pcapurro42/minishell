@@ -43,7 +43,7 @@ char	*ft_get_name(void)
 	return (name);
 }
 
-static void	ft_clean_stdin(void)
+void	ft_clean_stdin(void)
 {
 	struct termios idk;
 
@@ -51,9 +51,6 @@ static void	ft_clean_stdin(void)
 	idk.c_lflag &= ~ECHOCTL;									// = efface le flag 'ECHO' dans idk.c_lflag
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);				// = applique la config modifiée
 }
-
-// tcgetattr = fonction permettant de récupérer la config du terminal
-// tcsetattr = fonction permettant d'appliquer la config mise en argument
 
 // '&=' : opérateur binaire combinant && et =
 // '~' : opérateur binaire de négation (= inverse chaque bit de ECHO)
