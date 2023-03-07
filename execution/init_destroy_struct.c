@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/05 18:01:28 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:28:40 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	ft_destroy_mini(t_mini *minishell)
 	}
 }
 
-t_mini_tools	*ft_init_mini_tools(char *envp[])
+t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv)
 {
 	t_mini_tools	*mini_tools;
 
 	mini_tools = malloc(sizeof(*mini_tools));
-	mini_tools->envp = ft_cpy_envp(envp);
+	mini_tools->envp = ft_cpy_envp(envp, argv);
 	mini_tools->pwd = ft_get_pwd(mini_tools->envp);
 	mini_tools->old_pwd = ft_strdup(mini_tools->pwd);
 	mini_tools->g_last_return_code = 0;

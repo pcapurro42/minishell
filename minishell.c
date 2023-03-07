@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/07 11:08:28 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:22:39 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,8 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini_tools	*mini_tools;
 
 	(void) argc;
-	(void) argv;
 	name = ft_get_name();
-	mini_tools = ft_init_mini_tools(envp);
+	mini_tools = ft_init_mini_tools(envp, argv);
 	input = NULL;
 	global_pid = -1;
 	signal(SIGINT, ft_handle_signal);

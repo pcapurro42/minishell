@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:43:59 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/03 17:10:30 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:30:31 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,13 @@ char	*ft_get_pwd(char **envp)
 	char	*pwd;
 
 	i = 0;
-	if (!envp)
-		return (getenv("PWD"));
 	while (envp[i])
 	{
 		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
 			break ;
 		i++;
 	}
-	if (!(envp[i]))
-		return (getenv("PWD"));
 	pwd = ft_strdup(&(envp[i][4]));
-	if (pwd == NULL)
-		return (getenv("PWD"));
+	ft_check_malloc(pwd);
 	return (pwd);
 }

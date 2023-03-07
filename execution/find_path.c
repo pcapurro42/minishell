@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:52:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/27 11:11:33 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:42:29 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ static char	**ft_no_env(void)
 {
 	char	**cmd_path_lst;
 
-	cmd_path_lst = malloc(2 * sizeof(*cmd_path_lst));
+	cmd_path_lst = malloc(6 * sizeof(*cmd_path_lst));
 	if (cmd_path_lst == NULL)
 		ft_error();
-	cmd_path_lst[0] = "/usr/bin/";
-	cmd_path_lst[1] = NULL;
+	cmd_path_lst[0] = ft_strdup("/usr/gnu/bin/");
+	cmd_path_lst[1] = ft_strdup("/usr/local/bin/");
+	cmd_path_lst[2] = ft_strdup("/bin/");
+	cmd_path_lst[3] = ft_strdup("/usr/bin/");
+	cmd_path_lst[4] = ft_strdup("./");
+	cmd_path_lst[5] = NULL;
 	return (cmd_path_lst);
 }
 
