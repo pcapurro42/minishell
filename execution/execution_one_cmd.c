@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/06 14:04:03 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:59:03 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_cmd	*ft_exec_one_cmd(t_mini *minishell)
 	
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, 0);
-	if (!cmd_struct->cmd_arg || ft_is_builtins(cmd_struct) == 1)
+	if (!cmd_struct->cmd_arg || cmd_struct->infile_fd == -2 || \
+	cmd_struct->outfile_fd == -2|| ft_is_builtins(cmd_struct) == 1)
 		return (cmd_struct);
 	old_stdin = dup(0);
 	old_stdout = dup(1);

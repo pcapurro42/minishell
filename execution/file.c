@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:59:38 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/06 18:36:24 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:16:52 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 	int		pid;
 	char	*gnl;
 
+	unlink("minishell_here_doc.tmp");
+	cmd_struct->infile_fd = open("minishell_here_doc.tmp", \
+	O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (cmd_struct->infile_fd < 0)
+		return ;
 	pid = fork();
 	if (pid < 0)
 		ft_error();
 	if (pid == 0)
 	{
-		cmd_struct->infile_fd = open("minishell_here_doc.tmp", \
-		O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (cmd_struct->infile_fd < 0)
-			ft_error();
 		write(1, "> ", 2);
 		gnl = get_next_line(0);
 		if (!gnl)
@@ -43,6 +44,7 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 		close(cmd_struct->infile_fd);
 		exit(0);
 	}
+	close(cmd_struct->infile_fd);
 	global_pid = pid;
 	waitpid(pid, NULL, 0);
 	global_pid = -1;

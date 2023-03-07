@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:38:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/05 20:02:50 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:28:56 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft_stick_chevrons(char *str)
 	return (strf);
 }
 
-static char	*ft_substitute_str(char *str)
+char	*ft_substitute_str(char *str)
 {
 	int		i;
 	int		dquote;

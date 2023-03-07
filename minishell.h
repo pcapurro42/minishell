@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/06 16:13:49 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:15:25 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_error_msg(char *msg);
 void	ft_error(void);
 void	ft_cmd_error(char **cmd);
 void	ft_check_malloc(void *str);
+void	ft_msg(char	*msg);
 
 void	ft_execution(t_mini *minishell);
 
@@ -130,6 +131,7 @@ char	*ft_stick_chevrons(char *str);
 char	**ft_repair_spaces_in_quotes(char **strf);
 
 char	**ft_remove_quotes(char **cmd_arg);
+char	*ft_substitute_str(char *str);
 
 // SYNTAX CHECKERS //
 

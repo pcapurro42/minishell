@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:19 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/02/28 20:54:55 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:02:29 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ void	ft_check_malloc(void *str)
 {
 	if (str == NULL)
 		ft_error();
+}
+
+void	ft_msg(char	*msg)
+{
+	char	*error_msg;
+
+	error_msg = ft_strjoin("minishell: ", msg);
+	ft_check_malloc(error_msg);
+	perror(error_msg);
+	unlink("minishell_here_doc.tmp");
 }
