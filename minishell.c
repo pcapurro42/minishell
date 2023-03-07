@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char *envp[])
 		input = readline(name);
 		if (input == NULL)
 		{
-			g_pid = -2;
+			ft_putstr_fd("exit\n", 1);
 			exit(0);
 		}
 		add_history(input);
