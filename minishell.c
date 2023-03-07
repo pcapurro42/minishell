@@ -62,8 +62,12 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		if (g_pid != -1)
+		if (g_pid != -2147483648)
 		{
+			if (g_pid < 0)
+				g_pid = g_pid * (-1);
+			else
+				ft_putstr_fd("^C\n", 1);
 			kill(g_pid, SIGKILL);
 			ft_putstr_fd("", 1);
 			rl_on_new_line();
@@ -90,13 +94,13 @@ int	main(int argc, char **argv, char *envp[])
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp, argv);
 	input = NULL;
-	g_pid = -1;
+	g_pid = -2147483648;
 	ft_clean_stdin();
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
-		g_pid = -1;
+		g_pid = -2147483648;
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
