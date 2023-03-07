@@ -46,15 +46,10 @@ char	*ft_get_name(void)
 static void	ft_clean_stdin(void)
 {
 	struct termios idk;
-	struct termios backup;
-
-	tcgetattr(STDIN_FILENO, &backup);						// = sauvegarde la config initiale du terminal (avant de la modifier)
 
 	tcgetattr(STDIN_FILENO, &idk);							// = récupère la config du terminal
-	idk.c_lflag &= ~ECHO;									// = efface le flag 'ECHO' dans idk.c_lflag
+	idk.c_lflag &= ~ECHOCTL;									// = efface le flag 'ECHO' dans idk.c_lflag
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);				// = applique la config modifiée
-
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &backup);			// = restaure la config originale
 }
 
 // tcgetattr = fonction permettant de récupérer la config du terminal
@@ -65,12 +60,11 @@ static void	ft_clean_stdin(void)
 
 void	ft_handle_signal(int signal)
 {
-	ft_clean_stdin();
 	if (signal == SIGINT)
 	{
-		if (global_pid != -1)
+		if (g_pid != -1)
 		{
-			kill(global_pid, SIGKILL);
+			kill(g_pid, SIGKILL);
 			ft_putstr_fd("", 1);
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -85,10 +79,6 @@ void	ft_handle_signal(int signal)
 	}
 }
 
-// tcsetattr
-// tcgetattr
-// tgetent
-
 int	main(int argc, char **argv, char *envp[])
 {
 	char			*name;
@@ -100,19 +90,20 @@ int	main(int argc, char **argv, char *envp[])
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp, argv);
 	input = NULL;
-	global_pid = -1;
+	g_pid = -1;
+	ft_clean_stdin();
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
-		global_pid = -1;
+		g_pid = -1;
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
 		input = readline(name);
 		if (input == NULL)
 		{
-			global_pid = -2;
+			g_pid = -2;
 			exit(0);
 		}
 		add_history(input);

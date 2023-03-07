@@ -45,9 +45,9 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 		exit(0);
 	}
 	close(cmd_struct->infile_fd);
-	global_pid = pid;
+	g_pid = pid;
 	waitpid(pid, NULL, 0);
-	global_pid = -1;
+	g_pid = -1;
 	cmd_struct->infile_fd = open("minishell_here_doc.tmp", O_RDONLY);
 	return ;
 }

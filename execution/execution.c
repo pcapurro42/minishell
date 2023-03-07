@@ -41,7 +41,7 @@ static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell, t_cmd *cmd_struct)
 			else
 				ft_child(fd, i, minishell);
 		}
-		global_pid = pid[i];
+		g_pid = pid[i];
 		if (i > 0)
 			ft_pipex_close_files(fd, i);
 		i++;
@@ -82,7 +82,7 @@ void	ft_execution(t_mini *minishell)
 		waitpid(pid[i], &(status_code[i]), 0);
 		i++;
 	}
-	global_pid = -1;
+	g_pid = -1;
 	minishell->mini_tools->main_pid = -1;
 	unlink("minishell_here_doc.tmp");
 	minishell->mini_tools->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
