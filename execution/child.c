@@ -73,9 +73,9 @@ static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 		ft_export_builtins(cmd_struct->cmd_arg, minishell);
 		exit(0);
 	}
-	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 5) == 0)
+	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
 	{
-		ft_unset_builtins(cmd_struct->cmd_arg, minishell);
+		ft_unset_builtins(minishell, cmd_struct->cmd_arg);
 		exit(0);
 	}
 	if (ft_strncmp("cd", cmd_struct->cmd_arg[0], 3) == 0)

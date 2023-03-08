@@ -41,6 +41,8 @@ static void	ft_check_builtins_one_cmd(t_mini *minishell, t_cmd *cmd_struct)
 		ft_pwd_builtins(minishell->mini_tools);
 	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
 		ft_export_builtins(cmd_struct->cmd_arg, minishell);
+	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
+		ft_unset_builtins(minishell, cmd_struct->cmd_arg);
 	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
 		ft_exit_builtins(cmd_struct);
 	minishell->mini_tools->g_last_return_code = 0;
@@ -56,6 +58,8 @@ static int	ft_is_builtins(t_cmd *cmd_struct)
 		return (0);
 	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
 		return (0);
+	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
+		return (0);
 	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
 		return (0);
 	return (1);
@@ -66,7 +70,7 @@ t_cmd	*ft_exec_one_cmd(t_mini *minishell)
 	t_cmd	*cmd_struct;
 	int		old_stdin;
 	int		old_stdout;
-	
+
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, 0);
 	if (!cmd_struct->cmd_arg || cmd_struct->infile_fd == -2 || \

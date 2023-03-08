@@ -79,7 +79,7 @@ void	ft_pwd_builtins(t_mini_tools *mini_tools);
 void	ft_export_builtins(char **cmd_arg, t_mini *minishell);
 void	ft_exit_builtins(t_cmd *cmd_struct);
 
-void	ft_unset_builtins(char **cmd_arg, t_mini *minishell);
+void	ft_unset_builtins(t_mini *minishell, char **cmd_arg);
 void	ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 
 // #-# EXECUTION #-# //
