@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:27:46 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/07 18:14:27 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:48:15 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ static void	ft_check_env(char ***envp, int envp_len, char **argv)
 	char	**new_envp;
 	int		nb_missing_lines;
 	int		i;
-
+	
 	nb_missing_lines = ft_find_line_env(*envp, "PWD=") + \
 	ft_find_line_env(*envp, "SHLVL=") + ft_find_line_env(*envp, "_=");
 	if (nb_missing_lines != 0)
