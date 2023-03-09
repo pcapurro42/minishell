@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/08 20:13:35 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:31:19 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ void	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	char	**new_envp;
 	int		envp_len;
 	int		nb_export;
+	int		i;
 
 	nb_export = 0;
-	while (cmd_arg[nb_export + 1])
-		nb_export++;
+	i = 0;
+	while (cmd_arg[i + 1])
+	{
+		if (ft_verify_characters(cmd_arg[i + 1]))
+			nb_export++;
+		i++;
+	}
 	if (nb_export == 0)
 		return(ft_export_no_arg_builtins(minishell->mini_tools->envp));
 	envp_len = 0;
