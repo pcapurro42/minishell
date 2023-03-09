@@ -16,5 +16,15 @@ void	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 {
 	(void) cmd_arg;
 	(void) minishell;
+
 	printf("C'est pour bientôt...\n");
 }
+
+// FONCTIONS À UTILISER :
+// - access (!)
+// => F_OK, R_OK
+// - chdir (!)
+// - getcwd (?)
+// - opendir (?)
+// - readdir (?)
+// - closedir (?)

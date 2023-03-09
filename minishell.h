@@ -64,7 +64,7 @@ typedef struct s_nb
 
 char	*ft_get_name(void);
 
-void	ft_handle_signal(int signal);
+// void	ft_handle_signal(int signal);
 void	ft_clean_stdin(void);
 
 void	rl_replace_line(const char *text, int clear_undo);
@@ -123,7 +123,7 @@ char			**ft_cpy_envp(char *envp[], char **argv);
 
 // #-# PARSING #-# //
 
-void	*ft_analyze_input(char *input, t_mini *minishell);
+int		ft_analyze_input(char *input, t_mini *minishell);
 char	***ft_share_off(char **str);
 
 // CLEANERS //

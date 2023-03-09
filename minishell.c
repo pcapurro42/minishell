@@ -109,7 +109,8 @@ int	main(int argc, char **argv, char *envp[])
 		}
 		add_history(input);
 		if (input[0] != '\0')
-			ft_analyze_input(input, minishell);
+			if (ft_analyze_input(input, minishell) == 1)
+				minishell->mini_tools->g_last_return_code = 258;
 	}
 	return (0);
 }

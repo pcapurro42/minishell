@@ -87,5 +87,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		j = 0;
 		i++;
 	}
+	if (cmd_arg[i] != NULL && ft_verify(cmd_arg[i]) != 0)
+		minishell->mini_tools->g_last_return_code = 1;
 	minishell->mini_tools->envp = ft_clean_env(minishell->mini_tools->envp);
 }
