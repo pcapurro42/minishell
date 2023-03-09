@@ -12,20 +12,33 @@
 
 #include "../minishell.h"
 
+int	ft_verify_errors(char *str)
+{
+	int	i;
+
+	i = 0;
+	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*') && str[1] == '\0')
+		return (1);
+	while (str[i] != '\0')
+	{
+		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_verify_characters(char *str)
 {
 	int	i;
 
 	i = 0;
+	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*') && str[1] == '\0')
+		return (1);
 	while (str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0)
-		{
-			if (str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*')
-				return (1);
-			else
-				return (printf("minishell: unset: '%c': not a valid identifier!\n", str[i]));
-		}
+		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
+			return (printf("minishell: unset: '%c': not a valid identifier!\n", str[i]));
 		i++;
 	}
 	return (0);
@@ -87,7 +100,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		j = 0;
 		i++;
 	}
-	if (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) != 0)
-		minishell->mini_tools->g_last_return_code = 1;
+	if (cmd_arg[i] != NULL && ft_verify_errors(cmd_arg[i]) != 0)
+		g_global->g_last_return_code = 1;
 	minishell->mini_tools->envp = ft_clean_env(minishell->mini_tools->envp);
 }

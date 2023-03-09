@@ -25,7 +25,7 @@ static void	ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	{
 		ft_msg(infile);
 		cmd_struct->infile_fd = -2;
-		minishell->mini_tools->g_last_return_code = 1;
+		g_global->g_last_return_code = 1;
 	}
 	free(infile);
 	nb->j += 2;
@@ -44,7 +44,7 @@ static void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	{
 		ft_msg(outfile);
 		cmd_struct->outfile_fd = -2;
-		minishell->mini_tools->g_last_return_code = 1;
+		g_global->g_last_return_code = 1;
 	}
 	free(outfile);
 	nb->j += 2;
@@ -63,7 +63,7 @@ static void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	{
 		ft_msg("here_doc");
 		cmd_struct->infile_fd = -2;
-		minishell->mini_tools->g_last_return_code = 1;
+		g_global->g_last_return_code = 1;
 	}
 	free(limiter);
 	nb->j += 2;
@@ -82,7 +82,7 @@ static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	{
 		ft_msg(outfile);
 		cmd_struct->outfile_fd = -2;
-		minishell->mini_tools->g_last_return_code = 1;
+		g_global->g_last_return_code = 1;
 	}
 	free(outfile);
 	nb->j += 2;

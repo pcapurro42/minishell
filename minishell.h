@@ -26,7 +26,11 @@
 # include <signal.h>
 # include <termios.h>
 
-int	g_pid;
+typedef struct s_global
+{
+	int	g_pid;
+	int	g_last_return_code;
+}	t_global;
 
 typedef struct s_cmd
 {
@@ -41,7 +45,6 @@ typedef	struct s_mini_tools
 	char	*pwd;
 	char	*old_pwd;
 	char	**envp;
-	int		g_last_return_code;
 }	t_mini_tools;
 
 typedef struct s_mini
@@ -58,6 +61,8 @@ typedef struct s_nb
 	int	len_cmd_arg;
 	int	id_str_to_add;
 }	t_nb;
+
+t_global	*g_global;
 
 // #-# MAIN #-# //
 

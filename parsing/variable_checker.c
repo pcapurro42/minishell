@@ -48,7 +48,7 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 	i = 0;
 	j = 0;
 	if (variable[0] == '?' && variable[1] == '\0')
-		return (ft_itoa(minishell->mini_tools->g_last_return_code));
+		return (ft_itoa(g_global->g_last_return_code));
 	temp = ft_strdup("");
 	variable = ft_strjoin(variable, "=");
 	while (minishell->mini_tools->envp[i] != NULL)

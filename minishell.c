@@ -59,13 +59,19 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		if (g_pid != -2147483648)
+		if (g_global->g_pid != -2147483648)
 		{
-			if (g_pid < 0)
-				g_pid = g_pid * (-1);
+			if (g_global->g_pid < 0)
+			{
+				g_global->g_pid = g_global->g_pid * (-1);
+				g_global->g_last_return_code = 1;
+			}
 			else
+			{
 				ft_putstr_fd("^C\n", 1);
-			kill(g_pid, SIGKILL);
+				g_global->g_last_return_code = 130;
+			}
+			kill(g_global->g_pid, SIGKILL);
 			ft_putstr_fd("", 1);
 			rl_on_new_line();
 			rl_replace_line("", 0);
@@ -76,6 +82,7 @@ void	ft_handle_signal(int signal)
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
+			g_global->g_last_return_code = 1;
 		}
 	}
 }
@@ -88,16 +95,19 @@ int	main(int argc, char **argv, char *envp[])
 	t_mini_tools	*mini_tools;
 
 	(void) argc;
+	g_global = malloc(sizeof(*g_global));
+	ft_check_malloc(g_global);
+	g_global->g_pid = -2147483648;
+	g_global->g_last_return_code = 0;
 	name = ft_get_name();
 	mini_tools = ft_init_mini_tools(envp, argv);
 	input = NULL;
-	g_pid = -2147483648;
 	ft_clean_stdin();
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
 	while (6)
 	{
-		g_pid = -2147483648;
+		g_global->g_pid = -2147483648;
 		minishell = ft_init_mini(mini_tools);
 		if (input)
 			free(input);
@@ -110,7 +120,7 @@ int	main(int argc, char **argv, char *envp[])
 		add_history(input);
 		if (input[0] != '\0')
 			if (ft_analyze_input(input, minishell) == 1)
-				minishell->mini_tools->g_last_return_code = 258;
+				g_global->g_last_return_code = 258;
 	}
 	return (0);
 }
