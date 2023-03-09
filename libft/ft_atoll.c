@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:59:52 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/09 18:59:53 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:16:50 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atol(const char *s)
-{
-	int			i;
-	long int	result;
-	int			sign;
+#include "libft.h"
 
-	i = 0;
-	result = 0;
-	sign = 1;
-	while ((s[i] >= 9) && ((s[i] <= 13) || s[i] == 32))
-		i++;
-	if (s[i] == 45 || s[i] == 43)
+long long int	ft_atoll(const char *str)
+{
+	long long int	nb;
+	int	is_pos;
+
+	nb = 0;
+	is_pos = 1;
+	while ((*str == 32) || ((9 <= *str) && (*str <= 13)))
+		str++;
+	if ((*str == '+') || (*str == '-'))
 	{
-		if (s[i] == '-')
-			sign = sign * (-1);
-		i++;
+		if (*str == '-')
+			is_pos = -1;
+		str++;
 	}
-	while (s[i] >= 48 && s[i] <= 57)
+	while (ft_isdigit(*str))
 	{
-		result = (result * 10) + (s[i] - 48);
-		i++;
+		nb += ((int) *str) - 48;
+		if (ft_isdigit(str[1]))
+			nb *= 10;
+		str++;
 	}
-	return (result);
+	return (nb * is_pos);
 }

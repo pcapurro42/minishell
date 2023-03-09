@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:19:16 by vdelafos          #+#    #+#             */
-/*   Updated: 2022/12/16 08:17:38 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:04:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*ft_char_to_str(char c);
 int		ft_dstrlen(char **str);
 int		ft_tstrlen(char ***str);
 void	pls_free(char **str);
-int		ft_atol(const char *s);
+
+long long int		ft_atoll(const char *s);
 
 #endif

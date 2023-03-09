@@ -6,7 +6,7 @@
 #    By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 22:30:59 by vdelafos          #+#    #+#              #
-#    Updated: 2023/02/20 11:16:47 by pcapurro         ###   ########.fr        #
+#    Updated: 2023/03/09 19:04:45 by vdelafos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ SRCS	=	ft_isalpha.c \
 			ft_dstrlen.c \
 			ft_tstrlen.c \
 			ft_char_to_str.c \
-			ft_atol.c \
+			ft_atoll.c \
 
 
 OBJS	=	$(SRCS:.c=.o)
