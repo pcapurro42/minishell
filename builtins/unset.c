@@ -31,10 +31,10 @@ int	ft_verify(char *str)
 	return (0);
 }
 
-// # et & = ne rien faire
-// _ = ne rien faire
-// * = ne rien faire
-// TOUT LE RESTE QUI N'EST PAS UNE LETTRE = message d'erreur
+// # et & = ne rien faire (= mais ne pas mettre de message d'erreur)
+// _ = ne rien faire (= mais ne pas mettre de message d'erreur)
+// * = ne rien faire (= mais ne pas mettre de message d'erreur)
+// TOUT LE RESTE QUI N'EST PAS UNE LETTRE OU UN CHIFFRE = message d'erreur
 
 
 char	**ft_clean_env(char **envp)
