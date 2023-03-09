@@ -42,7 +42,6 @@ typedef	struct s_mini_tools
 	char	*old_pwd;
 	char	**envp;
 	int		g_last_return_code;
-	int		main_pid;
 }	t_mini_tools;
 
 typedef struct s_mini

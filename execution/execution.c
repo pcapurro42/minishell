@@ -83,7 +83,6 @@ void	ft_execution(t_mini *minishell)
 		i++;
 	}
 	g_pid = -2147483648;
-	minishell->mini_tools->main_pid = -1;
 	unlink("minishell_here_doc.tmp");
 	minishell->mini_tools->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
 }
