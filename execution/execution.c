@@ -82,7 +82,10 @@ void	ft_execution(t_mini *minishell)
 		waitpid(pid[i], &(status_code[i]), 0);
 		i++;
 	}
-	g_global->g_pid = -2147483648;
 	unlink("minishell_here_doc.tmp");
-	g_global->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
+	if (g_global->g_last_return_code >= 0)
+		g_global->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
+	else
+		g_global->g_last_return_code = g_global->g_last_return_code * (-1);
+	g_global->g_pid = -2147483648;
 }

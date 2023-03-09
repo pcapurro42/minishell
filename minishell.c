@@ -64,12 +64,12 @@ void	ft_handle_signal(int signal)
 			if (g_global->g_pid < 0)
 			{
 				g_global->g_pid = g_global->g_pid * (-1);
-				g_global->g_last_return_code = 1;
+				g_global->g_last_return_code = -1;
 			}
 			else
 			{
 				ft_putstr_fd("^C\n", 1);
-				g_global->g_last_return_code = 130;
+				g_global->g_last_return_code = -130;
 			}
 			kill(g_global->g_pid, SIGKILL);
 			ft_putstr_fd("", 1);
