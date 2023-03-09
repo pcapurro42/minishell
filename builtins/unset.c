@@ -19,7 +19,7 @@ int	ft_verify(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) == 0)
+		if (ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0)
 		{
 			if (str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*')
 				return (1);
