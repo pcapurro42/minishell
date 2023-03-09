@@ -63,8 +63,9 @@ typedef struct s_nb
 // #-# MAIN #-# //
 
 char	*ft_get_name(void);
+int		ft_verify_characters(char *str);
 
-// void	ft_handle_signal(int signal);
+void	ft_handle_signal(int signal);
 void	ft_clean_stdin(void);
 
 void	rl_replace_line(const char *text, int clear_undo);

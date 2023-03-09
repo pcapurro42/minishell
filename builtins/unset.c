@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_verify(char *str)
+int	ft_verify_characters(char *str)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	ft_verify(char *str)
 // TOUT LE RESTE QUI N'EST PAS UNE LETTRE OU UN CHIFFRE = message d'erreur
 
 
-char	**ft_clean_env(char **envp)
+static char	**ft_clean_env(char **envp)
 {
 	int		i;
 	int		k;
@@ -72,7 +72,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 
 	i = 1;
 	j = 0;
-	while (cmd_arg[i] != NULL && ft_verify(cmd_arg[i]) == 0)
+	while (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) == 0)
 	{
 		cmd_arg[i] = ft_strjoin(cmd_arg[i], "=");
 		while (minishell->mini_tools->envp[j] != NULL)
@@ -87,7 +87,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		j = 0;
 		i++;
 	}
-	if (cmd_arg[i] != NULL && ft_verify(cmd_arg[i]) != 0)
+	if (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) != 0)
 		minishell->mini_tools->g_last_return_code = 1;
 	minishell->mini_tools->envp = ft_clean_env(minishell->mini_tools->envp);
 }

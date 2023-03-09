@@ -47,9 +47,9 @@ void	ft_clean_stdin(void)
 {
 	struct termios idk;
 
-	tcgetattr(STDIN_FILENO, &idk);							// = récupère la config du terminal
-	idk.c_lflag &= ~ECHOCTL;									// = efface le flag 'ECHO' dans idk.c_lflag
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);				// = applique la config modifiée
+	tcgetattr(STDIN_FILENO, &idk);
+	idk.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);
 }
 
 // '&=' : opérateur binaire combinant && et =
