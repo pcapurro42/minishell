@@ -38,7 +38,7 @@ int	ft_verify_characters(char *str)
 	while (str[i] != '\0')
 	{
 		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
-			return (printf("minishell: unset: '%c': not a valid identifier!\n", str[i]));
+			return (printf("minishell: unset: '%c': not a valid identifier\n", str[i]));
 		i++;
 	}
 	return (0);

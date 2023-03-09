@@ -44,7 +44,7 @@ int	ft_quote_checker(char *str)
 		i++;
 	}
 	if (count % 2 != 0)
-		return (printf("Syntax error! Quotes are not closed.\n"));
+		return (printf("minishell: syntax error for unclosed quotes\n"));
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int	ft_pipe_checker(char **str)
 				|| str[i - 1][0] == '|' || str[i + 1][0] == '|')
 				// || str[i - 1][0] == '>' || str[i - 1][0] == '<'
 				// || str[i + 1][0] == '>' || str[i + 1][0] == '<')
-				return (printf("Syntax error! Unexpected pipe.\n"));
+				return (printf("minishell: syntax error near unexpected token '|'\n"));
 		}
 		i++;
 	}
@@ -78,16 +78,16 @@ int	ft_chevron_checker(char **str)
 		if (str[i][0] == '<' || str[i][0] == '>')
 		{
 			if (i == ft_dstrlen(str) - 1)
-				return (printf("Syntax error! Unexpected chevron.\n"));
+				return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
 			if (i != 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>'
 					|| str[i - 1][0] == '<' || str[i - 1][0] == '>')
-					return (printf("Syntax error! Unexpected chevron.\n"));
+					return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
-					return (printf("Syntax error! Unexpected chevron.\n"));
+					return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
 			if (ft_strlen(str[i]) >= 3)
-				return (printf("Syntax error! Unexpected chevron.\n"));
+				return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
 		}
 		i++;
 	}
