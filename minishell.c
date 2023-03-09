@@ -85,6 +85,8 @@ void	ft_handle_signal(int signal)
 			g_global->g_last_return_code = 1;
 		}
 	}
+	else
+		rl_redisplay();
 }
 
 int	main(int argc, char **argv, char *envp[])
