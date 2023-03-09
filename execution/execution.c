@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/07 10:51:45 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:57:14 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,11 @@ void	ft_execution(t_mini *minishell)
 	if (minishell->nb_cmd == 1)
 	{
 		cmd_struct = ft_exec_one_cmd(minishell);
-		if (cmd_struct == NULL)
+		if (cmd_struct->infile_fd == -2 || cmd_struct->outfile_fd == -2)
+		{
+			ft_destroy_cmd(cmd_struct);
 			return ;
+		}
 	}
 	else
 		cmd_struct = NULL;
