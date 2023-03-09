@@ -20,11 +20,22 @@ int	ft_verify(char *str)
 	while (str[i] != '\0')
 	{
 		if (ft_isalpha(str[i]) == 0)
-			return (printf("minishell: unset: '%c': not a valid identifier!\n", str[i]));
+		{
+			if (str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*')
+				return (1);
+			else
+				return (printf("minishell: unset: '%c': not a valid identifier!\n", str[i]));
+		}
 		i++;
 	}
 	return (0);
 }
+
+// # et & = ne rien faire
+// _ = ne rien faire
+// * = ne rien faire
+// TOUT LE RESTE QUI N'EST PAS UNE LETTRE = message d'erreur
+
 
 char	**ft_clean_env(char **envp)
 {
@@ -63,6 +74,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 	j = 0;
 	while (cmd_arg[i] != NULL && ft_verify(cmd_arg[i]) == 0)
 	{
+		cmd_arg[i] = ft_strjoin(cmd_arg[i], "=");
 		while (minishell->mini_tools->envp[j] != NULL)
 		{
 			if (ft_strncmp(cmd_arg[i], minishell->mini_tools->envp[j], ft_strlen(cmd_arg[i])) == 0)
