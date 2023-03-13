@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/07 17:07:03 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:25:51 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ void	rl_replace_line(const char *text, int clear_undo);
 
 char	*ft_get_pwd(char **envp);
 
-void	ft_echo_builtins(char **cmd_lst);
-void	ft_env_builtins(char **envp);
-void	ft_pwd_builtins(t_mini_tools *mini_tools);
-void	ft_export_builtins(char **cmd_arg, t_mini *minishell);
+int		ft_echo_builtins(char **cmd_lst);
+int		ft_env_builtins(char **envp);
+int		ft_pwd_builtins(t_mini_tools *mini_tools);
+int		ft_export_builtins(char **cmd_arg, t_mini *minishell);
 void	ft_exit_builtins(t_cmd *cmd_struct);
 
-void	ft_unset_builtins(t_mini *minishell, char **cmd_arg);
-void	ft_cd_builtins(char **cmd_arg, t_mini *minishell);
+int		ft_unset_builtins(t_mini *minishell, char **cmd_arg);
+int		ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 
 // #-# EXECUTION #-# //
 

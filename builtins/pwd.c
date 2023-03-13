@@ -6,16 +6,17 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:43:59 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/07 17:30:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:21:47 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd_builtins(t_mini_tools *mini_tools)
+int	ft_pwd_builtins(t_mini_tools *mini_tools)
 {
 	ft_putstr_fd(mini_tools->pwd, 1);
 	ft_putchar_fd('\n', 1);
+	return (0);
 }
 
 char	*ft_get_pwd(char **envp)

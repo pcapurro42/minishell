@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 20:31:47 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/07 20:31:47 by pcapurro         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:25:34 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_verify_characters(char *str)
 	while (str[i] != '\0')
 	{
 		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
-			return (printf("minishell: unset: '%c': not a valid identifier\n", str[i]));
+			return (printf("minishell: unset: '%s': not a valid identifier\n", str));
 		i++;
 	}
 	return (0);
@@ -78,11 +78,13 @@ static char	**ft_clean_env(char **envp)
 	return (new_envp);
 }
 
-void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
+int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 {
 	int		i;
 	int		j;
+	int		return_code;
 
+	return_code = 0;
 	i = 1;
 	j = 0;
 	while (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) == 0)
@@ -101,6 +103,7 @@ void	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		i++;
 	}
 	if (cmd_arg[i] != NULL && ft_verify_errors(cmd_arg[i]) != 0)
-		g_global->g_last_return_code = 1;
+		return_code = 1;
 	minishell->mini_tools->envp = ft_clean_env(minishell->mini_tools->envp);
+	return (return_code);
 }

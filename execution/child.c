@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/09 18:42:22 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:27:31 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,17 @@ static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 {
 	unlink("minishell_here_doc.tmp");
 	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
-	{
-		ft_echo_builtins(cmd_struct->cmd_arg);
-		exit(0);
-	}
+		exit(ft_echo_builtins(cmd_struct->cmd_arg));
 	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
-	{
-		ft_env_builtins(minishell->mini_tools->envp);
-		exit(0);
-	}
+		exit(ft_env_builtins(minishell->mini_tools->envp));
 	if (ft_strncmp("pwd", cmd_struct->cmd_arg[0], 4) == 0)
-	{
-		ft_pwd_builtins(minishell->mini_tools);
-		exit(0);
-	}
+		exit(ft_pwd_builtins(minishell->mini_tools));
 	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
-	{
-		ft_export_builtins(cmd_struct->cmd_arg, minishell);
-		exit(0);
-	}
+		exit(ft_export_builtins(cmd_struct->cmd_arg, minishell));
 	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
-	{
-		ft_unset_builtins(minishell, cmd_struct->cmd_arg);
-		exit(0);
-	}
+		exit(ft_unset_builtins(minishell, cmd_struct->cmd_arg));
 	if (ft_strncmp("cd", cmd_struct->cmd_arg[0], 3) == 0)
-	{
-		ft_cd_builtins(cmd_struct->cmd_arg, minishell);
-		exit(0);
-	}
+		exit(ft_cd_builtins(cmd_struct->cmd_arg, minishell));
 	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
 		ft_exit_builtins(cmd_struct);
 }

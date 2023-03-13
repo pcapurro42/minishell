@@ -6,13 +6,13 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:55:20 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/02 18:56:37 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:22:41 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_echo_builtins(char **cmd_lst)
+int	ft_echo_builtins(char **cmd_lst)
 {
 	int	i;
 	int	j;
@@ -39,4 +39,5 @@ void	ft_echo_builtins(char **cmd_lst)
 	}
 	if (final_line_break == 0)
 		ft_putstr_fd("\n", 1);
+	return (0);
 }

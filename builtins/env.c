@@ -6,18 +6,18 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:36:51 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/08 20:04:02 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/13 04:22:21 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_env_builtins(char **envp)
+int	ft_env_builtins(char **envp)
 {
 	int i;
 	
 	if (envp == NULL)
-		return ;
+		return (0);
 	i = 0;
 	while (envp[i])
 	{
@@ -28,5 +28,5 @@ void	ft_env_builtins(char **envp)
 		}
 		i++;
 	}
-	return ;
+	return (0);
 }
