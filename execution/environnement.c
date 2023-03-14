@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:27:46 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/07 18:48:15 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:39:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,4 +168,23 @@ char	**ft_cpy_envp(char *envp[], char **argv)
 	ft_check_env(&envp_cpy, envp_len, argv);
 	ft_increase_shlvl(envp_cpy);
 	return (envp_cpy);
+}
+
+char	*ft_get_home(char **envp)
+{
+	int		i;
+	char	*home;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "HOME=", 5) == 0)
+			break ;
+		i++;
+	}
+	if (envp[i] == NULL)
+		return (NULL);
+	home = ft_strdup(&(envp[i][5]));
+	ft_check_malloc(home);
+	return (home);
 }

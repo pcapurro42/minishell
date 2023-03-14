@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/13 04:25:51 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:41:31 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef	struct s_mini_tools
 {
 	char	*pwd;
 	char	*old_pwd;
+	char	*home_directory;
 	char	**envp;
 }	t_mini_tools;
 
@@ -127,6 +128,8 @@ t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv);
 void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
 char			**ft_cpy_envp(char *envp[], char **argv);
+
+char			*ft_get_home(char **envp);
 
 // #-# PARSING #-# //
 
