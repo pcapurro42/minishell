@@ -193,7 +193,7 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	int		i;
 	char	*path;
 
-	if (str == NULL || str[0] == '~')
+	if (str == NULL)
 	{
 		path = ft_get_variable_again(minishell, 1);
 		if (path == NULL)
@@ -215,22 +215,6 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	{
 		if (ft_strlen(str) == 1)
 		{
-			// if (str[0] == '~')
-			// {
-			// 	path = ft_strdup(minishell->mini_tools->home_directory);
-			// 	i = chdir(path);
-			// 	if (access(path, F_OK) == -1)
-			// 		return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
-			// 	if (access(path, X_OK) == -1)
-			// 		return (printf("minishell: cd: %s/: Permission denied\n", arguments));
-			//  if (i != 0)
-			// 		return (printf("minishell: cd: an error occured\n"));
-			// 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-			// 	if (getcwd(NULL, 1) != NULL)
-			// 		ft_update_pwd(minishell, getcwd(NULL, 1));
-			// 	else
-			// 		return (printf("minishell: cd: an error occured\n"));
-			// }
 			if (str[0] == '-')
 			{
 				if (ft_get_variable_again(minishell, 3) == NULL)
@@ -283,7 +267,7 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *argu
 	i = 0;
 	while (cmd_arg[i] != NULL)
 	{
-		if (ft_is_operator(cmd_arg[i]) == 1)
+		if (ft_is_operator(cmd_arg[i]) == 1 && cmd_arg[i][0] != '~')
 			ft_handle_operator(minishell, cmd_arg[i], arguments);
 		else
 		{
@@ -309,24 +293,47 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *argu
 
 static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *arguments)
 {
-	int	i;
+	int		i;
+	char	*path;
 
-	i = chdir("/");
-	if (access("/", F_OK) == -1)
-		return (printf("minishell: cd: /: No such file or directory\n"));
-	if (access("/", X_OK) == -1)
-		return (printf("minishell: cd: /: Permission denied\n"));
-	if (i != 0)
-		return (printf("minishell: cd: an error occured\n"));
-	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-	if (getcwd(NULL, 1) != NULL)
-		ft_update_pwd(minishell, getcwd(NULL, 1));
+	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~')
+	{
+		path = ft_get_variable_again(minishell, 1);
+		if (path == NULL)
+			return (printf("minishell: cd: HOME not set\n"));
+		i = chdir(path);
+		if (access(path, F_OK) == -1)
+			return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
+		if (access(path, X_OK) == -1)
+			return (printf("minishell: cd: %s/: Permission denied\n", arguments));
+		if (i != 0)
+			return (printf("minishell: cd: an error occured\n"));
+		ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+		if (getcwd(NULL, 1) != NULL)
+			ft_update_pwd(minishell, getcwd(NULL, 1));
+		else
+			return (printf("minishell: cd: an error occured\n"));
+		ft_handle_relative_path(minishell, cmd_arg + 1, arguments);
+	}
 	else
-		return (printf("minishell: cd: an error occured\n"));
-	if (cmd_arg[0] == NULL)
-		return (0);
-	else
-		ft_handle_relative_path(minishell, cmd_arg, arguments);
+	{
+		i = chdir("/");
+		if (access("/", F_OK) == -1)
+			return (printf("minishell: cd: /: No such file or directory\n"));
+		if (access("/", X_OK) == -1)
+			return (printf("minishell: cd: /: Permission denied\n"));
+		if (i != 0)
+			return (printf("minishell: cd: an error occured\n"));
+		ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+		if (getcwd(NULL, 1) != NULL)
+			ft_update_pwd(minishell, getcwd(NULL, 1));
+		else
+			return (printf("minishell: cd: an error occured\n"));
+		if (cmd_arg[0] == NULL)
+			return (0);
+		else
+			ft_handle_relative_path(minishell, cmd_arg, arguments);
+	}
 	return (0);
 }
 
@@ -339,7 +346,7 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 	i = 0;
 	absolute = 0;
 	arguments = ft_first_clean(cmd_arg);
-	if (cmd_arg[1] != NULL && cmd_arg[1][0] == '/')
+	if ((cmd_arg[1] != NULL && cmd_arg[1][0] == '/') || (cmd_arg[1][0] == '~'))
 		absolute++;
 	if (cmd_arg[1] == NULL)
 		i = ft_handle_operator(minishell, cmd_arg[1], arguments);
@@ -371,3 +378,20 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 // - ".." (= recule de un)
 // - " " (= redirige sur $HOME)
 // - "~" (= redirige sur $HOME sans passer par $HOME)
+
+// if (str[0] == '~')
+// {
+// 	path = ft_strdup(minishell->mini_tools->home_directory);
+// 	i = chdir(path);
+// 	if (access(path, F_OK) == -1)
+// 		return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
+// 	if (access(path, X_OK) == -1)
+// 		return (printf("minishell: cd: %s/: Permission denied\n", arguments));
+//  if (i != 0)
+// 		return (printf("minishell: cd: an error occured\n"));
+// 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+// 	if (getcwd(NULL, 1) != NULL)
+// 		ft_update_pwd(minishell, getcwd(NULL, 1));
+// 	else
+// 		return (printf("minishell: cd: an error occured\n"));
+// }
