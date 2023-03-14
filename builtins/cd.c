@@ -193,7 +193,7 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	int		i;
 	char	*path;
 
-	if (str == NULL)
+	if (str == NULL) // cd " "
 	{
 		path = ft_get_variable_again(minishell, 1);
 		if (path == NULL)
@@ -296,7 +296,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 	int		i;
 	char	*path;
 
-	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~')
+	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~') // cd "~"
 	{
 		path = ft_get_variable_again(minishell, 1);
 		if (path == NULL)
@@ -315,7 +315,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 			return (printf("minishell: cd: an error occured\n"));
 		ft_handle_relative_path(minishell, cmd_arg + 1, arguments);
 	}
-	else
+	else // cd "/"
 	{
 		i = chdir("/");
 		if (access("/", F_OK) == -1)
