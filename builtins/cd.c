@@ -36,6 +36,23 @@ static char	*ft_last_clean(char *str)
 	return (strf);
 }
 
+static int	ft_verify_args(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '-')
+		{
+			if (i == 0 && str[i + 1] != '\0')
+				return (printf("minishell: cd: -: invalid option\n"));
+		}
+		i++;
+	}
+	return (0);
+}
+
 static char	**ft_fix_args(char **cmd_arg)
 {
 	int		i;
@@ -57,6 +74,8 @@ static char	**ft_fix_args(char **cmd_arg)
 		j = 0;
 	}
 	str = ft_last_clean(str);
+	if (ft_verify_args(str) != 0)
+		return (NULL);
 	return (ft_split(str, '/'));
 }
 
@@ -132,7 +151,6 @@ static int	ft_update_pwd(t_mini *minishell, char *path)
 			minishell->mini_tools->envp[i] = ft_strjoin(minishell->mini_tools->envp[i], path);
 			minishell->mini_tools->pwd = ft_strdup(path);
 			return (0);
-
 		}
 		i++;
 	}
@@ -176,19 +194,23 @@ static char	*ft_step_back(char *str)
 
 static int	ft_handle_operator(t_mini *minishell, char *str)
 {
-	char	*path;
 	int		i;
-	int		j;
+	char	*path;
 
-	j = 0;
+	i = 0;
+	path = NULL;
 	if (str == NULL || str[0] == '~')
 	{
 		path = ft_get_variable_again(minishell, 1);
 		if (path == NULL)
 			return (printf("minishell: cd: HOME not set\n"));
 		i = chdir(path);
+		if (access(path, F_OK) == -1)
+			return (printf("minishell: cd: /: No such file or directory\n"));
+		if (access(path, X_OK) == -1)
+			return (printf("minishell: cd: /: Permission denied\n"));
 		if (i != 0)
-			return (printf("minishell: cd: an error occured!\n"));
+			return (printf("minishell: cd: an error occured\n"));
 		ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
 		ft_update_pwd(minishell, getcwd(NULL, 1));
 	}
@@ -196,14 +218,16 @@ static int	ft_handle_operator(t_mini *minishell, char *str)
 	{
 		if (ft_strlen(str) == 1)
 		{
-			if (str[0] == '.')
-				;
 			// if (str[0] == '~')
 			// {
 			// 	path = ft_strdup(minishell->mini_tools->home_directory);
 			// 	i = chdir(path);
-			// 	if (i != 0)
-			// 		return (printf("minishell: cd: an error occured!\n"));
+			// 	if (access(path, F_OK) == -1)
+			// 		return (printf("minishell: cd: /: No such file or directory\n"));
+			// 	if (access(path, X_OK) == -1)
+			// 		return (printf("minishell: cd: /: Permission denied\n"));
+			//  if (i != 0)
+			//		return (printf("minishell: cd: an error occured\n"));
 			// 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
 			// 	ft_update_pwd(minishell, getcwd(NULL, 1));
 			// }
@@ -211,9 +235,14 @@ static int	ft_handle_operator(t_mini *minishell, char *str)
 			{
 				if (ft_get_variable_again(minishell, 3) == NULL)
 					return (printf("minishell: cd: OLDPWD not set\n"));
-				i = chdir(ft_get_variable_again(minishell, 3));
+				path = ft_get_variable_again(minishell, 3);
+				i = chdir(path);
+				if (access(path, F_OK) == -1)
+					return (printf("minishell: cd: /: No such file or directory\n"));
+				if (access(path, X_OK) == -1)
+					return (printf("minishell: cd: /: Permission denied\n"));
 				if (i != 0)
-					return (printf("minishell: cd: an error occured!\n"));
+					return (printf("minishell: cd: an error occured\n"));
 				ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
 				ft_update_pwd(minishell, getcwd(NULL, 1));
 				printf("%s\n", minishell->mini_tools->pwd);
@@ -225,8 +254,12 @@ static int	ft_handle_operator(t_mini *minishell, char *str)
 			{
 				path = ft_step_back(minishell->mini_tools->pwd);
 				i = chdir(path);
-				if (i != 0)
+				if (access(path, F_OK) == -1)
 					return (printf("minishell: cd: /: No such file or directory\n"));
+				if (access(path, X_OK) == -1)
+					return (printf("minishell: cd: /: Permission denied\n"));
+				if (i != 0)
+					return (printf("minishell: cd: an error occured\n"));
 				ft_update_oldpwd(minishell, ft_get_variable_again(minishell, 2));
 				ft_update_pwd(minishell, getcwd(NULL, 1));
 			}
@@ -246,14 +279,18 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg)
 	while (cmd_arg[i] != NULL)
 	{
 		if (ft_is_operator(cmd_arg[i]) == 1)
-			j = ft_handle_operator(minishell, cmd_arg[i]);
+			ft_handle_operator(minishell, cmd_arg[i]);
 		else
 		{
 			path = ft_strjoin(minishell->mini_tools->pwd, "/");
 			path = ft_strjoin(path, cmd_arg[i]);
 			j = chdir(path);
-			if (j != 0)
+			if (access(path, F_OK) == -1)
 				return (printf("minishell: cd: /: No such file or directory\n"));
+			if (access(path, X_OK) == -1)
+				return (printf("minishell: cd: /: Permission denied\n"));
+			if (j != 0)
+				return (printf("minishell: cd: an error occured\n"));
 			ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
 			ft_update_pwd(minishell, getcwd(NULL, 1));
 			free(path);
@@ -268,17 +305,21 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg)
 
 static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg)
 {
-	int		i;
+	int	i;
 
 	i = chdir("/");
-	if (i != 0)
+	if (access("/", F_OK) == -1)
 		return (printf("minishell: cd: /: No such file or directory\n"));
+	if (access("/", X_OK) == -1)
+		return (printf("minishell: cd: /: Permission denied\n"));
+	if (i != 0)
+		return (printf("minishell: cd: an error occured\n"));
 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
 	ft_update_pwd(minishell, getcwd(NULL, 1));
 	if (cmd_arg[0] == NULL)
 		return (0);
 	else
-		i = ft_handle_relative_path(minishell, cmd_arg);
+		ft_handle_relative_path(minishell, cmd_arg);
 	return (0);
 }
 
@@ -291,18 +332,20 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 	absolute = 0;
 	if (cmd_arg[1] != NULL && cmd_arg[1][0] == '/')
 		absolute++;
-	if (cmd_arg[1] == NULL || cmd_arg[1][0] == '-')
+	if (cmd_arg[1] == NULL)
 		i = ft_handle_operator(minishell, cmd_arg[1]);
 	else
 	{
 		cmd_arg = ft_fix_args(cmd_arg);
+		if (cmd_arg == NULL)
+			return (1);
 		if (cmd_arg[0] == NULL || absolute != 0)
 			i = ft_handle_absolute_path(minishell, cmd_arg);
 		else
 			i = ft_handle_relative_path(minishell, cmd_arg);
 	}
 	if (i != 0)
-		g_global->g_last_return_code = 1;
+		return (1);
 	return (0);
 }
 
@@ -312,6 +355,11 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 // - getcwd (= obtenir le répertoire courant)
 // - opendir (= vérifie l'accès au RÉPERTOIRE)
 // - closedir (= ferme un répertoire ouvert par opendir j'imagine)
+
+// PROBLÈMES À FIX :
+//
+// - peauffiner les cas ou on navigue dans un directory qui n'existe plus
+// - ...
 
 // CAS À GÉRER :
 //
