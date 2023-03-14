@@ -220,9 +220,9 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 			// 	path = ft_strdup(minishell->mini_tools->home_directory);
 			// 	i = chdir(path);
 			// 	if (access(path, F_OK) == -1)
-			// 		return (printf("minishell: cd: /: No such file or directory\n"));
+			// 		return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
 			// 	if (access(path, X_OK) == -1)
-			// 		return (printf("minishell: cd: /: Permission denied\n"));
+			// 		return (printf("minishell: cd: %s/: Permission denied\n", arguments));
 			//  if (i != 0)
 			// 		return (printf("minishell: cd: an error occured\n"));
 			// 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
