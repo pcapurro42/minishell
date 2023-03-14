@@ -188,6 +188,30 @@ static char	*ft_step_back(char *str)
 	return (strf);
 }
 
+static int	ft_handle_exception(t_mini *minishell, char *arguments)
+{
+	int		i;
+	char	*path;
+
+	if (ft_get_variable_again(minishell, 3) == NULL)
+		return (printf("minishell: cd: OLDPWD not set\n"));
+	path = ft_get_variable_again(minishell, 3);
+	i = chdir(path);
+	if (access(path, F_OK) == -1)
+		return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
+	if (access(path, X_OK) == -1)
+		return (printf("minishell: cd: %s/: Permission denied\n", arguments));
+	if (i != 0)
+		return (printf("minishell: cd: an error occured\n"));
+	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+	if (getcwd(NULL, 1) != NULL)
+		ft_update_pwd(minishell, getcwd(NULL, 1));
+	else
+		return (printf("minishell: cd: an error occured\n"));
+	printf("%s\n", minishell->mini_tools->pwd);
+	return (0);
+}
+
 static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 {
 	int		i;
@@ -213,28 +237,6 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	}
 	else
 	{
-		if (ft_strlen(str) == 1)
-		{
-			if (str[0] == '-')
-			{
-				if (ft_get_variable_again(minishell, 3) == NULL)
-					return (printf("minishell: cd: OLDPWD not set\n"));
-				path = ft_get_variable_again(minishell, 3);
-				i = chdir(path);
-				if (access(path, F_OK) == -1)
-					return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
-				if (access(path, X_OK) == -1)
-					return (printf("minishell: cd: %s/: Permission denied\n", arguments));
-				if (i != 0)
-					return (printf("minishell: cd: an error occured\n"));
-				ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-				if (getcwd(NULL, 1) != NULL)
-					ft_update_pwd(minishell, getcwd(NULL, 1));
-				else
-					return (printf("minishell: cd: an error occured\n"));
-				printf("%s\n", minishell->mini_tools->pwd);
-			}
-		}
 		if (ft_strlen(str) == 2)
 		{
 			if (str[0] == '.' && str[1] == '.' && ft_strlen(minishell->mini_tools->pwd) > 1)
@@ -267,7 +269,9 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *argu
 	i = 0;
 	while (cmd_arg[i] != NULL)
 	{
-		if (ft_is_operator(cmd_arg[i]) == 1 && cmd_arg[i][0] != '~')
+		if (cmd_arg[0][0] == '-')
+			return (ft_handle_exception(minishell, arguments));
+		if (ft_is_operator(cmd_arg[i]) == 1 && cmd_arg[i][0] != '~' && cmd_arg[i][0] != '-')
 			ft_handle_operator(minishell, cmd_arg[i], arguments);
 		else
 		{
@@ -298,9 +302,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 
 	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~') // cd "~"
 	{
-		path = ft_get_variable_again(minishell, 1);
-		if (path == NULL)
-			return (printf("minishell: cd: HOME not set\n"));
+		path = ft_strdup(minishell->mini_tools->home_directory);
 		i = chdir(path);
 		if (access(path, F_OK) == -1)
 			return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
@@ -346,9 +348,9 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 	i = 0;
 	absolute = 0;
 	arguments = ft_first_clean(cmd_arg);
-	if ((cmd_arg[1] != NULL && cmd_arg[1][0] == '/') || (cmd_arg[1][0] == '~'))
+	if (cmd_arg[1] != NULL && ((cmd_arg[1][0] == '/') || (cmd_arg[1][0] == '~')))
 		absolute++;
-	if (cmd_arg[1] == NULL)
+	if (cmd_arg[1] == NULL) // cd " "
 		i = ft_handle_operator(minishell, cmd_arg[1], arguments);
 	else
 	{
@@ -378,20 +380,3 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 // - ".." (= recule de un)
 // - " " (= redirige sur $HOME)
 // - "~" (= redirige sur $HOME sans passer par $HOME)
-
-// if (str[0] == '~')
-// {
-// 	path = ft_strdup(minishell->mini_tools->home_directory);
-// 	i = chdir(path);
-// 	if (access(path, F_OK) == -1)
-// 		return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
-// 	if (access(path, X_OK) == -1)
-// 		return (printf("minishell: cd: %s/: Permission denied\n", arguments));
-//  if (i != 0)
-// 		return (printf("minishell: cd: an error occured\n"));
-// 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-// 	if (getcwd(NULL, 1) != NULL)
-// 		ft_update_pwd(minishell, getcwd(NULL, 1));
-// 	else
-// 		return (printf("minishell: cd: an error occured\n"));
-// }
