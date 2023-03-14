@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:59:38 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/13 05:17:27 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:18:55 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	file_not_open(t_cmd *cmd_struct, char *file_name)
 	ft_putstr_fd("minishell: ", 2);
 	perror(file_name);
 	cmd_struct->infile_fd = open("minishell_here_doc.tmp", \
-	O_CREAT | O_RDWR | O_TRUNC, 0644);
+	O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (cmd_struct->infile_fd < 0)
 		ft_error();
 	close(cmd_struct->infile_fd);

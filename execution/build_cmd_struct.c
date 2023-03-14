@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:38:28 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/09 19:35:29 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:19:21 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	outfile = ft_substitute_str(minishell->cmd_lst[i][nb->j + 1]);
 	if (cmd_struct->outfile_fd >= 0)
 		close(cmd_struct->outfile_fd);
-	cmd_struct->outfile_fd = open(outfile, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	cmd_struct->outfile_fd = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (cmd_struct->outfile_fd < 0)
 	{
 		ft_msg(outfile);
@@ -77,7 +77,7 @@ static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	outfile = ft_substitute_str(minishell->cmd_lst[i][nb->j + 1]);
 	if (cmd_struct->outfile_fd >= 0)
 		close(cmd_struct->outfile_fd);
-	cmd_struct->outfile_fd = open(outfile, O_CREAT | O_RDWR | O_APPEND, 0644);
+	cmd_struct->outfile_fd = open(outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (cmd_struct->outfile_fd < 0)
 	{
 		ft_msg(outfile);
