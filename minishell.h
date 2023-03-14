@@ -25,6 +25,8 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <termios.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 typedef struct s_global
 {
