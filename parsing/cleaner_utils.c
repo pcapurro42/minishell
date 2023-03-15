@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+// #include "../minishell.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "../libft/libft.h"
 
 char	*ft_hide_spaces_in_quotes(char *str)
 {
@@ -51,6 +55,8 @@ char	*ft_separate_chevrons(char *str)
 	int		i;
 	char	*strf;
 	char	*fstr;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	strf = ft_strdup("");
@@ -61,26 +67,58 @@ char	*ft_separate_chevrons(char *str)
 				&& str[i - 1] != '>') && (str[i - 1] != ' ')
 			&& (str[i - 1] != 34) && (str[i - 1] != 39))
 		{
-			strf = ft_strjoin(strf, " ");
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+			temp1 = ft_strdup(strf);
+			free(strf);
+			strf = ft_strjoin(temp1, " ");
+			free(temp1);
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
 		}
 		else
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		{
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 		i++;
 	}
 	i = 0;
+	free(str);
 	while (strf[i] != '\0')
 	{
 		if ((strf[i] == '>' || strf[i] == '<') && (strf[i + 1] != '<'
 				&& strf[i + 1] != '>') && (strf[i + 1] != ' ')
 			&& (str[i + 1] != 34) && (str[i + 1] != 39))
 		{
-			fstr = ft_strjoin(fstr, ft_char_to_str(strf[i]));
-			fstr = ft_strjoin(fstr, " ");
+			temp1 = ft_strdup(fstr);
+			free(fstr);
+			temp2 = ft_char_to_str(strf[i]);
+			fstr = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+			temp1 = ft_strdup(fstr);
+			free(fstr);
+			fstr = ft_strjoin(temp1, " ");
+			free(temp1);
 		}
 		else
-			fstr = ft_strjoin(fstr, ft_char_to_str(strf[i]));
+		{
+			temp1 = ft_strdup(fstr);
+			free(fstr);
+			temp2 = ft_char_to_str(strf[i]);
+			fstr = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 		i++;
 	}
+	free(strf);
 	return (fstr);
 }

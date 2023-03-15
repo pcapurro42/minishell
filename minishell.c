@@ -28,7 +28,6 @@ char	*ft_get_name(void)
 		printf("__  /|_/ /__  /__  __ \\_  /_  / / /  / / /  __ \\_  /  \n");
 		printf("_  /  / / _  / _  / / /  / / /_/ // /_/ // /_/ // /    \n");
 		printf("/_/  /_/  /_/  /_/ /_//_/  \\___\\_\\_____/ \\____//_/   \n\n");
-		ft_check_malloc(name);
 	}
 	else
 	{
@@ -38,14 +37,14 @@ char	*ft_get_name(void)
 		printf("__  /|_/ /__  /__  __ \\_  /__  /_ _  _ \\  / / /_  ___/\n");
 		printf("_  /  / / _  / _  / / /  / _  __/ /  __/ /_/ /_  /    \n");
 		printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
-		ft_check_malloc(name);
 	}
+	ft_check_malloc(name);
 	return (name);
 }
 
 void	ft_clean_stdin(void)
 {
-	struct termios idk;
+	struct termios	idk;
 
 	tcgetattr(STDIN_FILENO, &idk);
 	idk.c_lflag &= ~ECHOCTL;
@@ -123,6 +122,7 @@ int	main(int argc, char **argv, char *envp[])
 		if (input[0] != '\0')
 			if (ft_analyze_input(input, minishell) == 1)
 				g_global->g_last_return_code = 258;
+		free(minishell);
 	}
 	return (0);
 }

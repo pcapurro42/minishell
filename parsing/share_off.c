@@ -87,5 +87,6 @@ char	***ft_share_off(char **str)
 		i++;
 		k = 0;
 	}
+	pls_free(str);
 	return (fstr);
 }

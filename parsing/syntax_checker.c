@@ -59,8 +59,6 @@ int	ft_pipe_checker(char **str)
 		{
 			if (i == 0 || i == ft_dstrlen(str) - 1
 				|| str[i - 1][0] == '|' || str[i + 1][0] == '|')
-				// || str[i - 1][0] == '>' || str[i - 1][0] == '<'
-				// || str[i + 1][0] == '>' || str[i + 1][0] == '<')
 				return (printf("minishell: syntax error near unexpected token '|'\n"));
 		}
 		i++;

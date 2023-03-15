@@ -30,3 +30,5 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	ft_execution(minishell);
 	return (0);
 }
+
+// exit $USER '$USER' "'$USER'" << EOF ls >> f ls > > f cat | ls|grep "fefeqf  fq      fefeqef" ' fqfeqfeqfe f  fq'

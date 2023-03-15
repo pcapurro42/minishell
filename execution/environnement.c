@@ -98,6 +98,7 @@ static void	ft_increase_shlvl(char	**envp)
 	ft_check_malloc(nb_str_shlvl);
 	shlvl_line = ft_strjoin("SHLVL=", nb_str_shlvl);
 	free(envp[i_shlvl]);
+	free(nb_str_shlvl);
 	envp[i_shlvl] = shlvl_line;
 }
 
@@ -124,7 +125,7 @@ static void	ft_check_env(char ***envp, int envp_len, char **argv)
 	char	**new_envp;
 	int		nb_missing_lines;
 	int		i;
-	
+
 	nb_missing_lines = ft_find_line_env(*envp, "PWD=") + \
 	ft_find_line_env(*envp, "SHLVL=") + ft_find_line_env(*envp, "_=");
 	if (nb_missing_lines != 0)

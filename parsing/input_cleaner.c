@@ -37,17 +37,32 @@ char	*ft_add_spaces_for_pipes(char *str)
 {
 	int		i;
 	char	*strf;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	strf = ft_strdup("");
 	while (str[i] != '\0')
 	{
 		if (str[i] == '|')
-			strf = ft_strjoin(strf, " | ");
+		{
+			temp1 = ft_strdup(strf);
+			free(strf);
+			strf = ft_strjoin(temp1, " | ");
+			free(temp1);
+		}
 		else
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		{
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 		i++;
 	}
+	free(str);
 	return (strf);
 }
 
@@ -55,6 +70,8 @@ char	*ft_stick_chevrons(char *str)
 {
 	int		i;
 	char	*strf;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	strf = ft_strdup("");
@@ -62,16 +79,34 @@ char	*ft_stick_chevrons(char *str)
 	{
 		if (str[i] == '<' || str[i] == '>')
 		{
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
 			i++;
 			while (str[i] == ' ')
 				i++;
 			if (str[i] != '<' && str[i] != '>')
-				strf = ft_strjoin(strf, " ");
+			{
+				temp1 = ft_strdup(strf);
+				free(strf);
+				strf = ft_strjoin(temp1, " ");
+				free(temp1);
+			}
 		}
 		else
-			strf = ft_strjoin(strf, ft_char_to_str(str[i++]));
+		{
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i++]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 	}
+	free(str);
 	return (strf);
 }
 
@@ -81,6 +116,7 @@ char	*ft_substitute_str(char *str)
 	int		dquote;
 	int		quote;
 	char	*strf;
+	char	*temp;
 
 	i = 0;
 	dquote = 0;
@@ -104,7 +140,12 @@ char	*ft_substitute_str(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] != -1)
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		{
+			temp = ft_strdup(strf);
+			free(strf);
+			strf = ft_strjoin(temp, ft_char_to_str(str[i]));
+			free(temp);
+		}
 		i++;
 	}
 	return (strf);
@@ -128,19 +169,33 @@ char	*ft_input_cleaner(char *input)
 {
 	int		i;
 	char	*str;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	str = ft_strdup("");
 	while (input[i] != '\0')
 	{
 		if (input[i] < 33 || input[i] > 126)
-			str = ft_strjoin(str, ft_char_to_str(' '));
+		{
+			temp1 = ft_strdup(str);
+			free(str);
+			str = ft_strjoin(temp1, " ");
+			free(temp1);
+		}
 		else
-			str = ft_strjoin(str, ft_char_to_str(input[i]));
+		{
+			temp1 = ft_strdup(str);
+			free(str);
+			temp2 = ft_char_to_str(input[i]);
+			str = ft_strjoin(temp1, temp2);
+			free(temp2);
+			free(temp1);
+		}
 		i++;
 	}
 	if (ft_quote_checker(str) != 0)
-		return (NULL);
+		return (free(str), NULL);
 	str = ft_add_spaces_for_pipes(str);
 	str = ft_hide_spaces_in_quotes(str);
 	str = ft_separate_chevrons(str);
