@@ -42,21 +42,26 @@ char	*ft_add_spaces_for_pipes(char *str)
 
 	i = 0;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '|')
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			strf = ft_strjoin(temp1, " | ");
+			ft_check_malloc(strf);
 			free(temp1);
 		}
 		else
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
@@ -75,14 +80,17 @@ char	*ft_stick_chevrons(char *str)
 
 	i = 0;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '<' || str[i] == '>')
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 			i++;
@@ -91,17 +99,21 @@ char	*ft_stick_chevrons(char *str)
 			if (str[i] != '<' && str[i] != '>')
 			{
 				temp1 = ft_strdup(strf);
+				ft_check_malloc(temp1);
 				free(strf);
 				strf = ft_strjoin(temp1, " ");
+				ft_check_malloc(strf);
 				free(temp1);
 			}
 		}
 		else
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i++]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
@@ -122,6 +134,7 @@ char	*ft_substitute_str(char *str)
 	dquote = 0;
 	quote = 0;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34 && quote % 2 == 0)
@@ -142,8 +155,10 @@ char	*ft_substitute_str(char *str)
 		if (str[i] != -1)
 		{
 			temp = ft_strdup(strf);
+			ft_check_malloc(temp);
 			free(strf);
 			strf = ft_strjoin(temp, ft_char_to_str(str[i]));
+			ft_check_malloc(strf);
 			free(temp);
 		}
 		i++;
@@ -174,21 +189,26 @@ char	*ft_input_cleaner(char *input)
 
 	i = 0;
 	str = ft_strdup("");
+	ft_check_malloc(str);
 	while (input[i] != '\0')
 	{
 		if (input[i] < 33 || input[i] > 126)
 		{
 			temp1 = ft_strdup(str);
+			ft_check_malloc(temp1);
 			free(str);
 			str = ft_strjoin(temp1, " ");
+			ft_check_malloc(str);
 			free(temp1);
 		}
 		else
 		{
 			temp1 = ft_strdup(str);
+			ft_check_malloc(temp1);
 			free(str);
 			temp2 = ft_char_to_str(input[i]);
 			str = ft_strjoin(temp1, temp2);
+			ft_check_malloc(str);
 			free(temp2);
 			free(temp1);
 		}

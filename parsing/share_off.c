@@ -45,6 +45,7 @@ char	***ft_allocate_strs(char ***fstr, char **str, int size)
 			k++;
 		}
 		fstr[i] = malloc(sizeof(char *) * (k) + 1);
+		ft_check_malloc(fstr[i]);
 		fstr[i][k] = NULL;
 		if (str[j] == NULL)
 			return (fstr);
@@ -68,18 +69,15 @@ char	***ft_share_off(char **str)
 	k = 0;
 	size = ft_get_pipe_number(str) + 1;
 	fstr = malloc(sizeof(char **) * (size) + 1);
+	ft_check_malloc(fstr);
 	fstr[size] = NULL;
 	fstr = ft_allocate_strs(fstr, str, size);
 	while (fstr[i] != NULL)
 	{
 		while (str[j] != NULL && str[j][0] != '|')
 		{
-			if (str[j] == NULL)
-			{
-				fstr[i][k] = NULL;
-				return (fstr);
-			}
 			fstr[i][k] = ft_strdup(str[j]);
+			ft_check_malloc(fstr[i][k]);
 			k++;
 			j++;
 		}

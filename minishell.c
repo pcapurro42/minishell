@@ -38,8 +38,7 @@ char	*ft_get_name(void)
 		printf("_  /  / / _  / _  / / /  / _  __/ /  __/ /_/ /_  /    \n");
 		printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
 	}
-	ft_check_malloc(name);
-	return (name);
+	return (ft_check_malloc(name), name);
 }
 
 void	ft_clean_stdin(void)
@@ -50,9 +49,6 @@ void	ft_clean_stdin(void)
 	idk.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);
 }
-
-// '&=' : opérateur binaire combinant && et =
-// '~' : opérateur binaire de négation (= inverse chaque bit de ECHO)
 
 void	ft_handle_signal(int signal)
 {

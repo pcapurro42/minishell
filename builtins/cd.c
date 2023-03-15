@@ -19,6 +19,7 @@ static char	*ft_last_clean(char *str)
 
 	i = 0;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] == 92)
@@ -61,6 +62,7 @@ static char	*ft_first_clean(char **cmd_arg)
 	i = 1;
 	j = 0;
 	str = ft_strdup("");
+	ft_check_malloc(str);
 	while (cmd_arg[i] != NULL)
 	{
 		while (cmd_arg[i][j] != '\0')
@@ -79,11 +81,14 @@ static char	*ft_first_clean(char **cmd_arg)
 static char	**ft_fix_args(char **cmd_arg)
 {
 	char	*str;
+	char	**strf;
 
 	str = ft_first_clean(cmd_arg);
 	if (ft_verify_args(str) != 0)
 		return (NULL);
-	return (ft_split(str, '/'));
+	strf = ft_split(str, '/');
+	ft_check_malloc(strf);
+	return (strf);
 }
 
 static int	ft_is_operator(char *str)
@@ -117,6 +122,7 @@ static char	*ft_get_variable_again(t_mini *minishell, int a)
 		str = ft_strdup("PWD=");
 	if (a == 3)
 		str = ft_strdup("OLDPWD=");
+	ft_check_malloc(str);
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		if (ft_strncmp(str, minishell->mini_tools->envp[i], ft_strlen(str)) == 0)
@@ -138,6 +144,9 @@ static int	ft_update_oldpwd(t_mini *minishell, char *path)
 			minishell->mini_tools->envp[i] = ft_strdup("OLDPWD=");
 			minishell->mini_tools->envp[i] = ft_strjoin(minishell->mini_tools->envp[i], path);
 			minishell->mini_tools->old_pwd = ft_strdup(path);
+			ft_check_malloc(minishell->mini_tools->envp[i]);
+			ft_check_malloc(minishell->mini_tools->old_pwd);
+
 			return (0);
 		}
 		i++;
@@ -173,6 +182,7 @@ static char	*ft_step_back(char *str)
 		return (NULL);
 	i = ft_strlen(str) - 1;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (i != 0 && str[i] != '/')
 	{
 		str[i] = -1;
@@ -303,6 +313,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~') // cd "~"
 	{
 		path = ft_strdup(minishell->mini_tools->home_directory);
+		ft_check_malloc(path);
 		i = chdir(path);
 		if (access(path, F_OK) == -1)
 			return (printf("minishell: cd: %s: No such file or directory\n", arguments));
@@ -323,6 +334,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 			path = ft_strdup("//");
 		else
 			path = ft_strdup("/");
+		ft_check_malloc(path);
 		i = chdir(path);
 		if (access(path, F_OK) == -1)
 			return (printf("minishell: cd: %s: No such file or directory\n", path));

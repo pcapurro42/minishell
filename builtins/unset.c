@@ -44,12 +44,6 @@ int	ft_verify_characters(char *str)
 	return (0);
 }
 
-// # et & = ne rien faire (= mais ne pas mettre de message d'erreur)
-// _ = ne rien faire (= mais ne pas mettre de message d'erreur)
-// * = ne rien faire (= mais ne pas mettre de message d'erreur)
-// TOUT LE RESTE QUI N'EST PAS UNE LETTRE OU UN CHIFFRE = message d'erreur
-
-
 static char	**ft_clean_env(char **envp)
 {
 	int		i;
@@ -70,7 +64,10 @@ static char	**ft_clean_env(char **envp)
 	while (envp[i] != NULL)
 	{
 		if (envp[i][0] != -1)
+		{
 			new_envp[k++] = ft_strdup(envp[i]);
+			ft_check_malloc(new_envp[k - 1]);
+		}
 		i++;
 	}
 	new_envp[k] = NULL;
@@ -83,13 +80,19 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 	int		i;
 	int		j;
 	int		return_code;
+	char	*temp;
 
 	return_code = 0;
 	i = 1;
 	j = 0;
 	while (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) == 0)
 	{
-		cmd_arg[i] = ft_strjoin(cmd_arg[i], "=");
+		temp = ft_strdup(cmd_arg[i]);
+		ft_check_malloc(temp);
+		free(cmd_arg[i]);
+		cmd_arg[i] = ft_strjoin(temp, "=");
+		ft_check_malloc(cmd_arg[i]);
+		free(temp);
 		while (minishell->mini_tools->envp[j] != NULL)
 		{
 			if (ft_strncmp(cmd_arg[i], minishell->mini_tools->envp[j], ft_strlen(cmd_arg[i])) == 0)

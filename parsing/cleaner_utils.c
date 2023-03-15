@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../minishell.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
+#include "../minishell.h"
 
 char	*ft_hide_spaces_in_quotes(char *str)
 {
@@ -61,6 +57,8 @@ char	*ft_separate_chevrons(char *str)
 	i = 0;
 	strf = ft_strdup("");
 	fstr = ft_strdup("");
+	ft_check_malloc(strf);
+	ft_check_malloc(fstr);
 	while (str[i] != '\0')
 	{
 		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<'
@@ -68,22 +66,28 @@ char	*ft_separate_chevrons(char *str)
 			&& (str[i - 1] != 34) && (str[i - 1] != 39))
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			strf = ft_strjoin(temp1, " ");
+			ft_check_malloc(strf);
 			free(temp1);
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
 		else
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
@@ -98,22 +102,28 @@ char	*ft_separate_chevrons(char *str)
 			&& (str[i + 1] != 34) && (str[i + 1] != 39))
 		{
 			temp1 = ft_strdup(fstr);
+			ft_check_malloc(temp1);
 			free(fstr);
 			temp2 = ft_char_to_str(strf[i]);
 			fstr = ft_strjoin(temp1, temp2);
+			ft_check_malloc(fstr);
 			free(temp1);
 			free(temp2);
 			temp1 = ft_strdup(fstr);
+			ft_check_malloc(temp1);
 			free(fstr);
 			fstr = ft_strjoin(temp1, " ");
+			ft_check_malloc(fstr);
 			free(temp1);
 		}
 		else
 		{
 			temp1 = ft_strdup(fstr);
+			ft_check_malloc(temp1);
 			free(fstr);
 			temp2 = ft_char_to_str(strf[i]);
 			fstr = ft_strjoin(temp1, temp2);
+			ft_check_malloc(fstr);
 			free(temp1);
 			free(temp2);
 		}
