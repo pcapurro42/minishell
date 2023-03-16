@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/14 09:41:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 04:42:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_mini_tools
 	char	*old_pwd;
 	char	*home_directory;
 	char	**envp;
+	int		path_unset;
 }	t_mini_tools;
 
 typedef struct s_mini
@@ -119,7 +120,7 @@ void			ft_execution(t_mini *minishell);
 
 t_cmd			*ft_exec_one_cmd(t_mini *minishell);
 
-char			**ft_find_path(char *envp[]);
+char			**ft_find_path(char *envp[], int path_unset);
 
 // INITIALIZATION //
 

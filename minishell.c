@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/13 20:11:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 02:46:28 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	main(int argc, char **argv, char *envp[])
 		if (input[0] != '\0')
 			if (ft_analyze_input(input, minishell) == 1)
 				g_global->g_last_return_code = 258;
-		free(minishell);
+		ft_destroy_mini(minishell);
 	}
 	return (0);
 }

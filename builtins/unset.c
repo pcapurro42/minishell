@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 20:31:47 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/13 04:25:34 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 04:46:53 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		cmd_arg[i] = ft_strjoin(temp, "=");
 		ft_check_malloc(cmd_arg[i]);
 		free(temp);
+		if (ft_strncmp(cmd_arg[i], "PATH=", ft_strlen(cmd_arg[i])) == 0)
+			minishell->mini_tools->path_unset = 1;
 		while (minishell->mini_tools->envp[j] != NULL)
 		{
 			if (ft_strncmp(cmd_arg[i], minishell->mini_tools->envp[j], ft_strlen(cmd_arg[i])) == 0)

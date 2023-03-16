@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:52:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/07 17:42:29 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 04:36:44 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,25 @@ static char	**ft_no_env(void)
 	return (cmd_path_lst);
 }
 
-char	**ft_find_path(char *envp[])
+static char **ft_no_path(void)
+{
+	char	**cmd_path_lst;
+
+	cmd_path_lst = malloc(sizeof(*cmd_path_lst));
+	if (cmd_path_lst == NULL)
+		ft_error();
+	cmd_path_lst[0] = NULL;
+	return (cmd_path_lst);
+}
+
+char	**ft_find_path(char *envp[], int path_unset)
 {
 	char	**cmd_path_lst;
 	int		i;
 
 	i = 0;
+	if (path_unset == 1)
+		return (ft_no_path());
 	if (!envp)
 		return (ft_no_env());
 	while (envp[i])

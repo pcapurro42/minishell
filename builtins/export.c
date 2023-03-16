@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/13 04:19:38 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 05:24:24 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,9 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 		{
 			if (ft_name_in_envp(cmd_arg[i + 1], minishell->mini_tools->envp) == 1)
 			{
-				new_envp[envp_len + nb_export] = cmd_arg[i + 1];
+				if (ft_strncmp(cmd_arg[i + 1], "PATH=", ft_strlen("PATH=")) == 0)
+					minishell->mini_tools->path_unset = 0;
+				new_envp[envp_len + nb_export] = ft_strdup(cmd_arg[i + 1]);
 				nb_export++;
 			}
 			else
