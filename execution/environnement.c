@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:27:46 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/14 09:39:04 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:57:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_find_line_env(char **envp, char *name)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (envp[i])
@@ -28,7 +28,7 @@ static int	ft_find_line_env(char **envp, char *name)
 
 static int	ft_find_line_env_nb(char **envp, char *name)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (envp[i])
@@ -45,7 +45,7 @@ static char	*ft_getpwd(void)
 	char	*buf;
 	char	*ret;
 	char	*pwd;
-	int 	i;
+	int		i;
 
 	ret = NULL;
 	i = 1;
@@ -75,19 +75,18 @@ static char	*ft_getpwd(void)
 	return (pwd);
 }
 
-static char	*ft_getshlvl()
+static char	*ft_getshlvl(void)
 {
 	char	*shlvl;
 
 	shlvl = ft_strdup("SHLVL=0");
 	ft_check_malloc(shlvl);
 	return (shlvl);
-
 }
 
 static void	ft_increase_shlvl(char	**envp)
 {
-	int 	i_shlvl;
+	int		i_shlvl;
 	int		nb_shlvl;
 	char	*nb_str_shlvl;
 	char	*shlvl_line;

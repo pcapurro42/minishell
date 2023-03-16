@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:59:38 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 06:44:12 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:54:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 	int		pid;
 	char	*gnl;
 	int		pipe_fd[2];
+	int		status_code;
 
 	if (pipe(pipe_fd))
 		ft_error();
@@ -49,9 +50,15 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 	}
 	close(pipe_fd[1]);
 	g_global->g_pid = (0 - pid);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status_code, 0);
 	g_global->g_pid = -2147483648;
-	cmd_struct->infile_fd = pipe_fd[0];
+	if (g_global->g_last_return_code != -1)
+		cmd_struct->infile_fd = pipe_fd[0];
+	else
+	{
+		close(pipe_fd[0]);
+		cmd_struct->infile_fd = -2;
+	}
 	return ;
 }
 

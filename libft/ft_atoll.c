@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:59:52 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/09 19:16:50 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 23:04:59 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 long long int	ft_atoll(const char *str)
 {
 	long long int	nb;
-	int	is_pos;
+	int				is_pos;
 
 	nb = 0;
 	is_pos = 1;

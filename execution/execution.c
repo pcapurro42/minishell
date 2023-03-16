@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:47:08 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 02:34:21 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:57:56 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	ft_pipex_close_files(int (*fd)[2], int i)
 	close(fd[i - 1][1]);
 }
 
-static pid_t	*ft_execution2(int (*fd)[2], t_mini *minishell, t_cmd *cmd_struct)
+static pid_t	*ft_execution2(int (*fd)[2], \
+t_mini *minishell, t_cmd *cmd_struct)
 {
 	pid_t	*pid;
 	int		i;
@@ -57,7 +58,7 @@ void	ft_execution(t_mini *minishell)
 	int		(*fd)[2];
 	int		*status_code;
 	int		i;
-	t_cmd 	*cmd_struct;
+	t_cmd	*cmd_struct;
 
 	i = 0;
 	while (minishell->cmd_lst && minishell->cmd_lst[i] != NULL)

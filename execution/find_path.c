@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:52:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 04:36:44 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	**ft_no_env(void)
 	return (cmd_path_lst);
 }
 
-static char **ft_no_path(void)
+static char	**ft_no_path(void)
 {
 	char	**cmd_path_lst;
 

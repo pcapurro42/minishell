@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 05:24:24 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 23:02:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ static int	ft_verify_errors_export(char *str)
 	else
 		name_str = ft_strdup(str);
 	i = 0;
-	if ((name_str[i] == '#' || name_str[i] == '&' || name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
+	if ((name_str[i] == '#' || name_str[i] == '&' || \
+	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
 	{
 		free(name_str);
 		return (1);
 	}
 	while (name_str[i] != '=' && name_str[i] != '\0')
 	{
-		if ((ft_isalpha(name_str[i]) == 0 && ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
+		if ((ft_isalpha(name_str[i]) == 0 && \
+		ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
 		{
 			free(name_str);
 			return (1);
@@ -56,17 +58,20 @@ static int	ft_verify_characters_export(char *str)
 	else
 		name_str = ft_strdup(str);
 	i = 0;
-	if ((name_str[i] == '#' || name_str[i] == '&' || name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
+	if ((name_str[i] == '#' || name_str[i] == '&' || \
+	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
 	{
 		free(name_str);
 		return (1);
 	}
 	while (name_str[i] != '=' && name_str[i] != '\0')
 	{
-		if ((ft_isalpha(name_str[i]) == 0 && ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
+		if ((ft_isalpha(name_str[i]) == 0 && \
+		ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
 		{
 			free(name_str);
-			return (printf("minishell: export: '%s': not a valid identifier\n", str));
+			return (printf("minishell: export: '%s': \
+not a valid identifier\n", str));
 		}
 		i++;
 	}
@@ -92,7 +97,8 @@ static int	ft_name_in_envp(char *str, char **envp)
 	{
 		if (ft_strchr_i(envp[i], '=') != -1)
 		{
-			name_envp = malloc(sizeof(*name_envp) * (ft_strchr_i(envp[i], '=') + 1));
+			name_envp = malloc(sizeof(*name_envp) * \
+			(ft_strchr_i(envp[i], '=') + 1));
 			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
 		}
 		else
@@ -128,7 +134,8 @@ static void	ft_replace_in_envp(char *str, char **envp)
 	{
 		if (ft_strchr_i(envp[i], '=') != -1)
 		{
-			name_envp = malloc(sizeof(*name_envp) * (ft_strchr_i(envp[i], '=') + 1));
+			name_envp = malloc(sizeof(*name_envp) * \
+			(ft_strchr_i(envp[i], '=') + 1));
 			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
 		}
 		else
@@ -150,8 +157,8 @@ static void	ft_replace_in_envp(char *str, char **envp)
 
 void	ft_export_no_arg_builtins(char **envp)
 {
-	int i;
-	
+	int	i;
+
 	if (envp == NULL)
 		return ;
 	i = 0;
@@ -203,7 +210,7 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	envp_len = 0;
 	while (minishell->mini_tools->envp[envp_len])
 	{
-		new_envp[envp_len] = minishell->mini_tools->envp[envp_len]; 
+		new_envp[envp_len] = minishell->mini_tools->envp[envp_len];
 		envp_len++;
 	}
 	i = 0;
@@ -212,9 +219,11 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	{
 		if (ft_verify_errors_export(cmd_arg[i + 1]) == 0)
 		{
-			if (ft_name_in_envp(cmd_arg[i + 1], minishell->mini_tools->envp) == 1)
+			if (ft_name_in_envp(cmd_arg[i + 1], \
+			minishell->mini_tools->envp) == 1)
 			{
-				if (ft_strncmp(cmd_arg[i + 1], "PATH=", ft_strlen("PATH=")) == 0)
+				if (ft_strncmp(cmd_arg[i + 1], "PATH=", \
+				ft_strlen("PATH=")) == 0)
 					minishell->mini_tools->path_unset = 0;
 				new_envp[envp_len + nb_export] = ft_strdup(cmd_arg[i + 1]);
 				nb_export++;

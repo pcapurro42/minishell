@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:57 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/09 19:22:03 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 23:00:52 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	ft_is_llint(char	*nb)
 {
-	if (nb[0] == '-' && ((ft_strlen(nb) == ft_strlen("-9223372036854775808") && \
-	ft_strncmp(nb, "-9223372036854775808", ft_strlen(nb)) > 0) || \
+	if (nb[0] == '-' && \
+	((ft_strlen(nb) == ft_strlen("-9223372036854775808") \
+	&& ft_strncmp(nb, "-9223372036854775808", ft_strlen(nb)) > 0) || \
 	(ft_strlen(nb) > ft_strlen("-9223372036854775808"))))
 		return (1);
-	if (ft_isdigit(nb[0]) && ((ft_strlen(nb) == ft_strlen("9223372036854775807") && \
+	if (ft_isdigit(nb[0]) && \
+	((ft_strlen(nb) == ft_strlen("9223372036854775807") && \
 	ft_strncmp(nb, "9223372036854775807", ft_strlen(nb)) > 0) || \
 	(ft_strlen(nb) > ft_strlen("9223372036854775807"))))
 		return (1);

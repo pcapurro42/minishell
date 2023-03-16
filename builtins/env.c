@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:36:51 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/13 04:22:21 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:57 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_env_builtins(char **envp)
 {
-	int i;
-	
+	int	i;
+
 	if (envp == NULL)
 		return (0);
 	i = 0;
