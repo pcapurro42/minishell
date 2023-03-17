@@ -106,12 +106,12 @@ int	main(int argc, char **argv, char *envp[])
 	{
 		g_global->g_pid = -2147483648;
 		minishell = ft_init_mini(mini_tools);
-		if (input)
-			free(input);
 		input = readline(name);
 		if (input == NULL)
 		{
 			ft_putstr_fd("exit\n", 1);
+			ft_destroy_mini(minishell);
+			free(input);
 			exit(0);
 		}
 		add_history(input);
@@ -119,6 +119,7 @@ int	main(int argc, char **argv, char *envp[])
 			if (ft_analyze_input(input, minishell) == 1)
 				g_global->g_last_return_code = 258;
 		ft_destroy_mini(minishell);
+		free(input);
 	}
 	return (0);
 }

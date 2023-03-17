@@ -91,8 +91,10 @@ static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 
 void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 {
+	int		j;
 	t_nb	*nb;
 
+	j = 0;
 	nb = malloc(sizeof(*nb));
 	if (!nb)
 		ft_error();
@@ -115,6 +117,12 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 			free(nb);
 			return ;
 		}
+	}
+	while (cmd_struct->cmd_arg[j] != NULL)
+	{
+		if (ft_strchr(cmd_struct->cmd_arg[j], '~') != NULL)
+			cmd_struct->cmd_arg[j] = ft_replace_tilde(cmd_struct->cmd_arg[j], minishell);
+		j++;
 	}
 	ft_remove_quotes(cmd_struct->cmd_arg);
 	if (cmd_struct->infile_fd < 0)

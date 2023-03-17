@@ -173,30 +173,31 @@ static int	ft_update_pwd(t_mini *minishell, char *path)
 	return (1);
 }
 
-static char	*ft_step_back(char *str)
-{
-	int		i;
-	char	*strf;
+// static char	*ft_step_back(char *str)
+// {
+// 	int		i;
+// 	char	*strf;
 
-	if (str == NULL)
-		return (NULL);
-	i = ft_strlen(str) - 1;
-	strf = ft_strdup("");
-	ft_check_malloc(strf);
-	while (i != 0 && str[i] != '/')
-	{
-		str[i] = -1;
-		i--;
-	}
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] != -1)
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
-		i++;
-	}
-	return (strf);
-}
+// 	if (str == NULL)
+// 		return (NULL);
+// 	i = ft_strlen(str);
+// 	strf = ft_strdup("");
+// 	ft_check_malloc(strf);
+// 	str[i] = -1;
+// 	while (i != 0 && str[i] != '/')
+// 	{
+// 		str[i] = -1;
+// 		i--;
+// 	}
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		if (str[i] != -1)
+// 			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+// 		i++;
+// 	}
+// 	return (strf);
+// }
 
 static int	ft_handle_exception(t_mini *minishell, char *arguments)
 {
@@ -251,24 +252,15 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 		{
 			if (str[0] == '.' && str[1] == '.' && ft_strlen(minishell->mini_tools->pwd) > 1)
 			{
-				path = ft_step_back(minishell->mini_tools->pwd);
-				i = chdir(path);
-				if (access(path, F_OK) == -1)
-					return (printf("minishell: cd: %s: No such file or directory\n", arguments));
-				if (access(path, X_OK) == -1)
-					return (printf("minishell: cd: %s: Permission denied\n", arguments));
-				if (i != 0)
-					return (printf("minishell: cd: an error occured\n"));
-				ft_update_oldpwd(minishell, ft_get_variable_again(minishell, 2));
-				if (getcwd(NULL, 1) != NULL)
-					ft_update_pwd(minishell, getcwd(NULL, 1));
-				else
-					return (printf("minishell: cd: an error occured\n"));
+				;
 			}
 		}
 	}
 	return (0);
 }
+
+// minishell: cd: %s: No such file or directory\n
+// minishell: cd: %s: Permission denied\n
 
 static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *arguments)
 {

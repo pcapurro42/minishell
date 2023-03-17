@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_what_should_be_done(char *input)
+int	ft_to_do_quote(char *input)
 {
 	int		i;
 	int		dquote;
@@ -39,6 +39,32 @@ int	ft_what_should_be_done(char *input)
 		|| (quote % 2 != 0 && dquote % 2 != 0 && c == 34))
 		return (1);
 	return (0);
+}
+
+int	ft_to_do_tilde(char *input)
+{
+	int		i;
+	int		dquote;
+	int		quote;
+	char	c;
+
+	i = 0;
+	dquote = 0;
+	quote = 0;
+	c = 0;
+	while (input[i] != '~')
+	{
+		if (c == 0 && (input[i] == 34 || input[i] == 39))
+			c = input[i];
+		if (input[i] == 34 && quote % 2 == 0)
+			dquote++;
+		if (input[i] == 39 && dquote % 2 == 0)
+			quote++;
+		i++;
+	}
+	if (dquote % 2 != 0 || quote % 2 != 0)
+		return (0);
+	return (1);
 }
 
 char	*ft_get_variable(char *variable, t_mini *minishell)
@@ -120,7 +146,7 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 	return (str);
 }
 
-char	*ft_replace(char *input, t_mini *minishell)
+char	*ft_replace_quote(char *input, t_mini *minishell)
 {
 	int		i;
 	char	*str;
@@ -160,7 +186,7 @@ char	*ft_replace(char *input, t_mini *minishell)
 				free(temp1);
 				free(temp2);
 			}
-			if (ft_what_should_be_done(input) == 0)
+			if (ft_to_do_quote(input) == 0)
 			{
 				temp1 = ft_strdup(str);
 				ft_check_malloc(temp1);
@@ -184,6 +210,29 @@ char	*ft_replace(char *input, t_mini *minishell)
 	return (str);
 }
 
+char	*ft_replace_tilde(char *str, t_mini *minishell)
+{
+	int		i;
+	char	*strf;
+
+	i = 0;
+	strf = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if (str[i] != '~')
+			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		else
+		{
+			if (ft_to_do_tilde(str) != 0)
+				strf = ft_strjoin(strf, minishell->mini_tools->home_directory);
+			else
+				strf = ft_strjoin(strf, "~");
+		}
+		i++;
+	}
+	return (strf);
+}
+
 char	**ft_check_variables(char **str, t_mini *minishell)
 {
 	int	i;
@@ -192,7 +241,7 @@ char	**ft_check_variables(char **str, t_mini *minishell)
 	while (str[i] != NULL)
 	{
 		if (ft_strchr(str[i], '$') != NULL)
-			str[i] = ft_replace(str[i], minishell);
+			str[i] = ft_replace_quote(str[i], minishell);
 		i++;
 	}
 	return (str);
