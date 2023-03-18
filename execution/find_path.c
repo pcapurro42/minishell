@@ -45,10 +45,15 @@ static char	**ft_no_env(void)
 	if (cmd_path_lst == NULL)
 		ft_error();
 	cmd_path_lst[0] = ft_strdup("/usr/gnu/bin/");
+	ft_check_malloc(cmd_path_lst[0]);
 	cmd_path_lst[1] = ft_strdup("/usr/local/bin/");
+	ft_check_malloc(cmd_path_lst[1]);
 	cmd_path_lst[2] = ft_strdup("/bin/");
+	ft_check_malloc(cmd_path_lst[2]);
 	cmd_path_lst[3] = ft_strdup("/usr/bin/");
+	ft_check_malloc(cmd_path_lst[3]);
 	cmd_path_lst[4] = ft_strdup("./");
+	ft_check_malloc(cmd_path_lst[4]);
 	cmd_path_lst[5] = NULL;
 	return (cmd_path_lst);
 }
@@ -83,6 +88,7 @@ char	**ft_find_path(char *envp[], int path_unset)
 	if (!(envp[i]))
 		return (ft_no_env());
 	cmd_path_lst = ft_split(envp[i], ':');
+	ft_check_malloc(cmd_path_lst);
 	ft_complete_path(cmd_path_lst);
 	return (cmd_path_lst);
 }

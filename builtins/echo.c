@@ -18,9 +18,9 @@ int	ft_echo_builtins(char **cmd_lst)
 	int	j;
 	int	final_line_break;
 
-	i = 1;
+	i = 0;
 	final_line_break = 0;
-	while (cmd_lst[i] && ft_strncmp(cmd_lst[i], "-n", 2) == 0)
+	while (cmd_lst[++i] && ft_strncmp(cmd_lst[i], "-n", 2) == 0)
 	{
 		j = 2;
 		while (cmd_lst[i][j] == 'n')
@@ -28,7 +28,6 @@ int	ft_echo_builtins(char **cmd_lst)
 		if (cmd_lst[i][j] != '\0')
 			break ;
 		final_line_break = 1;
-		i++;
 	}
 	while (cmd_lst[i])
 	{

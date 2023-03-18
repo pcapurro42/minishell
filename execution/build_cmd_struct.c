@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static void	ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void	ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb)
 {
 	char	*infile;
@@ -31,7 +31,7 @@ static void	ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	nb->j += 2;
 }
 
-static void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb)
 {
 	char	*outfile;
@@ -50,7 +50,7 @@ static void	ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	nb->j += 2;
 }
 
-static void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb)
 {
 	char	*limiter;
@@ -70,7 +70,7 @@ static void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	nb->j += 2;
 }
 
-static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb)
 {
 	char	*outfile;
@@ -91,38 +91,20 @@ static void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 
 void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 {
-	int		j;
 	t_nb	*nb;
 
-	j = 0;
 	nb = malloc(sizeof(*nb));
 	if (!nb)
 		ft_error();
+	if (ft_check_chevron(minishell, cmd_struct, i, nb) == 1)
+		return ;
 	nb->j = 0;
-	nb->len_cmd_arg = 0;
-	while (minishell->cmd_lst[i][nb->j])
+	while (cmd_struct->cmd_arg[nb->j] != NULL)
 	{
-		if (ft_strncmp(minishell->cmd_lst[i][nb->j], "<", 2) == 0)
-			ft_case_left_chevron(minishell, cmd_struct, i, nb);
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], ">", 2) == 0)
-			ft_case_right_chevron(minishell, cmd_struct, i, nb);
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], "<<", 3) == 0)
-			ft_case_dbleft_chevron(minishell, cmd_struct, i, nb);
-		else if (ft_strncmp(minishell->cmd_lst[i][nb->j], ">>", 3) == 0)
-			ft_case_dright_chevron(minishell, cmd_struct, i, nb);
-		else
-			ft_add_to_cmd_arg(minishell, cmd_struct, i, nb);
-		if (cmd_struct->infile_fd == -2 || cmd_struct->outfile_fd == -2)
-		{
-			free(nb);
-			return ;
-		}
-	}
-	while (cmd_struct->cmd_arg[j] != NULL)
-	{
-		if (ft_strchr(cmd_struct->cmd_arg[j], '~') != NULL)
-			cmd_struct->cmd_arg[j] = ft_replace_tilde(cmd_struct->cmd_arg[j], minishell);
-		j++;
+		if (ft_strchr(cmd_struct->cmd_arg[nb->j], '~') != NULL)
+			cmd_struct->cmd_arg[nb->j] = ft_replace_tilde(\
+			cmd_struct->cmd_arg[nb->j], minishell);
+		nb->j++;
 	}
 	ft_remove_quotes(cmd_struct->cmd_arg);
 	if (cmd_struct->infile_fd < 0)

@@ -74,10 +74,12 @@ t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv)
 	t_mini_tools	*mini_tools;
 
 	mini_tools = malloc(sizeof(*mini_tools));
+	ft_check_malloc(mini_tools);
 	mini_tools->envp = ft_cpy_envp(envp, argv);
 	mini_tools->pwd = ft_get_pwd(mini_tools->envp);
 	mini_tools->old_pwd = ft_strdup(mini_tools->pwd);
-	mini_tools->home_directory = ft_get_home(envp);
+	ft_check_malloc(mini_tools->old_pwd);
+	mini_tools->home_directory = ft_gethome(envp);
 	mini_tools->path_unset = 0;
 	return (mini_tools);
 }

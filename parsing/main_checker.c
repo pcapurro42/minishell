@@ -14,10 +14,8 @@
 
 int	ft_analyze_input(char *input, t_mini *minishell)
 {
-	int		i;
 	char	**str;
 
-	i = 0;
 	input = ft_input_cleaner(input);
 	if (input == NULL)
 		return (free(input), 1);

@@ -12,10 +12,36 @@
 
 #include "../minishell.h"
 
+static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
+{
+	char	*gnl;
+
+	write(1, "> ", 2);
+	gnl = get_next_line(0);
+	if (!gnl)
+		exit(0);
+	while (ft_strncmp(gnl, limiter, ft_strlen(gnl)) != '\n')
+	{
+		write(pipe_fd[1], gnl, ft_strlen(gnl));
+		free(gnl);
+		write(1, "> ", 2);
+		gnl = get_next_line(0);
+		if (!gnl)
+		{
+			close(pipe_fd[0]);
+			close(pipe_fd[1]);
+			exit(0);
+		}
+	}
+	free(gnl);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	exit(0);
+}
+
 void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 {
 	int		pid;
-	char	*gnl;
 	int		pipe_fd[2];
 	int		status_code;
 
@@ -25,29 +51,7 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 	if (pid < 0)
 		ft_error();
 	if (pid == 0)
-	{
-		write(1, "> ", 2);
-		gnl = get_next_line(0);
-		if (!gnl)
-			exit(0);
-		while (ft_strncmp(gnl, limiter, ft_strlen(gnl)) != '\n')
-		{
-			write(pipe_fd[1], gnl, ft_strlen(gnl));
-			free(gnl);
-			write(1, "> ", 2);
-			gnl = get_next_line(0);
-			if (!gnl)
-			{
-				close(pipe_fd[0]);
-				close(pipe_fd[1]);
-				exit(0);
-			}
-		}
-		free(gnl);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		exit(0);
-	}
+		ft_here_doc_fork(limiter, pipe_fd);
 	close(pipe_fd[1]);
 	g_global->g_pid = (0 - pid);
 	waitpid(pid, &status_code, 0);
@@ -59,18 +63,5 @@ void	ft_here_doc(t_cmd *cmd_struct, char *limiter)
 		close(pipe_fd[0]);
 		cmd_struct->infile_fd = -2;
 	}
-	return ;
-}
-
-void	file_not_open(t_cmd *cmd_struct, char *file_name)
-{
-	ft_putstr_fd("minishell: ", 2);
-	perror(file_name);
-	cmd_struct->infile_fd = open("minishell_here_doc.tmp", \
-	O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (cmd_struct->infile_fd < 0)
-		ft_error();
-	close(cmd_struct->infile_fd);
-	cmd_struct->infile_fd = open("minishell_here_doc.tmp", O_RDONLY);
 	return ;
 }

@@ -24,6 +24,7 @@ SRCS = minishell.c \
 	execution/add_cmd_arg.c \
 	execution/build_cmd_struct.c \
 	execution/environnement.c \
+	execution/create_env_lines.c \
 	execution/execution_one_cmd.c \
 	builtins/echo.c \
 	builtins/env.c \
@@ -48,6 +49,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
+##	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 $(LIBFT):

@@ -20,10 +20,14 @@ static int	ft_verify_errors_export(char *str)
 	if (ft_strchr_i(str, '=') != -1)
 	{
 		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
+		ft_check_malloc(name_str);
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
+	{
 		name_str = ft_strdup(str);
+		ft_check_malloc(name_str);
+	}
 	i = 0;
 	if ((name_str[i] == '#' || name_str[i] == '&' || \
 	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
@@ -53,10 +57,14 @@ static int	ft_verify_characters_export(char *str)
 	if (ft_strchr_i(str, '=') != -1)
 	{
 		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
+		ft_check_malloc(name_str);
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
+	{
 		name_str = ft_strdup(str);
+		ft_check_malloc(name_str);
+	}
 	i = 0;
 	if ((name_str[i] == '#' || name_str[i] == '&' || \
 	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
@@ -88,10 +96,14 @@ static int	ft_name_in_envp(char *str, char **envp)
 	if (ft_strchr_i(str, '=') != -1)
 	{
 		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
+		ft_check_malloc(name_str);
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
+	{
 		name_str = ft_strdup(str);
+		ft_check_malloc(name_str);
+	}
 	i = 0;
 	while (envp[i])
 	{
@@ -99,10 +111,14 @@ static int	ft_name_in_envp(char *str, char **envp)
 		{
 			name_envp = malloc(sizeof(*name_envp) * \
 			(ft_strchr_i(envp[i], '=') + 1));
+			ft_check_malloc(name_envp);
 			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
 		}
 		else
+		{
 			name_envp = ft_strdup(envp[i]);
+			ft_check_malloc(name_envp);
+		}
 		if (ft_strncmp(name_str, name_envp, ft_strlen(name_str) + 1) == 0)
 		{
 			free(name_str);
@@ -125,10 +141,14 @@ static void	ft_replace_in_envp(char *str, char **envp)
 	if (ft_strchr_i(str, '=') != -1)
 	{
 		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
+		ft_check_malloc(name_str);
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
+	{
 		name_str = ft_strdup(str);
+		ft_check_malloc(name_str);
+	}
 	i = 0;
 	while (envp[i])
 	{
@@ -136,10 +156,14 @@ static void	ft_replace_in_envp(char *str, char **envp)
 		{
 			name_envp = malloc(sizeof(*name_envp) * \
 			(ft_strchr_i(envp[i], '=') + 1));
+			ft_check_malloc(name_envp);
 			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
 		}
 		else
+		{
 			name_envp = ft_strdup(envp[i]);
+			ft_check_malloc(name_envp);
+		}
 		if (ft_strncmp(name_str, name_envp, ft_strlen(name_str) + 1) == 0)
 		{
 			free(name_str);
@@ -207,6 +231,7 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	while (minishell->mini_tools->envp[envp_len])
 		envp_len++;
 	new_envp = malloc(sizeof(*new_envp) * (envp_len + nb_export + 1));
+	ft_check_malloc(new_envp);
 	envp_len = 0;
 	while (minishell->mini_tools->envp[envp_len])
 	{

@@ -96,9 +96,10 @@ int				ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 char			*ft_check_access(t_cmd *cmd_struct);
 
 void			ft_here_doc(t_cmd *cmd_struct, char *limiter);
-void			file_not_open(t_cmd *cmd_struct, char *file_name);
 
 void			ft_add_to_cmd_arg(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
+int				ft_check_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
 
 void			ft_child(int (*fd)[2], int i, t_mini *minishell);
@@ -107,8 +108,14 @@ void			ft_child_one_cmd(int (*fd)[2], int i, t_mini *minishell, \
 
 void			ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, \
 	int i);
-void			ft_build_little_struct_cmd(t_mini *minishell, \
-	t_cmd *cmd_struct, int i);
+void			ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
+void			ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
+void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
+void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+	int i, t_nb *nb);
 
 void			ft_error_msg(char *msg);
 void			ft_error(void);
@@ -133,7 +140,11 @@ void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
 char			**ft_cpy_envp(char *envp[], char **argv);
 
-char			*ft_get_home(char **envp);
+char			*ft_gethome(char **envp);
+char			*ft_getpwd(void);
+char			*ft_getshlvl(void);
+char			*ft_get_(char	*pwd, char	*exec_name);
+void			ft_increase_shlvl(char	**envp);
 
 // #-# PARSING #-# //
 
