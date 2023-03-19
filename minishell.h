@@ -74,7 +74,6 @@ typedef struct s_export
 	int		i;
 }	t_export;
 
-
 t_global	*g_global;
 
 // #-# MAIN #-# //
@@ -126,9 +125,9 @@ void			ft_case_left_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
 void			ft_case_right_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
-void	ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void			ft_case_dbleft_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
-void	ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
+void			ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
 
 void			ft_error_msg(char *msg);
