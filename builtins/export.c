@@ -12,174 +12,7 @@
 
 #include "../minishell.h"
 
-static int	ft_verify_errors_export(char *str)
-{
-	int		i;
-	char	*name_str;
-
-	if (ft_strchr_i(str, '=') != -1)
-	{
-		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
-		ft_check_malloc(name_str);
-		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
-	}
-	else
-	{
-		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
-	i = 0;
-	if ((name_str[i] == '#' || name_str[i] == '&' || \
-	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
-	{
-		free(name_str);
-		return (1);
-	}
-	while (name_str[i] != '=' && name_str[i] != '\0')
-	{
-		if ((ft_isalpha(name_str[i]) == 0 && \
-		ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
-		{
-			free(name_str);
-			return (1);
-		}
-		i++;
-	}
-	free(name_str);
-	return (0);
-}
-
-static int	ft_verify_characters_export(char *str)
-{
-	int		i;
-	char	*name_str;
-
-	if (ft_strchr_i(str, '=') != -1)
-	{
-		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
-		ft_check_malloc(name_str);
-		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
-	}
-	else
-	{
-		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
-	i = 0;
-	if ((name_str[i] == '#' || name_str[i] == '&' || \
-	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
-	{
-		free(name_str);
-		return (1);
-	}
-	while (name_str[i] != '=' && name_str[i] != '\0')
-	{
-		if ((ft_isalpha(name_str[i]) == 0 && \
-		ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
-		{
-			free(name_str);
-			return (printf("minishell: export: '%s': \
-not a valid identifier\n", str));
-		}
-		i++;
-	}
-	free(name_str);
-	return (0);
-}
-
-static int	ft_name_in_envp(char *str, char **envp)
-{
-	char	*name_str;
-	char	*name_envp;
-	int		i;
-
-	if (ft_strchr_i(str, '=') != -1)
-	{
-		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
-		ft_check_malloc(name_str);
-		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
-	}
-	else
-	{
-		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strchr_i(envp[i], '=') != -1)
-		{
-			name_envp = malloc(sizeof(*name_envp) * \
-			(ft_strchr_i(envp[i], '=') + 1));
-			ft_check_malloc(name_envp);
-			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
-		}
-		else
-		{
-			name_envp = ft_strdup(envp[i]);
-			ft_check_malloc(name_envp);
-		}
-		if (ft_strncmp(name_str, name_envp, ft_strlen(name_str) + 1) == 0)
-		{
-			free(name_str);
-			free(name_envp);
-			return (0);
-		}
-		free(name_envp);
-		i++;
-	}
-	free(name_str);
-	return (1);
-}
-
-static void	ft_replace_in_envp(char *str, char **envp)
-{
-	char	*name_str;
-	char	*name_envp;
-	int		i;
-
-	if (ft_strchr_i(str, '=') != -1)
-	{
-		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
-		ft_check_malloc(name_str);
-		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
-	}
-	else
-	{
-		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strchr_i(envp[i], '=') != -1)
-		{
-			name_envp = malloc(sizeof(*name_envp) * \
-			(ft_strchr_i(envp[i], '=') + 1));
-			ft_check_malloc(name_envp);
-			ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
-		}
-		else
-		{
-			name_envp = ft_strdup(envp[i]);
-			ft_check_malloc(name_envp);
-		}
-		if (ft_strncmp(name_str, name_envp, ft_strlen(name_str) + 1) == 0)
-		{
-			free(name_str);
-			free(name_envp);
-			free(envp[i]);
-			envp[i] = ft_strdup(str);
-			ft_check_malloc(envp[i]);
-			return ;
-		}
-		free(name_envp);
-		i++;
-	}
-	free(name_str);
-}
-
-void	ft_export_no_arg_builtins(char **envp)
+static void	ft_export_no_arg_builtins(char **envp)
 {
 	int	i;
 
@@ -204,15 +37,11 @@ void	ft_export_no_arg_builtins(char **envp)
 	return ;
 }
 
-int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
+static int	ft_export_builtins_nb_export(char **cmd_arg, t_mini *minishell)
 {
-	char	**new_envp;
-	int		return_code;
-	int		envp_len;
 	int		nb_export;
 	int		i;
 
-	return_code = 0;
 	nb_export = 0;
 	i = 0;
 	while (cmd_arg[i + 1])
@@ -227,43 +56,70 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 		ft_export_no_arg_builtins(minishell->mini_tools->envp);
 		return (0);
 	}
-	envp_len = 0;
-	while (minishell->mini_tools->envp[envp_len])
-		envp_len++;
-	new_envp = malloc(sizeof(*new_envp) * (envp_len + nb_export + 1));
-	ft_check_malloc(new_envp);
-	envp_len = 0;
-	while (minishell->mini_tools->envp[envp_len])
+	return (i);
+}
+
+static void	ft_export_builtins_3(char **cmd_arg, t_mini *minishell, \
+t_export *export_nb, char **new_envp)
+{
+	if (ft_strncmp(cmd_arg[export_nb->i + 1], "PATH=", \
+	ft_strlen("PATH=")) == 0)
+		minishell->mini_tools->path_unset = 0;
+	new_envp[export_nb->envp_len + export_nb->nb_export] = \
+	ft_strdup(cmd_arg[export_nb->i + 1]);
+	export_nb->nb_export++;
+}
+
+static void	ft_export_builtins_2(char **cmd_arg, t_mini *minishell, \
+char **new_envp, t_export *export_nb)
+{
+	export_nb->return_code = 0;
+	export_nb->nb_export = 0;
+	export_nb->i = 0;
+	while (cmd_arg[export_nb->i + 1])
 	{
-		new_envp[envp_len] = minishell->mini_tools->envp[envp_len];
-		envp_len++;
-	}
-	i = 0;
-	nb_export = 0;
-	while (cmd_arg[i + 1])
-	{
-		if (ft_verify_errors_export(cmd_arg[i + 1]) == 0)
+		if (ft_verify_errors_export(cmd_arg[export_nb->i + 1]) == 0)
 		{
-			if (ft_name_in_envp(cmd_arg[i + 1], \
+			if (ft_name_in_envp(cmd_arg[export_nb->i + 1], \
 			minishell->mini_tools->envp) == 1)
-			{
-				if (ft_strncmp(cmd_arg[i + 1], "PATH=", \
-				ft_strlen("PATH=")) == 0)
-					minishell->mini_tools->path_unset = 0;
-				new_envp[envp_len + nb_export] = ft_strdup(cmd_arg[i + 1]);
-				nb_export++;
-			}
+				ft_export_builtins_3(cmd_arg, minishell, export_nb, new_envp);
 			else
-				ft_replace_in_envp(cmd_arg[i + 1], new_envp);
+				ft_replace_in_envp(cmd_arg[export_nb->i + 1], new_envp);
 		}
 		else
-			return_code = 1;
-		i++;
+			export_nb->return_code = 1;
+		export_nb->i++;
 	}
-	new_envp[envp_len + nb_export] = NULL;
+	new_envp[export_nb->envp_len + export_nb->nb_export] = NULL;
+}
+
+int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
+{
+	char		**new_envp;
+	t_export	*export_nb;
+
+	export_nb = malloc(sizeof(*export_nb));
+	ft_check_malloc(export_nb);
+	export_nb->nb_export = ft_export_builtins_nb_export(cmd_arg, minishell);
+	if (export_nb->nb_export == 0)
+		return (0);
+	export_nb->envp_len = 0;
+	while (minishell->mini_tools->envp[export_nb->envp_len])
+		export_nb->envp_len++;
+	new_envp = malloc(sizeof(*new_envp) * (export_nb->envp_len + \
+	export_nb->nb_export + 1));
+	ft_check_malloc(new_envp);
+	export_nb->envp_len = 0;
+	while (minishell->mini_tools->envp[export_nb->envp_len])
+	{
+		new_envp[export_nb->envp_len] = \
+		minishell->mini_tools->envp[export_nb->envp_len];
+		export_nb->envp_len++;
+	}
+	ft_export_builtins_2(cmd_arg, minishell, new_envp, export_nb);
 	free(minishell->mini_tools->envp);
 	minishell->mini_tools->envp = new_envp;
-	return (return_code);
+	return (export_nb->return_code);
 }
 
 // modif variable
