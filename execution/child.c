@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 22:57:26 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:12:47 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 	if (cmd_struct->infile_fd == -2 || cmd_struct->outfile_fd == -2)
 		exit(1);
 	if (!cmd_struct->cmd_arg)
-		ft_error();
+		exit(0);
 	ft_child_dup(fd, i, minishell, cmd_struct);
 	ft_check_builtins(minishell, cmd_struct);
 	cmd_path = ft_check_access(cmd_struct);
@@ -93,7 +93,7 @@ t_mini *minishell, t_cmd *cmd_struct)
 	char	*cmd_path;
 
 	if (!cmd_struct->cmd_arg)
-		ft_error();
+		exit(0);
 	ft_child_dup(fd, i, minishell, cmd_struct);
 	ft_check_builtins(minishell, cmd_struct);
 	cmd_path = ft_check_access(cmd_struct);

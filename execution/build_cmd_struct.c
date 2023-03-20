@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 12:38:28 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 22:50:03 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:10:24 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 	if (ft_check_chevron(minishell, cmd_struct, i, nb) == 1)
 		return ;
 	nb->j = 0;
-	while (cmd_struct->cmd_arg[nb->j] != NULL)
+	while (cmd_struct->cmd_arg && cmd_struct->cmd_arg[nb->j] != NULL)
 	{
 		if (ft_strchr(cmd_struct->cmd_arg[nb->j], '~') != NULL)
 			cmd_struct->cmd_arg[nb->j] = ft_replace_tilde(\
