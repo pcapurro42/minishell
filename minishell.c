@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/16 22:54:07 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:42:00 by pcapurro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int	main(int argc, char **argv, char *envp[])
 				g_global->g_last_return_code = 258;
 		ft_destroy_mini(minishell);
 		free(input);
+		system("leaks minishell");
+		exit(0);
 	}
 	return (0);
 }

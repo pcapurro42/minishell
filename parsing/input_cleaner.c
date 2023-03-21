@@ -128,7 +128,8 @@ char	*ft_substitute_str(char *str)
 	int		dquote;
 	int		quote;
 	char	*strf;
-	char	*temp;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	dquote = 0;
@@ -154,12 +155,14 @@ char	*ft_substitute_str(char *str)
 	{
 		if (str[i] != -1)
 		{
-			temp = ft_strdup(strf);
-			ft_check_malloc(temp);
+			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
-			strf = ft_strjoin(temp, ft_char_to_str(str[i]));
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
 			ft_check_malloc(strf);
-			free(temp);
+			free(temp1);
+			free(temp2);
 		}
 		i++;
 	}

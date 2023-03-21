@@ -53,7 +53,8 @@ void	ft_add_to_cmd_arg(t_mini *minishell, t_cmd *cmd_struct, \
 	nb->id_str_to_add = 0;
 	while (nb->id_str_to_add < nb->nb_to_add)
 	{
-		cmd_struct->cmd_arg[nb->len_cmd_arg] = minishell->cmd_lst[i][nb->j];
+		cmd_struct->cmd_arg[nb->len_cmd_arg] = \
+		ft_strdup(minishell->cmd_lst[i][nb->j]);
 		nb->j++;
 		nb->len_cmd_arg++;
 		nb->id_str_to_add++;

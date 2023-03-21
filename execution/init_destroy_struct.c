@@ -32,7 +32,8 @@ void	ft_destroy_cmd(t_cmd *cmd_struct)
 	{
 		if (cmd_struct->cmd_path_lst)
 			pls_free(cmd_struct->cmd_path_lst);
-		free(cmd_struct->cmd_arg);
+		if (cmd_struct->cmd_arg)
+			pls_free(cmd_struct->cmd_arg);
 		free(cmd_struct);
 	}
 }
