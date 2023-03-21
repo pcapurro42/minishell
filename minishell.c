@@ -120,7 +120,7 @@ int	main(int argc, char **argv, char *envp[])
 				g_global->g_last_return_code = 258;
 		ft_destroy_mini(minishell);
 		free(input);
+		// system("leaks minishell");
 	}
-	exit(0);
 	return (0);
 }

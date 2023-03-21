@@ -102,7 +102,7 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	ft_check_malloc(export_nb);
 	export_nb->nb_export = ft_export_builtins_nb_export(cmd_arg, minishell);
 	if (export_nb->nb_export == 0)
-		return (0);
+		return (free(export_nb), 0);
 	export_nb->envp_len = 0;
 	while (minishell->mini_tools->envp[export_nb->envp_len])
 		export_nb->envp_len++;
@@ -119,7 +119,7 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	ft_export_builtins_2(cmd_arg, minishell, new_envp, export_nb);
 	free(minishell->mini_tools->envp);
 	minishell->mini_tools->envp = new_envp;
-	return (export_nb->return_code);
+	return (free(export_nb), export_nb->return_code);
 }
 
 // modif variable

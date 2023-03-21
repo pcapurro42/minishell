@@ -19,6 +19,8 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	input = ft_input_cleaner(input);
 	if (input == NULL)
 		return (free(input), 1);
+	if (ft_strncmp(input, "quoi", ft_strlen(input)) == 0)
+		return (free(input), printf("feur !! 🤣😹😹\n"), 0);
 	str = ft_split(input, ' ');
 	free(input);
 	ft_check_malloc(str);

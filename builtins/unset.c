@@ -97,11 +97,13 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 			minishell->mini_tools->path_unset = 1;
 		while (minishell->mini_tools->envp[j] != NULL)
 		{
-			if (ft_strncmp(cmd_arg[i], minishell->mini_tools->envp[j], ft_strlen(cmd_arg[i])) == 0)
+			temp = ft_strjoin(minishell->mini_tools->envp[j], "=");
+			if (ft_strncmp(cmd_arg[i], temp, ft_strlen(cmd_arg[i])) == 0)
 			{
 				cmd_arg[i][0] = -1;
 				minishell->mini_tools->envp[j][0] = -1;
 			}
+			free(temp);
 			j++;
 		}
 		j = 0;
