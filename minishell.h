@@ -49,6 +49,7 @@ typedef struct s_mini_tools
 	char	*home_directory;
 	char	**envp;
 	int		path_unset;
+	int		quoifeur;
 }	t_mini_tools;
 
 typedef struct s_mini

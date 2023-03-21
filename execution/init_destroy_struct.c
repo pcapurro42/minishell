@@ -82,5 +82,6 @@ t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv)
 	ft_check_malloc(mini_tools->old_pwd);
 	mini_tools->home_directory = ft_gethome(envp);
 	mini_tools->path_unset = 0;
+	mini_tools->quoifeur = 0;
 	return (mini_tools);
 }
