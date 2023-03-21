@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:38:04 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/07 10:28:56 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:28:19 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,12 +172,17 @@ char	*ft_substitute_str(char *str)
 char	**ft_remove_quotes(char **cmd_arg)
 {
 	int		i;
+	char	*new_arg;
 
 	i = 0;
 	while (cmd_arg && cmd_arg[i] != NULL)
 	{
 		if (ft_strchr(cmd_arg[i], 34) != NULL || ft_strchr(cmd_arg[i], 39) != NULL)
-			cmd_arg[i] = ft_substitute_str(cmd_arg[i]);
+		{
+			new_arg = ft_substitute_str(cmd_arg[i]);
+			free(cmd_arg[i]);
+			cmd_arg[i] = new_arg;
+		}
 		i++;
 	}
 	return (cmd_arg);
