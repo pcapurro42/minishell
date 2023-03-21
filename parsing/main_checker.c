@@ -42,8 +42,6 @@ void	ft_handle_quoi_feur(t_mini *minishell)
 		printf("feur !! 🤣😹 (tu l'as ? 😹😹)\n");
 	if (minishell->mini_tools->quoifeur == 4)
 		printf("feur !!!!! 🤣🤣😹😹😹 (tu l'as ou pas ? 🤣)\n");
-	if (minishell->mini_tools->quoifeur > 4)
-		printf("feur\n");
 	minishell->mini_tools->quoifeur++;
 }
 
