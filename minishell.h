@@ -163,6 +163,8 @@ void			ft_increase_shlvl(char	**envp);
 // #-# PARSING #-# //
 
 int				ft_analyze_input(char *input, t_mini *minishell);
+int				ft_is_it_quoi(char *input);
+void			ft_handle_quoi_feur(t_mini *minishell);
 char			***ft_share_off(char **str);
 
 // CLEANERS //

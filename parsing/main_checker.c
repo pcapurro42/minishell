@@ -43,7 +43,7 @@ void	ft_handle_quoi_feur(t_mini *minishell)
 	if (minishell->mini_tools->quoifeur == 4)
 		printf("feur !!!!! 🤣🤣😹😹😹 (tu l'as ou pas ? 🤣)\n");
 	if (minishell->mini_tools->quoifeur > 4)
-		printf("minishell: feur: command not found\n");
+		printf("minishell: feur: command not found (you broke feur...)\n");
 	minishell->mini_tools->quoifeur++;
 }
 
@@ -68,5 +68,3 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	ft_execution(minishell);
 	return (0);
 }
-
-// exit $USER '$USER' "'$USER'" << EOF ls >> f ls > > f cat | ls|grep "fefeqf  fq      fefeqef" ' fqfeqfeqfe f  fq'
