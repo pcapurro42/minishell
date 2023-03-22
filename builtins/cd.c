@@ -34,9 +34,11 @@ static char	*ft_last_clean(char *str)
 		if (str[i] != -1)
 		{
 			temp1 = ft_strdup(strf);
+			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
+			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
@@ -80,17 +82,21 @@ static char	*ft_first_clean(char **cmd_arg)
 		while (cmd_arg[i][j] != '\0')
 		{
 			temp1 = ft_strdup(str);
+			ft_check_malloc(temp1);
 			free(str);
 			temp2 = ft_char_to_str(cmd_arg[i][j++]);
 			str = ft_strjoin(temp1, temp2);
+			ft_check_malloc(str);
 			free(temp1);
 			free(temp2);
 		}
 		if (cmd_arg[i][j - 1] == 92)
 		{
 			temp1 = ft_strdup(str);
+			ft_check_malloc(temp1);
 			free(str);
 			str = ft_strjoin(temp1, " ");
+			ft_check_malloc(str);
 			free(temp1);
 		}
 		else
@@ -111,8 +117,8 @@ static char	**ft_fix_args(char **cmd_arg)
 	if (ft_verify_args(str) != 0)
 		return (NULL);
 	strf = ft_split(str, '/');
-	free(str);
 	ft_check_malloc(strf);
+	free(str);
 	return (strf);
 }
 
@@ -170,9 +176,12 @@ static int	ft_update_oldpwd(t_mini *minishell, char *path)
 		{
 			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strdup("OLDPWD=");
+			ft_check_malloc(minishell->mini_tools->envp[i]);
 			temp = ft_strdup(minishell->mini_tools->envp[i]);
+			ft_check_malloc(temp);
 			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strjoin(temp, path);
+			ft_check_malloc(minishell->mini_tools->envp[i]);
 			free(temp);
 			free(minishell->mini_tools->old_pwd);
 			minishell->mini_tools->old_pwd = ft_strdup(path);
@@ -197,9 +206,12 @@ static int	ft_update_pwd(t_mini *minishell, char *path)
 		{
 			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strdup("PWD=");
+			ft_check_malloc(minishell->mini_tools->envp[i]);
 			temp = ft_strdup(minishell->mini_tools->envp[i]);
+			ft_check_malloc(temp);
 			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strjoin(temp, path);
+			ft_check_malloc(minishell->mini_tools->envp[i]);
 			free(temp);
 			free(minishell->mini_tools->pwd);
 			minishell->mini_tools->pwd = ft_strdup(path);
@@ -238,9 +250,11 @@ static char	*ft_step_back(char *path)
 	while (str[i] != '\0' && str[i] != -1)
 	{
 		temp1 = ft_strdup(strf);
+		ft_check_malloc(temp1);
 		free(strf);
 		temp2 = ft_char_to_str(str[i++]);
 		strf = ft_strjoin(temp1, temp2);
+		ft_check_malloc(strf);
 		free(temp1);
 		free(temp2);
 	}
@@ -311,6 +325,7 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 				while (access(path, F_OK) != 0)
 				{
 					temp = ft_strdup(path);
+					ft_check_malloc(temp);
 					free(path);
 					path = ft_step_back(temp);
 					free(temp);
@@ -352,9 +367,12 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *argu
 		else
 		{
 			path = ft_strjoin(minishell->mini_tools->pwd, "/");
+			ft_check_malloc(path);
 			temp = ft_strdup(path);
+			ft_check_malloc(temp);
 			free(path);
 			path = ft_strjoin(temp, cmd_arg[i]);
+			ft_check_malloc(path);
 			free(temp);
 			j = chdir(path);
 			if (access(path, F_OK) == -1)

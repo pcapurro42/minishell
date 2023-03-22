@@ -50,6 +50,7 @@ void	ft_handle_quoi_feur(t_mini *minishell)
 int	ft_analyze_input(char *input, t_mini *minishell)
 {
 	char	**str;
+	char	***strf;
 
 	input = ft_input_cleaner(input);
 	if (input == NULL)
@@ -63,7 +64,8 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	if (ft_syntax_checker(str) != 0)
 		return (pls_free(str), 1);
 	ft_check_variables(str, minishell);
-	minishell->cmd_lst = ft_share_off(str);
+	strf = ft_share_off(str);
+	minishell->cmd_lst = strf;
 	pls_free(str);
 	ft_execution(minishell);
 	return (0);
