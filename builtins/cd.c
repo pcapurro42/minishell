@@ -373,6 +373,8 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 
 	i = 0;
 	absolute = 0;
+	system("leaks minishell");
+	exit(0);
 	arguments = ft_first_clean(cmd_arg);
 	if (cmd_arg[1] != NULL && ((cmd_arg[1][0] == '/') || (cmd_arg[1][0] == '~' && cmd_arg[1][1] == '\0')))
 		absolute++;

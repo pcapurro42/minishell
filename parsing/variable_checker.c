@@ -214,9 +214,11 @@ char	*ft_replace_tilde(char *str, t_mini *minishell)
 {
 	int		i;
 	char	*strf;
+	char	*temp;
 
 	i = 0;
 	strf = ft_strdup("");
+	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] != '~')
@@ -224,12 +226,23 @@ char	*ft_replace_tilde(char *str, t_mini *minishell)
 		else
 		{
 			if (ft_to_do_tilde(str) != 0)
-				strf = ft_strjoin(strf, minishell->mini_tools->home_directory);
+			{
+				temp = ft_strdup(strf);
+				free(strf);
+				strf = ft_strjoin(temp, minishell->mini_tools->home_directory);
+				free(temp);
+			}
 			else
-				strf = ft_strjoin(strf, "~");
+			{
+				temp = ft_strdup(strf);
+				free(strf);
+				strf = ft_strjoin(temp, "~");
+				free(temp);
+			}
 		}
 		i++;
 	}
+	free(str);
 	return (strf);
 }
 
