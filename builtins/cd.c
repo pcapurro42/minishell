@@ -392,17 +392,3 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 		return (1);
 	return (0);
 }
-
-// FONCTIONS À UTILISER :
-//
-// - chdir (= change et vérifie les DOSSIERS)
-// - getcwd (= obtenir le répertoire courant)
-// - access (=/)
-
-// CAS À GÉRER :
-//
-// - "-" (= aller dans le répertoire ou l'on se trouvait avant)
-// - "." (= ne fait rien...)
-// - ".." (= recule de un)
-// - " " (= redirige sur $HOME)
-// - "~" (= redirige sur $HOME sans passer par $HOME)
