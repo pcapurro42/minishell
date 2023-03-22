@@ -102,7 +102,7 @@ int	main(int argc, char **argv, char *envp[])
 	ft_clean_stdin();
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
-	while (6)
+	while ((((6 * 6 == 36) != 4) != 0))
 	{
 		g_global->g_pid = -2147483648;
 		minishell = ft_init_mini(mini_tools);
