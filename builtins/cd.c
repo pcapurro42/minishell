@@ -16,6 +16,8 @@ static char	*ft_last_clean(char *str)
 {
 	int		i;
 	char	*strf;
+	char	*temp1;
+	char	*temp2;
 
 	i = 0;
 	strf = ft_strdup("");
@@ -30,9 +32,17 @@ static char	*ft_last_clean(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] != -1)
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		{
+			temp1 = ft_strdup(strf);
+			free(strf);
+			temp2 = ft_char_to_str(str[i]);
+			strf = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 		i++;
 	}
+	free(str);
 	return (strf);
 }
 
@@ -58,6 +68,8 @@ static char	*ft_first_clean(char **cmd_arg)
 	int		i;
 	int		j;
 	char	*str;
+	char	*temp1;
+	char	*temp2;
 
 	i = 1;
 	j = 0;
@@ -66,9 +78,21 @@ static char	*ft_first_clean(char **cmd_arg)
 	while (cmd_arg[i] != NULL)
 	{
 		while (cmd_arg[i][j] != '\0')
-			str = ft_strjoin(str, ft_char_to_str(cmd_arg[i][j++]));
+		{
+			temp1 = ft_strdup(str);
+			free(str);
+			temp2 = ft_char_to_str(cmd_arg[i][j++]);
+			str = ft_strjoin(temp1, temp2);
+			free(temp1);
+			free(temp2);
+		}
 		if (cmd_arg[i][j - 1] == 92)
-			str = ft_strjoin(str, " ");
+		{
+			temp1 = ft_strdup(str);
+			free(str);
+			str = ft_strjoin(temp1, " ");
+			free(temp1);
+		}
 		else
 			break ;
 		i++;
@@ -87,6 +111,7 @@ static char	**ft_fix_args(char **cmd_arg)
 	if (ft_verify_args(str) != 0)
 		return (NULL);
 	strf = ft_split(str, '/');
+	free(str);
 	ft_check_malloc(strf);
 	return (strf);
 }
@@ -126,27 +151,33 @@ static char	*ft_get_variable_again(t_mini *minishell, int a)
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		if (ft_strncmp(str, minishell->mini_tools->envp[i], ft_strlen(str)) == 0)
-			return (minishell->mini_tools->envp[i] + ft_strlen(str));
+			return (free(str), (minishell->mini_tools->envp[i] + ft_strlen(str)));
 		i++;
 	}
+	free(str);
 	return (NULL);
 }
 
 static int	ft_update_oldpwd(t_mini *minishell, char *path)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		if (ft_strncmp("OLDPWD=", minishell->mini_tools->envp[i], 7) == 0)
 		{
+			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strdup("OLDPWD=");
-			minishell->mini_tools->envp[i] = ft_strjoin(minishell->mini_tools->envp[i], path);
+			temp = ft_strdup(minishell->mini_tools->envp[i]);
+			free(minishell->mini_tools->envp[i]);
+			minishell->mini_tools->envp[i] = ft_strjoin(temp, path);
+			free(temp);
+			free(minishell->mini_tools->old_pwd);
 			minishell->mini_tools->old_pwd = ft_strdup(path);
 			ft_check_malloc(minishell->mini_tools->envp[i]);
 			ft_check_malloc(minishell->mini_tools->old_pwd);
-
 			return (0);
 		}
 		i++;
@@ -156,20 +187,30 @@ static int	ft_update_oldpwd(t_mini *minishell, char *path)
 
 static int	ft_update_pwd(t_mini *minishell, char *path)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	i = 0;
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		if (ft_strncmp("PWD=", minishell->mini_tools->envp[i], 4) == 0)
 		{
+			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strdup("PWD=");
-			minishell->mini_tools->envp[i] = ft_strjoin(minishell->mini_tools->envp[i], path);
+			temp = ft_strdup(minishell->mini_tools->envp[i]);
+			free(minishell->mini_tools->envp[i]);
+			minishell->mini_tools->envp[i] = ft_strjoin(temp, path);
+			free(temp);
+			free(minishell->mini_tools->pwd);
 			minishell->mini_tools->pwd = ft_strdup(path);
+			ft_check_malloc(minishell->mini_tools->envp[i]);
+			ft_check_malloc(minishell->mini_tools->pwd);
+			free(path);
 			return (0);
 		}
 		i++;
 	}
+	free(path);
 	return (1);
 }
 
@@ -178,6 +219,8 @@ static char	*ft_step_back(char *path)
 	int		i;
 	char	*str;
 	char	*strf;
+	char	*temp1;
+	char	*temp2;
 
 	if (path == NULL)
 		return (NULL);
@@ -188,19 +231,20 @@ static char	*ft_step_back(char *path)
 	ft_check_malloc(strf);
 	str[i] = -1;
 	while (i != 0 && str[i] != '/')
-	{
-		str[i] = -1;
-		i--;
-	}
-	if (i != 1)
+		str[i--] = -1;
+	if (i != 0)
 		str[i] = -1;
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str[i] != -1)
 	{
-		if (str[i] != -1)
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
-		i++;
+		temp1 = ft_strdup(strf);
+		free(strf);
+		temp2 = ft_char_to_str(str[i++]);
+		strf = ft_strjoin(temp1, temp2);
+		free(temp1);
+		free(temp2);
 	}
+	free(str);
 	return (strf);
 }
 
@@ -208,6 +252,7 @@ static int	ft_handle_exception(t_mini *minishell, char *arguments)
 {
 	int		i;
 	char	*path;
+	char	*temp;
 
 	if (ft_get_variable_again(minishell, 3) == NULL)
 		return (printf("minishell: cd: OLDPWD not set\n"));
@@ -220,8 +265,9 @@ static int	ft_handle_exception(t_mini *minishell, char *arguments)
 	if (i != 0)
 		return (printf("minishell: cd: an error occured\n"));
 	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-	if (getcwd(NULL, 1) != NULL)
-		ft_update_pwd(minishell, getcwd(NULL, 1));
+	temp = getcwd(NULL, 1);
+	if (temp != NULL)
+		ft_update_pwd(minishell, temp);
 	else
 		return (printf("minishell: cd: an error occured\n"));
 	printf("%s\n", minishell->mini_tools->pwd);
@@ -232,6 +278,7 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 {
 	int		i;
 	char	*path;
+	char	*temp;
 
 	if (str == NULL) // cd " "
 	{
@@ -246,8 +293,9 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 		if (i != 0)
 			return (printf("minishell: cd: an error occured\n"));
 		ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-		if (getcwd(NULL, 1) != NULL)
-			ft_update_pwd(minishell, getcwd(NULL, 1));
+		temp = getcwd(NULL, 1);
+		if (temp != NULL)
+			ft_update_pwd(minishell, temp);
 		else
 			return (printf("minishell: cd: an error occured\n"));
 	}
@@ -255,13 +303,18 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	{
 		if (ft_strlen(str) == 2)
 		{
-			if (str[0] == '.' && str[1] == '.' && ft_strlen(minishell->mini_tools->pwd) > 1)
+			if (str[0] == '.' && str[1] == '.' && ft_strlen(minishell->mini_tools->pwd) > 1) // cd ".."
 			{
 				path = ft_step_back(minishell->mini_tools->pwd);
 				if (access(path, F_OK) == 0 && access(path, X_OK) == -1)
-					return (printf("minishell: cd: %s/: Permission denied\n", arguments));
+					return (free(path), printf("minishell: cd: %s/: Permission denied\n", arguments));
 				while (access(path, F_OK) != 0)
-					path = ft_step_back(path);
+				{
+					temp = ft_strdup(path);
+					free(path);
+					path = ft_step_back(temp);
+					free(temp);
+				}
 				i = chdir(path);
 				if (access(path, F_OK) == -1)
 					return (printf("minishell: cd: %s/: No such file or directory\n", arguments));
@@ -269,9 +322,11 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 					return (printf("minishell: cd: %s/: Permission denied\n", arguments));
 				if (i != 0)
 					return (printf("minishell: cd: an error occured\n"));
-				ft_update_oldpwd(minishell, ft_get_variable_again(minishell, 2));
-				if (getcwd(NULL, 1) != NULL)
-					ft_update_pwd(minishell, getcwd(NULL, 1));
+				ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+				free(path);
+				temp = getcwd(NULL, 1);
+				if (temp != NULL)
+					ft_update_pwd(minishell, temp);
 				else
 					return (printf("minishell: cd: an error occured\n"));
 			}
@@ -280,14 +335,12 @@ static int	ft_handle_operator(t_mini *minishell, char *str, char *arguments)
 	return (0);
 }
 
-// minishell: cd: %s: No such file or directory\n
-// minishell: cd: %s: Permission denied\n
-
 static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *arguments)
 {
 	int		i;
 	int		j;
 	char	*path;
+	char	*temp;
 
 	i = 0;
 	while (cmd_arg[i] != NULL)
@@ -299,17 +352,22 @@ static int	ft_handle_relative_path(t_mini *minishell, char **cmd_arg, char *argu
 		else
 		{
 			path = ft_strjoin(minishell->mini_tools->pwd, "/");
-			path = ft_strjoin(path, cmd_arg[i]);
+			temp = ft_strdup(path);
+			free(path);
+			path = ft_strjoin(temp, cmd_arg[i]);
+			free(temp);
 			j = chdir(path);
 			if (access(path, F_OK) == -1)
-				return (printf("minishell: cd: %s: No such file or directory\n", arguments));
+				return (free(path), printf("minishell: cd: %s: No such file or directory\n", arguments));
 			if (access(path, X_OK) == -1)
-				return (printf("minishell: cd: %s: Permission denied\n", arguments));
+				return (free(path), printf("minishell: cd: %s: Permission denied\n", arguments));
 			if (j != 0)
-				return (printf("minishell: cd: an error occured\n"));
+				return (free(path), printf("minishell: cd: an error occured\n"));
+			free(path);
 			ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-			if (getcwd(NULL, 1) != NULL)
-				ft_update_pwd(minishell, getcwd(NULL, 1));
+			temp = getcwd(NULL, 1);
+			if (temp != NULL)
+				ft_update_pwd(minishell, temp);
 			else
 				return (printf("minishell: cd: an error occured\n"));
 		}
@@ -322,6 +380,7 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 {
 	int		i;
 	char	*path;
+	char	*temp;
 
 	if (cmd_arg != NULL && cmd_arg[0] != NULL && cmd_arg[0][0] == '~') // cd "~"
 	{
@@ -335,10 +394,12 @@ static int	ft_handle_absolute_path(t_mini *minishell, char **cmd_arg, char *argu
 		if (i != 0)
 			return (printf("minishell: cd: an error occured\n"));
 		ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
-		if (getcwd(NULL, 1) != NULL)
-			ft_update_pwd(minishell, getcwd(NULL, 1));
+		temp = getcwd(NULL, 1);
+		if (temp != NULL)
+			ft_update_pwd(minishell, temp);
 		else
 			return (printf("minishell: cd: an error occured\n"));
+		free(temp);
 		ft_handle_relative_path(minishell, cmd_arg + 1, arguments);
 	}
 	else // cd "/"
@@ -369,12 +430,11 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 {
 	int		i;
 	int		absolute;
+	char	**str;
 	char	*arguments;
 
 	i = 0;
 	absolute = 0;
-	system("leaks minishell");
-	exit(0);
 	arguments = ft_first_clean(cmd_arg);
 	if (cmd_arg[1] != NULL && ((cmd_arg[1][0] == '/') || (cmd_arg[1][0] == '~' && cmd_arg[1][1] == '\0')))
 		absolute++;
@@ -382,14 +442,16 @@ int	ft_cd_builtins(char **cmd_arg, t_mini *minishell)
 		i = ft_handle_operator(minishell, cmd_arg[1], arguments);
 	else
 	{
-		cmd_arg = ft_fix_args(cmd_arg);
-		if (cmd_arg == NULL)
+		str = ft_fix_args(cmd_arg);
+		if (str == NULL)
 			return (1);
-		if (cmd_arg[0] == NULL || absolute != 0)
-			i = ft_handle_absolute_path(minishell, cmd_arg, arguments);
+		if (str[0] == NULL || absolute != 0)
+			i = ft_handle_absolute_path(minishell, str, arguments);
 		else
-			i = ft_handle_relative_path(minishell, cmd_arg, arguments);
+			i = ft_handle_relative_path(minishell, str, arguments);
+		pls_free(str);
 	}
+	free(arguments);
 	if (i != 0)
 		return (1);
 	return (0);
