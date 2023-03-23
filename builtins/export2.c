@@ -43,10 +43,7 @@ int	ft_verify_errors_export(char *str)
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
-	{
 		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
 	if (ft_verify_errors_export_2(name_str) == 1)
 	{
 		free(name_str);
@@ -89,10 +86,7 @@ int	ft_verify_characters_export(char *str)
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
-	{
 		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
 	if (ft_verify_characters_export_2(str, name_str) == 1)
 	{
 		free(name_str);

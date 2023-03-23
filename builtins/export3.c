@@ -13,7 +13,7 @@
 #include "../minishell.h"
 
 static int	ft_name_in_envp_2(char *name_str, char **envp, int *i)
-{	
+{
 	char	*name_envp;
 
 	while (envp[*i])
@@ -26,10 +26,7 @@ static int	ft_name_in_envp_2(char *name_str, char **envp, int *i)
 			ft_strlcpy(name_envp, envp[*i], ft_strchr_i(envp[*i], '=') + 1);
 		}
 		else
-		{
 			name_envp = ft_strdup(envp[*i]);
-			ft_check_malloc(name_envp);
-		}
 		if (ft_strncmp(name_str, name_envp, ft_strlen(name_str) + 1) == 0)
 		{
 			free(name_envp);
@@ -53,10 +50,7 @@ int	ft_name_in_envp(char *str, char **envp)
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
 	}
 	else
-	{
 		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
-	}
 	i = 0;
 	if (ft_name_in_envp_2(name_str, envp, &i) == 0)
 	{
@@ -79,10 +73,7 @@ static char	*ft_create_name_envp(char **envp, int i)
 		ft_strlcpy(name_envp, envp[i], ft_strchr_i(envp[i], '=') + 1);
 	}
 	else
-	{
 		name_envp = ft_strdup(envp[i]);
-		ft_check_malloc(name_envp);
-	}
 	return (name_envp);
 }
 
@@ -100,7 +91,6 @@ static void	ft_replace_in_envp_2(char *str, char *name_str, char **envp)
 			free(name_envp);
 			free(envp[i]);
 			envp[i] = ft_strdup(str);
-			ft_check_malloc(envp[i]);
 			return ;
 		}
 		free(name_envp);
@@ -122,7 +112,6 @@ void	ft_replace_in_envp(char *str, char **envp)
 	else
 	{
 		name_str = ft_strdup(str);
-		ft_check_malloc(name_str);
 	}
 	ft_replace_in_envp_2(str, name_str, envp);
 	free(name_str);

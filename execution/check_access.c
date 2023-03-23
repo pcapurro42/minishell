@@ -23,7 +23,6 @@ char	*ft_check_access(t_cmd *cmd_struct)
 	{
 		cmd_path = ft_strjoin(cmd_struct->cmd_path_lst[j], \
 			cmd_struct->cmd_arg[0]);
-		ft_check_malloc(cmd_path);
 		if (access(cmd_path, F_OK) == 0 && access(cmd_path, X_OK) == 0)
 			return (cmd_path);
 		free(cmd_path);
@@ -33,10 +32,7 @@ char	*ft_check_access(t_cmd *cmd_struct)
 		access(cmd_struct->cmd_arg[0], X_OK) == 0)
 		return (cmd_struct->cmd_arg[0]);
 	cmd_path = ft_strjoin(cmd_struct->cmd_arg[0], ": command not found\n");
-	ft_check_malloc(cmd_path);
 	error_msg = ft_strjoin("minishell: ", cmd_path);
-	ft_check_malloc(error_msg);
 	write(2, error_msg, ft_strlen(error_msg));
-	unlink("minishell_here_doc.tmp");
 	exit(127);
 }

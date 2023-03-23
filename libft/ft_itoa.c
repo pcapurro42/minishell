@@ -34,8 +34,7 @@ char	*ft_itoa(int n)
 
 	i = ft_lenint(n) - 1;
 	ans = malloc(ft_lenint(n) * sizeof(*ans) + 1);
-	if (ans == NULL)
-		return (ans);
+	ft_check_malloc(ans);
 	ans[i + 1] = '\0';
 	if (n == 0)
 		ans[i] = '0';

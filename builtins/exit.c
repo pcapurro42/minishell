@@ -41,9 +41,7 @@ void	ft_exit_builtins(t_cmd *cmd_struct)
 	else
 	{
 		temp = ft_strjoin("minishell: exit: ", cmd_struct->cmd_arg[1]);
-		ft_check_malloc(temp);
 		temp2 = ft_strjoin(temp, ": numeric argument required\n");
-		ft_check_malloc(temp2);
 		ft_putstr_fd(temp2, 2);
 		exit(255);
 	}

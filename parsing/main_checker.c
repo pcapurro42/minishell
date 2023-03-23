@@ -58,7 +58,6 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 		return (free(input), ft_handle_quoi_feur(minishell), 0);
 	str = ft_split(input, ' ');
 	free(input);
-	ft_check_malloc(str);
 	ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
 		return (pls_free(str), 1);

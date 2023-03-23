@@ -81,42 +81,33 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 	if (variable[0] == '?' && variable[1] == '\0')
 	{
 		temporary = ft_itoa(g_global->g_last_return_code);
-		ft_check_malloc(temporary);
 		return (temporary);
 	}
 	temporary = ft_strdup("");
-	ft_check_malloc(temporary);
 	temp1 = ft_strdup(variable);
-	ft_check_malloc(temp1);
 	free(variable);
 	variable = ft_strjoin(temp1, "=");
-	ft_check_malloc(variable);
 	free(temp1);
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j] != '=')
 		{
 			temp1 = ft_strdup(temporary);
-			ft_check_malloc(temp1);
 			free(temporary);
 			temp2 = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
 			temporary = ft_strjoin(temp1, temp2);
-			ft_check_malloc(temporary);
 			free(temp1);
 			free(temp2);
 		}
 		j = 0;
 		temp1 = ft_strdup(temporary);
-		ft_check_malloc(temp1);
 		free(temporary);
 		temporary = ft_strjoin(temp1, "=");
-		ft_check_malloc(temporary);
 		free(temp1);
 		if (ft_strncmp(variable, temporary, ft_strlen(temporary)) != 0)
 		{
 			free(temporary);
 			temporary = ft_strdup("");
-			ft_check_malloc(temporary);
 		}
 		else
 			break ;
@@ -125,7 +116,6 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 	free(variable);
 	free(temporary);
 	str = ft_strdup("");
-	ft_check_malloc(str);
 	if (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j] != '=')
@@ -134,11 +124,9 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 		while (minishell->mini_tools->envp[i][j] != '\0')
 		{
 			temp1 = ft_strdup(str);
-			ft_check_malloc(temp1);
 			free(str);
 			temp2 = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
 			str = ft_strjoin(temp1, temp2);
-			ft_check_malloc(str);
 			free(temp1);
 			free(temp2);
 		}
@@ -156,17 +144,14 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 
 	i = 0;
 	str = ft_strdup("");
-	ft_check_malloc(str);
 	while (input[i] != '\0')
 	{
 		if (input[i] != '$')
 		{
 			temp1 = ft_strdup(str);
-			ft_check_malloc(temp1);
 			free(str);
 			temp2 = ft_char_to_str(input[i++]);
 			str = ft_strjoin(temp1, temp2);
-			ft_check_malloc(str);
 			free(temp1);
 			free(temp2);
 		}
@@ -174,34 +159,27 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 		{
 			i = i + 1;
 			variable = ft_strdup("");
-			ft_check_malloc(variable);
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 && input[i] != 39 && input[i] != 58)
 			{
 				temp1 = ft_strdup(variable);
-				ft_check_malloc(temp1);
 				free(variable);
 				temp2 = ft_char_to_str(input[i++]);
 				variable = ft_strjoin(temp1, temp2);
-				ft_check_malloc(variable);
 				free(temp1);
 				free(temp2);
 			}
 			if (ft_to_do_quote(input) == 0)
 			{
 				temp1 = ft_strdup(str);
-				ft_check_malloc(temp1);
 				free(str);
 				str = ft_strjoin(temp1, "$");
-				ft_check_malloc(str);
 				free(temp1);
 			}
 			else
 				variable = ft_get_variable(variable, minishell);
 			temp1 = ft_strdup(str);
-			ft_check_malloc(temp1);
 			free(str);
 			str = ft_strjoin(temp1, variable);
-			ft_check_malloc(str);
 			free(temp1);
 			free(variable);
 		}
@@ -218,7 +196,6 @@ char	*ft_replace_tilde(char *str, t_mini *minishell)
 
 	i = 0;
 	strf = ft_strdup("");
-	ft_check_malloc(strf);
 	while (str[i] != '\0')
 	{
 		if (str[i] != '~')

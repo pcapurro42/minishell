@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
 static int	ft_find_start(char const *s1, char const *set)
 {
@@ -79,8 +79,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	else
 		s2 = malloc(len * sizeof(*s2) + 2);
-	if (s2 == NULL)
-		return (s2);
+	ft_check_malloc(s2);
 	ft_strlcpy(s2, &(s1[start]), len + 2);
 	return (s2);
 }

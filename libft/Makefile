@@ -65,6 +65,8 @@ SRCS	=	ft_isalpha.c \
 			ft_tstrlen.c \
 			ft_char_to_str.c \
 			ft_atoll.c \
+			ft_error.c \
+			ft_check_malloc.c \
 
 
 OBJS	=	$(SRCS:.c=.o)

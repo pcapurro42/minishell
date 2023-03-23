@@ -34,8 +34,7 @@ t_mini *minishell, t_cmd *cmd_struct)
 	int		i;
 
 	pid = malloc(sizeof(*pid) * (minishell->nb_cmd));
-	if (pid == NULL)
-		ft_error();
+	ft_check_malloc(pid);
 	i = 0;
 	while (i < minishell->nb_cmd)
 	{
@@ -64,9 +63,9 @@ void	ft_execution3(t_mini *minishell, t_cmd *cmd_struct)
 	int		i;
 
 	status_code = malloc(sizeof(*status_code) * minishell->nb_cmd);
+	ft_check_malloc(status_code);
 	fd = malloc(sizeof(*fd) * (minishell->nb_cmd - 1));
-	if (status_code == NULL || fd == NULL)
-		ft_error();
+	ft_check_malloc(fd);
 	pid = ft_execution2(fd, minishell, cmd_struct);
 	i = 0;
 	while (i < minishell->nb_cmd)
@@ -74,7 +73,6 @@ void	ft_execution3(t_mini *minishell, t_cmd *cmd_struct)
 		waitpid(pid[i], &(status_code[i]), 0);
 		i++;
 	}
-	unlink("minishell_here_doc.tmp");
 	if (g_global->g_last_return_code >= 0)
 		g_global->g_last_return_code = WEXITSTATUS(status_code[i - 1]);
 	else

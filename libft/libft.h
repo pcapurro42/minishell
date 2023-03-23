@@ -99,5 +99,7 @@ int					ft_tstrlen(char ***str);
 void				pls_free(char **str);
 
 long long int		ft_atoll(const char *s);
+void				ft_error(void);
+void				ft_check_malloc(void *str);
 
 #endif

@@ -85,8 +85,7 @@ char	*get_next_line(int fd)
 		save = get_next_line_ret_pos(buf, save, ret);
 	}
 	line = malloc((ft_strchr_i(save, '\n') + 1) * sizeof(*line) + 1);
-	if (line == NULL)
-		return (free(save), save = NULL);
+	ft_check_malloc(line);
 	ft_strlcpy(line, save, ft_strchr_i(save, '\n') + 2);
 	temp = ft_strdup(&(save[ft_strchr_i(save, '\n') + 1]));
 	free(save);

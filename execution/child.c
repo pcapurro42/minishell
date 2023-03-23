@@ -52,7 +52,6 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
 
 static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 {
-	unlink("minishell_here_doc.tmp");
 	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
 		exit(ft_echo_builtins(cmd_struct->cmd_arg));
 	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)

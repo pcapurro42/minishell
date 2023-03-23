@@ -17,8 +17,7 @@ char	*ft_char_to_str(char c)
 	char	*str;
 
 	str = malloc(sizeof(char) + 1);
-	if (!str)
-		exit(1);
+	ft_check_malloc(str);
 	str[0] = c;
 	str[1] = '\0';
 	return (str);

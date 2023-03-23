@@ -50,9 +50,7 @@ void	ft_increase_shlvl(char	**envp)
 	i_shlvl = ft_find_line_env_nb(envp, "SHLVL=");
 	nb_shlvl = ft_atoi(&(envp[i_shlvl][6]));
 	nb_str_shlvl = ft_itoa(nb_shlvl + 1);
-	ft_check_malloc(nb_str_shlvl);
 	shlvl_line = ft_strjoin("SHLVL=", nb_str_shlvl);
-	ft_check_malloc(shlvl_line);
 	free(envp[i_shlvl]);
 	free(nb_str_shlvl);
 	envp[i_shlvl] = shlvl_line;
@@ -99,7 +97,6 @@ char	**ft_cpy_envp(char *envp[], char **argv)
 	while (envp[envp_len])
 	{
 		envp_cpy[envp_len] = ft_strdup(envp[envp_len]);
-		ft_check_malloc(envp_cpy[envp_len]);
 		envp_len++;
 	}
 	envp_cpy[envp_len] = NULL;

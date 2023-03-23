@@ -59,15 +59,13 @@ static char	**ft_clean_env(char **envp)
 		i++;
 	}
 	new_envp = malloc(sizeof(char *) * k + 1);
+	ft_check_malloc(new_envp);
 	i = 0;
 	k = 0;
 	while (envp[i] != NULL)
 	{
 		if (envp[i][0] != -1)
-		{
 			new_envp[k++] = ft_strdup(envp[i]);
-			ft_check_malloc(new_envp[k - 1]);
-		}
 		i++;
 	}
 	new_envp[k] = NULL;
@@ -88,10 +86,8 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 	while (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) == 0)
 	{
 		temp = ft_strdup(cmd_arg[i]);
-		ft_check_malloc(temp);
 		free(cmd_arg[i]);
 		cmd_arg[i] = ft_strjoin(temp, "=");
-		ft_check_malloc(cmd_arg[i]);
 		free(temp);
 		if (ft_strncmp(cmd_arg[i], "PATH=", ft_strlen(cmd_arg[i])) == 0)
 			minishell->mini_tools->path_unset = 1;

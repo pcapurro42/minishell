@@ -38,7 +38,7 @@ char	*ft_get_name(void)
 		printf("_  /  / / _  / _  / / /  / _  __/ /  __/ /_/ /_  /    \n");
 		printf("/_/  /_/  /_/  /_/ /_//_/  /_/    \\___/\\____/ /_/     \n\n");
 	}
-	return (ft_check_malloc(name), name);
+	return (name);
 }
 
 void	ft_clean_stdin(void)

@@ -49,21 +49,15 @@ static char	**ft_nul_case(char const *s)
 	if (ft_strlen(s) == 0)
 	{
 		tab = malloc(sizeof(*tab));
-		if (tab == NULL)
-			return (NULL);
+		ft_check_malloc(tab);
 		tab[0] = NULL;
 		return (tab);
 	}
 	tab = malloc(2 * sizeof(*tab));
-	if (tab == NULL)
-		return (NULL);
+	ft_check_malloc(tab);
 	tab[0] = malloc((ft_strlen(s) + 1) * sizeof(**tab));
+	ft_check_malloc(tab[0]);
 	ft_strlcpy(tab[0], s, count_char_to_c(s, '\0') + 1);
-	if (tab[0] == NULL)
-	{
-		free(tab);
-		return (NULL);
-	}
 	tab[1] = NULL;
 	return (tab);
 }
@@ -80,13 +74,7 @@ static char	**ft_main_split(char const *s, char c, char **tab)
 		while (s[j] == c)
 			j++;
 		tab[i] = malloc((count_char_to_c(&(s[j]), c) + 1) * sizeof(**tab));
-		if (tab[i] == NULL)
-		{
-			while (i >= 0)
-				free(tab[i--]);
-			free(tab);
-			return (NULL);
-		}
+		ft_check_malloc(tab[i]);
 		ft_strlcpy(tab[i], &(s[j]), count_char_to_c(&(s[j]), c) + 1);
 		j += count_char_to_c(&(s[j]), c);
 		i++;
@@ -104,8 +92,7 @@ char	**ft_split(char const *s, char c)
 	if (c == '\0')
 		return (ft_nul_case(s));
 	tab = malloc((count_c_in_s(s, c) + 1) * sizeof(*tab));
-	if (tab == NULL)
-		return (NULL);
+	ft_check_malloc(tab);
 	tab = ft_main_split(s, c, tab);
 	if (tab == NULL)
 		return (NULL);

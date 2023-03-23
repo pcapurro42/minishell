@@ -25,12 +25,10 @@ static void	ft_complete_path(char **cmd_path_lst)
 	}
 	else
 		ft_error();
-	ft_check_malloc(cmd_path_lst[0]);
 	i = 0;
 	while (cmd_path_lst[i])
 	{
 		temp = ft_strjoin(cmd_path_lst[i], "/");
-		ft_check_malloc(temp);
 		free(cmd_path_lst[i]);
 		cmd_path_lst[i] = temp;
 		i++;
@@ -42,18 +40,12 @@ static char	**ft_no_env(void)
 	char	**cmd_path_lst;
 
 	cmd_path_lst = malloc(6 * sizeof(*cmd_path_lst));
-	if (cmd_path_lst == NULL)
-		ft_error();
+	ft_check_malloc(cmd_path_lst);
 	cmd_path_lst[0] = ft_strdup("/usr/gnu/bin/");
-	ft_check_malloc(cmd_path_lst[0]);
 	cmd_path_lst[1] = ft_strdup("/usr/local/bin/");
-	ft_check_malloc(cmd_path_lst[1]);
 	cmd_path_lst[2] = ft_strdup("/bin/");
-	ft_check_malloc(cmd_path_lst[2]);
 	cmd_path_lst[3] = ft_strdup("/usr/bin/");
-	ft_check_malloc(cmd_path_lst[3]);
 	cmd_path_lst[4] = ft_strdup("./");
-	ft_check_malloc(cmd_path_lst[4]);
 	cmd_path_lst[5] = NULL;
 	return (cmd_path_lst);
 }
@@ -63,8 +55,7 @@ static char	**ft_no_path(void)
 	char	**cmd_path_lst;
 
 	cmd_path_lst = malloc(sizeof(*cmd_path_lst));
-	if (cmd_path_lst == NULL)
-		ft_error();
+	ft_check_malloc(cmd_path_lst);
 	cmd_path_lst[0] = NULL;
 	return (cmd_path_lst);
 }
@@ -88,7 +79,6 @@ char	**ft_find_path(char *envp[], int path_unset)
 	if (!(envp[i]))
 		return (ft_no_env());
 	cmd_path_lst = ft_split(envp[i], ':');
-	ft_check_malloc(cmd_path_lst);
 	ft_complete_path(cmd_path_lst);
 	return (cmd_path_lst);
 }

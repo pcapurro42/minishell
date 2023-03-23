@@ -94,8 +94,7 @@ void	ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, int i)
 	t_nb	*nb;
 
 	nb = malloc(sizeof(*nb));
-	if (!nb)
-		ft_error();
+	ft_check_malloc(nb);
 	if (ft_check_chevron(minishell, cmd_struct, i, nb) == 1)
 		return ;
 	nb->j = 0;

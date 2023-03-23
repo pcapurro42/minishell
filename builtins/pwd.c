@@ -32,6 +32,5 @@ char	*ft_get_pwd(char **envp)
 		i++;
 	}
 	pwd = ft_strdup(&(envp[i][4]));
-	ft_check_malloc(pwd);
 	return (pwd);
 }

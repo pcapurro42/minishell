@@ -77,7 +77,6 @@ char	***ft_share_off(char **str)
 		while (str[j] != NULL && str[j][0] != '|')
 		{
 			fstr[i][k] = ft_strdup(str[j]);
-			ft_check_malloc(fstr[i][k]);
 			k++;
 			j++;
 		}

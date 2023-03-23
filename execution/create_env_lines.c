@@ -60,7 +60,6 @@ char	*ft_getshlvl(void)
 	char	*shlvl;
 
 	shlvl = ft_strdup("SHLVL=0");
-	ft_check_malloc(shlvl);
 	return (shlvl);
 }
 
@@ -71,11 +70,8 @@ char	*ft_get_(char	*pwd, char	*exec_name)
 	char	*_;
 
 	temp = ft_strjoin("_", &(pwd[3]));
-	ft_check_malloc(temp);
 	temp2 = ft_strjoin(temp, "/");
-	ft_check_malloc(temp2);
 	_ = ft_strjoin(temp2, exec_name);
-	ft_check_malloc(_);
 	free(pwd);
 	free(temp);
 	free(temp2);
@@ -97,6 +93,5 @@ char	*ft_gethome(char **envp)
 	if (envp[i] == NULL)
 		return (NULL);
 	home = ft_strdup(&(envp[i][5]));
-	ft_check_malloc(home);
 	return (home);
 }

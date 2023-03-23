@@ -57,8 +57,6 @@ char	*ft_separate_chevrons(char *str)
 	i = 0;
 	strf = ft_strdup("");
 	fstr = ft_strdup("");
-	ft_check_malloc(strf);
-	ft_check_malloc(fstr);
 	while (str[i] != '\0')
 	{
 		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<'
@@ -66,28 +64,22 @@ char	*ft_separate_chevrons(char *str)
 			&& (str[i - 1] != 34) && (str[i - 1] != 39))
 		{
 			temp1 = ft_strdup(strf);
-			ft_check_malloc(temp1);
 			free(strf);
 			strf = ft_strjoin(temp1, " ");
-			ft_check_malloc(strf);
 			free(temp1);
 			temp1 = ft_strdup(strf);
-			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
-			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
 		else
 		{
 			temp1 = ft_strdup(strf);
-			ft_check_malloc(temp1);
 			free(strf);
 			temp2 = ft_char_to_str(str[i]);
 			strf = ft_strjoin(temp1, temp2);
-			ft_check_malloc(strf);
 			free(temp1);
 			free(temp2);
 		}
@@ -102,28 +94,22 @@ char	*ft_separate_chevrons(char *str)
 			&& (str[i + 1] != 34) && (str[i + 1] != 39))
 		{
 			temp1 = ft_strdup(fstr);
-			ft_check_malloc(temp1);
 			free(fstr);
 			temp2 = ft_char_to_str(strf[i]);
 			fstr = ft_strjoin(temp1, temp2);
-			ft_check_malloc(fstr);
 			free(temp1);
 			free(temp2);
 			temp1 = ft_strdup(fstr);
-			ft_check_malloc(temp1);
 			free(fstr);
 			fstr = ft_strjoin(temp1, " ");
-			ft_check_malloc(fstr);
 			free(temp1);
 		}
 		else
 		{
 			temp1 = ft_strdup(fstr);
-			ft_check_malloc(temp1);
 			free(fstr);
 			temp2 = ft_char_to_str(strf[i]);
 			fstr = ft_strjoin(temp1, temp2);
-			ft_check_malloc(fstr);
 			free(temp1);
 			free(temp2);
 		}
@@ -145,22 +131,16 @@ void	ft_prepare_for_heredoc(char **str)
 		if (ft_strncmp(str[i], "<<", 3) == 0 && str[i + 1][0] == '$' && (i == 0 || str[i - 1][0] == '|'))
 		{
 			temp = ft_strdup(str[i + 1]);
-			ft_check_malloc(temp);
 			free(str[i + 1]);
 			str[i + 1] = ft_strdup("'");
-			ft_check_malloc(str[i + 1]);
 			temp_one = ft_strdup(str[i + 1]);
-			ft_check_malloc(temp_one);
 			free(str[i + 1]);
 			str[i + 1] = ft_strjoin(temp_one, temp);
-			ft_check_malloc(str[i + 1]);
 			free(temp);
 			free(temp_one);
 			temp_one = ft_strdup(str[i + 1]);
-			ft_check_malloc(temp_one);
 			free(str[i + 1]);
 			str[i + 1] = ft_strjoin(temp_one, "'");
-			ft_check_malloc(str[i + 1]);
 			free(temp_one);
 		}
 		i++;

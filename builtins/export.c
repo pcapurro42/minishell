@@ -121,5 +121,3 @@ int	ft_export_builtins(char **cmd_arg, t_mini *minishell)
 	minishell->mini_tools->envp = new_envp;
 	return (free(export_nb), export_nb->return_code);
 }
-
-// modif variable

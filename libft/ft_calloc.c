@@ -21,8 +21,7 @@ void	*ft_calloc(size_t count, size_t size)
 	if ((count != 0) && ((SIZE_MAX / count) < size))
 		return (NULL);
 	memory = malloc(count * size);
-	if (memory == NULL)
-		return (NULL);
+	ft_check_malloc(memory);
 	while (i < (size * count))
 	{
 		((char *) memory)[i] = '\0';

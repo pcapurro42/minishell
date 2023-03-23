@@ -133,9 +133,7 @@ void			ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
 
 void			ft_error_msg(char *msg);
-void			ft_error(void);
 void			ft_cmd_error(char **cmd);
-void			ft_check_malloc(void *str);
 void			ft_msg(char	*msg);
 
 void			ft_execution(t_mini *minishell);

@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 23:24:31 by vdelafos          #+#    #+#             */
-/*   Updated: 2022/11/15 00:29:00 by vdelafos         ###   ########.fr       */
+/*   Created: 2023/03/23 01:49:42 by pcapurro          #+#    #+#             */
+/*   Updated: 2023/03/23 01:49:43 by pcapurro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_error(void)
 {
-	t_list	*new_list;
-
-	new_list = malloc(sizeof(*new_list));
-	ft_check_malloc(new_list);
-	(*new_list).content = content;
-	(*new_list).next = NULL;
-	return (new_list);
+	write(2, "minishell: Error\n", 17);
+	exit(EXIT_FAILURE);
 }
