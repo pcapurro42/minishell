@@ -103,6 +103,7 @@ int				ft_name_in_envp(char *str, char **envp);
 void			ft_replace_in_envp(char *str, char **envp);
 
 int				ft_unset_builtins(t_mini *minishell, char **cmd_arg);
+
 int				ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 
 // #-# EXECUTION #-# //
@@ -175,6 +176,8 @@ char			*ft_hide_spaces_in_quotes(char *str);
 char			*ft_separate_chevrons(char *str);
 char			*ft_stick_chevrons(char *str);
 char			**ft_repair_spaces_in_quotes(char **strf);
+
+void			ft_prepare_for_heredoc(char **str);
 
 char			**ft_remove_quotes(char **cmd_arg);
 char			*ft_substitute_str(char *str);

@@ -132,3 +132,37 @@ char	*ft_separate_chevrons(char *str)
 	free(strf);
 	return (fstr);
 }
+
+void	ft_prepare_for_heredoc(char **str)
+{
+	int		i;
+	char	*temp;
+	char	*temp_one;
+
+	i = 0;
+	while (str[i] != NULL)
+	{
+		if (ft_strncmp(str[i], "<<", 3) == 0 && str[i + 1][0] == '$' && (i == 0 || str[i - 1][0] == '|'))
+		{
+			temp = ft_strdup(str[i + 1]);
+			ft_check_malloc(temp);
+			free(str[i + 1]);
+			str[i + 1] = ft_strdup("'");
+			ft_check_malloc(str[i + 1]);
+			temp_one = ft_strdup(str[i + 1]);
+			ft_check_malloc(temp_one);
+			free(str[i + 1]);
+			str[i + 1] = ft_strjoin(temp_one, temp);
+			ft_check_malloc(str[i + 1]);
+			free(temp);
+			free(temp_one);
+			temp_one = ft_strdup(str[i + 1]);
+			ft_check_malloc(temp_one);
+			free(str[i + 1]);
+			str[i + 1] = ft_strjoin(temp_one, "'");
+			ft_check_malloc(str[i + 1]);
+			free(temp_one);
+		}
+		i++;
+	}
+}
