@@ -53,14 +53,22 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 
 	input = ft_input_cleaner(input);
 	if (input == NULL)
-		return (free(input), 1);
+	{
+		g_global->g_last_return_code = 258;
+		free(input);
+		return (1);
+	}
 	if (ft_is_it_quoi(input) == 1)
 		return (free(input), ft_handle_quoi_feur(minishell), 0);
 	str = ft_split(input, ' ');
 	free(input);
 	ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
-		return (pls_free(str), 1);
+	{
+		pls_free(str);
+		g_global->g_last_return_code = 258;
+		return (1);
+	}
 	ft_prepare_for_heredoc(str);
 	ft_check_variables(str, minishell);
 	minishell->cmd_lst = ft_share_off(str);

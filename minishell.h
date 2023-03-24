@@ -80,10 +80,9 @@ t_global	*g_global;
 // #-# MAIN #-# //
 
 char			*ft_get_name(void);
-int				ft_verify_characters(char *str);
-
 void			ft_handle_signal(int signal);
-void			ft_clean_stdin(void);
+void			ft_init_minishell(void);
+void			ft_print_shell(int number);
 
 void			rl_replace_line(const char *text, int clear_undo);
 
@@ -94,15 +93,16 @@ char			*ft_get_pwd(char **envp);
 int				ft_echo_builtins(char **cmd_lst);
 int				ft_env_builtins(char **envp);
 int				ft_pwd_builtins(t_mini_tools *mini_tools);
-int				ft_export_builtins(char **cmd_arg, t_mini *minishell);
 void			ft_exit_builtins(t_cmd *cmd_struct);
 
+int				ft_export_builtins(char **cmd_arg, t_mini *minishell);
 int				ft_verify_errors_export(char *str);
 int				ft_verify_characters_export(char *str);
 int				ft_name_in_envp(char *str, char **envp);
 void			ft_replace_in_envp(char *str, char **envp);
 
 int				ft_unset_builtins(t_mini *minishell, char **cmd_arg);
+int				ft_verify_characters(char *str);
 
 int				ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 
@@ -147,7 +147,7 @@ char			**ft_find_path(char *envp[], int path_unset);
 t_cmd			*ft_init_cmd(t_mini *minishell);
 void			ft_destroy_cmd(t_cmd *cmd_struct);
 t_mini			*ft_init_mini(t_mini_tools *mini_tools);
-void			ft_destroy_mini(t_mini *minishell);
+void			ft_destroy_mini(t_mini *minishell, char *input);
 t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv);
 void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 

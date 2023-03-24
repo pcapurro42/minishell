@@ -42,6 +42,7 @@ t_mini	*ft_init_mini(t_mini_tools *mini_tools)
 {
 	t_mini	*minishell;
 
+	g_global->g_pid = -2147483648;
 	minishell = malloc(sizeof(*minishell));
 	ft_check_malloc(minishell);
 	minishell->nb_cmd = -1;
@@ -50,7 +51,7 @@ t_mini	*ft_init_mini(t_mini_tools *mini_tools)
 	return (minishell);
 }
 
-void	ft_destroy_mini(t_mini *minishell)
+void	ft_destroy_mini(t_mini *minishell, char *input)
 {
 	int	i;
 
@@ -67,6 +68,11 @@ void	ft_destroy_mini(t_mini *minishell)
 			free(minishell->cmd_lst);
 		}
 		free(minishell);
+	}
+	if (input == NULL)
+	{
+		ft_putstr_fd("exit\n", 1);
+		exit(0);
 	}
 }
 
