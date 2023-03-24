@@ -12,17 +12,11 @@
 
 #include "../minishell.h"
 
-int	ft_quote_checker(char *str)
+static int	ft_qc_main(char *str, int dquote, int quote, int count)
 {
 	int	i;
-	int	dquote;
-	int	quote;
-	int	count;
 
 	i = 0;
-	count = 0;
-	dquote = 0;
-	quote = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34 && quote == 0)
@@ -43,7 +37,21 @@ int	ft_quote_checker(char *str)
 		}
 		i++;
 	}
-	if (count % 2 != 0)
+	return (count);
+}
+
+int	ft_quote_checker(char *str)
+{
+	int	i;
+	int	dquote;
+	int	quote;
+	int	count;
+
+	i = 0;
+	count = 0;
+	dquote = 0;
+	quote = 0;
+	if (ft_qc_main(str, dquote, quote, count) % 2 != 0)
 		return (printf("minishell: syntax error for unclosed quotes\n"));
 	return (0);
 }
