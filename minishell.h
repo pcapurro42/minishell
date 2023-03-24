@@ -95,16 +95,37 @@ int				ft_env_builtins(char **envp);
 int				ft_pwd_builtins(t_mini_tools *mini_tools);
 void			ft_exit_builtins(t_cmd *cmd_struct);
 
+// EXPORT //
+
 int				ft_export_builtins(char **cmd_arg, t_mini *minishell);
 int				ft_verify_errors_export(char *str);
 int				ft_verify_characters_export(char *str);
 int				ft_name_in_envp(char *str, char **envp);
 void			ft_replace_in_envp(char *str, char **envp);
 
+// UNSET //
+
 int				ft_unset_builtins(t_mini *minishell, char **cmd_arg);
 int				ft_verify_characters(char *str);
 
+// CD //
+
 int				ft_cd_builtins(char **cmd_arg, t_mini *minishell);
+int				ft_absolute_path(t_mini *minishell, char **cmd_arg, char *arg);
+int				ft_relative_path(t_mini *minishell, char **cmd_arg, char *arg);
+int				ft_verify_args(char *str);
+char			**ft_fix_args(char **cmd_arg);
+char			*ft_first_clean(char **cmd_arg);
+char			*ft_last_clean(char *str);
+int				ft_update_oldpwd(t_mini *minishell, char *path);
+int				ft_update_pwd(t_mini *minishell, char *path);
+char			*ft_step_back(char *path);
+int				ft_verify_failure(char *path, char *arg, int i);
+char			*ft_get_variable_again(t_mini *minishell, int a);
+int				ft_handle_hyphen(t_mini *minishell);
+int				ft_handle_point_point(t_mini *minishell, char *arg);
+int				ft_handle_operator(t_mini *minishell, char *str, char *arg);
+
 
 // #-# EXECUTION #-# //
 

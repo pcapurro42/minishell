@@ -29,12 +29,15 @@ SRCS = minishell.c \
 	builtins/echo.c \
 	builtins/env.c \
 	builtins/pwd.c \
-	builtins/export.c \
-	builtins/export2.c \
-	builtins/export3.c \
+	builtins/export/export_one.c \
+	builtins/export/export_two.c \
+	builtins/export/export_three.c \
 	builtins/exit.c \
 	builtins/unset.c \
-	builtins/cd.c
+	builtins/cd/main_cd.c \
+	builtins/cd/except_cd.c \
+	builtins/cd/utils_two_cd.c \
+	builtins/cd/utils_one_cd.c \
 
 LIBFT = libft/libft.a
 

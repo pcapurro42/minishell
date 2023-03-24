@@ -21,10 +21,10 @@ int	ft_is_it_quoi(char *input)
 	j = 0;
 	if (ft_strlen(input) == 4)
 	{
-		if ((input[0] == 'q' || input[0] == 'Q')
-		&& (input[1] == 'u' || input[1] == 'U')
-		&& (input[2] == 'o' || input[2] == 'O')
-		&& (input[3] == 'i' || input[3] == 'I'))
+		if ((input[0] == 'q' || input[0] == 'Q') \
+			&& (input[1] == 'u' || input[1] == 'U') \
+			&& (input[2] == 'o' || input[2] == 'O') \
+			&& (input[3] == 'i' || input[3] == 'I'))
 			return (1);
 	}
 	return (0);
@@ -72,7 +72,6 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	ft_prepare_for_heredoc(str);
 	ft_check_variables(str, minishell);
 	minishell->cmd_lst = ft_share_off(str);
-	pls_free(str);
 	ft_execution(minishell);
-	return (0);
+	return (pls_free(str), 0);
 }

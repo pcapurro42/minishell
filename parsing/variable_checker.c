@@ -159,7 +159,8 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 		{
 			i = i + 1;
 			variable = ft_strdup("");
-			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 && input[i] != 39 && input[i] != 58)
+			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 \
+				&& input[i] != 39 && input[i] != 58)
 			{
 				temp1 = ft_strdup(variable);
 				free(variable);

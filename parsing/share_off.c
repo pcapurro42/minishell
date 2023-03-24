@@ -37,6 +37,7 @@ char	***ft_allocate_strs(char ***fstr, char **str, int size)
 	i = 0;
 	j = 0;
 	k = 0;
+	fstr[size] = NULL;
 	while (i != size)
 	{
 		while (str[j] != NULL && str[j][0] != '|')
@@ -70,16 +71,11 @@ char	***ft_share_off(char **str)
 	size = ft_get_pipe_number(str) + 1;
 	fstr = malloc(sizeof(char **) * (size) + 1);
 	ft_check_malloc(fstr);
-	fstr[size] = NULL;
 	fstr = ft_allocate_strs(fstr, str, size);
 	while (fstr[i] != NULL)
 	{
 		while (str[j] != NULL && str[j][0] != '|')
-		{
-			fstr[i][k] = ft_strdup(str[j]);
-			k++;
-			j++;
-		}
+			fstr[i][k++] = ft_strdup(str[j++]);
 		j++;
 		i++;
 		k = 0;

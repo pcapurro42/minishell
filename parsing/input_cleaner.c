@@ -162,7 +162,8 @@ char	**ft_remove_quotes(char **cmd_arg)
 	i = 0;
 	while (cmd_arg && cmd_arg[i] != NULL)
 	{
-		if (ft_strchr(cmd_arg[i], 34) != NULL || ft_strchr(cmd_arg[i], 39) != NULL)
+		if (ft_strchr(cmd_arg[i], 34) != NULL \
+			|| ft_strchr(cmd_arg[i], 39) != NULL)
 		{
 			new_arg = ft_substitute_str(cmd_arg[i]);
 			free(cmd_arg[i]);

@@ -122,27 +122,29 @@ char	*ft_separate_chevrons(char *str)
 void	ft_prepare_for_heredoc(char **str)
 {
 	int		i;
+	int		j;
+	int		k;
 	char	*temp;
-	char	*temp_one;
 
 	i = 0;
+	j = 0;
+	k = 1;
 	while (str[i] != NULL)
 	{
-		if (ft_strncmp(str[i], "<<", 3) == 0 && str[i + 1][0] == '$' && (i == 0 || str[i - 1][0] == '|'))
+		if (ft_strncmp(str[i], "<<", 3) == 0 && str[i + 1][0] == '$' \
+			&& (i == 0 || str[i - 1][0] == '|'))
 		{
 			temp = ft_strdup(str[i + 1]);
 			free(str[i + 1]);
-			str[i + 1] = ft_strdup("'");
-			temp_one = ft_strdup(str[i + 1]);
-			free(str[i + 1]);
-			str[i + 1] = ft_strjoin(temp_one, temp);
-			free(temp);
-			free(temp_one);
-			temp_one = ft_strdup(str[i + 1]);
-			free(str[i + 1]);
-			str[i + 1] = ft_strjoin(temp_one, "'");
-			free(temp_one);
+			str[i + 1] = malloc(sizeof(char) * (ft_strlen(temp) + 2) + 1);
+			str[i + 1][0] = 39;
+			while (temp[j] != '\0')
+				str[i + 1][k++] = temp[j++];
+			str[i + 1][k] = 39;
+			str[i + 1][k + 1] = '\0';
 		}
 		i++;
 	}
 }
+
+

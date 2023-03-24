@@ -59,7 +59,8 @@ int	ft_pipe_checker(char **str)
 		{
 			if (i == 0 || i == ft_dstrlen(str) - 1
 				|| str[i - 1][0] == '|' || str[i + 1][0] == '|')
-				return (printf("minishell: syntax error near unexpected token '|'\n"));
+				return (printf("minishell: syntax error near \
+					unexpected token '|'\n"));
 		}
 		i++;
 	}
@@ -76,16 +77,20 @@ int	ft_chevron_checker(char **str)
 		if (str[i][0] == '<' || str[i][0] == '>')
 		{
 			if (i == ft_dstrlen(str) - 1)
-				return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
+				return (printf("minishell: syntax error near \
+					unexpected token '%c'\n", str[i][0]));
 			if (i != 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>'
 					|| str[i - 1][0] == '<' || str[i - 1][0] == '>')
-					return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
+					return (printf("minishell: syntax error near \
+						unexpected token '%c'\n", str[i][0]));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
-					return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
+					return (printf("minishell: syntax error near \
+						unexpected token '%c'\n", str[i][0]));
 			if (ft_strlen(str[i]) >= 3)
-				return (printf("minishell: syntax error near unexpected token '%c'\n", str[i][0]));
+				return (printf("minishell: syntax error near \
+					unexpected token '%c'\n", str[i][0]));
 		}
 		i++;
 	}

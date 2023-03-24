@@ -101,5 +101,6 @@ void				pls_free(char **str);
 long long int		ft_atoll(const char *s);
 void				ft_error(void);
 void				ft_check_malloc(void *str);
+char				*ft_join_free(char *s1, char *s2);
 
 #endif

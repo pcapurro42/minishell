@@ -17,11 +17,13 @@ int	ft_verify_errors(char *str)
 	int	i;
 
 	i = 0;
-	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*') && str[1] == '\0')
+	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' \
+		|| str[i] == '*') && str[1] == '\0')
 		return (1);
 	while (str[i] != '\0')
 	{
-		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
+		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) \
+			&& str[i] != '_')
 			return (1);
 		i++;
 	}
@@ -33,12 +35,15 @@ int	ft_verify_characters(char *str)
 	int	i;
 
 	i = 0;
-	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' || str[i] == '*') && str[1] == '\0')
+	if ((str[i] == '#' || str[i] == '&' || str[i] == '_' \
+		|| str[i] == '*') && str[1] == '\0')
 		return (1);
 	while (str[i] != '\0')
 	{
-		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) && str[i] != '_')
-			return (printf("minishell: unset: '%s': not a valid identifier\n", str));
+		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) \
+			&& str[i] != '_')
+			return (printf("minishell: unset: '%s': not a valid \
+				identifier\n", str));
 		i++;
 	}
 	return (0);
@@ -73,6 +78,24 @@ static char	**ft_clean_env(char **envp)
 	return (new_envp);
 }
 
+static void	ft_browse_unit(t_mini *minishell, char **cmd_arg, char *temp, int i)
+{
+	int	j;
+
+	j = 0;
+	while (minishell->mini_tools->envp[j] != NULL)
+	{
+		temp = ft_strjoin(minishell->mini_tools->envp[j], "=");
+		if (ft_strncmp(cmd_arg[i], temp, ft_strlen(cmd_arg[i])) == 0)
+		{
+			cmd_arg[i][0] = -1;
+			minishell->mini_tools->envp[j][0] = -1;
+		}
+		free(temp);
+		j++;
+	}
+}
+
 int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 {
 	int		i;
@@ -91,18 +114,7 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		free(temp);
 		if (ft_strncmp(cmd_arg[i], "PATH=", ft_strlen(cmd_arg[i])) == 0)
 			minishell->mini_tools->path_unset = 1;
-		while (minishell->mini_tools->envp[j] != NULL)
-		{
-			temp = ft_strjoin(minishell->mini_tools->envp[j], "=");
-			if (ft_strncmp(cmd_arg[i], temp, ft_strlen(cmd_arg[i])) == 0)
-			{
-				cmd_arg[i][0] = -1;
-				minishell->mini_tools->envp[j][0] = -1;
-			}
-			free(temp);
-			j++;
-		}
-		j = 0;
+		ft_browse_unit(minishell, cmd_arg, temp, i);
 		i++;
 	}
 	if (cmd_arg[i] != NULL && ft_verify_errors(cmd_arg[i]) != 0)
