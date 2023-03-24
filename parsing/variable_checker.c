@@ -12,98 +12,30 @@
 
 #include "../minishell.h"
 
-int	ft_to_do_quote(char *input)
-{
-	int		i;
-	int		dquote;
-	int		quote;
-	char	c;
-
-	i = 0;
-	dquote = 0;
-	quote = 0;
-	c = 0;
-	while (input[i] != '$')
-	{
-		if (c == 0 && (input[i] == 34 || input[i] == 39))
-			c = input[i];
-		if (input[i] == 34 && quote % 2 == 0)
-			dquote++;
-		if (input[i] == 39 && dquote % 2 == 0)
-			quote++;
-		i++;
-	}
-	if ((dquote % 2 != 0 && quote % 2 == 0)
-		|| (dquote % 2 == 0 && quote % 2 == 0)
-		|| (dquote == 0 && quote == 0)
-		|| (quote % 2 != 0 && dquote % 2 != 0 && c == 34))
-		return (1);
-	return (0);
-}
-
-int	ft_to_do_tilde(char *input)
-{
-	int		i;
-	int		dquote;
-	int		quote;
-	char	c;
-
-	i = 0;
-	dquote = 0;
-	quote = 0;
-	c = 0;
-	while (input[i] != '~')
-	{
-		if (c == 0 && (input[i] == 34 || input[i] == 39))
-			c = input[i];
-		if (input[i] == 34 && quote % 2 == 0)
-			dquote++;
-		if (input[i] == 39 && dquote % 2 == 0)
-			quote++;
-		i++;
-	}
-	if (dquote % 2 != 0 || quote % 2 != 0)
-		return (0);
-	return (1);
-}
-
 char	*ft_get_variable(char *variable, t_mini *minishell)
 {
 	int		i;
 	int		j;
 	char	*temporary;
-	char	*temp1;
-	char	*temp2;
+	char	*temp;
 	char	*str;
 
 	i = 0;
 	j = 0;
 	if (variable[0] == '?' && variable[1] == '\0')
-	{
-		temporary = ft_itoa(g_global->g_last_return_code);
-		return (temporary);
-	}
+		return (ft_itoa(g_global->g_last_return_code));
 	temporary = ft_strdup("");
-	temp1 = ft_strdup(variable);
-	free(variable);
-	variable = ft_strjoin(temp1, "=");
-	free(temp1);
+	variable = ft_join_free(variable, "=");
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j] != '=')
 		{
-			temp1 = ft_strdup(temporary);
-			free(temporary);
-			temp2 = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
-			temporary = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
+			temporary = ft_join_free(temporary, temp);
+			free(temp);
 		}
 		j = 0;
-		temp1 = ft_strdup(temporary);
-		free(temporary);
-		temporary = ft_strjoin(temp1, "=");
-		free(temp1);
+		temporary = ft_join_free(temporary, "=");
 		if (ft_strncmp(variable, temporary, ft_strlen(temporary)) != 0)
 		{
 			free(temporary);
@@ -123,12 +55,9 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 		j = j + 1;
 		while (minishell->mini_tools->envp[i][j] != '\0')
 		{
-			temp1 = ft_strdup(str);
-			free(str);
-			temp2 = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
-			str = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
+			str = ft_join_free(str, temp);
+			free(temp);
 		}
 	}
 	return (str);
@@ -139,8 +68,7 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 	int		i;
 	char	*str;
 	char	*variable;
-	char	*temp1;
-	char	*temp2;
+	char	*temp;
 
 	i = 0;
 	str = ft_strdup("");
@@ -148,40 +76,26 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 	{
 		if (input[i] != '$')
 		{
-			temp1 = ft_strdup(str);
-			free(str);
-			temp2 = ft_char_to_str(input[i++]);
-			str = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			temp = ft_char_to_str(input[i++]);
+			str = ft_join_free(str, temp);
+			free(temp);
 		}
 		else
 		{
-			i = i + 1;
+			i++;
 			variable = ft_strdup("");
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 \
 				&& input[i] != 39 && input[i] != 58)
 			{
-				temp1 = ft_strdup(variable);
-				free(variable);
-				temp2 = ft_char_to_str(input[i++]);
-				variable = ft_strjoin(temp1, temp2);
-				free(temp1);
-				free(temp2);
+				temp = ft_char_to_str(input[i++]);
+				variable = ft_join_free(variable, temp);
+				free(temp);
 			}
 			if (ft_to_do_quote(input) == 0)
-			{
-				temp1 = ft_strdup(str);
-				free(str);
-				str = ft_strjoin(temp1, "$");
-				free(temp1);
-			}
+				str = ft_join_free(str, "$");
 			else
 				variable = ft_get_variable(variable, minishell);
-			temp1 = ft_strdup(str);
-			free(str);
-			str = ft_strjoin(temp1, variable);
-			free(temp1);
+			str = ft_join_free(str, variable);
 			free(variable);
 		}
 	}
@@ -192,36 +106,30 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 char	*ft_replace_tilde(char *str, t_mini *minishell)
 {
 	int		i;
-	char	*strf;
+	char	*sf;
 	char	*temp;
 
 	i = 0;
-	strf = ft_strdup("");
+	sf = ft_strdup("");
 	while (str[i] != '\0')
 	{
 		if (str[i] != '~')
-			strf = ft_strjoin(strf, ft_char_to_str(str[i]));
+		{
+			temp = ft_char_to_str(str[i]);
+			sf = ft_join_free(sf, temp);
+			free(temp);
+		}
 		else
 		{
 			if (ft_to_do_tilde(str) != 0)
-			{
-				temp = ft_strdup(strf);
-				free(strf);
-				strf = ft_strjoin(temp, minishell->mini_tools->home_directory);
-				free(temp);
-			}
+				sf = ft_join_free(sf, minishell->mini_tools->home_directory);
 			else
-			{
-				temp = ft_strdup(strf);
-				free(strf);
-				strf = ft_strjoin(temp, "~");
-				free(temp);
-			}
+				sf = ft_join_free(sf, "~");
 		}
 		i++;
 	}
 	free(str);
-	return (strf);
+	return (sf);
 }
 
 char	**ft_check_variables(char **str, t_mini *minishell)

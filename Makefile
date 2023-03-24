@@ -10,6 +10,7 @@ SRCS = minishell.c \
 	parsing/main_checker.c \
 	parsing/syntax_checker.c \
 	parsing/variable_checker.c \
+	parsing/variable_checker_utils.c \
 	parsing/input_cleaner.c \
 	parsing/cleaner_utils.c \
 	parsing/share_off.c \

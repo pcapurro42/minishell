@@ -75,3 +75,5 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	ft_execution(minishell);
 	return (pls_free(str), 0);
 }
+
+// echo "hello" 'hello'|grep 'h' >      >     f.txt

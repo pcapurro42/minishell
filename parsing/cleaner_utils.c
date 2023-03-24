@@ -51,8 +51,7 @@ char	*ft_separate_chevrons(char *str)
 	int		i;
 	char	*strf;
 	char	*fstr;
-	char	*temp1;
-	char	*temp2;
+	char	*temp;
 
 	i = 0;
 	strf = ft_strdup("");
@@ -63,25 +62,16 @@ char	*ft_separate_chevrons(char *str)
 				&& str[i - 1] != '>') && (str[i - 1] != ' ')
 			&& (str[i - 1] != 34) && (str[i - 1] != 39))
 		{
-			temp1 = ft_strdup(strf);
-			free(strf);
-			strf = ft_strjoin(temp1, " ");
-			free(temp1);
-			temp1 = ft_strdup(strf);
-			free(strf);
-			temp2 = ft_char_to_str(str[i]);
-			strf = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			strf = ft_join_free(strf, " ");
+			temp = ft_char_to_str(str[i]);
+			strf = ft_join_free(strf, temp);
+			free(temp);
 		}
 		else
 		{
-			temp1 = ft_strdup(strf);
-			free(strf);
-			temp2 = ft_char_to_str(str[i]);
-			strf = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			temp = ft_char_to_str(str[i]);
+			strf = ft_join_free(strf, temp);
+			free(temp);
 		}
 		i++;
 	}
@@ -93,25 +83,16 @@ char	*ft_separate_chevrons(char *str)
 				&& strf[i + 1] != '>') && (strf[i + 1] != ' ')
 			&& (str[i + 1] != 34) && (str[i + 1] != 39))
 		{
-			temp1 = ft_strdup(fstr);
-			free(fstr);
-			temp2 = ft_char_to_str(strf[i]);
-			fstr = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
-			temp1 = ft_strdup(fstr);
-			free(fstr);
-			fstr = ft_strjoin(temp1, " ");
-			free(temp1);
+			temp = ft_char_to_str(strf[i]);
+			fstr = ft_join_free(fstr, temp);
+			free(temp);
+			fstr = ft_join_free(fstr, " ");
 		}
 		else
 		{
-			temp1 = ft_strdup(fstr);
-			free(fstr);
-			temp2 = ft_char_to_str(strf[i]);
-			fstr = ft_strjoin(temp1, temp2);
-			free(temp1);
-			free(temp2);
+			temp = ft_char_to_str(strf[i]);
+			fstr = ft_join_free(fstr, temp);
+			free(temp);
 		}
 		i++;
 	}
@@ -146,5 +127,3 @@ void	ft_prepare_for_heredoc(char **str)
 		i++;
 	}
 }
-
-
