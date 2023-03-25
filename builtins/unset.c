@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	ft_verify_errors(char *str)
+int	ft_verify_unset_errors(char *str)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ int	ft_verify_errors(char *str)
 	return (0);
 }
 
-int	ft_verify_characters(char *str)
+int	ft_verify_unset_characters(char *str)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ int	ft_verify_characters(char *str)
 	return (0);
 }
 
-static char	**ft_clean_env(char **envp)
+char	**ft_clean_env(char **envp)
 {
 	int		i;
 	int		k;
@@ -80,9 +80,10 @@ static char	**ft_clean_env(char **envp)
 	return (new_envp);
 }
 
-static void	ft_browse_unit(t_mini *minishell, char **cmd_arg, char *temp, int i)
+void	ft_browse_unit(t_mini *minishell, char **cmd_arg, int i)
 {
-	int	j;
+	int		j;
+	char	*temp;
 
 	j = 0;
 	while (minishell->mini_tools->envp[j] != NULL)
@@ -108,7 +109,7 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 	return_code = 0;
 	i = 1;
 	j = 0;
-	while (cmd_arg[i] != NULL && ft_verify_characters(cmd_arg[i]) == 0)
+	while (cmd_arg[i] != NULL && ft_verify_unset_characters(cmd_arg[i]) == 0)
 	{
 		temp = ft_strdup(cmd_arg[i]);
 		free(cmd_arg[i]);
@@ -116,10 +117,10 @@ int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 		free(temp);
 		if (ft_strncmp(cmd_arg[i], "PATH=", ft_strlen(cmd_arg[i])) == 0)
 			minishell->mini_tools->path_unset = 1;
-		ft_browse_unit(minishell, cmd_arg, temp, i);
+		ft_browse_unit(minishell, cmd_arg, i);
 		i++;
 	}
-	if (cmd_arg[i] != NULL && ft_verify_errors(cmd_arg[i]) != 0)
+	if (cmd_arg[i] != NULL && ft_verify_unset_errors(cmd_arg[i]) != 0)
 		return_code = 1;
 	minishell->mini_tools->envp = ft_clean_env(minishell->mini_tools->envp);
 	return (return_code);

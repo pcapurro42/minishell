@@ -106,7 +106,10 @@ void			ft_replace_in_envp(char *str, char **envp);
 // UNSET //
 
 int				ft_unset_builtins(t_mini *minishell, char **cmd_arg);
-int				ft_verify_characters(char *str);
+void			ft_browse_unit(t_mini *minishell, char **cmd_arg, int i);
+char			**ft_clean_env(char **envp);
+int				ft_verify_unset_characters(char *str);
+int				ft_verify_unset_errors(char *str);
 
 // CD //
 
