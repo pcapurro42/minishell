@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_triple_split.c                                  :+:      :+:    :+:   */
+/*   ft_share_off.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcapurro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 18:01:45 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/02/27 18:01:47 by pcapurro         ###   ########.fr       */
+/*   Created: 2023/03/25 02:30:44 by pcapurro          #+#    #+#             */
+/*   Updated: 2023/03/25 02:30:45 by pcapurro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_get_pipe_number(char **str)
 	return (count);
 }
 
-char	***ft_allocate_strs(char ***fstr, char **str, int size)
+static char	***ft_allocate_strs(char ***fstr, char **str, int size)
 {
 	int	i;
 	int	j;

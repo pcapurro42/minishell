@@ -11,9 +11,9 @@ SRCS = minishell.c \
 	parsing/syntax_checker.c \
 	parsing/variable_checker.c \
 	parsing/variable_checker_utils.c \
-	parsing/input_cleaner_main.c \
+	parsing/input_cleaner.c \
 	parsing/input_cleaner_utils.c \
-	parsing/share_off.c \
+	parsing/ft_share_off.c \
 	execution/check_access.c \
 	execution/init_destroy_struct.c \
 	execution/init_destroy_struct2.c \
