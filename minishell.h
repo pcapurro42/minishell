@@ -189,6 +189,8 @@ char			***ft_share_off(char **str);
 
 // CLEANERS //
 
+int				ft_inside_quotes(char *str, int i, int quote, int dquote);
+
 char			*ft_input_cleaner(char *input);
 char			*ft_add_spaces_for_pipes(char *str);
 char			*ft_hide_spaces_in_quotes(char *str);

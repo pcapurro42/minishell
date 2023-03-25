@@ -12,34 +12,46 @@
 
 #include "../minishell.h"
 
-char	*ft_hide_spaces_in_quotes(char *str)
+int	ft_inside_quotes(char *str, int i, int quote, int dquote)
 {
-	int	i;
-	int	dquote;
-	int	quote;
+	int	j;
 
-	i = 0;
-	dquote = 0;
-	quote = 0;
-	while (str[i] != '\0')
+	j = 0;
+	while (str[j] != '\0' && j != i)
 	{
-		if (str[i] == 34 && quote == 0)
+		if (str[j] == 34 && quote == 0)
 		{
 			if (dquote == 0)
 				dquote = 1;
 			else
 				dquote = 0;
 		}
-		if (str[i] == 39 && dquote == 0)
+		if (str[j] == 39 && dquote == 0)
 		{
 			if (quote == 0)
 				quote = 1;
 			else
 				quote = 0;
 		}
-		if (str[i] == ' ' && dquote == 1)
-			str[i] = -1;
-		if (str[i] == ' ' && quote == 1)
+		j++;
+	}
+	if (quote % 2 != 0 || dquote % 2 != 0)
+		return (1);
+	return (0);
+}
+
+char	*ft_hide_spaces_in_quotes(char *str)
+{
+	int	i;
+	int	quote;
+	int	dquote;
+
+	i = 0;
+	quote = 0;
+	dquote = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ' && ft_inside_quotes(str, i, quote, dquote) == 1)
 			str[i] = -1;
 		i++;
 	}
@@ -49,55 +61,28 @@ char	*ft_hide_spaces_in_quotes(char *str)
 char	*ft_separate_chevrons(char *str)
 {
 	int		i;
+	int		quote;
+	int		dquote;
 	char	*strf;
-	char	*fstr;
 	char	*temp;
 
 	i = 0;
+	quote = 0;
+	dquote = 0;
 	strf = ft_strdup("");
-	fstr = ft_strdup("");
 	while (str[i] != '\0')
 	{
-		if ((str[i] == '>' || str[i] == '<') && (str[i - 1] != '<'
-				&& str[i - 1] != '>') && (str[i - 1] != ' ')
-			&& (str[i - 1] != 34) && (str[i - 1] != 39))
-		{
-			strf = ft_join_free(strf, " ");
-			temp = ft_char_to_str(str[i]);
-			strf = ft_join_free(strf, temp);
-			free(temp);
-		}
-		else
-		{
-			temp = ft_char_to_str(str[i]);
-			strf = ft_join_free(strf, temp);
-			free(temp);
-		}
+		if (ft_inside_quotes(str, i, quote, dquote) != 1)
+			if (str[i] == '>' || str[i] == '<'
+				|| (i != 0 && (str[i - 1] == '<' || str[i - 1] == '>')))
+				strf = ft_join_free(strf, " ");
+		temp = ft_char_to_str(str[i]);
+		strf = ft_join_free(strf, temp);
+		free(temp);
 		i++;
 	}
-	i = 0;
 	free(str);
-	while (strf[i] != '\0')
-	{
-		if ((strf[i] == '>' || strf[i] == '<') && (strf[i + 1] != '<'
-				&& strf[i + 1] != '>') && (strf[i + 1] != ' ')
-			&& (str[i + 1] != 34) && (str[i + 1] != 39))
-		{
-			temp = ft_char_to_str(strf[i]);
-			fstr = ft_join_free(fstr, temp);
-			free(temp);
-			fstr = ft_join_free(fstr, " ");
-		}
-		else
-		{
-			temp = ft_char_to_str(strf[i]);
-			fstr = ft_join_free(fstr, temp);
-			free(temp);
-		}
-		i++;
-	}
-	free(strf);
-	return (fstr);
+	return (strf);
 }
 
 void	ft_prepare_for_heredoc(char **str)
