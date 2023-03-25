@@ -12,54 +12,6 @@
 
 #include "../minishell.h"
 
-char	*ft_gv_end(t_mini *minishell, int i, int j)
-{
-	char	*str;
-	char	*temp;
-
-	str = ft_strdup("");
-	if (minishell->mini_tools->envp[i] != NULL)
-	{
-		while (minishell->mini_tools->envp[i][j - 1] != '=')
-			j++;
-		while (minishell->mini_tools->envp[i][j] != '\0')
-		{
-			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
-			str = ft_join_free(str, temp);
-			free(temp);
-		}
-	}
-	return (str);
-}
-
-char	*ft_gv_start(t_mini *minishell, char *temporary, char *var, int j)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (minishell->mini_tools->envp[i] != NULL)
-	{
-		while (minishell->mini_tools->envp[i][j] != '=')
-		{
-			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
-			temporary = ft_join_free(temporary, temp);
-			free(temp);
-		}
-		j = 0;
-		temporary = ft_join_free(temporary, "=");
-		if (ft_strncmp(var, temporary, ft_strlen(temporary)) != 0)
-		{
-			free(temporary);
-			temporary = ft_strdup("");
-		}
-		else
-			break ;
-		i++;
-	}
-	return (free(var), free(temporary), ft_gv_end(minishell, i, j));
-}
-
 char	*ft_get_variable(char *var, t_mini *minishell)
 {
 	int		j;
@@ -76,9 +28,9 @@ char	*ft_get_variable(char *var, t_mini *minishell)
 	return (ft_gv_start(minishell, temporary, var, j));
 }
 
-char	*ft_cv_end_loop(t_mini *minishell, char *input, char *str, char *var)
+char	*ft_cv_end(t_mini *minishell, char *in, char *str, char *var)
 {
-	if (ft_to_do_quote(input) == 0)
+	if (ft_to_do_quote(in) == 0)
 		str = ft_join_free(str, "$");
 	else
 		var = ft_get_variable(var, minishell);
@@ -87,73 +39,44 @@ char	*ft_cv_end_loop(t_mini *minishell, char *input, char *str, char *var)
 	return (str);
 }
 
-char	*ft_cv_heart(t_mini *minishell, char *input, char *str, char *var)
+char	*ft_cv_heart(t_mini *minishell, char *in, char *str, char *var)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
-	while (input[i] != '\0')
+	while (in[i] != '\0')
 	{
-		if (input[i] != '$')
+		if (in[i] != '$')
 		{
-			temp = ft_char_to_str(input[i++]);
+			temp = ft_char_to_str(in[i++]);
 			str = ft_join_free(str, temp);
 			free(temp);
 		}
-		else if (input[i++] == '$')
+		else if (in[i++] == '$')
 		{
-			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 \
-				&& input[i] != 39 && input[i] != ':')
+			while (in[i] != '\0' && in[i] != ' ' && in[i] != 34 \
+				&& in[i] != 39 && in[i] != ':')
 			{
-				temp = ft_char_to_str(input[i++]);
+				temp = ft_char_to_str(in[i++]);
 				var = ft_join_free(var, temp);
 				free(temp);
 			}
-			str = ft_cv_end_loop(minishell, input, str, var);
+			str = ft_cv_end(minishell, in, str, var);
 		}
 	}
-	return (free(input), str);
+	return (free(in), str);
 }
 
-char	*ft_capture_variable(char *input, t_mini *minishell)
+char	*ft_capture_variable(char *in, t_mini *minishell)
 {
 	char	*str;
 	char	*var;
 
 	str = ft_strdup("");
 	var = ft_strdup("");
-	str = ft_cv_heart(minishell, input, str, var);
+	str = ft_cv_heart(minishell, in, str, var);
 	return (str);
-}
-
-char	*ft_replace_tilde(char *str, t_mini *minishell)
-{
-	int		i;
-	char	*sf;
-	char	*temp;
-
-	i = 0;
-	sf = ft_strdup("");
-	while (str[i] != '\0')
-	{
-		if (str[i] != '~')
-		{
-			temp = ft_char_to_str(str[i]);
-			sf = ft_join_free(sf, temp);
-			free(temp);
-		}
-		else
-		{
-			if (ft_to_do_tilde(str) != 0)
-				sf = ft_join_free(sf, minishell->mini_tools->home_directory);
-			else
-				sf = ft_join_free(sf, "~");
-		}
-		i++;
-	}
-	free(str);
-	return (sf);
 }
 
 char	**ft_check_variables(char **str, t_mini *minishell)
