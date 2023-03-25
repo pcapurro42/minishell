@@ -35,6 +35,7 @@ void	ft_prepare_for_heredoc(char **str)
 				str[i + 1][k++] = temp[j++];
 			str[i + 1][k] = 39;
 			str[i + 1][k + 1] = '\0';
+			free(temp);
 		}
 		i++;
 	}
