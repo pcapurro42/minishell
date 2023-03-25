@@ -12,20 +12,32 @@
 
 #include "../minishell.h"
 
-char	*ft_get_variable(char *variable, t_mini *minishell)
+char	*ft_gv_end(t_mini *minishell, int i, int j)
+{
+	char	*str;
+	char	*temp;
+
+	str = ft_strdup("");
+	if (minishell->mini_tools->envp[i] != NULL)
+	{
+		while (minishell->mini_tools->envp[i][j - 1] != '=')
+			j++;
+		while (minishell->mini_tools->envp[i][j] != '\0')
+		{
+			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
+			str = ft_join_free(str, temp);
+			free(temp);
+		}
+	}
+	return (str);
+}
+
+char	*ft_gv_start(t_mini *minishell, char *temporary, char *variable, int j)
 {
 	int		i;
-	int		j;
-	char	*temporary;
 	char	*temp;
-	char	*str;
 
 	i = 0;
-	j = 0;
-	if (variable[0] == '?' && variable[1] == '\0')
-		return (ft_itoa(g_global->g_last_return_code));
-	temporary = ft_strdup("");
-	variable = ft_join_free(variable, "=");
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j] != '=')
@@ -45,22 +57,23 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 			break ;
 		i++;
 	}
-	free(variable);
-	free(temporary);
-	str = ft_strdup("");
-	if (minishell->mini_tools->envp[i] != NULL)
+	return (free(variable), free(temporary), ft_gv_end(minishell, i, j));
+}
+
+char	*ft_get_variable(char *variable, t_mini *minishell)
+{
+	int		j;
+	char	*temporary;
+
+	j = 0;
+	if (variable[0] == '?' && variable[1] == '\0')
+		return (ft_itoa(g_global->g_last_return_code));
+	else
 	{
-		while (minishell->mini_tools->envp[i][j] != '=')
-			j++;
-		j = j + 1;
-		while (minishell->mini_tools->envp[i][j] != '\0')
-		{
-			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
-			str = ft_join_free(str, temp);
-			free(temp);
-		}
+		temporary = ft_strdup("");
+		variable = ft_join_free(variable, "=");
 	}
-	return (str);
+	return (ft_gv_start(minishell, temporary, variable, j));
 }
 
 char	*ft_capture_variable(char *input, t_mini *minishell)
