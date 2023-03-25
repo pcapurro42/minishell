@@ -20,8 +20,7 @@ char	*ft_join_free(char *s1, char *s2)
 
 	i = 0;
 	s3 = malloc(ft_strlen(s2) + ft_strlen(s1) + 1);
-	if (!s3 || !s1 || !s2)
-		exit(1);
+	ft_check_malloc(s3);
 	while (s1[i] != '\0')
 	{
 		s3[i] = s1[i];
@@ -35,6 +34,5 @@ char	*ft_join_free(char *s1, char *s2)
 		j++;
 	}
 	s3[i] = '\0';
-	free(s1);
-	return (s3);
+	return (free(s1), s3);
 }

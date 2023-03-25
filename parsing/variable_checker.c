@@ -63,7 +63,7 @@ char	*ft_get_variable(char *variable, t_mini *minishell)
 	return (str);
 }
 
-char	*ft_replace_quote(char *input, t_mini *minishell)
+char	*ft_capture_variable(char *input, t_mini *minishell)
 {
 	int		i;
 	char	*str;
@@ -99,8 +99,7 @@ char	*ft_replace_quote(char *input, t_mini *minishell)
 			free(variable);
 		}
 	}
-	free(input);
-	return (str);
+	return (free(input), str);
 }
 
 char	*ft_replace_tilde(char *str, t_mini *minishell)
@@ -140,7 +139,7 @@ char	**ft_check_variables(char **str, t_mini *minishell)
 	while (str[i] != NULL)
 	{
 		if (ft_strchr(str[i], '$') != NULL)
-			str[i] = ft_replace_quote(str[i], minishell);
+			str[i] = ft_capture_variable(str[i], minishell);
 		i++;
 	}
 	return (str);

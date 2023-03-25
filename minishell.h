@@ -210,7 +210,7 @@ char			*ft_substitute_str(char *str);
 
 char			**ft_check_variables(char **str, t_mini *minishell);
 char			*ft_get_variable(char *variable, t_mini *minishell);
-char			*ft_replace_quote(char *input, t_mini *minishell);
+char			*ft_capture_variable(char *input, t_mini *minishell);
 char			*ft_replace_tilde(char *str, t_mini *minishell);
 int				ft_to_do_tilde(char *input);
 int				ft_to_do_quote(char *input);
