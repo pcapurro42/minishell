@@ -125,7 +125,6 @@ int	main(int argc, char **argv, char *envp[])
 			ft_analyze_input(input, minishell);
 		ft_destroy_mini(minishell, input);
 		free(input);
-		// system("leaks minishell");
 	}
 	return (0);
 }

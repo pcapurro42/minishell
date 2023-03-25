@@ -126,7 +126,6 @@ int				ft_handle_hyphen(t_mini *minishell);
 int				ft_handle_point_point(t_mini *minishell, char *arg);
 int				ft_handle_operator(t_mini *minishell, char *str, char *arg);
 
-
 // #-# EXECUTION #-# //
 
 char			*ft_check_access(t_cmd *cmd_struct);
