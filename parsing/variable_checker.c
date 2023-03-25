@@ -93,12 +93,11 @@ char	*ft_capture_variable(char *input, t_mini *minishell)
 			str = ft_join_free(str, temp);
 			free(temp);
 		}
-		else
+		else if (input[i++] == '$')
 		{
-			i++;
 			variable = ft_strdup("");
 			while (input[i] != '\0' && input[i] != ' ' && input[i] != 34 \
-				&& input[i] != 39 && input[i] != 58)
+				&& input[i] != 39 && input[i] != ':')
 			{
 				temp = ft_char_to_str(input[i++]);
 				variable = ft_join_free(variable, temp);
