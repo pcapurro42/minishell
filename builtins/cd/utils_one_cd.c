@@ -68,11 +68,13 @@ int	ft_update_oldpwd(t_mini *minishell, char *path)
 {
 	int		i;
 	char	*temp;
+	char	*tmp;
 
 	i = 0;
 	while (minishell->mini_tools->envp[i] != NULL)
 	{
-		if (ft_strncmp("OLDPWD=", minishell->mini_tools->envp[i], 7) == 0)
+		tmp = ft_strjoin(minishell->mini_tools->envp[i], "=");
+		if (ft_strncmp("OLDPWD=", tmp, 7) == 0)
 		{
 			free(minishell->mini_tools->envp[i]);
 			minishell->mini_tools->envp[i] = ft_strdup("OLDPWD=");
@@ -82,9 +84,11 @@ int	ft_update_oldpwd(t_mini *minishell, char *path)
 			free(temp);
 			free(minishell->mini_tools->old_pwd);
 			minishell->mini_tools->old_pwd = ft_strdup(path);
+			free(tmp);
 			return (0);
 		}
 		i++;
+		free(tmp);
 	}
 	return (0);
 }
