@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/16 04:42:43 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:26:43 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,10 @@ t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv);
 void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
 char			**ft_cpy_envp(char *envp[], char **argv);
+int				ft_find_line_env(char **envp, char *name);
+
+int				ft_find_nb_missing_lines(char **envp);
+char			*ft_getoldpwd(void);
 
 char			*ft_gethome(char **envp);
 char			*ft_getpwd(void);

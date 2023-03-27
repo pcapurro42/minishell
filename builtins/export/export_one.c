@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export_one.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/20 16:56:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:32:59 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ static void	ft_export_no_arg_builtins(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
-		if (ft_strchr(envp[i], '='))
+		if (ft_strncmp(envp[i], "_=", 2) != 0)
 		{
-			write(1, envp[i], ft_strchr_i(envp[i], '=') + 1);
-			ft_putchar_fd('\"', 1);
-			ft_putstr_fd(&(envp[i][ft_strchr_i(envp[i], '=') + 1]), 1);
-			ft_putchar_fd('\"', 1);
+			ft_putstr_fd("declare -x ", 1);
+			if (ft_strchr(envp[i], '='))
+			{
+				write(1, envp[i], ft_strchr_i(envp[i], '=') + 1);
+				ft_putchar_fd('\"', 1);
+				ft_putstr_fd(&(envp[i][ft_strchr_i(envp[i], '=') + 1]), 1);
+				ft_putchar_fd('\"', 1);
+			}
+			else
+				ft_putstr_fd(envp[i], 1);
+			ft_putchar_fd('\n', 1);
 		}
-		else
-			ft_putstr_fd(envp[i], 1);
-		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	return ;

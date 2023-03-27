@@ -6,13 +6,13 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:27:46 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 22:57:13 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:26:31 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_find_line_env(char **envp, char *name)
+int	ft_find_line_env(char **envp, char *name)
 {
 	int	i;
 
@@ -62,8 +62,7 @@ static void	ft_check_env(char ***envp, int envp_len, char **argv)
 	int		nb_missing_lines;
 	int		i;
 
-	nb_missing_lines = ft_find_line_env(*envp, "PWD=") + \
-	ft_find_line_env(*envp, "SHLVL=") + ft_find_line_env(*envp, "_=");
+	nb_missing_lines = ft_find_nb_missing_lines(*envp);
 	if (nb_missing_lines == 0)
 		return ;
 	new_envp = malloc(sizeof(*new_envp) * \
@@ -78,6 +77,8 @@ static void	ft_check_env(char ***envp, int envp_len, char **argv)
 		new_envp[i++] = ft_getshlvl();
 	if (ft_find_line_env(*envp, "_=") == 1)
 		new_envp[i++] = ft_get_(ft_getpwd(), argv[0]);
+	if (ft_find_line_env(*envp, "OLDPWD=") == 1)
+		new_envp[i++] = ft_getoldpwd();
 	new_envp[i] = NULL;
 	pls_free(*envp);
 	*envp = new_envp;
