@@ -43,7 +43,8 @@ int	ft_verify_unset_characters(char *str)
 		if ((ft_isalpha(str[i]) == 0 && ft_isdigit(str[i]) == 0) \
 			&& str[i] != '_')
 		{
-			printf("minishell: unset: '%s': not a valid identifier\n", str);
+			ft_putstr_fd("minishell: unset: ", 2);
+			ft_printf_error("'%s': not a valid identifier\n", str);
 			return (1);
 		}
 		i++;
@@ -102,13 +103,11 @@ void	ft_browse_unit(t_mini *minishell, char **cmd_arg, int i)
 int	ft_unset_builtins(t_mini *minishell, char **cmd_arg)
 {
 	int		i;
-	int		j;
 	int		return_code;
 	char	*temp;
 
 	return_code = 0;
 	i = 1;
-	j = 0;
 	while (cmd_arg[i] != NULL && ft_verify_unset_characters(cmd_arg[i]) == 0)
 	{
 		temp = ft_strdup(cmd_arg[i]);

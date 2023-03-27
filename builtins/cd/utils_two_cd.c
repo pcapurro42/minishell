@@ -15,11 +15,17 @@
 int	ft_verify_failure(char *path, char *arg, int i)
 {
 	if (access(path, F_OK) == -1)
-		return (printf("minishell: cd: %s: No such file or directory\n", arg));
+	{
+		ft_printf_error("minishell: cd: %s: No such file or directory\n", arg);
+		return (1);
+	}
 	if (access(path, X_OK) == -1)
-		return (printf("minishell: cd: %s: Permission denied\n", arg));
+		return (ft_printf_error("minishell: cd: %s: Permission denied\n", arg));
 	if (i != 0)
-		return (printf("minishell: cd: an error occured\n"));
+	{
+		ft_putstr_fd("minishell: cd: an error occured\n", 2);
+		return (1);
+	}
 	return (0);
 }
 
@@ -33,7 +39,10 @@ int	ft_verify_args(char *str)
 		if (str[i] == '-')
 		{
 			if (i == 0 && str[i + 1] != '\0')
-				return (printf("minishell: cd: -: invalid option\n"));
+			{
+				ft_putstr_fd("minishell: cd: -: invalid option\n", 2);
+				return (1);
+			}
 		}
 		i++;
 	}

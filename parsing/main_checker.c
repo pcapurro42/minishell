@@ -14,11 +14,6 @@
 
 int	ft_is_it_quoi(char *input)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	if (ft_strlen(input) == 4)
 	{
 		if ((input[0] == 'q' || input[0] == 'Q') \
@@ -80,12 +75,12 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 {
 	char	**str;
 
+	add_history(input);
 	input = ft_input_cleaner(input);
 	if (input == NULL)
 	{
 		g_global->g_last_return_code = 258;
-		free(input);
-		return (1);
+		return (free(input), 1);
 	}
 	if (ft_is_it_quoi(input) == 1)
 		return (free(input), ft_handle_quoi_feur(minishell), 0);
@@ -94,8 +89,8 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	ft_repair_spaces_in_quotes(str);
 	if (ft_syntax_checker(str) != 0)
 	{
-		pls_free(str);
 		g_global->g_last_return_code = 258;
+		pls_free(str);
 		return (1);
 	}
 	ft_prepare_for_heredoc(str);

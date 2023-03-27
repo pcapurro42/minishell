@@ -120,7 +120,6 @@ int	main(int argc, char **argv, char *envp[])
 		input = readline(name);
 		if (input == NULL)
 			ft_destroy_mini(minishell, input);
-		add_history(input);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);
 		ft_destroy_mini(minishell, input);

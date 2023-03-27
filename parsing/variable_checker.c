@@ -73,9 +73,8 @@ char	*ft_capture_variable(char *in, t_mini *minishell)
 	char	*str;
 	char	*var;
 
-	str = ft_strdup("");
 	var = ft_strdup("");
-	str = ft_cv_heart(minishell, in, str, var);
+	str = ft_cv_heart(minishell, in, ft_strdup(""), var);
 	return (str);
 }
 

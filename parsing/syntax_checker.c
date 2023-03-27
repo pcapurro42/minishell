@@ -42,17 +42,18 @@ static int	ft_qc_main(char *str, int dquote, int quote, int count)
 
 int	ft_quote_checker(char *str)
 {
-	int	i;
 	int	dquote;
 	int	quote;
 	int	count;
 
-	i = 0;
 	count = 0;
 	dquote = 0;
 	quote = 0;
 	if (ft_qc_main(str, dquote, quote, count) % 2 != 0)
-		return (printf("minishell: syntax error for unclosed quotes\n"));
+	{
+		ft_putstr_fd("minishell: syntax error for unclosed quotes\n", 2);
+		return (1);
+	}
 	return (0);
 }
 
@@ -67,8 +68,8 @@ int	ft_pipe_checker(char **str)
 		{
 			if (i == 0 || i == ft_dstrlen(str) - 1
 				|| str[i - 1][0] == '|' || str[i + 1][0] == '|')
-				return (printf("minishell: syntax error near \
-unexpected token '|'\n"));
+				return (ft_putstr_fd("minishell: syntax error near \
+unexpected token '|'\n", 2), 1);
 		}
 		i++;
 	}
@@ -85,19 +86,19 @@ int	ft_chevron_checker(char **str)
 		if (str[i][0] == '<' || str[i][0] == '>')
 		{
 			if (i == ft_dstrlen(str) - 1)
-				return (printf("minishell: syntax error near \
+				return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][0]));
 			if (i != 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>'
 					|| str[i - 1][0] == '<' || str[i - 1][0] == '>')
-					return (printf("minishell: syntax error near \
+					return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][0]));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
-					return (printf("minishell: syntax error near \
+					return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][0]));
 			if (ft_strlen(str[i]) >= 3)
-				return (printf("minishell: syntax error near \
+				return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][0]));
 		}
 		i++;

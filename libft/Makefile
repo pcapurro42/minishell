@@ -68,6 +68,7 @@ SRCS	=	ft_isalpha.c \
 			ft_error.c \
 			ft_check_malloc.c \
 			ft_join_free.c \
+			ft_printf_error.c \
 
 
 OBJS	=	$(SRCS:.c=.o)

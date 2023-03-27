@@ -62,13 +62,13 @@ static int	ft_verify_characters_export_2(char *str, char *name_str)
 	name_str[i] == '_' || name_str[i] == '*') && name_str[1] == '\0')
 		return (1);
 	if (name_str[i] == '\0')
-		return (printf("minishell: export: '%s': \
+		return (ft_printf_error("minishell: export: '%s': \
 not a valid identifier\n", str));
 	while (name_str[i] != '=' && name_str[i] != '\0')
 	{
 		if ((ft_isalpha(name_str[i]) == 0 && \
 		ft_isdigit(name_str[i]) == 0) && name_str[i] != '_')
-			return (printf("minishell: export: '%s': \
+			return (ft_printf_error("minishell: export: '%s': \
 not a valid identifier\n", str));
 		i++;
 	}
