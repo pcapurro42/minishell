@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:27:46 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/27 10:26:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:44:36 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_increase_shlvl(char	**envp)
 	envp[i_shlvl] = shlvl_line;
 }
 
-static void	ft_check_env(char ***envp, int envp_len, char **argv)
+void	ft_check_env(char ***envp, int envp_len, char **argv)
 {
 	char	**new_envp;
 	int		nb_missing_lines;
@@ -80,7 +80,7 @@ static void	ft_check_env(char ***envp, int envp_len, char **argv)
 	if (ft_find_line_env(*envp, "OLDPWD=") == 1)
 		new_envp[i++] = ft_getoldpwd();
 	new_envp[i] = NULL;
-	pls_free(*envp);
+	free(*envp);
 	*envp = new_envp;
 }
 

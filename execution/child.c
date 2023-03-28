@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/20 20:12:47 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:38:28 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 		exit(0);
 	ft_child_dup(fd, i, minishell, cmd_struct);
 	ft_check_builtins(minishell, cmd_struct);
+	if ((ft_strlen(cmd_struct->cmd_arg[0]) > 1 && \
+	cmd_struct->cmd_arg[0][0] == '.' && cmd_struct->cmd_arg[0][1] == '/') || \
+	(ft_strchr(cmd_struct->cmd_arg[0], '/')))
+		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	ft_error_msg(minishell->cmd_lst[0][i]);
@@ -95,6 +99,10 @@ t_mini *minishell, t_cmd *cmd_struct)
 		exit(0);
 	ft_child_dup(fd, i, minishell, cmd_struct);
 	ft_check_builtins(minishell, cmd_struct);
+	if ((ft_strlen(cmd_struct->cmd_arg[0]) > 1 && \
+	cmd_struct->cmd_arg[0][0] == '.' && cmd_struct->cmd_arg[0][1] == '/') || \
+	(ft_strchr(cmd_struct->cmd_arg[0], '/')))
+		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	ft_error_msg(minishell->cmd_lst[0][i]);

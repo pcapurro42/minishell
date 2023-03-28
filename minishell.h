@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/27 10:26:43 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:39:07 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,10 +158,13 @@ void			ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 void			ft_error_msg(char *msg);
 void			ft_cmd_error(char **cmd);
 void			ft_msg(char	*msg);
+void			ft_error_dir(char *msg);
 
 void			ft_execution(t_mini *minishell);
 
 t_cmd			*ft_exec_one_cmd(t_mini *minishell);
+
+void			ft_exec_case(char **cmd_arg, char **envp);
 
 char			**ft_find_path(char *envp[], int path_unset);
 

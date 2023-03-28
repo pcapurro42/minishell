@@ -28,6 +28,7 @@ SRCS = minishell.c \
 	execution/create_env_lines.c \
 	execution/create_env_lines2.c \
 	execution/execution_one_cmd.c \
+	execution/exec_case.c \
 	builtins/echo.c \
 	builtins/env.c \
 	builtins/pwd.c \
