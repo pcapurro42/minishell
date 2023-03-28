@@ -226,9 +226,9 @@ char			*ft_replace_tilde(char *str, t_mini *minishell);
 int				ft_to_do_tilde(char *input);
 int				ft_to_do_quote(char *input);
 
-int				ft_syntax_checker(char **str);
 int				ft_pipe_checker(char **str);
-int				ft_chevron_checker(char **str);
+int				ft_chevron_checker_a(char *str);
+int				ft_chevron_checker_b(char **str);
 int				ft_quote_checker(char *str);
 
 #endif

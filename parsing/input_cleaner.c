@@ -130,7 +130,7 @@ char	*ft_input_cleaner(char *input)
 		}
 		i++;
 	}
-	if (ft_quote_checker(str) != 0)
+	if (ft_quote_checker(str) != 0 || ft_chevron_checker_a(str) != 0)
 		return (free(str), NULL);
 	str = ft_add_spaces_for_pipes(str);
 	str = ft_hide_spaces_in_quotes(str);

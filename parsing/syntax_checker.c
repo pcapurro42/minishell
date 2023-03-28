@@ -76,7 +76,17 @@ unexpected token '|'\n", 2), 1);
 	return (0);
 }
 
-int	ft_chevron_checker(char **str)
+int	ft_chevron_checker_a(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (0);
+}
+
+int	ft_chevron_checker_b(char **str)
 {
 	int	i;
 
@@ -103,14 +113,5 @@ unexpected token '%c'\n", str[i][0]));
 		}
 		i++;
 	}
-	return (0);
-}
-
-int	ft_syntax_checker(char **str)
-{
-	if (ft_pipe_checker(str) != 0)
-		return (1);
-	if (ft_chevron_checker(str) != 0)
-		return (1);
 	return (0);
 }

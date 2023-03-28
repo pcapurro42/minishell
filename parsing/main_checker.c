@@ -87,7 +87,7 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	str = ft_split(input, ' ');
 	free(input);
 	ft_repair_spaces_in_quotes(str);
-	if (ft_syntax_checker(str) != 0)
+	if (ft_pipe_checker(str) != 0 || ft_chevron_checker_b(str) != 0)
 	{
 		g_global->g_last_return_code = 258;
 		pls_free(str);
