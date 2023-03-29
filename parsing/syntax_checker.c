@@ -119,7 +119,8 @@ int	ft_chevron_checker_b(char **str)
 	{
 		if ((str[i][0] == '<' || str[i][0] == '>'))
 		{
-			if (str[i][0] == '>' && str[i][1] == '<')
+			if ((str[i][0] == '>' && str[i][1] == '<')
+				|| (str[i][0] == '<' && str[i][1] == '>'))
 				return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][1]));
 			if (i != 0 && ft_strlen(str[i]) >= 3)
