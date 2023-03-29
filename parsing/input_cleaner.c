@@ -36,7 +36,7 @@ char	*ft_add_spaces_for_pipes(char *str)
 	return (strf);
 }
 
-char	*ft_hide_spaces_in_quotes(char *str)
+char	*ft_hide_things(char *str)
 {
 	int	i;
 
@@ -45,6 +45,13 @@ char	*ft_hide_spaces_in_quotes(char *str)
 	{
 		if (str[i] == ' ' && ft_in_out_quotes(str, i) == 1)
 			str[i] = -1;
+		i++;
+	}
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '>' && str[i + 1] == '|' && ft_in_out_quotes(str, i) != 1)
+			str[i + 1] = ' ';
 		i++;
 	}
 	return (str);
@@ -124,8 +131,8 @@ char	*ft_input_cleaner(char *input)
 	}
 	if (ft_quote_checker(str) != 0 || ft_chevron_checker_a(str) != 0)
 		return (free(str), NULL);
+	str = ft_hide_things(str);
 	str = ft_add_spaces_for_pipes(str);
-	str = ft_hide_spaces_in_quotes(str);
 	str = ft_separate_chevrons(str);
 	str = ft_stick_chevrons(str);
 	return (str);
