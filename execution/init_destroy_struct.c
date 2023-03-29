@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:10:13 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/28 19:44:19 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:25:05 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	ft_destroy_cmd(t_cmd *cmd_struct)
 {
 	if (cmd_struct)
 	{
+		if (cmd_struct->infile_fd >= 0)
+			close(cmd_struct->infile_fd);
+		if (cmd_struct->outfile_fd >= 0)
+			close(cmd_struct->outfile_fd);
 		if (cmd_struct->cmd_path_lst)
 			pls_free(cmd_struct->cmd_path_lst);
 		if (cmd_struct->cmd_arg)
