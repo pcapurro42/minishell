@@ -93,13 +93,13 @@ char	**ft_check_variables(char **str, t_mini *minishell)
 	char	**str_tmp;
 
 	i = 0;
-	j = -1;
 	while (str[i] != NULL)
 	{
 		if (ft_strchr(str[i], '$') != NULL)
 		{
 			str_tmp = ft_split(str[i], '$');
 			free(str[i]);
+			j = -1;
 			while (str_tmp[++j] != NULL)
 				str_tmp[j] = ft_capture_variable(str_tmp[j], minishell);
 			j = 0;
