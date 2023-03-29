@@ -50,8 +50,11 @@ char	*ft_hide_things(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (i != 0 && str[i - 1] != '>' && str[i] == '>' && str[i + 1] == '|' && ft_in_out_quotes(str, i) != 1)
-			str[i + 1] = ' ';
+		if (str[i] == '>' && str[i + 1] == '|' && ft_in_out_quotes(str, i) != 1)
+		{
+			if (i == 0 || (str[i - 1] != '>' && str[i - 1] != '<'))
+				str[i + 1] = ' ';
+		}
 		i++;
 	}
 	return (str);
