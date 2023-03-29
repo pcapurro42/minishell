@@ -103,5 +103,6 @@ void				ft_error(void);
 void				ft_check_malloc(void *str);
 char				*ft_join_free(char *s1, char *s2);
 int					ft_printf_error(const char *str, ...);
+char				*ft_lower_input(char *str);
 
 #endif
