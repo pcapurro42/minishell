@@ -78,6 +78,11 @@ char	*ft_capture_variable(char *in, t_mini *minishell)
 	temp = ft_strjoin("$", in);
 	free(in);
 	str = ft_cv_heart(minishell, temp, ft_strdup(""), var);
+	temp = ft_strtrim(str, " ");
+	free(str);
+	str = ft_strjoin("'", temp);
+	free(temp);
+	str = ft_join_free(str, "'");
 	return (str);
 }
 

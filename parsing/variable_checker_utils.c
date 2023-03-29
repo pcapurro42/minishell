@@ -76,9 +76,6 @@ char	*ft_gv_end(t_mini *minishell, int i, int j)
 	char	*temp;
 
 	str = ft_strdup("");
-	temp = ft_char_to_str('"');
-	str = ft_join_free(str, temp);
-	free(temp);
 	if (minishell->mini_tools->envp[i] != NULL)
 	{
 		while (minishell->mini_tools->envp[i][j - 1] != '=')
@@ -90,9 +87,6 @@ char	*ft_gv_end(t_mini *minishell, int i, int j)
 			free(temp);
 		}
 	}
-	temp = ft_char_to_str('"');
-	str = ft_join_free(str, temp);
-	free(temp);
 	return (str);
 }
 
