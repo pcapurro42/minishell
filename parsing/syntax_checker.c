@@ -121,7 +121,7 @@ int	ft_chevron_checker_b(char **str)
 		{
 			if (ft_strlen(str[i]) >= 3)
 				return (ft_printf_error("minishell: syntax error near \
-unexpected token '%c'\n", str[i][0]));
+unexpected token '%c'\n", str[i][ft_strlen(str[i]) - 1]));
 			if (i == ft_dstrlen(str) - 1)
 				return (ft_putstr_fd("minishell: syntax error near \
 unexpected token 'newline'\n", 2), 1);
@@ -133,7 +133,7 @@ unexpected token '%c'\n", str[i][0]));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
 					return (ft_printf_error("minishell: syntax error near \
-unexpected token '%c'\n", str[i][ft_strlen(str[i]) - 1]));
+unexpected token '%c'\n", str[i][0]));
 		}
 		i++;
 	}
