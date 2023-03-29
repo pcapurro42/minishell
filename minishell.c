@@ -114,7 +114,7 @@ int	main(int argc, char **argv, char *envp[])
 	ft_init_minishell();
 	signal(SIGINT, ft_handle_signal);
 	signal(SIGQUIT, ft_handle_signal);
-	while ((((6 * 6 == 36) != 4) != 0))
+	while ((42 + (42 * 42) - (42 * 42)) == 42)
 	{
 		minishell = ft_init_mini(mini_tools);
 		input = readline(name);
