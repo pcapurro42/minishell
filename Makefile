@@ -58,7 +58,10 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
+# MAC OS
 	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+# LINUX
+### $(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/usr/lib/x86_64-linux-gnu/ -I/usr/include/
 
 $(LIBFT):
 	make -C libft
