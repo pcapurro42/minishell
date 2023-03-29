@@ -56,7 +56,7 @@ char	*ft_cv_heart(t_mini *minishell, char *in, char *str, char *var)
 		else if (in[i++] == '$')
 		{
 			while (in[i] != '\0' && in[i] != ' ' && in[i] != 34 \
-				&& in[i] != 39 && in[i] != ':' && in[i] != '$')
+				&& in[i] != 39 && in[i] != ':' && in[i] != '$' && in[i] != ']' && in[i] != '[')
 			{
 				temp = ft_char_to_str(in[i++]);
 				var = ft_join_free(var, temp);
