@@ -60,30 +60,7 @@ char	*ft_hide_things(char *str)
 	return (str);
 }
 
-char	*ft_separate_chevrons(char *str)
-{
-	int		i;
-	char	*strf;
-	char	*temp;
-
-	i = 0;
-	strf = ft_strdup("");
-	while (str[i] != '\0')
-	{
-		if (ft_in_out_quotes(str, i) != 1)
-			if (str[i] == '>' || str[i] == '<'
-				|| (i != 0 && (str[i - 1] == '<' || str[i - 1] == '>')))
-				strf = ft_join_free(strf, " ");
-		temp = ft_char_to_str(str[i]);
-		strf = ft_join_free(strf, temp);
-		free(temp);
-		i++;
-	}
-	free(str);
-	return (strf);
-}
-
-char	*ft_stick_chevrons(char *str)
+char	*ft_stick_chevrons_two(char *str)
 {
 	int		i;
 	char	*strf;
@@ -112,6 +89,30 @@ char	*ft_stick_chevrons(char *str)
 	return (free(str), strf);
 }
 
+char	*ft_fix_chevrons_one(char *str)
+{
+	int		i;
+	char	*strf;
+	char	*temp;
+
+	i = 0;
+	strf = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if (ft_in_out_quotes(str, i) != 1)
+			if (str[i] == '>' || str[i] == '<'
+				|| (i != 0 && (str[i - 1] == '<' || str[i - 1] == '>')))
+				strf = ft_join_free(strf, " ");
+		temp = ft_char_to_str(str[i]);
+		strf = ft_join_free(strf, temp);
+		free(temp);
+		i++;
+	}
+	free(str);
+	strf = ft_stick_chevrons_two(strf);
+	return (strf);
+}
+
 char	*ft_input_cleaner(char *input)
 {
 	int		i;
@@ -134,9 +135,9 @@ char	*ft_input_cleaner(char *input)
 	}
 	if (ft_quote_checker(str) != 0 || ft_chevron_checker_a(str) != 0)
 		return (free(str), NULL);
+	ft_lower_input(str);
 	str = ft_hide_things(str);
 	str = ft_add_spaces_for_pipes(str);
-	str = ft_separate_chevrons(str);
-	str = ft_stick_chevrons(str);
+	str = ft_fix_chevrons_one(str);
 	return (str);
 }
