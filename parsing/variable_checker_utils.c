@@ -41,30 +41,33 @@ int	ft_to_do_quote(char *input)
 	return (0);
 }
 
-int	ft_to_do_tilde(char *input)
+char	*ft_replace_tilde(char *str, t_mini *minishell)
 {
 	int		i;
-	int		dquote;
-	int		quote;
-	char	c;
+	char	*sf;
+	char	*temp;
 
 	i = 0;
-	dquote = 0;
-	quote = 0;
-	c = 0;
-	while (input[i] != '~')
+	sf = ft_strdup("");
+	while (str[i] != '\0')
 	{
-		if (c == 0 && (input[i] == 34 || input[i] == 39))
-			c = input[i];
-		if (input[i] == 34 && quote % 2 == 0)
-			dquote++;
-		if (input[i] == 39 && dquote % 2 == 0)
-			quote++;
+		if (str[i] != '~')
+		{
+			temp = ft_char_to_str(str[i]);
+			sf = ft_join_free(sf, temp);
+			free(temp);
+		}
+		else
+		{
+			if (ft_in_out_quotes(str, i) != 1)
+				sf = ft_join_free(sf, minishell->mini_tools->home_directory);
+			else
+				sf = ft_join_free(sf, "~");
+		}
 		i++;
 	}
-	if (dquote % 2 != 0 || quote % 2 != 0)
-		return (0);
-	return (1);
+	free(str);
+	return (sf);
 }
 
 char	*ft_gv_end(t_mini *minishell, int i, int j)

@@ -223,7 +223,6 @@ char			*ft_capture_variable(char *input, t_mini *minishell);
 char			*ft_cv_heart(t_mini *minishell, char *in, char *str, char *var);
 char			*ft_cv_end(t_mini *minishell, char *in, char *str, char *var);
 char			*ft_replace_tilde(char *str, t_mini *minishell);
-int				ft_to_do_tilde(char *input);
 int				ft_to_do_quote(char *input);
 
 int				ft_pipe_checker(char **str);

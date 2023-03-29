@@ -42,35 +42,6 @@ void	ft_handle_quoi_feur(t_mini *minishell)
 	minishell->mini_tools->quoifeur++;
 }
 
-char	*ft_replace_tilde(char *str, t_mini *minishell)
-{
-	int		i;
-	char	*sf;
-	char	*temp;
-
-	i = 0;
-	sf = ft_strdup("");
-	while (str[i] != '\0')
-	{
-		if (str[i] != '~')
-		{
-			temp = ft_char_to_str(str[i]);
-			sf = ft_join_free(sf, temp);
-			free(temp);
-		}
-		else
-		{
-			if (ft_to_do_tilde(str) != 0)
-				sf = ft_join_free(sf, minishell->mini_tools->home_directory);
-			else
-				sf = ft_join_free(sf, "~");
-		}
-		i++;
-	}
-	free(str);
-	return (sf);
-}
-
 int	ft_analyze_input(char *input, t_mini *minishell)
 {
 	char	**str;
