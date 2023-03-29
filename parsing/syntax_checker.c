@@ -129,7 +129,7 @@ unexpected token '%c'\n", str[i][ft_strlen(str[i]) - 1]));
 			if (i == ft_dstrlen(str) - 1)
 				return (ft_putstr_fd("minishell: syntax error near \
 unexpected token 'newline'\n", 2), 1);
-			if (i == 0 && ft_strlen(str[i]) > 3)
+			if (i == 0 && ft_strlen(str[i]) >= 3)
 				return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i][ft_strlen(str[i]) - 1]));
 		}
