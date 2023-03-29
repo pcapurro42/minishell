@@ -36,6 +36,7 @@ SRCS = minishell.c \
 	builtins/export/export_one.c \
 	builtins/export/export_two.c \
 	builtins/export/export_three.c \
+	builtins/export/export_four.c \
 	builtins/exit.c \
 	builtins/unset.c \
 	builtins/cd/main_cd.c \

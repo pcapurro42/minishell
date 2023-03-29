@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/28 18:39:07 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:21:19 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int				ft_export_builtins(char **cmd_arg, t_mini *minishell);
 int				ft_verify_errors_export(char *str);
 int				ft_verify_characters_export(char *str);
 int				ft_name_in_envp(char *str, char **envp);
+int				ft_name_in_cmd_arg(char *str, char **cmd_arg, int j);
 void			ft_replace_in_envp(char *str, char **envp);
 
 // UNSET //
@@ -162,7 +163,7 @@ void			ft_case_dright_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 	int i, t_nb *nb);
 
 void			ft_error_msg(char *msg);
-void			ft_cmd_error(char **cmd);
+void			ft_cmd_error(char *msg);
 void			ft_msg(char	*msg);
 void			ft_error_dir(char *msg);
 

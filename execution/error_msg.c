@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:19 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/28 18:38:55 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:55:56 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	ft_error_msg(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_cmd_error(char **cmd)
+void	ft_cmd_error(char *msg)
 {
 	char	*temp;
 	char	*error_msg;
 
-	temp = ft_strjoin(cmd[0], ": command not found\n");
+	temp = ft_strjoin(msg, ": command not found\n");
 	error_msg = ft_strjoin("minishell: ", temp);
 	write(2, error_msg, ft_strlen(error_msg));
 	exit(127);

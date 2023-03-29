@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/28 17:38:28 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:01:00 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ static void	ft_child_dup(int (*fd)[2], int i, t_mini *minishell, \
 
 static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 {
+	char	*temp;
+
+	temp = cmd_struct->cmd_arg[0];
+	cmd_struct->cmd_arg[0] = ft_lower_input(cmd_struct->cmd_arg[0]);
 	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
 		exit(ft_echo_builtins(cmd_struct->cmd_arg));
 	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
@@ -66,6 +70,8 @@ static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 		exit(ft_cd_builtins(cmd_struct->cmd_arg, minishell));
 	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
 		ft_exit_builtins(cmd_struct);
+	free(cmd_struct->cmd_arg[0]);
+	cmd_struct->cmd_arg[0] = temp;
 }
 
 void	ft_child(int (*fd)[2], int i, t_mini *minishell)
@@ -87,6 +93,12 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
+	if (ft_strlen(cmd_struct->cmd_arg[0]) > 1 \
+	&& ft_strncmp(cmd_struct->cmd_arg[0], "\"\"", 3))
+		ft_cmd_error("");
+	else if (ft_strlen(cmd_struct->cmd_arg[0]) > 1 \
+	&& ft_strncmp(cmd_struct->cmd_arg[0], "\'\'", 3))
+		exit(0);
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }
 
@@ -105,5 +117,8 @@ t_mini *minishell, t_cmd *cmd_struct)
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
+	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0)
+		ft_cmd_error("");
+	ft_putnbr_fd(ft_strlen(cmd_struct->cmd_arg[0]), 2);
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }

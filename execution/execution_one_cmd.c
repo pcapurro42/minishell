@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 22:58:45 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:37:31 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,43 +32,57 @@ static void	ft_child_dup_one_cmd(t_cmd *cmd_struct)
 
 static void	ft_check_builtins_one_cmd(t_mini *minishell, t_cmd *cmd_struct)
 {
-	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
+	char	*temp;
+
+	temp = ft_lower_input(cmd_struct->cmd_arg[0]);
+	free(cmd_struct->cmd_arg[0]);
+	cmd_struct->cmd_arg[0] = temp;
+	if (ft_strncmp("echo", temp, 5) == 0)
 		g_global->g_last_return_code = ft_echo_builtins(cmd_struct->cmd_arg);
-	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
+	if (ft_strncmp("env", temp, 4) == 0)
 		g_global->g_last_return_code = ft_env_builtins \
 		(minishell->mini_tools->envp);
-	if (ft_strncmp("pwd", cmd_struct->cmd_arg[0], 4) == 0)
+	if (ft_strncmp("pwd", temp, 4) == 0)
 		g_global->g_last_return_code = ft_pwd_builtins(minishell->mini_tools);
-	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
+	if (ft_strncmp("export", temp, 7) == 0)
 		g_global->g_last_return_code = ft_export_builtins \
 		(cmd_struct->cmd_arg, minishell);
-	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
+	if (ft_strncmp("unset", temp, 6) == 0)
 		g_global->g_last_return_code = ft_unset_builtins \
 		(minishell, cmd_struct->cmd_arg);
-	if (ft_strncmp("cd", cmd_struct->cmd_arg[0], 3) == 0)
+	if (ft_strncmp("cd", temp, 3) == 0)
 		g_global->g_last_return_code = ft_cd_builtins \
 		(cmd_struct->cmd_arg, minishell);
-	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
+	if (ft_strncmp("exit", temp, 5) == 0)
 		ft_exit_builtins(cmd_struct);
 }
 
 static int	ft_is_builtins(t_cmd *cmd_struct)
 {
-	if (ft_strncmp("echo", cmd_struct->cmd_arg[0], 5) == 0)
+	char	*temp;
+	int		is_builtins;
+	
+	is_builtins = 1;
+	temp = ft_lower_input(cmd_struct->cmd_arg[0]);
+	if (ft_strncmp("echo", temp, 5) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("env", temp, 4) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("pwd", temp, 4) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("export", temp, 7) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("unset", temp, 6) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("cd", temp, 3) == 0)
+		is_builtins = 0;
+	if (ft_strncmp("exit", temp, 5) == 0)
+		is_builtins = 0;
+	free(temp);
+	if (is_builtins == 0)
 		return (0);
-	if (ft_strncmp("env", cmd_struct->cmd_arg[0], 4) == 0)
-		return (0);
-	if (ft_strncmp("pwd", cmd_struct->cmd_arg[0], 4) == 0)
-		return (0);
-	if (ft_strncmp("export", cmd_struct->cmd_arg[0], 7) == 0)
-		return (0);
-	if (ft_strncmp("unset", cmd_struct->cmd_arg[0], 6) == 0)
-		return (0);
-	if (ft_strncmp("cd", cmd_struct->cmd_arg[0], 3) == 0)
-		return (0);
-	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
-		return (0);
-	return (1);
+	else
+		return (1);
 }
 
 t_cmd	*ft_exec_one_cmd(t_mini *minishell)

@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/27 10:32:59 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:21:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	ft_export_builtins_nb_export(char **cmd_arg, t_mini *minishell)
 	while (cmd_arg[i + 1])
 	{
 		if (ft_verify_characters_export(cmd_arg[i + 1]) == 0 && \
-		ft_name_in_envp(cmd_arg[i + 1], minishell->mini_tools->envp) == 1)
+		ft_name_in_envp(cmd_arg[i + 1], minishell->mini_tools->envp) == 1
+		&& ft_name_in_cmd_arg(cmd_arg[i + 1], cmd_arg, i + 1))
 			nb_export++;
 		i++;
 	}
@@ -84,7 +85,7 @@ char **new_envp, t_export *export_nb)
 		if (ft_verify_errors_export(cmd_arg[export_nb->i + 1]) == 0)
 		{
 			if (ft_name_in_envp(cmd_arg[export_nb->i + 1], \
-			minishell->mini_tools->envp) == 1)
+			new_envp) == 1)
 				ft_export_builtins_3(cmd_arg, minishell, export_nb, new_envp);
 			else
 				ft_replace_in_envp(cmd_arg[export_nb->i + 1], new_envp);
