@@ -94,7 +94,7 @@ int	ft_chevron_checker_a(char *str)
 		if (str[i] == '>' || str[i] == '<')
 		{
 			i = i + 1;
-			if (str[i] == '<' || str[i] == '>')
+			if (str[i] == '<' || str[i] == '>' || str[i] == '|')
 				break ;
 			else
 			{
