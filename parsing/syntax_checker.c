@@ -72,7 +72,10 @@ near unexpected token '|'\n", 2), 1);
 			if (str[i - 1][0] == '|' || str[i + 1][0] == '|')
 				return (ft_putstr_fd("minishell: syntax error \
 near unexpected token '|'\n", 2), 1);
-			if (str[i - 1][0] == '>' || str[i - 1][0] == '<')
+			if (str[i - 1][0] == '<')
+				return (ft_putstr_fd("minishell: syntax error \
+near unexpected token '|'\n", 2), 1);
+			if (str[i - 1][0] == '>' && ft_strlen(str[i - 1]) != 1)
 				return (ft_putstr_fd("minishell: syntax error \
 near unexpected token '|'\n", 2), 1);
 		}
