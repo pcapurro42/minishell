@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 11:16:55 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/29 11:23:06 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:46:38 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	ft_name_in_cmd_arg_2(char *name_str, char **cmd_arg, int *i, int j)
 			name_envp = malloc(sizeof(*name_envp) * \
 			(ft_strchr_i(cmd_arg[*i], '=') + 1));
 			ft_check_malloc(name_envp);
-			ft_strlcpy(name_envp, cmd_arg[*i], ft_strchr_i(cmd_arg[*i], '=') + 1);
+			ft_strlcpy(name_envp, cmd_arg[*i], \
+			ft_strchr_i(cmd_arg[*i], '=') + 1);
 		}
 		else
 			name_envp = ft_strdup(cmd_arg[*i]);

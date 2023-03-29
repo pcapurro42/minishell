@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/29 10:37:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:46:17 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_is_builtins(t_cmd *cmd_struct)
 {
 	char	*temp;
 	int		is_builtins;
-	
+
 	is_builtins = 1;
 	temp = ft_lower_input(cmd_struct->cmd_arg[0]);
 	if (ft_strncmp("echo", temp, 5) == 0)
