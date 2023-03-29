@@ -199,7 +199,7 @@ char			***ft_share_off(char **str);
 
 // CLEANERS //
 
-int				ft_inside_quotes(char *str, int i, int quote, int dquote);
+int				ft_in_out_quotes(char *str, int i);
 
 char			*ft_input_cleaner(char *input);
 char			*ft_add_spaces_for_pipes(char *str);

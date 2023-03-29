@@ -32,10 +32,21 @@ static int	ft_print_str(va_list ap)
 	return (i);
 }
 
+static int	ft_print_char(va_list ap)
+{
+	char	c;
+
+	c = va_arg(ap, int);
+	write(1, &c, 1);
+	return (1);
+}
+
 static int	ft_get_conv(char x, va_list ap)
 {
 	if (x == 's')
 		return (ft_print_str(ap));
+	if (x == 'c')
+		return (ft_print_char(ap));
 	return (0);
 }
 

@@ -22,7 +22,7 @@ char	*ft_add_spaces_for_pipes(char *str)
 	strf = ft_strdup("");
 	while (str[i] != '\0')
 	{
-		if (str[i] == '|')
+		if (str[i] == '|' && ft_in_out_quotes(str, i) != 1)
 			strf = ft_join_free(strf, " | ");
 		else
 		{
@@ -39,15 +39,11 @@ char	*ft_add_spaces_for_pipes(char *str)
 char	*ft_hide_spaces_in_quotes(char *str)
 {
 	int	i;
-	int	quote;
-	int	dquote;
 
 	i = 0;
-	quote = 0;
-	dquote = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ' && ft_inside_quotes(str, i, quote, dquote) == 1)
+		if (str[i] == ' ' && ft_in_out_quotes(str, i) == 1)
 			str[i] = -1;
 		i++;
 	}
@@ -57,18 +53,14 @@ char	*ft_hide_spaces_in_quotes(char *str)
 char	*ft_separate_chevrons(char *str)
 {
 	int		i;
-	int		quote;
-	int		dquote;
 	char	*strf;
 	char	*temp;
 
 	i = 0;
-	quote = 0;
-	dquote = 0;
 	strf = ft_strdup("");
 	while (str[i] != '\0')
 	{
-		if (ft_inside_quotes(str, i, quote, dquote) != 1)
+		if (ft_in_out_quotes(str, i) != 1)
 			if (str[i] == '>' || str[i] == '<'
 				|| (i != 0 && (str[i - 1] == '<' || str[i - 1] == '>')))
 				strf = ft_join_free(strf, " ");
@@ -91,7 +83,7 @@ char	*ft_stick_chevrons(char *str)
 	strf = ft_strdup("");
 	while (str[i] != '\0')
 	{
-		if (str[i] == '<' || str[i] == '>')
+		if ((str[i] == '<' || str[i] == '>') && ft_in_out_quotes(str, i) != 1)
 		{
 			temp = ft_char_to_str(str[i++]);
 			strf = ft_join_free(strf, temp);

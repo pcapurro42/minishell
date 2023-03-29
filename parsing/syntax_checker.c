@@ -78,11 +78,30 @@ unexpected token '|'\n", 2), 1);
 
 int	ft_chevron_checker_a(char *str)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (str[i] != '\0')
-		i++;
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			i = i + 1;
+			if (str[i] == '<' || str[i] == '>')
+				break ;
+			else
+			{
+				while (str[i] == ' ')
+					i++;
+				if (str[i] == '<' || str[i] == '>')
+					return (ft_printf_error("minishell: syntax error near \
+unexpected token '%c'\n", str[i]));
+				else
+					i = i + 1;
+			}
+		}
+		else
+			i++;
+	}
 	return (0);
 }
 
@@ -93,11 +112,11 @@ int	ft_chevron_checker_b(char **str)
 	i = 0;
 	while (str[i] != NULL)
 	{
-		if (str[i][0] == '<' || str[i][0] == '>')
+		if ((str[i][0] == '<' || str[i][0] == '>'))
 		{
 			if (i == ft_dstrlen(str) - 1)
-				return (ft_printf_error("minishell: syntax error near \
-unexpected token '%c'\n", str[i][0]));
+				return (ft_putstr_fd("minishell: syntax error near \
+unexpected token 'newline'\n", 2), 1);
 			if (i != 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>'
 					|| str[i - 1][0] == '<' || str[i - 1][0] == '>')
