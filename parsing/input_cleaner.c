@@ -36,28 +36,28 @@ char	*ft_add_spaces_for_pipes(char *str)
 	return (strf);
 }
 
-char	*ft_hide_things(char *str)
+char	*ft_hide_things(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (str[i] == ' ' && ft_in_out_quotes(str, i) == 1)
-			str[i] = -1;
+		if (s[i] == ' ' && ft_in_out_quotes(s, i) == 1)
+			s[i] = -1;
 		i++;
 	}
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (str[i] == '>' && str[i + 1] == '|' && ft_in_out_quotes(str, i) != 1)
+		if (s[i] == '>' && s[i + 1] == '|' && ft_in_out_quotes(s, i) != 1)
 		{
-			if (i == 0 || (str[i - 1] != '>' && str[i - 1] != '<'))
-				str[i + 1] = ' ';
+			if (i == 0 || (s[i - 1] != '>' && s[i - 1] != '<'))
+				s[i + 1] = ' ';
 		}
 		i++;
 	}
-	return (str);
+	return (s);
 }
 
 char	*ft_stick_chevrons_two(char *str)
