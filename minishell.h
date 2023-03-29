@@ -28,11 +28,17 @@
 # include <sys/types.h>
 # include <dirent.h>
 
+// #-# STRUCTURES #-# //
+
+// GLOBAL STRUCTURE //
+
 typedef struct s_global
 {
 	int	g_pid;
 	int	g_last_return_code;
 }	t_global;
+
+// OTHERS STRUCTURES //
 
 typedef struct s_cmd
 {
@@ -199,8 +205,6 @@ char			***ft_share_off(char **str);
 
 // CLEANERS //
 
-int				ft_in_out_quotes(char *str, int i);
-
 char			*ft_input_cleaner(char *input);
 char			*ft_add_spaces_for_pipes(char *str);
 char			*ft_hide_spaces_in_quotes(char *str);
@@ -214,6 +218,8 @@ char			**ft_remove_quotes(char **cmd_arg);
 char			*ft_substitute_str(char *str);
 
 // SYNTAX CHECKERS //
+
+int				ft_in_out_quotes(char *str, int i);
 
 char			**ft_check_variables(char **str, t_mini *minishell);
 char			*ft_get_variable(char *variable, t_mini *minishell);
