@@ -66,10 +66,15 @@ int	ft_pipe_checker(char **str)
 	{
 		if (str[i][0] == '|')
 		{
-			if (i == 0 || i == ft_dstrlen(str) - 1
-				|| str[i - 1][0] == '|' || str[i + 1][0] == '|')
-				return (ft_putstr_fd("minishell: syntax error near \
-unexpected token '|'\n", 2), 1);
+			if (i == 0 || i == ft_dstrlen(str) - 1)
+				return (ft_putstr_fd("minishell: syntax error \
+near unexpected token '|'\n", 2), 1);
+			if (str[i - 1][0] == '|' || str[i + 1][0] == '|')
+				return (ft_putstr_fd("minishell: syntax error \
+near unexpected token '|'\n", 2), 1);
+			if (str[i - 1][0] == '>' || str[i - 1][0] == '<')
+				return (ft_putstr_fd("minishell: syntax error \
+near unexpected token '|'\n", 2), 1);
 		}
 		i++;
 	}
