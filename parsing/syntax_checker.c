@@ -100,7 +100,7 @@ int	ft_chevron_checker_a(char *str)
 			{
 				while (str[i] == ' ')
 					i++;
-				if (str[i] == '<' || str[i] == '>')
+				if (str[i] == '<' || str[i] == '>' || str[i] == '|')
 					return (ft_printf_error("minishell: syntax error near \
 unexpected token '%c'\n", str[i]));
 				else
