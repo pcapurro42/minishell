@@ -14,6 +14,14 @@
 
 int	ft_verify_failure(char *path, char *arg, int i)
 {
+	struct stat	tmp;
+
+	stat(path, &tmp);
+	if (S_ISDIR(tmp.st_mode) == 0)
+	{
+		ft_printf_error("minishell: cd: %s: Not a directory\n", arg);
+		return (1);
+	}
 	if (access(path, F_OK) == -1)
 	{
 		ft_printf_error("minishell: cd: %s: No such file or directory\n", arg);
