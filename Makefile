@@ -58,7 +58,6 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-##	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include
 	$(CC) $(LIBFT) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 $(LIBFT):
