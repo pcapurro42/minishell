@@ -133,7 +133,7 @@ unexpected token '%c'\n", str[i][0]));
 			if (i == 0)
 				if (str[i + 1][0] == '<' || str[i + 1][0] == '>')
 					return (ft_printf_error("minishell: syntax error near \
-unexpected token '%c'\n", str[i][0]));
+unexpected token '%c'\n", str[i][ft_strlen(str[i]) - 1]));
 		}
 		i++;
 	}
