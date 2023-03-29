@@ -72,21 +72,37 @@ char	*ft_capture_variable(char *in, t_mini *minishell)
 {
 	char	*str;
 	char	*var;
+	char	*temp;
 
 	var = ft_strdup("");
-	str = ft_cv_heart(minishell, in, ft_strdup(""), var);
+	temp = ft_strjoin("$", in);
+	free(in);
+	str = ft_cv_heart(minishell, temp, ft_strdup(""), var);
 	return (str);
 }
 
 char	**ft_check_variables(char **str, t_mini *minishell)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**str_tmp;
 
 	i = 0;
+	j = -1;
 	while (str[i] != NULL)
 	{
 		if (ft_strchr(str[i], '$') != NULL)
-			str[i] = ft_capture_variable(str[i], minishell);
+		{
+			str_tmp = ft_split(str[i], '$');
+			free(str[i]);
+			while (str_tmp[++j] != NULL)
+				str_tmp[j] = ft_capture_variable(str_tmp[j], minishell);
+			j = 0;
+			str[i] = ft_strdup("");
+			while (str_tmp[j] != NULL)
+				str[i] = ft_join_free(str[i], str_tmp[j++]);
+			pls_free(str_tmp);
+		}
 		i++;
 	}
 	return (str);
