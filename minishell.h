@@ -129,6 +129,7 @@ char			*ft_first_clean(char **cmd_arg);
 char			*ft_last_clean(char *str);
 int				ft_update_oldpwd(t_mini *minishell, char *path);
 int				ft_update_pwd(t_mini *minishell, char *path);
+void			ft_update_ifnot(char *path, t_mini *minishell, int k);
 char			*ft_step_back(char *path);
 int				ft_verify_failure(char *path, char *arg, int i);
 char			*ft_get_variable_again(t_mini *minishell, int a);
