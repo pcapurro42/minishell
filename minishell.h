@@ -221,11 +221,17 @@ char			*ft_substitute_str(char *str);
 // SYNTAX CHECKERS //
 
 int				ft_in_out_quotes(char *str, int i);
+int				ft_is_delimiter(char c);
+int				ft_to_do_quote(char *input, int j);
 char			*ft_lower_input(char *str);
 
-char			*ft_check_variables(char *str, t_mini *minishell);
+void			ft_check_variables(char **str, t_mini *minishell);
+char			*ft_get_variable(char *str, t_mini *minishell);
+char			*ft_capture_variable_name(char *str, int *i);
+char			*ft_capture_variable_content(char *var, t_mini *minishell);
+char			*ft_cv_start(t_mini *minishell, char *tmp, char *var, int j);
+char			*ft_cv_end(t_mini *minishell, int i, int j);
 char			*ft_replace_tilde(char *str, t_mini *minishell);
-int				ft_to_do_quote(char *input);
 
 int				ft_pipe_checker(char **str);
 int				ft_chevron_checker_a(char *str);

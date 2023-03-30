@@ -55,7 +55,6 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 	}
 	if (ft_is_it_quoi(input) == 1)
 		return (free(input), ft_handle_quoi_feur(minishell), 0);
-// 	ft_check_variables(str, minishell);
 	str = ft_split(input, ' ');
 	free(input);
 	ft_repair_spaces_in_quotes(str);
@@ -66,6 +65,7 @@ int	ft_analyze_input(char *input, t_mini *minishell)
 		return (1);
 	}
 	ft_prepare_for_heredoc(str);
+	ft_check_variables(str, minishell);
 	minishell->cmd_lst = ft_share_off(str);
 	ft_execution(minishell);
 	return (pls_free(str), 0);
