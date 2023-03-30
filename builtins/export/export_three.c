@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/30 11:26:50 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:49:13 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	ft_name_in_envp_2(char *name_str, char **envp, int *i)
 		free(name_envp);
 		(*i)++;
 	}
-
 	return (1);
 }
 
