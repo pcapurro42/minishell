@@ -59,15 +59,15 @@ int	ft_relative_path(t_mini *minishell, char **cmd_arg, char *arg)
 	int		i;
 	char	*path;
 
-	i = 0;
-	while (cmd_arg[i] != NULL)
+	i = -1;
+	while (cmd_arg[++i] != NULL)
 	{
 		if (cmd_arg[0] != NULL && cmd_arg[0][0] == '-')
 			return (ft_handle_hyphen(minishell));
-		if (cmd_arg[i] != NULL && cmd_arg[i][0] == '.' && cmd_arg[i][1] == '.')
-			if (ft_handle_operator(minishell, cmd_arg[i], arg) != 0)
-				return (1);
-		if (cmd_arg[i] != NULL && cmd_arg[i][0] != '.' && cmd_arg[i][1] != '.')
+		if (cmd_arg[i] != NULL && cmd_arg[i][0] == '.' && cmd_arg[i][1] == '.'
+			&& cmd_arg[i][2] == '\0')
+			return (ft_handle_operator(minishell, cmd_arg[i], arg) != 0);
+		if (cmd_arg[i] != NULL)
 		{
 			path = ft_strjoin(minishell->mini_tools->pwd, "/");
 			path = ft_join_free(path, cmd_arg[i]);
@@ -78,7 +78,6 @@ int	ft_relative_path(t_mini *minishell, char **cmd_arg, char *arg)
 			if (ft_update_pwd(minishell, getcwd(NULL, 1)) != 0)
 				return (ft_putstr_fd("minishell: cd: an error occured\n", 2), 1);
 		}
-		i++;
 	}
 	return (0);
 }

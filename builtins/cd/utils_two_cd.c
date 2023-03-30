@@ -20,9 +20,17 @@ void	ft_update_ifnot(char *path, t_mini *minishell, int k)
 	str[2] = NULL;
 	str[0] = ft_strdup("export");
 	if (k == 0)
+	{
+		free(minishell->mini_tools->pwd);
+		minishell->mini_tools->pwd = ft_strdup(path);
 		str[1] = ft_strdup("PWD=");
+	}
 	else
+	{
+		free(minishell->mini_tools->old_pwd);
+		minishell->mini_tools->old_pwd = ft_strdup(path);
 		str[1] = ft_strdup("OLDPWD=");
+	}
 	str[1] = ft_join_free(str[1], path);
 	ft_export_builtins(str, minishell);
 	pls_free(str);
