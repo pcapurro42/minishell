@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/29 11:46:58 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:32:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_export *export_nb, char **new_envp)
 	new_envp[export_nb->envp_len + export_nb->nb_export] = \
 	ft_strdup(cmd_arg[export_nb->i + 1]);
 	export_nb->nb_export++;
+	new_envp[export_nb->envp_len + export_nb->nb_export] = NULL;
 }
 
 static void	ft_export_builtins_2(char **cmd_arg, t_mini *minishell, \
@@ -80,6 +81,7 @@ char **new_envp, t_export *export_nb)
 	export_nb->return_code = 0;
 	export_nb->nb_export = 0;
 	export_nb->i = 0;
+	new_envp[export_nb->envp_len + export_nb->nb_export] = NULL;
 	while (cmd_arg[export_nb->i + 1])
 	{
 		if (ft_verify_errors_export(cmd_arg[export_nb->i + 1]) == 0)

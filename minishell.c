@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 04:59:16 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/29 13:28:00 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:01:25 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	main(int argc, char **argv, char *envp[])
 			ft_analyze_input(input, minishell);
 		ft_destroy_mini(minishell, input);
 		free(input);
+		system("leaks minishell");
 	}
 	return (0);
 }
