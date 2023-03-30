@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 10:04:39 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/29 10:51:11 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:52:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*ft_lower_input(char *str)
 			new_str[i] = str[i];
 		i++;
 	}
+	new_str[i] = '\0';
 	return (new_str);
 }

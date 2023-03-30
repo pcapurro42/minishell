@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:57 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/16 23:00:52 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:55:39 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_exit_builtins(t_cmd *cmd_struct)
 	char	*temp;
 	char	*temp2;
 
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	if (!(cmd_struct) || !(cmd_struct->cmd_arg[1]))
 		exit(0);
 	else if (ft_isnum(cmd_struct->cmd_arg[1]) && \
