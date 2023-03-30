@@ -27,6 +27,7 @@ int	ft_handle_hyphen(t_mini *minishell)
 	if (ft_update_pwd(minishell, getcwd(NULL, 1)) != 0)
 		return (ft_putstr_fd("minishell: cd: an error occured\n", 2), 1);
 	ft_putstr_fd(minishell->mini_tools->pwd, 1);
+	ft_putstr_fd("\n", 1);
 	return (0);
 }
 
