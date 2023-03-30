@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:32:42 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/30 11:49:13 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:58:15 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,7 @@ void	ft_replace_in_envp(char *str, char **envp)
 		name_str = malloc(sizeof(*name_str) * (ft_strchr_i(str, '=') + 1));
 		ft_check_malloc(name_str);
 		ft_strlcpy(name_str, str, ft_strchr_i(str, '=') + 1);
+		ft_replace_in_envp_2(str, name_str, envp);
+		free(name_str);
 	}
-	else
-	{
-		name_str = ft_strdup(str);
-	}
-	ft_replace_in_envp_2(str, name_str, envp);
-	free(name_str);
 }
