@@ -21,7 +21,7 @@ char	*ft_capture_variable_content(char *var, t_mini *minishell)
 
 	j = 0;
 	if (var[0] == '?' && var[1] == '\0')
-		return (ft_itoa(g_global->g_last_return_code));
+		return (free(var), ft_itoa(g_global->g_last_return_code));
 	else
 	{
 		temporary = ft_strdup("");
