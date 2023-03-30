@@ -90,6 +90,9 @@ int	ft_update_oldpwd(t_mini *minishell, char *path)
 		i++;
 		free(tmp);
 	}
+	free(minishell->mini_tools->old_pwd);
+	minishell->mini_tools->old_pwd = ft_strdup(path);
+	ft_update_ifnot(path, minishell, 1);
 	return (0);
 }
 
@@ -118,6 +121,9 @@ int	ft_update_pwd(t_mini *minishell, char *path)
 		}
 		i++;
 	}
+	free(minishell->mini_tools->pwd);
+	minishell->mini_tools->pwd = ft_strdup(path);
+	ft_update_ifnot(path, minishell, 0);
 	free(path);
 	return (0);
 }

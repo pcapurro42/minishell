@@ -12,6 +12,22 @@
 
 #include "../../minishell.h"
 
+void	ft_update_ifnot(char *path, t_mini *minishell, int k)
+{
+	char	**str;
+
+	str = malloc(sizeof(char *) * 2 + 1);
+	str[2] = NULL;
+	str[0] = ft_strdup("export");
+	if (k == 0)
+		str[1] = ft_strdup("PWD=");
+	else
+		str[1] = ft_strdup("OLDPWD=");
+	str[1] = ft_join_free(str[1], path);
+	ft_export_builtins(str, minishell);
+	pls_free(str);
+}
+
 int	ft_verify_failure(char *path, char *arg, int i)
 {
 	struct stat	tmp;
