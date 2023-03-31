@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/30 10:52:39 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:16:24 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
-	if (ft_strlen(cmd_struct->cmd_arg[0]) > 1 \
-	&& ft_strncmp(cmd_struct->cmd_arg[0], "\"\"", 3))
+	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0 || \
+	(ft_strlen(cmd_struct->cmd_arg[0]) == 1 && \
+	cmd_struct->cmd_arg[0][0] == '.') || \
+	(ft_strlen(cmd_struct->cmd_arg[0]) == 2 && \
+	cmd_struct->cmd_arg[0][0] == '.' && \
+	cmd_struct->cmd_arg[0][1] == '.'))
 		ft_cmd_error("");
-	else if (ft_strlen(cmd_struct->cmd_arg[0]) > 1 \
-	&& ft_strncmp(cmd_struct->cmd_arg[0], "\'\'", 3))
-		exit(0);
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }
 
@@ -117,8 +118,12 @@ t_mini *minishell, t_cmd *cmd_struct)
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
 	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
-	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0)
-		ft_cmd_error("");
-	ft_putnbr_fd(ft_strlen(cmd_struct->cmd_arg[0]), 2);
+	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0 || \
+	(ft_strlen(cmd_struct->cmd_arg[0]) == 1 && \
+	cmd_struct->cmd_arg[0][0] == '.') || \
+	(ft_strlen(cmd_struct->cmd_arg[0]) == 2 && \
+	cmd_struct->cmd_arg[0][0] == '.' && \
+	cmd_struct->cmd_arg[0][1] == '.'))
+		ft_cmd_error(cmd_struct->cmd_arg[0]);
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }

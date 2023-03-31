@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:43:12 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/28 18:46:31 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:15:58 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@ static void	ft_exec_case2(char **cmd_arg, char **envp, int i)
 			cmd_arg_len++;
 		tab = malloc(sizeof(*tab) * (cmd_arg_len + 2));
 		ft_check_malloc(tab);
-		cmd_arg_len = 1;
+		cmd_arg_len = 0;
 		tab[0] = "/bin/bash";
 		tab[1] = &(cmd_arg[0][i]);
-		while (cmd_arg[cmd_arg_len])
-		{
+		while (cmd_arg[++cmd_arg_len])
 			tab[cmd_arg_len + 1] = cmd_arg[cmd_arg_len];
-			cmd_arg_len++;
-		}
 		tab[cmd_arg_len + 1] = NULL;
 		execve(tab[0], tab, envp);
 	}
 	else
 		execve(cmd_arg[0], cmd_arg, envp);
+	if (ft_strlen(&(cmd_arg[0][i])) == 0)
+		ft_error_dir(cmd_arg[0]);
 	ft_error_msg(cmd_arg[0]);
 }
 
