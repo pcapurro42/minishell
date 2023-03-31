@@ -75,7 +75,7 @@ void	ft_print_shell(int signal)
 	if (signal == SIGQUIT)
 	{
 		if (g_global->g_pid >= 0)
-			ft_putstr_fd("Quit: 3\n", 1);
+			ft_putstr_fd("^\\Quit: 3\n", 1);
 		rl_redisplay();
 	}
 }
