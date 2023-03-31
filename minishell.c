@@ -54,19 +54,28 @@ void	ft_init_minishell(void)
 	g_global->g_last_return_code = 0;
 }
 
-void	ft_print_shell(int number)
+void	ft_print_shell(int signal)
 {
-	if (number != 0)
+	if (signal == SIGINT)
 	{
-		ft_putstr_fd("", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		if (g_global->g_pid == -2147483648)
+		{
+			ft_putstr_fd("\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else
+		{
+			ft_putstr_fd("", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+		}
 	}
-	else
+	if (signal == SIGQUIT)
 	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		if (g_global->g_pid >= 0)
+			ft_putstr_fd("Quit: 3\n", 1);
 		rl_redisplay();
 	}
 }
@@ -75,7 +84,9 @@ void	ft_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		if (g_global->g_pid != -2147483648)
+		if (g_global->g_pid == -2147483648)
+			g_global->g_last_return_code = 1;
+		else
 		{
 			if (g_global->g_pid < 0)
 			{
@@ -88,16 +99,12 @@ void	ft_handle_signal(int signal)
 				g_global->g_last_return_code = -130;
 			}
 			kill(g_global->g_pid, SIGKILL);
-			ft_print_shell(1);
-		}
-		else
-		{
-			ft_print_shell(0);
-			g_global->g_last_return_code = 1;
 		}
 	}
-	else
-		rl_redisplay();
+	if (signal == SIGQUIT)
+		if (g_global->g_pid >= 0)
+			g_global->g_last_return_code = -131;
+	ft_print_shell(signal);
 }
 
 int	main(int argc, char **argv, char *envp[])

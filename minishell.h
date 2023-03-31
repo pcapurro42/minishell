@@ -87,8 +87,8 @@ t_global	*g_global;
 
 char			*ft_get_name(void);
 void			ft_handle_signal(int signal);
+void			ft_print_shell(int signal);
 void			ft_init_minishell(void);
-void			ft_print_shell(int number);
 
 void			rl_replace_line(const char *text, int clear_undo);
 
