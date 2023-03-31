@@ -41,7 +41,7 @@ int	ft_verify_failure(char *path, char *arg, int i)
 	struct stat	tmp;
 
 	stat(path, &tmp);
-	if (S_ISDIR(tmp.st_mode) == 0)
+	if (access(path, F_OK) == -0 && S_ISDIR(tmp.st_mode) == 0)
 	{
 		ft_printf_error("minishell: cd: %s: Not a directory\n", arg);
 		return (1);
