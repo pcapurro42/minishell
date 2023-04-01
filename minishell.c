@@ -97,7 +97,7 @@ void	ft_handle_signal(int signal)
 			}
 			else
 			{
-				ft_putstr_fd("^C\n", 1);
+				ft_putstr_fd("^C", 1);
 				g_global->g_last_return_code = -130;
 			}
 			kill(g_global->g_pid, SIGKILL);
