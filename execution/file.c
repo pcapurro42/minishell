@@ -14,26 +14,16 @@
 
 static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 {
-	char	*gnl;
+	char	*input;
 
-	write(1, "> ", 2);
-	gnl = get_next_line(0);
-	if (!gnl)
-		exit(0);
-	while (ft_strncmp(gnl, limiter, ft_strlen(gnl)) != '\n')
+	input = readline("> ");
+	while (ft_strncmp(input, limiter, ft_strlen(limiter)) != 0)
 	{
-		write(pipe_fd[1], gnl, ft_strlen(gnl));
-		free(gnl);
-		write(1, "> ", 2);
-		gnl = get_next_line(0);
-		if (!gnl)
-		{
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			exit(0);
-		}
+		write(pipe_fd[1], input, ft_strlen(input));
+		free(input);
+		input = readline("> ");
 	}
-	free(gnl);
+	free(input);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	exit(0);

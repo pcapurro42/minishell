@@ -50,6 +50,7 @@ void	ft_init_minishell(void)
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &idk);
 	g_global = malloc(sizeof(*g_global));
 	ft_check_malloc(g_global);
+	tcgetattr(STDIN_FILENO, &g_global->save);
 	g_global->g_pid = -2147483648;
 	g_global->g_last_return_code = 0;
 }
@@ -67,10 +68,11 @@ void	ft_print_shell(int signal)
 		}
 		else
 		{
-			ft_putstr_fd("", 1);
+			ft_putstr_fd("\n", 1);
 			rl_on_new_line();
 			rl_replace_line("", 0);
 		}
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_global->save);
 	}
 	if (signal == SIGQUIT)
 	{

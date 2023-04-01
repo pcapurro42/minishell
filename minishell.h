@@ -34,8 +34,9 @@
 
 typedef struct s_global
 {
-	int	g_pid;
-	int	g_last_return_code;
+	int				g_pid;
+	int				g_last_return_code;
+	struct termios	save;
 }	t_global;
 
 // OTHERS STRUCTURES //
