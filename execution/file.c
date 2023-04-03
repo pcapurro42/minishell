@@ -14,29 +14,20 @@
 
 static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 {
-	char	*input;
+	char	*in;
 
-	input = readline("> ");
-	if (input == NULL)
+	in = readline("> ");
+	while (in != NULL && ft_strncmp(in, limiter, ft_strlen(limiter)) != 0)
 	{
+		write(pipe_fd[1], in, ft_strlen(in));
+		write(pipe_fd[1], "\n", 1);
+		free(in);
+		in = readline("> ");
+	}
+	if (in == NULL)
 		ft_putstr_fd("\033[A> ", 1);
-		close(pipe_fd[0]);
-		close(pipe_fd[1]);
-		exit(0);
-	}
-	while (ft_strncmp(input, limiter, ft_strlen(limiter)) != 0)
-	{
-		write(pipe_fd[1], input, ft_strlen(input));
-		free(input);
-		input = readline("> ");
-		if (input == NULL)
-		{
-			ft_putstr_fd("\033[A> ", 1);
-			break ;
-		}
-	}
-	if (input != NULL)
-		free(input);
+	else
+		free(in);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	exit(0);
