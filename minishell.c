@@ -128,10 +128,10 @@ int	main(int argc, char **argv, char *envp[])
 		minishell = ft_init_mini(mini_tools);
 		input = readline(name);
 		if (input == NULL)
-			ft_destroy_mini(minishell, input);
+			ft_destroy_mini(minishell, input, name);
 		if (input[0] != '\0')
 			ft_analyze_input(input, minishell);
-		ft_destroy_mini(minishell, input);
+		ft_destroy_mini(minishell, input, name);
 		free(input);
 	}
 	return (0);

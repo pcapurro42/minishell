@@ -55,7 +55,7 @@ t_mini	*ft_init_mini(t_mini_tools *mini_tools)
 	return (minishell);
 }
 
-void	ft_destroy_mini(t_mini *minishell, char *input)
+void	ft_destroy_mini(t_mini *minishell, char *input, char *name)
 {
 	int	i;
 
@@ -75,7 +75,8 @@ void	ft_destroy_mini(t_mini *minishell, char *input)
 	}
 	if (input == NULL)
 	{
-		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd(name, 1);
+		ft_putstr_fd("\033[Aexit\n", 1);
 		exit(0);
 	}
 }

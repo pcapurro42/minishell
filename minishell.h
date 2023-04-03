@@ -182,7 +182,7 @@ char			**ft_find_path(char *envp[], int path_unset);
 t_cmd			*ft_init_cmd(t_mini *minishell);
 void			ft_destroy_cmd(t_cmd *cmd_struct);
 t_mini			*ft_init_mini(t_mini_tools *mini_tools);
-void			ft_destroy_mini(t_mini *minishell, char *input);
+void			ft_destroy_mini(t_mini *minishell, char *input, char *name);
 t_mini_tools	*ft_init_mini_tools(char *envp[], char **argv);
 void			ft_destroy_mini_tools(t_mini_tools *mini_tools);
 
