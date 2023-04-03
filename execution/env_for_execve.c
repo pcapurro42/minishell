@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:33:22 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/04/03 14:33:41 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:43:04 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		ft_find_nb_complete_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strchr(envp[i], '=') == 0)
+		if (ft_strchr(envp[i], '='))
 			envp_len++;
 		i++;
 	}

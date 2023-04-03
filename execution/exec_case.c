@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:43:12 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/31 16:15:58 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:45:47 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static void	ft_exec_case2(char **cmd_arg, char **envp, int i)
 {
+	char	**envp_without_export;
 	int		cmd_arg_len;
 	char	**tab;
 
+	envp_without_export = ft_envp_without_export(envp);
 	if (ft_strchr(&(cmd_arg[0][i]), '.'))
 	{
 		cmd_arg_len = 0;
@@ -30,10 +32,10 @@ static void	ft_exec_case2(char **cmd_arg, char **envp, int i)
 		while (cmd_arg[++cmd_arg_len])
 			tab[cmd_arg_len + 1] = cmd_arg[cmd_arg_len];
 		tab[cmd_arg_len + 1] = NULL;
-		execve(tab[0], tab, envp);
+		execve(tab[0], tab, envp_without_export);
 	}
 	else
-		execve(cmd_arg[0], cmd_arg, envp);
+		execve(cmd_arg[0], cmd_arg, envp_without_export);
 	if (ft_strlen(&(cmd_arg[0][i])) == 0)
 		ft_error_dir(cmd_arg[0]);
 	ft_error_msg(cmd_arg[0]);
