@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 14:33:22 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/04/03 14:43:04 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:47:10 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_exec_fail(t_cmd	*cmd_struct, t_mini *minishell, int i)
 	ft_error_msg(minishell->cmd_lst[0][i]);
 }
 
-static int		ft_find_nb_complete_env(char **envp)
+static int	ft_find_nb_complete_env(char **envp)
 {
 	int		envp_len;
 	int		i;
