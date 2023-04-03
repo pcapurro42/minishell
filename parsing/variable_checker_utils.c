@@ -88,7 +88,8 @@ char	*ft_cv_end(t_mini *minishell, int i, int j)
 	str = ft_strdup("");
 	if (minishell->mini_tools->envp[i] != NULL)
 	{
-		while (minishell->mini_tools->envp[i][j - 1] != '=')
+		while (minishell->mini_tools->envp[i][j] != '\0'
+			&& minishell->mini_tools->envp[i][j - 1] != '=')
 			j++;
 		while (minishell->mini_tools->envp[i][j] != '\0')
 		{
@@ -105,10 +106,11 @@ char	*ft_cv_start(t_mini *minishell, char *tmp, char *var, int j)
 	int		i;
 	char	*temp;
 
-	i = 0;
-	while (minishell->mini_tools->envp[i] != NULL)
+	i = -1;
+	while (minishell->mini_tools->envp[++i] != NULL)
 	{
-		while (minishell->mini_tools->envp[i][j] != '=')
+		while (minishell->mini_tools->envp[i][j] != '\0'
+			&& minishell->mini_tools->envp[i][j] != '=')
 		{
 			temp = ft_char_to_str(minishell->mini_tools->envp[i][j++]);
 			tmp = ft_join_free(tmp, temp);
@@ -123,7 +125,6 @@ char	*ft_cv_start(t_mini *minishell, char *tmp, char *var, int j)
 		}
 		else
 			break ;
-		i++;
 	}
 	return (free(var), free(tmp), ft_cv_end(minishell, i, j));
 }
