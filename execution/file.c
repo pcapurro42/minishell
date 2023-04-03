@@ -22,8 +22,11 @@ static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 		write(pipe_fd[1], input, ft_strlen(input));
 		free(input);
 		input = readline("> ");
+		if (input == NULL)
+			break ;
 	}
-	free(input);
+	if (input != NULL)
+		free(input);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	exit(0);
