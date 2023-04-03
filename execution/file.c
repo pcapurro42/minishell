@@ -19,8 +19,10 @@ static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 	input = readline("> ");
 	if (input == NULL)
 	{
+		ft_putstr_fd("\033[A> ", 1);
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
+		exit(0);
 	}
 	while (ft_strncmp(input, limiter, ft_strlen(limiter)) != 0)
 	{
@@ -28,7 +30,10 @@ static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 		free(input);
 		input = readline("> ");
 		if (input == NULL)
+		{
+			ft_putstr_fd("\033[A> ", 1);
 			break ;
+		}
 	}
 	if (input != NULL)
 		free(input);
