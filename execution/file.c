@@ -17,6 +17,11 @@ static void	ft_here_doc_fork(char *limiter, int pipe_fd[2])
 	char	*input;
 
 	input = readline("> ");
+	if (input == NULL)
+	{
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
+	}
 	while (ft_strncmp(input, limiter, ft_strlen(limiter)) != 0)
 	{
 		write(pipe_fd[1], input, ft_strlen(input));
