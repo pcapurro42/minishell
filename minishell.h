@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/03/29 11:21:19 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:38:53 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,9 @@ int				ft_check_chevron(t_mini *minishell, t_cmd *cmd_struct, \
 void			ft_child(int (*fd)[2], int i, t_mini *minishell);
 void			ft_child_one_cmd(int (*fd)[2], int i, t_mini *minishell, \
 	t_cmd *cmd_struct);
+
+char			**ft_envp_without_export(char **envp);
+void			ft_exec_fail(t_cmd	*cmd_struct, t_mini *minishell, int i);
 
 void			ft_build_struct_cmd(t_mini *minishell, t_cmd *cmd_struct, \
 	int i);

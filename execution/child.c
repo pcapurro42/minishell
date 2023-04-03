@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/31 16:16:24 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:36:23 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 {
 	char	*cmd_path;
 	t_cmd	*cmd_struct;
+	char	**envp_without_export;
 
 	cmd_struct = ft_init_cmd(minishell);
 	ft_build_struct_cmd(minishell, cmd_struct, i);
@@ -92,21 +93,16 @@ void	ft_child(int (*fd)[2], int i, t_mini *minishell)
 	(ft_strchr(cmd_struct->cmd_arg[0], '/')))
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
-	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
-	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0 || \
-	(ft_strlen(cmd_struct->cmd_arg[0]) == 1 && \
-	cmd_struct->cmd_arg[0][0] == '.') || \
-	(ft_strlen(cmd_struct->cmd_arg[0]) == 2 && \
-	cmd_struct->cmd_arg[0][0] == '.' && \
-	cmd_struct->cmd_arg[0][1] == '.'))
-		ft_cmd_error("");
-	ft_error_msg(minishell->cmd_lst[0][i]);
+	envp_without_export = ft_envp_without_export(minishell->mini_tools->envp);
+	execve(cmd_path, cmd_struct->cmd_arg, envp_without_export);
+	ft_exec_fail(cmd_struct, minishell, i);
 }
 
 void	ft_child_one_cmd(int (*fd)[2], int i, \
 t_mini *minishell, t_cmd *cmd_struct)
 {
 	char	*cmd_path;
+	char	**envp_without_export;
 
 	if (!cmd_struct->cmd_arg)
 		exit(0);
@@ -117,13 +113,7 @@ t_mini *minishell, t_cmd *cmd_struct)
 	(ft_strchr(cmd_struct->cmd_arg[0], '/')))
 		ft_exec_case(cmd_struct->cmd_arg, minishell->mini_tools->envp);
 	cmd_path = ft_check_access(cmd_struct);
-	execve(cmd_path, cmd_struct->cmd_arg, minishell->mini_tools->envp);
-	if (ft_strlen(cmd_struct->cmd_arg[0]) == 0 || \
-	(ft_strlen(cmd_struct->cmd_arg[0]) == 1 && \
-	cmd_struct->cmd_arg[0][0] == '.') || \
-	(ft_strlen(cmd_struct->cmd_arg[0]) == 2 && \
-	cmd_struct->cmd_arg[0][0] == '.' && \
-	cmd_struct->cmd_arg[0][1] == '.'))
-		ft_cmd_error(cmd_struct->cmd_arg[0]);
-	ft_error_msg(minishell->cmd_lst[0][i]);
+	envp_without_export = ft_envp_without_export(minishell->mini_tools->envp);
+	execve(cmd_path, cmd_struct->cmd_arg, envp_without_export);
+	ft_exec_fail(cmd_struct, minishell, i);
 }
