@@ -75,11 +75,7 @@ void	ft_print_shell(int signal)
 		tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_global->save);
 	}
 	if (signal == SIGQUIT)
-	{
-		if (g_global->g_pid >= 0)
-			ft_putstr_fd("^\\Quit: 3\n", 1);
 		rl_redisplay();
-	}
 }
 
 void	ft_handle_signal(int signal)
