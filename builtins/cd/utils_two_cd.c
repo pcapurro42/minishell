@@ -36,6 +36,21 @@ void	ft_update_ifnot(char *path, t_mini *minishell, int k)
 	pls_free(str);
 }
 
+int	ft_rp_core(t_mini *minishell, char **cmd_arg, char *arg, int i)
+{
+	char	*path;
+
+	path = ft_strjoin(minishell->mini_tools->pwd, "/");
+	path = ft_join_free(path, cmd_arg[i]);
+	if (ft_verify_failure(path, arg, chdir(path)) != 0)
+		return (free(path), 1);
+	free(path);
+	ft_update_oldpwd(minishell, minishell->mini_tools->pwd);
+	if (ft_update_pwd(minishell, getcwd(NULL, 1)) != 0)
+		return (ft_putstr_fd("minishell: cd: an error occured\n", 2), 1);
+	return (0);
+}
+
 int	ft_verify_failure(char *path, char *arg, int i)
 {
 	struct stat	tmp;

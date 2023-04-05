@@ -124,6 +124,7 @@ int				ft_verify_unset_errors(char *str);
 int				ft_cd_builtins(char **cmd_arg, t_mini *minishell);
 int				ft_absolute_path(t_mini *minishell, char **cmd_arg, char *arg);
 int				ft_relative_path(t_mini *minishell, char **cmd_arg, char *arg);
+int				ft_rp_core(t_mini *minishell, char **cmd_arg, char *arg, int i);
 int				ft_verify_args(char *str);
 char			**ft_fix_args(char **cmd_arg);
 char			*ft_first_clean(char **cmd_arg);
