@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:58:08 by pcapurro          #+#    #+#             */
-/*   Updated: 2023/04/03 14:38:53 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:09:45 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char			*ft_get_pwd(char **envp);
 int				ft_echo_builtins(char **cmd_lst);
 int				ft_env_builtins(char **envp);
 int				ft_pwd_builtins(t_mini_tools *mini_tools);
-void			ft_exit_builtins(t_cmd *cmd_struct);
+void			ft_exit_builtins(t_cmd *cmd_struct, t_mini *minishell);
 
 // EXPORT //
 

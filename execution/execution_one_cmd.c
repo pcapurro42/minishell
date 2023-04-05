@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:07:23 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/30 10:56:05 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:09:56 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_check_builtins_one_cmd(t_mini *minishell, t_cmd *cmd_struct)
 		g_global->g_last_return_code = ft_cd_builtins \
 		(cmd_struct->cmd_arg, minishell);
 	if (ft_strncmp("exit", temp, 5) == 0)
-		ft_exit_builtins(cmd_struct);
+		ft_exit_builtins(cmd_struct, minishell);
 }
 
 static int	ft_is_builtins(t_cmd *cmd_struct)

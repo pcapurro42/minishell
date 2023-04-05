@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:57 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/04/05 12:02:46 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:08:30 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ int	ft_is_llint(char	*nb)
 	return (0);
 }
 
-void	ft_exit_builtins(t_cmd *cmd_struct)
+void	ft_exit_builtins(t_cmd *cmd_struct, t_mini *minishell)
 {
 	char	*temp;
 	char	*temp2;
 
-	ft_putstr_fd("exit\n", 1);
+	if (minishell->nb_cmd == 1)
+		ft_putstr_fd("exit\n", 1);
 	if (!(cmd_struct) || !(cmd_struct->cmd_arg[1]))
 		exit(0);
 	else if (ft_isnum(cmd_struct->cmd_arg[1]) && \

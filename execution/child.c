@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:53:27 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/04/03 14:36:23 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:08:35 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_check_builtins(t_mini *minishell, t_cmd *cmd_struct)
 	if (ft_strncmp("cd", cmd_struct->cmd_arg[0], 3) == 0)
 		exit(ft_cd_builtins(cmd_struct->cmd_arg, minishell));
 	if (ft_strncmp("exit", cmd_struct->cmd_arg[0], 5) == 0)
-		ft_exit_builtins(cmd_struct);
+		ft_exit_builtins(cmd_struct, minishell);
 	free(cmd_struct->cmd_arg[0]);
 	cmd_struct->cmd_arg[0] = temp;
 }
