@@ -6,7 +6,7 @@
 /*   By: vdelafos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:57 by vdelafos          #+#    #+#             */
-/*   Updated: 2023/03/30 10:55:39 by vdelafos         ###   ########.fr       */
+/*   Updated: 2023/04/05 11:45:45 by vdelafos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 int	ft_is_llint(char	*nb)
 {
+	int i;
+
+	i = 0;
+	if (nb[0] == '-' || nb[1] == '+')
+		i++;
+	while (nb[i] == '0')
+		i++;
 	if (nb[0] == '-' && \
-	((ft_strlen(nb) == ft_strlen("-9223372036854775808") \
-	&& ft_strncmp(nb, "-9223372036854775808", ft_strlen(nb)) > 0) || \
-	(ft_strlen(nb) > ft_strlen("-9223372036854775808"))))
+	((ft_strlen(&(nb[i])) == ft_strlen("9223372036854775808") \
+	&& ft_strncmp(&(nb[i]), "9223372036854775808", ft_strlen(&(nb[i]))) > 0) \
+	|| (ft_strlen(&(nb[i])) > ft_strlen("9223372036854775808"))))
 		return (1);
-	if (ft_isdigit(nb[0]) && \
-	((ft_strlen(nb) == ft_strlen("9223372036854775807") && \
-	ft_strncmp(nb, "9223372036854775807", ft_strlen(nb)) > 0) || \
-	(ft_strlen(nb) > ft_strlen("9223372036854775807"))))
+	if ((ft_isdigit(nb[0]) || nb[0] == '+') && \
+	((ft_strlen(&(nb[i])) == ft_strlen("9223372036854775807") && \
+	ft_strncmp(&(nb[i]), "9223372036854775807", ft_strlen(&(nb[i]))) > 0) || \
+	(ft_strlen(&(nb[i])) > ft_strlen("9223372036854775807"))))
 		return (1);
 	return (0);
 }
