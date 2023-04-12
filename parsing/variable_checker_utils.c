@@ -57,9 +57,9 @@ char	*ft_replace_tilde(char *str, t_mini *minishell)
 	char	*sf;
 	char	*temp;
 
-	i = 0;
+	i = -1;
 	sf = ft_strdup("");
-	while (str[i] != '\0')
+	while (str[++i] != '\0')
 	{
 		if (str[i] != '~')
 		{
@@ -69,15 +69,14 @@ char	*ft_replace_tilde(char *str, t_mini *minishell)
 		}
 		else
 		{
-			if (ft_in_out_quotes(str, i) != 1)
+			if (ft_in_out_quotes(str, i) != 1
+				&& minishell->mini_tools->home_directory)
 				sf = ft_join_free(sf, minishell->mini_tools->home_directory);
 			else
 				sf = ft_join_free(sf, "~");
 		}
-		i++;
 	}
-	free(str);
-	return (sf);
+	return (free(str), sf);
 }
 
 char	*ft_cv_end(t_mini *minishell, int i, int j)
